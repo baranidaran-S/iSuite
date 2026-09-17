@@ -36,6 +36,13 @@ export const site = {
      ========================================================================== */
   PLACEHOLDER_CLAIMS: [
     {
+      where: "components/JourneyMocks.tsx - the six How It Works cards",
+      claim:
+        "Priya S., her saved budget of Rs 25,000-50,000, and the Rs 42,000 deal value",
+      truth:
+        "Invented sample data. Approved by the client so the product screens stop looking empty. It is written to read as ONE record rather than a result - no totals, no averages, no rates - but it is still not real, and the requirements doc forbids fake dashboard figures, so this override is the client's and should be re-confirmed before launch.",
+    },
+    {
       where: "lib/content.ts - faq, 'How long does it take to set up?'",
       claim: "Setup on our side is usually done within a week",
       truth: "Unknown. Nobody has given a figure from a real onboarding.",

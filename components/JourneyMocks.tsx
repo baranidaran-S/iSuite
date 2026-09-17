@@ -33,14 +33,34 @@ import { Icon } from "@/components/ui/icons";
    should have had — the first cut was emerald end to end, which put six green
    cards under a green band on a green section.
 
-   THERE IS NOT ONE FIGURE IN HERE. No deal value, no lead count, no
-   percentage, no rating. The requirements doc forbids fake dashboard figures
-   and this page carries no invented proof anywhere, so the mocks show
-   structure and nothing that could be read as a result.
+   THEY NOW FOLLOW ONE NAMED CUSTOMER. Priya S., on WhatsApp, who is already
+   the top thread in the hero inbox and whose preview there is about booking
+   an appointment. The section's heading promises a journey and the six cards
+   were six unrelated screens; they are now one enquiry moving through six
+   stages, which is what the section said all along.
 
-   No dates either. A hard date ("Tue, 16 Sep") is stale the week after it
-   ships and quietly dates the whole page, so the booking card says
-   "Tomorrow" — which stays true for as long as the page is up.
+   SAMPLE DATA, ADDED ON THE CLIENT'S INSTRUCTION. These cards used to carry
+   no figure at all — no value, no count, no name — because the requirements
+   doc forbids fake dashboard figures and this page invents no proof. The
+   client has since asked for placeholder data so the screens stop looking
+   empty, on the understanding that real values replace it.
+
+   That override is deliberate and narrow, so the figures are chosen to be
+   unmistakably a RECORD rather than a RESULT:
+
+     - one money figure on the whole page, on one deal, sitting inside a deal
+       card. No totals, no averages, no growth, no "customers see X".
+     - the budget range and the deal value agree with each other, the way a
+       real record would.
+     - nothing aggregated. An aggregate is a claim about many customers; a
+       single record is a screenshot.
+
+   It is registered in site.PLACEHOLDER_CLAIMS with everything else that has
+   to be replaced before ad spend points here.
+
+   STILL NO HARD DATES. "Tue, 16 Sep" is stale the week after it ships and
+   quietly dates the whole page, so the booking card says "Tomorrow" — which
+   stays true for as long as the page is up.
    ========================================================================== */
 
 /**
@@ -88,11 +108,14 @@ function Frame({ children }: { children: ReactNode }) {
 function Head({
   tile,
   icon,
+  sub,
   children,
 }: {
   /** Background + text classes for the tile, e.g. "bg-harbour-tint text-harbour". */
   tile: string;
   icon: ReactNode;
+  /** Optional second line — who the record belongs to. */
+  sub?: string;
   children: ReactNode;
 }) {
   return (
@@ -102,10 +125,19 @@ function Head({
       >
         {icon}
       </span>
-      <span
-        className={`leading-tight font-extrabold text-forest ${SCALE.title}`}
-      >
-        {children}
+      <span className="min-w-0">
+        <span
+          className={`block truncate leading-tight font-extrabold text-forest ${SCALE.title}`}
+        >
+          {children}
+        </span>
+        {sub && (
+          <span
+            className={`block truncate leading-tight font-semibold text-slate ${SCALE.stamp}`}
+          >
+            {sub}
+          </span>
+        )}
       </span>
     </span>
   );
@@ -176,18 +208,27 @@ function EnquiryMock() {
     <Frame>
       <span className="flex items-center gap-2">
         <WhatsAppMark className={`shrink-0 ${SCALE.tile}`} />
-        <span
-          className={`leading-tight font-extrabold text-forest ${SCALE.title}`}
-        >
-          New enquiry
+        <span className="min-w-0">
+          <span
+            className={`block truncate leading-tight font-extrabold text-forest ${SCALE.title}`}
+          >
+            Priya S.
+          </span>
+          <span
+            className={`block truncate leading-tight font-semibold text-slate ${SCALE.stamp}`}
+          >
+            WhatsApp &middot; New enquiry
+          </span>
         </span>
       </span>
 
-      {/* Neutral on purpose. The customer's own words are not a brand moment. */}
+      {/* Her words match her preview in the hero inbox, so the two mocks are
+          plainly the same person. Neutral styling on purpose — the customer's
+          own message is not a brand moment. */}
       <p
         className={`rounded-[12px] rounded-tl-[4px] bg-offwhite px-2.5 py-2 leading-snug font-semibold text-charcoal ${SCALE.body}`}
       >
-        Hi, I&rsquo;m interested in your service. Do you have a demo?
+        Hi, can I book an appointment this week?
       </p>
 
       <Stamp>11:24&nbsp;AM</Stamp>
@@ -202,6 +243,7 @@ function ReplyMock() {
       <Head
         tile="bg-harbour-tint text-harbour"
         icon={<Icon name="sparkReply" className={SCALE.tileIcon} />}
+        sub="Replying to Priya S."
       >
         iSuite AI
       </Head>
@@ -209,7 +251,7 @@ function ReplyMock() {
       <p
         className={`rounded-[12px] rounded-tl-[4px] bg-harbour-tint px-2.5 py-2 leading-snug font-semibold text-forest ${SCALE.body}`}
       >
-        Thanks for getting in touch! Which service are you looking for?
+        Happy to help! Which service do you need, and which day suits you?
       </p>
 
       <Stamp>
@@ -221,10 +263,17 @@ function ReplyMock() {
 }
 
 /* --- 03 · the answers are saved — emerald, because a tick is green -------- */
+/*
+ * Her three answers, saved. These were "High", "Confirmed" and "Clear" —
+ * words that describe a lead rather than anything she said. A saved answer is
+ * the thing she typed, which is what makes this look like a record.
+ *
+ * The range agrees with the deal value on card 06. PLACEHOLDER DATA.
+ */
 const QUALIFIED = [
-  ["Interest", "High"],
-  ["Budget", "Confirmed"],
-  ["Requirement", "Clear"],
+  ["Service", "Consultation"],
+  ["Budget", "₹25,000–50,000"],
+  ["Timeline", "This week"],
 ];
 
 function QualifyMock() {
@@ -233,6 +282,7 @@ function QualifyMock() {
       <Head
         tile="bg-emerald-tint text-emerald"
         icon={<Icon name="checklist" className={SCALE.tileIcon} />}
+        sub="Priya S."
       >
         Lead details
       </Head>
@@ -268,8 +318,9 @@ function BookingMock() {
       <Head
         tile="bg-copper-tint text-copper"
         icon={<Icon name="calendar" className={SCALE.tileIcon} />}
+        sub="with Priya S."
       >
-        Product demo
+        Consultation
       </Head>
 
       <div className="flex flex-col gap-1">
@@ -328,8 +379,9 @@ function HandoverMock() {
       <Head
         tile="bg-harbour-tint text-harbour"
         icon={<Icon name="team" className={SCALE.tileIcon} />}
+        sub="Sales team &middot; Priya S."
       >
-        Assigned to sales team
+        Assigned to Arun S.
       </Head>
 
       <span className="flex -space-x-1.5">
@@ -359,6 +411,7 @@ function ClosedMock() {
       <Head
         tile="bg-copper-tint text-copper"
         icon={<Trophy className={SCALE.tileIcon} />}
+        sub="Consultation &middot; Priya S."
       >
         Deal closed
       </Head>
@@ -375,6 +428,20 @@ function ClosedMock() {
         <span className="h-2 flex-1 rounded-full bg-copper xl:h-1.5 2xl:h-2" />
         <span className="h-2 flex-1 rounded-full bg-copper xl:h-1.5 2xl:h-2" />
         <span className="h-2 flex-1 rounded-full bg-emerald xl:h-1.5 2xl:h-2" />
+      </span>
+
+      {/* THE ONLY MONEY FIGURE ON THE PAGE. One deal, inside a deal card, and
+          it agrees with the budget range saved on card 03 — a record, not a
+          result. Nothing here is a total, an average or a rate, because those
+          are claims about many customers and this is a screenshot of one.
+          PLACEHOLDER DATA, registered in site.PLACEHOLDER_CLAIMS. */}
+      <span className="flex items-center justify-between gap-2">
+        <span className={`font-semibold text-slate ${SCALE.row}`}>
+          Deal value
+        </span>
+        <span className={`font-extrabold text-forest ${SCALE.row}`}>
+          &#8377;42,000
+        </span>
       </span>
 
       <span className="flex items-center justify-between gap-2">
