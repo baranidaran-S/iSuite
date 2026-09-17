@@ -8,6 +8,7 @@ import { MetaAds } from "@/components/MetaAds";
 import { BusinessTypes } from "@/components/BusinessTypes";
 import { Trust } from "@/components/Trust";
 import { Faq } from "@/components/Faq";
+import { DemoCall } from "@/components/DemoCall";
 import { CtaBand } from "@/components/CtaBand";
 import { LeadForm } from "@/components/LeadForm";
 import { Footer } from "@/components/Footer";
@@ -70,6 +71,7 @@ import { WhatsAppFab } from "@/components/WhatsAppFab";
      Meta Ads        DARK
      Trust           white
      FAQ             off-white
+     Demo call       DARK
      Lead Form       white     (must stay light for trust)
      Footer          DARK
    ========================================================================== */
@@ -93,6 +95,7 @@ export default function Page() {
         <MetaAds />
         <Trust />
         <Faq />
+        <DemoCall />
         <LeadForm />
       </main>
 

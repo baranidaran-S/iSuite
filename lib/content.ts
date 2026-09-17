@@ -25,11 +25,46 @@ export const cta = {
 
 /* --- §7.1 Hero — DARK ANCHOR --------------------------------------------- */
 export const hero = {
-  // [SPEC]
-  headline: "Turn Every Enquiry Into a Clear Sales Journey.",
-  // [SPEC]
+  /*
+   * [DRAFT - NEEDS APPROVAL] rewritten in Phase 5 of the ads redesign.
+   *
+   * WAS: "Turn Every Enquiry Into a Clear Sales Journey." That is a sentence
+   * about the product. Someone who tapped an Instagram ad four seconds ago
+   * does not yet care what the product turns things into - they care that
+   * messages are piling up in three apps and nobody has answered them. The
+   * headline now names their morning, and the subhead answers it.
+   *
+   * Six words, because it has to hold together at 375px, where roughly 90%
+   * of this traffic lands. The accent falls on the second half - the half
+   * that is the complaint.
+   *
+   * Nothing here claims anything. It does not say how many enquiries are
+   * missed or what share go unanswered; it describes a situation the reader
+   * recognises. Every capability named in the subhead is documented in the
+   * requirements doc, including replies outside working hours.
+   */
+  headline: "Enquiries Everywhere. Nobody Free to Reply.",
+  headlineAccent: "Nobody Free to Reply.",
   subhead:
-    "iSuite AI brings WhatsApp, Instagram, Facebook, website and Meta ad enquiries into one system — with an AI sales assistant that responds, qualifies, books appointments and follows up.",
+    "WhatsApp, Instagram, Facebook, your website and Meta ads land in one inbox - with an AI sales assistant that answers, qualifies and books appointments, including outside working hours.",
+
+  /*
+   * [CONFIRMED BY CLIENT] the demo, stated as an offer rather than a button.
+   *
+   * "Book a Demo" is a label. It says nothing about how long it takes, what
+   * it costs, where it happens or what is going to be asked of you - and
+   * every reference page we were sent states all of that next to the button.
+   * These are the client's own answers, given directly.
+   *
+   * "Pick your slot" is the one thing this page has that none of the
+   * reference pages do: the form books a real calendar time, not a callback
+   * request. It was in the repo unadvertised.
+   */
+  offer: "Free · 30 minutes · on Google Meet",
+  offerNote: "Pick your slot at the bottom of this page.",
+
+  /** Label above the channel marks. Names the four, rather than claiming. */
+  channelsLabel: "Enquiries from",
 } as const;
 
 /* --- §7.2 Proof Strip ----------------------------------------------------- */
@@ -727,6 +762,62 @@ export const finalCta = {
   heading: "Ready to Bring Your Enquiries Into One Sales System?",
   // [SPEC]
   body: "See how iSuite AI fits your enquiry handling, follow-up and sales process.",
+} as const;
+
+/* --- The demo call, stated plainly ---------------------------------------- */
+export const demoCall = {
+  /*
+   * [DRAFT - NEEDS APPROVAL] new in Phase 5. Every fact below came from the
+   * client directly: 30 minutes, free, Google Meet, a general walkthrough
+   * rather than a session on the visitor's own accounts, run by the team and
+   * sometimes the founder.
+   *
+   * WHY THIS SECTION EXISTS. "Book a Demo" asks a business owner for their
+   * WhatsApp number and a slot in their week, and tells them nothing about
+   * what they are agreeing to. Every reference page we were sent states the
+   * shape of its offer next to the ask - three hours, live on Zoom, this is
+   * what you leave with. This is ours.
+   *
+   * THE LAST POINT IS THE IMPORTANT ONE. The demo is a walkthrough, not a
+   * setup session; nobody's account gets connected on the call. Saying so
+   * costs a little enthusiasm and buys the thing this page cannot buy any
+   * other way - it has no rating, no client count and no testimonial, so
+   * being straight about the limits is the whole of its credibility. Trust
+   * and Business Types both run the same move.
+   *
+   * Nothing here is a figure, a result or a promise.
+   */
+  heading: "What Happens on the Call.",
+  headingAccent: "on the Call",
+  lead: "Thirty minutes on Google Meet. Here is exactly what it is - and what it is not.",
+
+  points: [
+    {
+      title: "A live walkthrough of iSuite AI",
+      body: "The shared inbox, the assistant replying, the sales pipeline and the Meta Ads view - shown working, not described.",
+    },
+    {
+      title: "Your channels, named",
+      body: "You tell us where your enquiries actually arrive. We show you how each one lands in the inbox.",
+    },
+    {
+      title: "What setting it up would involve",
+      body: "Which channels you would connect, what Meta has to approve, and which parts run on Meta's timeline rather than ours.",
+    },
+    {
+      title: "Meta's charges, explained",
+      body: "Meta bills WhatsApp messaging separately from MnT Future. We walk you through how that applies to the volume you expect.",
+    },
+  ],
+
+  /** The honest limit. Rendered apart from the four above, in copper. */
+  limit: {
+    title: "It is a walkthrough, not a setup session",
+    body: "We do not connect your accounts on the call, and nothing changes in your business until you decide it should.",
+  },
+
+  footnote:
+    "Free. Thirty minutes. On Google Meet. Run by the MnT Future team, sometimes by the founder.",
 } as const;
 
 /* --- §7.12 Lead Form ----------------------------------------------------- */

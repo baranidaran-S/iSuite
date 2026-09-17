@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/Button";
 import { AppMock, ChannelArc, MetaAdsCard } from "@/components/AppMock";
 import { Reveal } from "@/components/ui/Reveal";
 import { ArrowDown, Icon } from "@/components/ui/icons";
+import { channelMarks } from "@/components/ui/brand";
 import { cta, hero } from "@/lib/content";
 import { site } from "@/lib/site";
 
@@ -24,18 +25,23 @@ import { site } from "@/lib/site";
    600-700px on mobile so the CTA stays above the fold.
    ========================================================================== */
 
-/** Splits the spec headline so the closing clause can carry the accent. */
+/**
+ * Splits the headline so the closing clause carries the accent.
+ *
+ * The marker used to be hardcoded here ("a Clear Sales Journey."), which
+ * meant changing the headline in lib/content.ts silently dropped the accent
+ * and nothing failed. It reads `headlineAccent` now, like every other
+ * section on this page.
+ */
 function TwoToneHeadline() {
-  const full = hero.headline; // "Turn Every Enquiry Into a Clear Sales Journey."
-  const marker = "a Clear Sales Journey.";
-  const idx = full.indexOf(marker);
-
-  if (idx === -1) return <>{full}</>;
-
+  const { headline, headlineAccent } = hero;
+  const i = headline.indexOf(headlineAccent);
+  if (i === -1) return <>{headline}</>;
   return (
     <>
-      {full.slice(0, idx)}
-      <span className="text-emerald-tint">{marker}</span>
+      {headline.slice(0, i)}
+      <span className="text-emerald-tint">{headlineAccent}</span>
+      {headline.slice(i + headlineAccent.length)}
     </>
   );
 }
@@ -97,6 +103,45 @@ export function Hero() {
                 {cta.secondary}
                 <ArrowDown className="h-4 w-4" />
               </Button>
+            </div>
+          </Reveal>
+
+          {/* THE OFFER, NOT JUST THE LABEL.
+              "Book a Demo" says nothing about how long it takes, what it
+              costs or where it happens — and every landing page we were sent
+              states all three right next to the button. These are the
+              client's own figures.
+
+              The second line advertises something this page already had and
+              never mentioned: the form books a real calendar slot, which not
+              one of the reference pages does. */}
+          <Reveal delay={300}>
+            <p className="mt-5 text-[15px] leading-relaxed font-bold text-emerald-tint">
+              {hero.offer}
+            </p>
+            <p className="mt-1 text-[14px] leading-relaxed text-ink-muted">
+              {hero.offerNote}
+            </p>
+          </Reveal>
+
+          {/* The four channels plus Meta ads, as their own marks. Naming them
+              in the subhead is a sentence; showing them is recognised in a
+              glance, which is all the time this gets on a phone. Third-party
+              logos keep their own brand colours — the no-gradient rule is
+              ours, not Meta's. */}
+          <Reveal delay={360}>
+            <div className="mt-8 flex flex-wrap items-center gap-x-4 gap-y-3 border-t border-white/10 pt-6">
+              <span className="text-[11px] font-extrabold tracking-[0.16em] text-ink-muted uppercase">
+                {hero.channelsLabel}
+              </span>
+              <ul className="flex flex-wrap items-center gap-3">
+                {channelMarks.map(({ name, Mark }) => (
+                  <li key={name} className="flex items-center">
+                    <Mark className="h-7 w-7" />
+                    <span className="sr-only">{name}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </Reveal>
         </div>

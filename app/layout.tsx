@@ -15,14 +15,30 @@ const jakarta = Plus_Jakarta_Sans({
   variable: "--font-jakarta",
 });
 
+/*
+ * The <title> is what shows in the browser tab and in the link preview Meta
+ * renders when this URL is shared. It is NOT the hero headline and should not
+ * be: "Enquiries Everywhere. Nobody Free to Reply." is a hook that works
+ * above a subhead explaining it, and works nowhere else. A title has to say
+ * what the thing is, on its own, to someone who has no other context.
+ *
+ * It carried the OLD hero headline until Phase 5, and the description still
+ * said "Messenger" long after the channel was renamed to Facebook across the
+ * rest of the page. Both fixed.
+ *
+ * STILL MISSING: an og:image. Meta renders a blank card without one, which
+ * is the first thing a person sees when this link is shared — and this page
+ * exists to be shared by Meta. It needs a real 1200x630 image in public/.
+ */
 export const metadata: Metadata = {
-  title: "iSuite AI — Turn Every Enquiry Into a Clear Sales Journey",
+  title: "iSuite AI — One Inbox for WhatsApp, Instagram and Facebook Enquiries",
   description:
-    "iSuite AI brings WhatsApp, Instagram, Messenger, website and Meta ad enquiries into one system — with an AI sales assistant that responds, qualifies, books appointments and follows up.",
+    "iSuite AI brings WhatsApp, Instagram, Facebook, website and Meta ad enquiries into one system — with an AI sales assistant that responds, qualifies, books appointments and follows up. Book a free 30-minute demo.",
   openGraph: {
-    title: "iSuite AI — Turn Every Enquiry Into a Clear Sales Journey",
+    title:
+      "iSuite AI — One Inbox for WhatsApp, Instagram and Facebook Enquiries",
     description:
-      "One system for every enquiry, follow-up and deal. Book a demo with MnT Future.",
+      "One system for every enquiry, follow-up and deal. Book a free 30-minute demo with MnT Future, on Google Meet.",
     type: "website",
   },
 };
