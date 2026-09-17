@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import { Section } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
 import { journeyMocks, type JourneyMockName } from "@/components/JourneyMocks";
@@ -15,10 +18,14 @@ import { howItWorks } from "@/lib/content";
    and what the section is for. It also gives the dark field a large piece of
    colour, which is what stopped this section looking plain.
 
-   Desktop (lg+): the band runs across six grid columns, segments interlocking.
-   Below lg : the same band turns and runs down the page — one chevron bar per
-              step, pointing at the card it belongs to. Roughly 90% of visitors
-              are on a phone, so six across is never attempted there.
+   Desktop (xl+): the band runs across six grid columns, segments interlocking.
+   Below xl : a numbered rail — the numbers thread down the left, each step's
+              title, screen and sentence to their right. Roughly 90% of
+              visitors are on a phone, so six across is never attempted there.
+
+   NOT A CAROUSEL, deliberately. Swiping would be the shortest answer to the
+   height, but Core Benefits and Meta Ads both already swipe directly below
+   this section, and three strips in a row is worse than a long scroll.
 
    The mocks are structure only — no figure appears in any of them. See the
    header of JourneyMocks.tsx.
@@ -68,10 +75,23 @@ const numberOf = (i: number) => String(i + 1).padStart(2, "0");
  * the RING draws the circle, not the fill: tint at 70% measures 3.25:1 on the
  * band, and the numeral is tint too at 11.4:1 on the ink.
  */
-function Badge({ n, className = "" }: { n: string; className?: string }) {
+function Badge({
+  n,
+  lit = false,
+  className = "",
+}: {
+  n: string;
+  /** Lights up once the step has been scrolled to. Rail only. */
+  lit?: boolean;
+  className?: string;
+}) {
   return (
     <span
-      className={`flex shrink-0 items-center justify-center rounded-full bg-ink font-extrabold text-emerald-tint ring-2 ring-emerald-tint/70 ${className}`}
+      className={`flex shrink-0 items-center justify-center rounded-full font-extrabold ring-2 transition-[background-color,color,transform] duration-500 ease-out ${className} ${
+        lit
+          ? "scale-105 bg-emerald-tint text-ink ring-emerald-tint"
+          : "bg-ink text-emerald-tint ring-emerald-tint/70"
+      }`}
     >
       {n}
     </span>
@@ -80,6 +100,36 @@ function Badge({ n, className = "" }: { n: string; className?: string }) {
 
 export function HowItWorks() {
   const steps = howItWorks.steps;
+
+  /* --- The rail lights up as you scroll ---------------------------------
+     `reached` is the furthest step that has come into view, and it only ever
+     goes forward. A step that lit and then scrolled away stays lit, because
+     this is a PROGRESS rail: a thread that filled on the way down and emptied
+     again behind you would read as a bug, not as a journey.
+
+     The margin fires a step when it crosses the lower third of the screen,
+     which is roughly where the eye is when you scroll to something. */
+  const rail = useRef<HTMLOListElement>(null);
+  const [reached, setReached] = useState(-1);
+
+  useEffect(() => {
+    const items = rail.current?.querySelectorAll("[data-step]");
+    if (!items?.length) return;
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          const i = Number((entry.target as HTMLElement).dataset.step);
+          setReached((prev) => (i > prev ? i : prev));
+        }
+      },
+      { rootMargin: "0px 0px -30% 0px" },
+    );
+
+    items.forEach((el) => io.observe(el));
+    return () => io.disconnect();
+  }, []);
 
   return (
     <Section
@@ -156,39 +206,72 @@ export function HowItWorks() {
           })}
         </ol>
 
-        {/* ================= Phone and tablet: it runs down ================= */}
-        <ol className="mx-auto mt-10 max-w-[520px] xl:hidden">
+        {/* ============ Phone and tablet: a numbered rail ============
+            The numbers sit in a column down the left with a line threading
+            them together, and each step's title, screen and sentence sit to
+            the right of its own number.
+
+            This replaced full-width chevron bars stacked down the page. Those
+            cost 56px of vertical space each and pushed the title away from the
+            card it belonged to; the rail puts the number, the title and the
+            screen on one line of sight, and the thread makes the order
+            explicit without repeating the band six times.
+
+            The line is 2px of tint at 50% — 3.9:1 against the dark section.
+            Every faint connector on this page has had to be redrawn once
+            already; this one starts visible. */}
+        <ol ref={rail} className="mx-auto mt-10 max-w-[520px] xl:hidden">
           {steps.map((step, i) => {
             const Mock = journeyMocks[step.mock as JourneyMockName];
+            const last = i === steps.length - 1;
             return (
-              <li key={step.title}>
-                <Reveal delay={i * 120}>
-                  <div className="ribbon-bar flex min-h-[64px] items-center gap-3 px-4 pb-3.5">
-                    <Badge n={numberOf(i)} className="h-7 w-7 text-[11px]" />
-                    <span className="text-[15px] leading-tight font-extrabold text-white">
-                      {step.title}
-                    </span>
-                  </div>
+              <li
+                key={step.title}
+                data-step={i}
+                className="grid grid-cols-[40px_1fr] gap-x-4"
+              >
+                {/* The rail. `flex-1` stretches the thread to the full height
+                    of the row beside it, including the gap below, so it runs
+                    unbroken from one number into the next. */}
+                <div className="flex flex-col items-center">
+                  <Badge
+                    n={numberOf(i)}
+                    lit={i <= reached}
+                    className="h-10 w-10 text-[13px]"
+                  />
 
-                  <div className="mt-4">
+                  {/* The thread. The dim track is always there so the rail
+                      never looks broken; the bright inner line grows down it
+                      as the NEXT step is reached, so the fill arrives just
+                      ahead of the number it is travelling to. */}
+                  {!last && (
+                    <span
+                      aria-hidden="true"
+                      className="relative mt-2 w-0.5 flex-1 overflow-hidden rounded-full bg-emerald-tint/25"
+                    >
+                      <span
+                        className={`absolute inset-0 origin-top rounded-full bg-emerald-tint transition-transform duration-700 ease-out ${
+                          i < reached ? "scale-y-100" : "scale-y-0"
+                        }`}
+                      />
+                    </span>
+                  )}
+                </div>
+
+                <Reveal delay={i * 120} className={last ? "" : "pb-9"}>
+                  {/* min-h-10 centres the title against its number. */}
+                  <h3 className="flex min-h-10 items-center text-[17px] leading-tight font-extrabold text-white">
+                    {step.title}
+                  </h3>
+
+                  <div className="mt-3">
                     <Mock />
                   </div>
 
-                  <p className="mt-3.5 text-[15px] leading-relaxed text-white/75">
+                  <p className="mt-3 text-[15px] leading-relaxed text-white/75">
                     {step.detail}
                   </p>
                 </Reveal>
-
-                {/* Carries the eye from one bar to the next — the point of the
-                    chevron above is doing the same job from the other end. */}
-                {i < steps.length - 1 && (
-                  <Reveal delay={i * 120 + 90}>
-                    <span
-                      aria-hidden="true"
-                      className="mx-auto my-6 block h-7 w-0.5 bg-emerald-tint/30"
-                    />
-                  </Reveal>
-                )}
               </li>
             );
           })}

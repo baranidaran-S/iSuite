@@ -26,6 +26,13 @@ import { LEAD_ENDPOINT } from "@/lib/site";
    OPTIONAL slot rows below them.
    WhatsApp Number uses type="tel" so mobile shows the number pad.
 
+   THERE IS NO DROPDOWN LEFT IN HERE. Business Type was a native <select>,
+   and a native select's open list is drawn by the operating system — every
+   browser ignores the page's CSS for it, so it could not be made to match
+   anything else on the page. It is a row of chips now, the same control the
+   Preferred Time row uses, which also saves a tap on a phone: no system
+   sheet to open and dismiss.
+
    THE PICKER IS NOT A BOOKING. It records a preference that travels with the
    lead; the team confirms the real time on WhatsApp. Nothing in it is
    validated — see components/DateTimePicker.tsx.
@@ -135,17 +142,20 @@ export function LeadForm() {
             </div>
           ) : (
             <form onSubmit={handleSubmit} noValidate>
+              {/* THREE GRID CHILDREN, PLACED EXPLICITLY — details, picker, foot.
+
+                  DOM order is the MOBILE order: fields, then the demo slot,
+                  then the button. It used to be one "left half" holding the
+                  fields and the button with the picker beside it, which read
+                  correctly on desktop and wrongly on a phone, where the
+                  column collapses: the button landed above the date and time
+                  it was meant to submit.
+
+                  From md the placement below puts it back — picker on the
+                  right spanning both rows, foot under the fields on the left,
+                  bottom-aligned with the picker's last line. */}
               <div className="grid gap-x-10 gap-y-8 md:grid-cols-2">
-                {/* ---- Left half: the details, then the finish ----
-                    A flex column so the foot can be pushed to the bottom with
-                    mt-auto. Dropping Main Enquiry Channel left this side two
-                    rows shorter than the calendar, and the slack was hanging
-                    UNDER the button as dead space. Now the button bottom-aligns
-                    with the picker's last line and the slack sits above it,
-                    between the fields and the rule — which is where a form
-                    wants a pause anyway, right before the thing you press. */}
-                <div className="flex flex-col">
-                  {/* ONE FIELD PER LINE.
+                {/* ONE FIELD PER LINE.
                       They were two a side, which left this half two rows
                       shorter than the calendar and put a hole under the
                       button. Stacked, the four fields run to roughly the
@@ -157,131 +167,172 @@ export function LeadForm() {
                       the call, and the page itself says enquiries "arrive
                       from everywhere" — so a required pick-one contradicted
                       it. See lib/content.ts. */}
-                  <div className="space-y-5">
-                    <Field
+                <div className="space-y-5 md:col-start-1 md:row-start-1">
+                  <Field
+                    id="fullName"
+                    label={leadForm.labels.fullName}
+                    error={errors.fullName}
+                  >
+                    <input
                       id="fullName"
-                      label={leadForm.labels.fullName}
-                      error={errors.fullName}
-                    >
-                      <input
-                        id="fullName"
-                        name="fullName"
-                        type="text"
-                        autoComplete="name"
-                        className={fieldBase}
-                        value={values.fullName}
-                        onChange={(e) => update("fullName", e.target.value)}
-                        aria-invalid={Boolean(errors.fullName)}
-                        aria-describedby={
-                          errors.fullName ? "fullName-error" : undefined
-                        }
-                      />
-                    </Field>
+                      name="fullName"
+                      type="text"
+                      autoComplete="name"
+                      className={fieldBase}
+                      value={values.fullName}
+                      onChange={(e) => update("fullName", e.target.value)}
+                      aria-invalid={Boolean(errors.fullName)}
+                      aria-describedby={
+                        errors.fullName ? "fullName-error" : undefined
+                      }
+                    />
+                  </Field>
 
-                    <Field
+                  <Field
+                    id="whatsapp"
+                    label={leadForm.labels.whatsapp}
+                    error={errors.whatsapp}
+                  >
+                    <input
                       id="whatsapp"
-                      label={leadForm.labels.whatsapp}
-                      error={errors.whatsapp}
-                    >
-                      <input
-                        id="whatsapp"
-                        name="whatsapp"
-                        type="tel"
-                        inputMode="tel"
-                        autoComplete="tel"
-                        className={fieldBase}
-                        value={values.whatsapp}
-                        onChange={(e) => update("whatsapp", e.target.value)}
-                        aria-invalid={Boolean(errors.whatsapp)}
-                        aria-describedby={
-                          errors.whatsapp ? "whatsapp-error" : undefined
-                        }
-                      />
-                    </Field>
+                      name="whatsapp"
+                      type="tel"
+                      inputMode="tel"
+                      autoComplete="tel"
+                      className={fieldBase}
+                      value={values.whatsapp}
+                      onChange={(e) => update("whatsapp", e.target.value)}
+                      aria-invalid={Boolean(errors.whatsapp)}
+                      aria-describedby={
+                        errors.whatsapp ? "whatsapp-error" : undefined
+                      }
+                    />
+                  </Field>
 
-                    <Field
+                  <Field
+                    id="businessName"
+                    label={leadForm.labels.businessName}
+                    error={errors.businessName}
+                  >
+                    <input
                       id="businessName"
-                      label={leadForm.labels.businessName}
-                      error={errors.businessName}
-                    >
-                      <input
-                        id="businessName"
-                        name="businessName"
-                        type="text"
-                        autoComplete="organization"
-                        className={fieldBase}
-                        value={values.businessName}
-                        onChange={(e) => update("businessName", e.target.value)}
-                        aria-invalid={Boolean(errors.businessName)}
-                        aria-describedby={
-                          errors.businessName ? "businessName-error" : undefined
-                        }
-                      />
-                    </Field>
+                      name="businessName"
+                      type="text"
+                      autoComplete="organization"
+                      className={fieldBase}
+                      value={values.businessName}
+                      onChange={(e) => update("businessName", e.target.value)}
+                      aria-invalid={Boolean(errors.businessName)}
+                      aria-describedby={
+                        errors.businessName ? "businessName-error" : undefined
+                      }
+                    />
+                  </Field>
 
-                    <Field
-                      id="businessType"
-                      label={leadForm.labels.businessType}
-                      error={errors.businessType}
-                    >
-                      <select
-                        id="businessType"
-                        name="businessType"
-                        className={fieldBase}
-                        value={values.businessType}
-                        onChange={(e) => update("businessType", e.target.value)}
-                        aria-invalid={Boolean(errors.businessType)}
-                        aria-describedby={
-                          errors.businessType ? "businessType-error" : undefined
-                        }
-                      >
-                        <option value="">{leadForm.selectPlaceholder}</option>
-                        {leadForm.businessTypeOptions.map((o) => (
-                          <option key={o} value={o}>
-                            {o}
-                          </option>
-                        ))}
-                      </select>
-                    </Field>
-                  </div>
+                  <ChipChoice
+                    name="businessType"
+                    label={leadForm.labels.businessType}
+                    options={leadForm.businessTypeOptions}
+                    value={values.businessType}
+                    error={errors.businessType}
+                    onSelect={(v) => update("businessType", v)}
+                  />
+                </div>
 
-                  {/* ---- Foot: consent and the button, across both columns ---- */}
-                  <div className="mt-auto border-t border-line-strong/45 pt-6">
-                    {/* Consent — legal wording pending review before publishing */}
-                    {/* CTA #5 of 7 (§10). Capped rather than edge to edge —
+                {/* ---- The demo slot: right column, both rows ---- */}
+                <div className="md:col-start-2 md:row-span-2 md:row-start-1">
+                  <DateTimePicker
+                    date={values.preferredDate}
+                    time={values.preferredTime}
+                    onDate={(v) => update("preferredDate", v)}
+                    onTime={(v) => update("preferredTime", v)}
+                    dateError={errors.preferredDate}
+                    timeError={errors.preferredTime}
+                  />
+                </div>
+
+                {/* ---- Foot: consent and the button, across both columns ---- */}
+                <div className="border-t border-line-strong/45 pt-6 md:col-start-1 md:row-start-2 md:self-end">
+                  {/* Consent — legal wording pending review before publishing */}
+                  {/* CTA #5 of 7 (§10). Capped rather than edge to edge —
                         an 1100px button reads as a banner, not something to
                         press. */}
-                    <div className="mx-auto max-w-[420px]">
-                      <Button type="submit" fullWidth>
-                        {cta.primary}
-                      </Button>
-                    </div>
+                  <div className="mx-auto max-w-[420px]">
+                    <Button type="submit" fullWidth>
+                      {cta.primary}
+                    </Button>
+                  </div>
 
-                    {/* The tick box is gone; the consent is not. Pressing the
+                  {/* The tick box is gone; the consent is not. Pressing the
                         button is the agreement, and the wording sits directly
                         under it rather than buried. NEEDS LEGAL REVIEW — see
                         leadForm.consentNote in lib/content.ts. */}
-                    <p className="t-small mx-auto mt-4 max-w-[480px] text-center text-slate">
-                      {leadForm.consentNote}
-                    </p>
-                  </div>
+                  <p className="t-small mx-auto mt-4 max-w-[480px] text-center text-slate">
+                    {leadForm.consentNote}
+                  </p>
                 </div>
-
-                {/* ---- Right half: the demo slot ---- */}
-                <DateTimePicker
-                  date={values.preferredDate}
-                  time={values.preferredTime}
-                  onDate={(v) => update("preferredDate", v)}
-                  onTime={(v) => update("preferredTime", v)}
-                  dateError={errors.preferredDate}
-                  timeError={errors.preferredTime}
-                />
               </div>
             </form>
           )}
         </div>
       </div>
     </Section>
+  );
+}
+
+/**
+ * A row of choice chips — one of several, like a radio group, because that is
+ * exactly what it is.
+ *
+ * Real <input type="radio"> elements, visually hidden, with the chip drawn by
+ * the label beside them. That is what makes arrow-key navigation, the grouped
+ * <fieldset>/<legend> announcement and "one of these" semantics come for
+ * free; a row of <button>s would need a hand-rolled roving tabindex and an
+ * ARIA radiogroup to match it.
+ *
+ * Every chip clears 44px, and the chosen state is a fill rather than a border
+ * alone — white on the primary measures 5.65:1, where a 1px ring change would
+ * be the only signal and easy to miss on a phone.
+ */
+function ChipChoice({
+  name,
+  label,
+  options,
+  value,
+  error,
+  onSelect,
+}: {
+  name: string;
+  label: string;
+  options: readonly string[];
+  value: string;
+  error?: string;
+  onSelect: (value: string) => void;
+}) {
+  return (
+    <fieldset>
+      <legend className="t-small font-bold text-forest">{label}</legend>
+
+      <div className="mt-1.5 flex flex-wrap gap-2">
+        {options.map((option) => (
+          <label key={option} className="cursor-pointer">
+            <input
+              type="radio"
+              name={name}
+              value={option}
+              checked={value === option}
+              onChange={() => onSelect(option)}
+              className="peer sr-only"
+            />
+            <span className="flex min-h-11 items-center rounded-full border border-line-strong px-3.5 text-[14px] font-semibold text-charcoal transition-colors duration-150 peer-checked:border-primary peer-checked:bg-primary peer-checked:text-white peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-forest">
+              {option}
+            </span>
+          </label>
+        ))}
+      </div>
+
+      {error && <p className="t-small mt-2 text-forest">{error}</p>}
+    </fieldset>
   );
 }
 

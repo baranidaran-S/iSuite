@@ -721,19 +721,81 @@
       0 100%
     );
   }
+}
 
-  /* Phone and tablet: the same band turned to run down the page, its point
-     facing the card it belongs to. Six chevrons across is never attempted at
-     375px, where most of this page is read. */
-  .ribbon-bar {
-    --notch: 14px;
-    background: var(--color-ribbon);
-    clip-path: polygon(
-      0 0,
-      100% 0,
-      100% calc(100% - var(--notch)),
-      50% 100%,
-      0 calc(100% - var(--notch))
-    );
+/* ==========================================================================
+   WHATSAPP NUDGE — the floating button asks once, then waits
+   --------------------------------------------------------------------------
+   A short wiggle every five seconds: about half a second of motion and four
+   and a half of stillness. It replaced a red notification dot, which implied
+   an unread message that does not exist — a nudge is an invitation, a badge
+   is a lie.
+
+   The rest position is upright and the keyframes only depart from it near the
+   end of the cycle, so the button is still for most of its life and the
+   reduced-motion rule below leaves it exactly where it belongs.
+   ========================================================================== */
+@layer components {
+  @keyframes wa-nudge {
+    0%,
+    84%,
+    100% {
+      transform: rotate(0deg);
+    }
+    86% {
+      transform: rotate(-11deg);
+    }
+    89% {
+      transform: rotate(9deg);
+    }
+    92% {
+      transform: rotate(-6deg);
+    }
+    95% {
+      transform: rotate(4deg);
+    }
+    98% {
+      transform: rotate(-2deg);
+    }
+  }
+
+  .wa-nudge {
+    animation: wa-nudge 5s ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .wa-nudge {
+      animation: none;
+    }
+  }
+}
+
+/* ==========================================================================
+   BRAND BLOCK — the product name set into a heading
+   --------------------------------------------------------------------------
+   Used ONCE, on "iSuite AI" in the Solution heading. The marker swipe that
+   marks key phrases elsewhere appears in four other headings, which is
+   exactly why it stopped reading as special on the one word that is the
+   product itself.
+
+   THE TILT IS THE POINT, not decoration. A solid green rounded rectangle at
+   heading size looks like a button, and a heading nobody can click that
+   invites a click is worse than a quiet heading. Nothing rotated reads as a
+   control, so 1.5 degrees buys the block back from the button language.
+
+   White on #007743 is 5.65:1 — it clears AA for body text, let alone at
+   heading size. The negative margins keep the sentence's own spacing: the
+   padding would otherwise push the words either side apart.
+   ========================================================================== */
+@layer components {
+  .brand-block {
+    display: inline-block;
+    margin-inline: -0.06em;
+    padding-inline: 0.22em;
+    padding-block: 0.04em;
+    border-radius: 0.22em;
+    background: var(--color-primary);
+    color: #fff;
+    transform: rotate(-1.5deg);
   }
 }

@@ -1,38 +1,55 @@
+import Image from "next/image";
+
 /* ==========================================================================
    LOGO — mark + wordmark
    --------------------------------------------------------------------------
-   Matches the reference's lockup: the mark followed by the wordmark with
-   "AI" picked out in the brand green.
+   The mark is the real logo file, /public/logo.png. It is a MARK ONLY, with
+   no lettering in it, so the "iSuite AI" wordmark beside it stays.
 
-   TWO THINGS WERE WRONG HERE AND BOTH WERE SILENT.
+   Served through next/image so the browser never fetches the 1254px original
+   for a 40px slot — Next resizes and re-encodes to WebP (see next.config.ts).
+   The `sizes` hint keeps it from generating a needlessly wide candidate.
 
-   The mark was filled with a <linearGradient>. Gradients were ruled out for
-   this page, and this was the last one outside the third-party channel logos
-   in brand.tsx, which have to keep their own. It is a flat forest fill now.
+   ON DARK BARS IT NEEDS A PLATE. The mark is mid-green on transparency, and
+   the product mocks put it on the forest app bar, where it measures about
+   2.6:1 and reads as a smudge. `plate` sets it on a white tile there — which
+   is what a real app does with a logo on a dark chrome bar anyway. The old
+   drawn mark did not need this: it was a forest tile with a WHITE glyph, so
+   the glyph carried the contrast.
 
-   And "AI" was set in `text-teal`, a class from the palette this page had
-   before #007743 arrived. The token no longer exists, so Tailwind emitted
-   nothing and the two letters quietly inherited forest like the rest of the
-   wordmark - the accent had not rendered for some time.
-
-   TODO BEFORE LAUNCH: replace the mark below with the official logo file.
+   TWO THINGS TO FIX IN THE FILE ITSELF, before launch:
+     - 633KB for a logo. Next will not ship that to the browser, but it is in
+       the repo and in every clone. A trimmed PNG or an SVG would be a few KB.
+     - The edges are speckled with teal fringing from the export. Invisible at
+       40px, obvious anywhere it is shown large.
+   An SVG would settle both, and would stay sharp at any size.
    ========================================================================== */
 
-type P = { className?: string };
+type P = { className?: string; plate?: boolean; priority?: boolean };
 
-export const LogoMark = ({ className }: P) => (
-  <svg viewBox="0 0 40 40" className={className} aria-hidden="true">
-    <rect width="40" height="40" rx="12" fill="#123526" />
-    {/* Abstract "S" — two conversation strokes flowing into one */}
-    <path
-      d="M26.5 13.5c-1.6-1.6-4-2.2-6.4-1.6-3 .8-4.8 3.4-4.3 6 .4 2.2 2.4 3.3 5.2 4 3.2.8 4.6 1.8 4.9 3.4.4 2.4-1.5 4.6-4.3 5.2-2.3.5-4.6-.1-6.1-1.6"
-      fill="none"
-      stroke="#FFF"
-      strokeWidth="2.6"
-      strokeLinecap="round"
+export const LogoMark = ({ className, plate = false, priority = false }: P) => {
+  const mark = (
+    <Image
+      src="/logo.png"
+      alt=""
+      width={120}
+      height={120}
+      sizes="44px"
+      priority={priority}
+      className={plate ? "h-[76%] w-[76%]" : className}
     />
-  </svg>
-);
+  );
+
+  if (!plate) return mark;
+
+  return (
+    <span
+      className={`flex shrink-0 items-center justify-center rounded-[5px] bg-white ${className ?? ""}`}
+    >
+      {mark}
+    </span>
+  );
+};
 
 export function Logo({
   className,
@@ -43,7 +60,7 @@ export function Logo({
 }) {
   return (
     <span className={`flex items-center gap-2 ${className ?? ""}`}>
-      <LogoMark className="h-7 w-7 shrink-0 md:h-10 md:w-10" />
+      <LogoMark priority className="h-8 w-8 shrink-0 md:h-11 md:w-11" />
       <span
         className={`whitespace-nowrap text-lg font-extrabold tracking-tight md:text-2xl ${
           onDark ? "text-ink-fg" : "text-forest"

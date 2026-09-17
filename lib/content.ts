@@ -29,15 +29,16 @@ export const hero = {
   headline: "Turn Every Enquiry Into a Clear Sales Journey.",
   // [SPEC]
   subhead:
-    "iSuite AI brings WhatsApp, Instagram, Messenger, website and Meta ad enquiries into one system — with an AI sales assistant that responds, qualifies, books appointments and follows up.",
+    "iSuite AI brings WhatsApp, Instagram, Facebook, website and Meta ad enquiries into one system — with an AI sales assistant that responds, qualifies, books appointments and follows up.",
 } as const;
 
 /* --- §7.2 Proof Strip ----------------------------------------------------- */
 /*
  * [CLIENT-SUPPLIED] Replaces the build spec's §7.2 sentence, broken into
  * individual business types so the strip can run them as a ticker.
- * NOTE: this audience differs from §7.8 Suitable Business Types below, which
- * still lists showrooms, clinics, salons and studios.
+ * NOTE: this audience differs from `leadForm.businessTypeOptions`, which
+ * lists showrooms, clinics, salons and studios. RAISED AND KEPT — the two
+ * lists stay as they are by decision, so do not "fix" one to match the other.
  */
 export const proofStrip = {
   label: "Built for",
@@ -360,7 +361,7 @@ export const benefits = {
       icon: "inbox",
       title: "One Shared Inbox",
       tag: "Every channel",
-      body: "WhatsApp, Instagram, Messenger and website chat, all in one place.",
+      body: "WhatsApp, Instagram, Facebook and website chat, all in one place.",
       points: ["Shared conversations", "Team assignment", "Channel filters"],
       tint: "#CFE6DB",
       deep: "#00603A",
@@ -541,7 +542,7 @@ export const trust = {
         {
           title: "Answers every enquiry, day or night",
           detail:
-            "Messages from WhatsApp, Instagram, Messenger, your website and Meta ads all land in one inbox and get a reply — including outside working hours.",
+            "Messages from WhatsApp, Instagram, Facebook, your website and Meta ads all land in one inbox and get a reply — including outside working hours.",
         },
         {
           title: "Replies in the customer's own language",
@@ -617,14 +618,14 @@ export const faq = {
   items: [
     {
       q: "What is iSuite AI?",
-      a: "iSuite AI is an AI sales system for businesses whose enquiries arrive through WhatsApp, Instagram, Messenger, websites and Meta ads. It brings those conversations into one shared inbox, and its AI sales assistant responds, qualifies enquiries, helps book appointments and follows up — while your team manages contacts, deals and sales progress from one place.",
+      a: "iSuite AI is an AI sales system for businesses whose enquiries arrive through WhatsApp, Instagram, Facebook, websites and Meta ads. It brings those conversations into one shared inbox, and its AI sales assistant responds, qualifies enquiries, helps book appointments and follows up — while your team manages contacts, deals and sales progress from one place.",
     },
     {
       q: "Does it replace my sales team?",
       a: "No. iSuite AI is built to support your existing team, not replace it. The assistant handles first responses, qualifying questions and follow-up reminders so your team can spend its time on the conversations that need a person. Your team keeps ownership of every deal and can take over any conversation at any point.",
     },
     {
-      q: "Can it connect WhatsApp, Instagram and Messenger?",
+      q: "Can it connect WhatsApp, Instagram and Facebook?",
       a: "Yes. WhatsApp Business, Instagram DMs, Facebook Messenger and website chat can all be brought into one shared inbox, alongside enquiries from Meta lead ads and click-to-WhatsApp ads. Channel connection, and the approvals each one needs, are handled with you during onboarding.",
     },
     {
@@ -637,6 +638,11 @@ export const faq = {
     },
   ],
   // [SPEC]
+  /*
+   * NOT RENDERED. The link pointed at `site.fullFaqUrl`, which is still the
+   * "#" placeholder — a dead link under the last question on a page whose
+   * only job is one button. Kept because this repo's removed copy stays put.
+   */
   moreLinkLabel: "More questions? See full FAQ",
 } as const;
 
@@ -673,9 +679,20 @@ export const leadForm = {
     businessType: "Business Type",
     enquiryChannel: "Main Enquiry Channel",
   },
+  // NOT RENDERED — the last <select> on the form became a row of chips.
   selectPlaceholder: "Please select",
-  // [DRAFT — NEEDS APPROVAL] dropdown options, derived from §7.8 and
-  // requirements doc §3
+  /*
+   * [DRAFT — NEEDS APPROVAL] the Business Type chips, derived from §7.8 and
+   * requirements doc §3.
+   *
+   * These deliberately do NOT match the Proof Strip at the top of the page,
+   * which says "Built for IT Companies, Consulting Firms, Agencies…". The
+   * difference was raised and the list was kept as it is — leave it alone.
+   *
+   * Rendered as chips, not a <select>: a native select's open list is drawn
+   * by the operating system and ignores this page's CSS entirely, so it could
+   * never be made to match anything else in the form.
+   */
   businessTypeOptions: [
     "Showroom",
     "Clinic",

@@ -48,21 +48,23 @@ export const InstagramMark = ({ className }: P) => (
   </svg>
 );
 
-export const MessengerMark = ({ className }: P) => (
+/**
+ * Facebook. Replaced the Messenger mark, and the labels moved with it.
+ *
+ * What connects is Facebook MESSENGER, and Messenger has its own logo — but
+ * the chat bubble reads as a generic speech balloon at 20px, while the blue
+ * "f" is the mark a business owner recognises instantly. The short labels on
+ * the page say "Facebook" to match, which is also what people call it.
+ *
+ * The precision is kept where there is room for it: the FAQ answer still
+ * says "Facebook Messenger" in full. Short label, full name in the detail.
+ */
+export const FacebookMark = ({ className }: P) => (
   <svg viewBox="0 0 24 24" className={className} aria-hidden="true">
-    <defs>
-      <linearGradient id="msgr-grad" x1="50%" y1="0%" x2="50%" y2="100%">
-        <stop offset="0%" stopColor="#00B2FF" />
-        <stop offset="100%" stopColor="#006AFF" />
-      </linearGradient>
-    </defs>
-    <path
-      fill="url(#msgr-grad)"
-      d="M12 2C6.3 2 2 6.2 2 11.8c0 3.2 1.4 6 3.7 7.8v3.8l3.4-1.9c.9.25 1.9.4 2.9.4 5.7 0 10-4.2 10-9.8S17.7 2 12 2Z"
-    />
+    <circle cx="12" cy="12" r="12" fill="#1877F2" />
     <path
       fill="#FFF"
-      d="m6 14.9 2.9-4.6 2.5 1.9 2.7-1.9-2.9 4.6-2.4-1.9L6 14.9Z"
+      d="M14.9 24v-8.9h3l.57-3.48h-3.57V9.36c0-1 .35-1.69 1.79-1.69h1.9V4.56A25 25 0 0 0 15.8 4.4c-2.75 0-4.63 1.68-4.63 4.76v2.46H8.1v3.48h3.07V24h3.73Z"
     />
   </svg>
 );
@@ -122,7 +124,7 @@ export const WebsiteMark = ({ className }: P) => (
 export const channelMarks = [
   { name: "WhatsApp", Mark: WhatsAppMark },
   { name: "Instagram", Mark: InstagramMark },
-  { name: "Messenger", Mark: MessengerMark },
+  { name: "Facebook", Mark: FacebookMark },
   { name: "Website", Mark: WebsiteMark },
   { name: "Meta Ads", Mark: MetaMark },
 ] as const;

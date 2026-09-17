@@ -3,21 +3,21 @@ import { WhatsAppMark } from "@/components/ui/brand";
 import { Icon } from "@/components/ui/icons";
 
 /* ==========================================================================
-   JOURNEY MOCKS — the six mini product screens on the How It Works ribbon
+   JOURNEY MOCKS — the six mini product screens in How It Works
    --------------------------------------------------------------------------
    Six white cards, one per step, each showing the SHAPE of the screen that
    step produces: a message, a reply, three saved answers, a booking, a
    handover, a closed deal.
 
-   THREE SIZES, NOT TWO. A card is 343px wide on a phone, about 186px in the
-   six-across band at the 1200px shell, and about 280px once the section takes
-   the full breadth past 1400px. One type scale cannot serve all three: sized
-   for the band it is unreadable on a phone, sized for the phone it breaks the
-   band. Every size below is therefore declared three times — see SCALE.
+   ONE SHAPE AT EVERY WIDTH — a card. They were briefly collapsed to compact
+   rows on phone to save height; the cards read better and are what shipped.
 
-   No card is allowed to set its own type size inline. That is how the middle
-   tier got missed the first time and the cards came out looking cramped on a
-   wide screen.
+   THREE SIZES THOUGH. A card is about 290px wide beside the numbered rail on
+   a phone, about 186px in the six-across band at the 1200px shell, and about
+   280px once the section takes the full breadth past 1400px. One type scale
+   cannot serve all three, so every size is declared three times — see SCALE.
+   No card sets its own size inline; that is how the middle tier got missed
+   the first time and the cards came out cramped on a wide screen.
 
    COLOUR. Each card owns ONE of the page's three accent families and shows it
    twice, in the header tile and in the element that matters:
@@ -44,9 +44,9 @@ import { Icon } from "@/components/ui/icons";
    ========================================================================== */
 
 /**
- * base = the vertical stack below 1280px · xl = the band at the 1200px shell
- * · 2xl = the band at full breadth. Written out rather than composed, because
- * Tailwind reads this file as plain text.
+ * base = the card beside the rail below 1280px · xl = the card in the band at
+ * the 1200px shell · 2xl = the card at full breadth. Written out rather than
+ * composed, because Tailwind reads this file as plain text.
  */
 const SCALE = {
   title: "text-[12.5px] xl:text-[11px] 2xl:text-[12.5px]",
@@ -69,12 +69,12 @@ const SCALE = {
  * box: `height: 100%` resolved against a grid row whose height was still
  * being worked out from these very cards, so the row collapsed to the
  * min-height and everything past it overflowed. The card is sized by its
- * content now, and HowItWorks makes each grid cell a flex container so the
+ * content now, and HowItWorks makes each band cell a flex container so the
  * six still stretch to one common height.
  */
 function Frame({ children }: { children: ReactNode }) {
   return (
-    <div className="mock-shadow flex w-full min-w-0 flex-col gap-2.5 rounded-[16px] bg-white p-4 text-left xl:min-h-[156px] xl:gap-2 xl:p-3 2xl:gap-2.5 2xl:p-4">
+    <div className="mock-shadow flex w-full min-w-0 flex-col gap-2.5 rounded-[16px] bg-white p-3.5 text-left xl:min-h-[156px] xl:gap-2 xl:p-3 2xl:gap-2.5 2xl:p-4">
       {children}
     </div>
   );

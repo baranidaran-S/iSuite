@@ -151,7 +151,7 @@ export function MockPhone() {
 
       <p className="sr-only">
         A demonstration of the iSuite AI inbox on a phone. Enquiries from
-        WhatsApp, Instagram, Messenger and the website all arrive in one list;
+        WhatsApp, Instagram, Facebook and the website all arrive in one list;
         opening one shows the AI sales assistant answering the customer and
         offering appointment times.
       </p>
@@ -165,7 +165,7 @@ export function MockPhone() {
       >
         {/* App bar — the one piece of chrome both screens share */}
         <div className="flex items-center gap-2 bg-forest px-4 py-3">
-          <LogoMark className="h-6 w-6" />
+          <LogoMark plate className="h-6 w-6" />
           <span className="text-[14px] font-extrabold text-white">
             iSuite<span className="text-emerald-tint"> AI</span>
           </span>

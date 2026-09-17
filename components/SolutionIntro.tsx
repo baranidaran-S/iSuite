@@ -38,11 +38,12 @@ const PopLines = () => (
  * The accent is the PRODUCT NAME, and it sits mid-string, so this splits on
  * indexOf rather than startsWith.
  *
- * It used to colour the whole opening clause, "Meet iSuite AI —", in primary.
- * That treated the brand name as part of a phrase and left it reading like
- * any other green word on the page. The swipe goes behind the two words that
- * matter, and the name itself stays at full forest contrast — 7.3:1 on the
- * marker, against 2.9:1 for primary text on off-white.
+ * THIS ONE DOES NOT USE .hilite. Two earlier passes tried it — first the
+ * whole clause "Meet iSuite AI —" in primary (2.9:1, and it read as one more
+ * green phrase), then the marker swipe. The swipe was the problem: it marks a
+ * key phrase in four other headings on this page, so on the one word that is
+ * the product itself it read as ordinary. .brand-block is used here and
+ * nowhere else.
  */
 function Heading() {
   const { heading, headingAccent } = solution;
@@ -51,7 +52,7 @@ function Heading() {
   return (
     <>
       {heading.slice(0, i)}
-      <span className="hilite">{headingAccent}</span>
+      <span className="brand-block">{headingAccent}</span>
       {heading.slice(i + headingAccent.length)}
     </>
   );

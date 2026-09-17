@@ -1,6 +1,6 @@
 import {
   InstagramMark,
-  MessengerMark,
+  FacebookMark,
   WebsiteMark,
   WhatsAppMark,
 } from "@/components/ui/brand";
@@ -27,7 +27,7 @@ import {
 const channels = [
   { name: "WhatsApp", Mark: WhatsAppMark, active: true },
   { name: "Instagram", Mark: InstagramMark, active: false },
-  { name: "Messenger", Mark: MessengerMark, active: false },
+  { name: "Facebook", Mark: FacebookMark, active: false },
   { name: "Website", Mark: WebsiteMark, active: false },
 ];
 
@@ -46,7 +46,7 @@ export function InboxMock() {
     <div
       className="overflow-hidden rounded-card border border-line bg-white shadow-2xl"
       role="img"
-      aria-label="The iSuite AI shared inbox, showing WhatsApp, Instagram, Messenger and website conversations in one place, with the AI sales assistant replying and booking an appointment."
+      aria-label="The iSuite AI shared inbox, showing WhatsApp, Instagram, Facebook and website conversations in one place, with the AI sales assistant replying and booking an appointment."
     >
       {/* Window chrome */}
       <div className="flex items-center gap-2 border-b border-line bg-offwhite px-4 py-2">

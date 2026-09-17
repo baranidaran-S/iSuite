@@ -1,6 +1,6 @@
 import {
   InstagramMark,
-  MessengerMark,
+  FacebookMark,
   MetaMark,
   WebsiteMark,
   WhatsAppMark,
@@ -47,7 +47,7 @@ function MockDesk() {
         {/* ---------------- Sidebar ---------------- */}
         <div className="bg-forest p-3">
           <div className="flex items-center gap-1.5 px-1 py-1">
-            <LogoMark className="h-5 w-5" />
+            <LogoMark plate className="h-5 w-5" />
             <span className="text-[11px] font-extrabold text-white">
               iSuite<span className="text-emerald-tint"> AI</span>
             </span>
@@ -262,7 +262,7 @@ export function MetaAdsCard() {
 const channels = [
   { name: "WhatsApp", Mark: WhatsAppMark, lift: 0 },
   { name: "Instagram", Mark: InstagramMark, lift: 16 },
-  { name: "Messenger", Mark: MessengerMark, lift: 22 },
+  { name: "Facebook", Mark: FacebookMark, lift: 22 },
   { name: "Website chat", Mark: WebsiteMark, lift: 16 },
   { name: "Meta Ads", Mark: MetaMark, lift: 0 },
 ];

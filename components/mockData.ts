@@ -1,6 +1,6 @@
 import {
   InstagramMark,
-  MessengerMark,
+  FacebookMark,
   WebsiteMark,
   WhatsAppMark,
 } from "@/components/ui/brand";
@@ -37,10 +37,21 @@ export const filters = [
   "All",
   "WhatsApp",
   "Instagram",
-  "Messenger",
+  "Facebook",
   "Website",
 ] as const;
 
+/*
+ * Six conversations, ordered newest first.
+ *
+ * SIX, NOT FOUR. The phone mock lays the inbox and the chat side by side on
+ * one track, so the card is as tall as whichever is taller — the chat — and
+ * four rows left a band of empty white under the list. Two more fill it, and
+ * the desktop pane stops ending halfway down too.
+ *
+ * Every channel in `filters` appears at least once, so the filter row is not
+ * offering a tab that would come back empty.
+ */
 export const threads = [
   {
     name: "Priya S.",
@@ -65,11 +76,21 @@ export const threads = [
   {
     name: "Anand Kumar",
     first: "Anand",
-    channel: "Messenger",
+    channel: "Facebook",
     preview: "Is the showroom open today?",
     time: "09:32 AM",
     unread: null,
-    Mark: MessengerMark,
+    Mark: FacebookMark,
+    active: false,
+  },
+  {
+    name: "Meera K.",
+    first: "Meera",
+    channel: "Instagram",
+    preview: "Saw your ad — can you share pricing?",
+    time: "09:15 AM",
+    unread: "3",
+    Mark: InstagramMark,
     active: false,
   },
   {
@@ -80,6 +101,16 @@ export const threads = [
     time: "Yesterday",
     unread: null,
     Mark: WebsiteMark,
+    active: false,
+  },
+  {
+    name: "Karthik V.",
+    first: "Karthik",
+    channel: "Facebook",
+    preview: "Can someone call me today?",
+    time: "Yesterday",
+    unread: null,
+    Mark: FacebookMark,
     active: false,
   },
 ];

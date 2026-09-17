@@ -2,9 +2,8 @@
 
 import { useState } from "react";
 import { Section } from "@/components/ui/Section";
-import { ArrowRight, ChevronDown } from "@/components/ui/icons";
+import { ChevronDown } from "@/components/ui/icons";
 import { faq } from "@/lib/content";
-import { site } from "@/lib/site";
 
 /* ==========================================================================
    FAQ — build spec §7.10
@@ -66,14 +65,6 @@ export function Faq() {
           );
         })}
       </div>
-
-      <a
-        href={site.fullFaqUrl}
-        className="t-small mt-8 inline-flex min-h-11 items-center gap-2 font-medium text-forest underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest"
-      >
-        {faq.moreLinkLabel}
-        <ArrowRight className="h-4 w-4" />
-      </a>
     </Section>
   );
 }
