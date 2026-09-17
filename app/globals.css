@@ -1,0 +1,739 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   DESIGN TOKENS — iSuite AI landing page
+   Locked to the palette in build spec §1. Every colour has exactly one job.
+   Do not add colours here without updating the spec.
+   ========================================================================== */
+@theme {
+  /* ==========================================================================
+     PALETTE — "Emerald & Forest", built on the client's primary #007743
+     --------------------------------------------------------------------------
+     #007743 is 154deg / 100% saturation / 23% LIGHTNESS. Full saturation would
+     read as neon at 50% lightness; held at 23% it reads as pigment. That is the
+     same rule the rest of this palette follows — colour comes from saturation
+     held deep, never from brightness.
+
+     The dark sections are the primary's own deep cousin, so the whole page
+     belongs to one colour rather than borrowing an unrelated navy.
+
+     Three accent families, not six — six evenly-spaced hues is the single
+     strongest tell of a generated palette. Each has two tiers: a DEEP that
+     carries white text and a TINT that carries dark text. That split is what
+     lets muted colour work at all; a single mid-tone accent cannot hold dark
+     text (~2.9:1), which is why earlier palettes kept drifting brighter.
+
+     Every pairing used on the page is measured and clears WCAG AA.
+     ========================================================================== */
+
+  /* --- The primary -------------------------------------------------------- */
+  /* The CTA, and the two letters of "AI" in the logo lockup — the one other
+     place a brand's primary colour belongs. Nowhere else. */
+  --color-primary: #007743; /* white label 5.65:1, and legible as text 5.04:1 */
+  --color-primary-dark: #00603a; /* hover                                     */
+
+  /* --- Light sections ---------------------------------------------------- */
+  --color-forest: #123526; /* Headings, header, footer          12.0:1        */
+  --color-offwhite: #f4f2ec; /* Warm oat. Warm neutrals are most of the reason
+                                this no longer reads as a screen.             */
+  --color-charcoal: #1f2a24; /* Body copy                       13.3:1        */
+  --color-slate: #5c6a62; /* Secondary text                      5.1:1        */
+  --color-line: #e1dfd6; /* Dividers and decorative edges     1.16:1 on white */
+  /*
+   * Control boundaries — input, select, checkbox, the calendar, the chips.
+   *
+   * WCAG 1.4.11 asks 3:1 of anything you need to see to identify a control,
+   * and --color-line is 1.16:1 on white: fine for a rule between two rows,
+   * far too faint to be the edge of a field you are meant to type in. This
+   * measures 3.21:1 and stays in the warm family the rest of the neutrals
+   * belong to.
+   */
+  --color-line-strong: #94907f;
+
+  /* --- Section accents. Deep carries white, tint carries dark ------------ */
+  --color-emerald: #00603a;
+  --color-emerald-tint: #cfe6db;
+  --color-copper: #8c4a29;
+  --color-copper-tint: #f0e0d6;
+  --color-harbour: #2f5a6b;
+  --color-harbour-tint: #d9e3e8;
+
+  /* --- The How It Works journey band -------------------------------------- */
+  /* Held BELOW the CTA's luminance on purpose — see the ribbon block at the
+     bottom of this file. It is the one green that is neither CTA nor accent. */
+  --color-ribbon: #0a6e48;
+
+  /* --- Dark anchor sections ---------------------------------------------- */
+  --color-ink: #052c1e; /* Hero, How It Works, Meta Ads, Final CTA, Footer     */
+  --color-ink-fg: #f4f2ec; /* Headlines + body on dark        15.2:1          */
+  --color-ink-muted: #a5bfb2; /* Captions + disclaimers on dark  7.7:1        */
+
+  /* --- Typography (§2) --------------------------------------------------- */
+  --font-sans:
+    var(--font-jakarta), ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    sans-serif;
+
+  /* --- Breakpoints -------------------------------------------------------- */
+  /*
+   * The Problem section's three-column composition needs ~1400px before its
+   * outer columns clear 400px, so 2xl is moved down from its 1536px default.
+   *
+   * IT MUST BE WRITTEN IN REM. Tailwind sorts breakpoints by their literal
+   * value, not their computed width, and emits every px-valued one in a
+   * bucket BEFORE the rem-valued defaults. Declared as `1400px` this block
+   * landed ahead of md, so at 1730px `md:grid-cols-2` matched later and won:
+   * the grid stayed two columns, the Lost card took the whole right-hand
+   * column and the four cards piled into the left. In rem it sorts after xl,
+   * where it belongs.
+   *
+   * Nothing else on the page uses 2xl, so moving it down is free.
+   */
+  --breakpoint-2xl: 87.5rem; /* 1400px */
+
+  /* --- Layout (§3) ------------------------------------------------------- */
+  --container-content: 1200px; /* Desktop max content width                  */
+
+  /* --- Radii (§6, §7.6, §7.12) ------------------------------------------- */
+  --radius-btn: 8px;
+  --radius-card: 12px;
+}
+
+/* ==========================================================================
+   BASE
+   ========================================================================== */
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+
+    /* THE PAGE MUST NEVER SCROLL SIDEWAYS.
+       Every section clips its own bleed - the ribbon's arrowhead, the Meta
+       mark hanging off the right, the wordmark behind Trust, the marquee
+       track - but there was no net under all of them, so one absolute child
+       or one negative margin in a section that forgot `overflow-hidden`
+       widens the whole document and every section looks shifted.
+
+       `clip`, not `hidden`: `hidden` would turn <html> into a scroll
+       container and break the sticky header. `clip` does not, and leaves the
+       vertical axis visible. Safari below 16 ignores it and simply behaves
+       as it does today. */
+    overflow-x: clip;
+  }
+
+  body {
+    background-color: var(--color-offwhite);
+    color: var(--color-charcoal);
+    font-family: var(--font-sans);
+    font-size: 1rem; /* 16px mobile (§2 body)  */
+    line-height: 1.5; /* §2 line height 1.4–1.5 */
+    -webkit-font-smoothing: antialiased;
+  }
+
+  @media (min-width: 768px) {
+    body {
+      font-size: 1.125rem; /* 18px desktop */
+    }
+  }
+
+  /* Anchor targets clear the header when jumped to */
+  [id] {
+    scroll-margin-top: 80px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* ==========================================================================
+   COMPONENTS — layout + type scale (§2, §3)
+   In the `components` layer so Tailwind utilities can always override them.
+   ========================================================================== */
+@layer components {
+  /* --- Layout ------------------------------------------------------------ */
+
+  /* 1200px centred, 16px side margins on mobile / 24px gutters desktop */
+  .shell {
+    width: 100%;
+    max-width: var(--container-content);
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+
+  @media (min-width: 768px) {
+    .shell {
+      padding-inline: 1.5rem;
+    }
+  }
+
+  /* 48px mobile / 96px desktop vertical rhythm */
+  .section {
+    padding-block: 3rem;
+  }
+
+  @media (min-width: 768px) {
+    .section {
+      padding-block: 6rem;
+    }
+  }
+
+  /* Caps paragraphs at ~65–75 characters */
+  .measure {
+    max-width: 68ch;
+  }
+
+  /* 12-column grid with 24px gutters on desktop (§3).
+     Collapses to the single column §3 specifies for mobile.
+     Children position with Tailwind's col-span-* / col-start-*.
+     Note: the Hero is deliberately NOT on this grid — §7.1 fixes it at 55/45. */
+  .grid-12 {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .grid-12 {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+    }
+  }
+
+  /* --- Type scale -------------------------------------------------------- */
+
+  /* H1 — Hero only. Extrabold "display" cut: the one spot with personality. */
+  .t-h1 {
+    font-size: 2rem; /* 32px mobile  */
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  /* H2 — section headings */
+  .t-h2 {
+    font-size: 1.625rem; /* 26px mobile */
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  /* H3 — card titles, subheadings */
+  .t-h3 {
+    font-size: 1.25rem; /* 20px mobile */
+    font-weight: 600;
+    line-height: 1.2;
+  }
+
+  /* Body — strictly normal and readable. No styling flourishes. */
+  .t-body {
+    font-size: 1rem; /* 16px mobile */
+    font-weight: 400;
+    line-height: 1.5;
+  }
+
+  /* Form labels, FAQ, disclaimers — never stylised */
+  .t-small {
+    font-size: 0.875rem; /* 14px mobile */
+    font-weight: 400;
+    line-height: 1.5;
+  }
+
+  @media (min-width: 768px) {
+    .t-h1 {
+      font-size: 3.5rem;
+    } /* 56px */
+    .t-h2 {
+      font-size: 2.5rem;
+    } /* 40px */
+    .t-h3 {
+      font-size: 1.5rem;
+    } /* 24px */
+    .t-body {
+      font-size: 1.125rem;
+    } /* 18px */
+    .t-small {
+      font-size: 0.9375rem;
+    } /* 15px */
+  }
+}
+
+/* ==========================================================================
+   SURFACE LAYER
+   --------------------------------------------------------------------------
+   NO GRADIENTS. The client removed them from the design, which also happens
+   to move the page away from the glowing-dark-hero look that reads as
+   machine-made. Every background here is ONE flat colour; depth comes from
+   grain (below), never from a blend.
+
+   What this layer does NOT do: invent facts. No statistics, ratings, client
+   counts or urgency claims appear anywhere. Colour energy comes from real
+   channel brand logos, not from a widened palette.
+
+   The primary #007743 is still CTA-only — that restraint is exactly what
+   makes the button carry on a busy page.
+   ========================================================================== */
+@layer components {
+  /* Eyebrow pill above the hero headline. */
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 9999px;
+    border: 1px solid rgba(165, 191, 178, 0.35);
+    background: rgba(244, 242, 236, 0.06);
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    line-height: 1;
+  }
+
+  /* Scroll reveal — elements fade and rise as they enter the viewport. */
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    transition:
+      opacity 0.6s ease-out,
+      transform 0.6s ease-out;
+  }
+  .reveal[data-visible="true"] {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Connecting lines wipe in from the left, timed to the step sequence. */
+  .reveal-draw {
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 1.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .reveal-draw[data-visible="true"] {
+    transform: scaleX(1);
+  }
+
+  /* Cards lift on hover (desktop pointer only). */
+  .lift {
+    transition:
+      transform 0.2s ease-out,
+      box-shadow 0.2s ease-out;
+  }
+  @media (hover: hover) {
+    .lift:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 32px -16px rgba(18, 53, 38, 0.25);
+    }
+  }
+
+  /* Live typing indicator in the product mock. */
+  .typing span {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 9999px;
+    background: currentColor;
+    animation: typing 1.2s infinite ease-in-out;
+  }
+  .typing span:nth-child(2) {
+    animation-delay: 0.15s;
+  }
+  .typing span:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+
+  @keyframes typing {
+    0%,
+    60%,
+    100% {
+      opacity: 0.25;
+      transform: translateY(0);
+    }
+    30% {
+      opacity: 1;
+      transform: translateY(-3px);
+    }
+  }
+
+  /* Everything above collapses to a static page under reduced motion. */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+    .reveal-draw {
+      transform: none;
+      transition: none;
+    }
+    .lift:hover {
+      transform: none;
+    }
+    .typing span {
+      animation: none;
+      opacity: 0.6;
+    }
+  }
+}
+
+/* ==========================================================================
+   REFERENCE-DESIGN LAYER
+   --------------------------------------------------------------------------
+   Matches the approved reference screenshot's design language, rendered in
+   the iSuite palette rather than the reference's greens.
+   ========================================================================== */
+@layer components {
+  /* --- Pastel icon badges, derived from the two brand colours ----------- */
+  .tint-1 {
+    background: rgba(0, 119, 67, 0.12);
+  }
+  .tint-2 {
+    background: rgba(18, 53, 38, 0.08);
+  }
+  .tint-3 {
+    background: rgba(0, 119, 67, 0.16);
+  }
+  .tint-4 {
+    background: rgba(18, 53, 38, 0.12);
+  }
+  .tint-5 {
+    background: rgba(0, 119, 67, 0.1);
+  }
+  .tint-6 {
+    background: rgba(18, 53, 38, 0.06);
+  }
+
+  /* --- Gradient pill CTA, matching the reference's button treatment ----- */
+  .btn-pill {
+    background: #007743;
+  }
+
+  .btn-pill:hover {
+    background: #00603a;
+  }
+
+  /*
+   * INVERTED on dark sections.
+   *
+   * The primary is a DARK colour (23% lightness), so a green button on the
+   * deep-forest hero measures 2.68:1 against its own background - under the
+   * 3:1 needed for a UI component, and in practice a button you have to hunt
+   * for. Two of the page's seven CTAs sit on dark sections.
+   *
+   * Flipping it keeps #007743 as the one and only button colour: cream fill,
+   * primary text. 13.5:1 separation, 5.04:1 on the label.
+   */
+  .btn-pill-invert {
+    background: #f7f6f1;
+    color: var(--color-primary);
+  }
+
+  .btn-pill-invert:hover {
+    background: #ffffff;
+  }
+
+  /* --- Floating cards overlapping the product mock ---------------------- */
+  .float-card {
+    box-shadow:
+      0 20px 40px -12px rgba(18, 53, 38, 0.18),
+      0 0 0 1px rgba(225, 223, 214, 0.9);
+  }
+
+  /* --- The product mock's own elevation --------------------------------- */
+  .mock-shadow {
+    box-shadow:
+      0 32px 64px -24px rgba(18, 53, 38, 0.28),
+      0 0 0 1px rgba(225, 223, 214, 0.8);
+  }
+}
+
+/* ==========================================================================
+   PROBLEM PANEL — ghosted numerals and the white rows that sit on it
+   ========================================================================== */
+@layer components {
+  /* Large ghosted step numeral sitting behind the row content. */
+  .ghost-num {
+    font-size: 4rem;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: rgba(0, 119, 67, 0.13);
+    user-select: none;
+  }
+
+  @media (min-width: 768px) {
+    .ghost-num {
+      font-size: 4.5rem;
+    }
+  }
+
+  /* White pill row, lifted off the panel. */
+  .balance {
+    text-wrap: balance;
+  }
+
+  .hype-row {
+    box-shadow:
+      0 18px 40px -18px rgba(0, 0, 0, 0.55),
+      0 0 0 1px rgba(255, 255, 255, 0.06);
+    transition: transform 0.2s ease-out;
+  }
+
+  @media (hover: hover) {
+    .hype-row:hover {
+      transform: translateX(6px);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hype-row:hover {
+      transform: none;
+    }
+  }
+}
+
+/* ==========================================================================
+   LOUD LAYER — deliberately not "clean SaaS"
+   --------------------------------------------------------------------------
+   Gradient frames, glow, pulsing rings, marker underlines and floating chips.
+   Bold on purpose: this page is the landing for a paid Meta ad, not a
+   corporate product site.
+   ========================================================================== */
+@layer components {
+  /* Rotated sticker badge. */
+  .sticker {
+    transform: rotate(-6deg);
+    box-shadow: 0 12px 28px -10px rgba(18, 53, 38, 0.45);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .chip {
+      animation: none;
+    }
+  }
+}
+
+/* ==========================================================================
+   MARQUEE — infinite horizontal ticker
+   --------------------------------------------------------------------------
+   The track holds the chip list twice, so translating it exactly -50% lands
+   on an identical frame and the loop is seamless.
+   ========================================================================== */
+@layer components {
+  .marquee {
+    /* Required: the track is width:max-content and holds the chip list twice,
+       so without this it widens the document and creates a page-level
+       horizontal scrollbar. The mask only affects paint, never layout. */
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(
+      90deg,
+      transparent 0%,
+      #000 6%,
+      #000 94%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      90deg,
+      transparent 0%,
+      #000 6%,
+      #000 94%,
+      transparent 100%
+    );
+  }
+
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee 34s linear infinite;
+  }
+
+  .marquee:hover .marquee-track {
+    animation-play-state: paused;
+  }
+
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track {
+      animation: none;
+    }
+    .marquee {
+      overflow-x: auto;
+    }
+  }
+}
+
+/* ==========================================================================
+   GRAIN — what replaces every gradient
+   --------------------------------------------------------------------------
+   With gradients gone, five dark sections became one flat green each and read
+   as dead. Depth now comes from a fine noise rather than a blend: every pixel
+   is a single flat value, nothing fades into anything.
+
+   It is an inline SVG feTurbulence, so it costs no network request, never
+   pixelates, and tiles to any section height.
+
+   Applied as `background-image`, NOT a pseudo-element, which matters: a
+   background image paints above the background colour but below the content,
+   so the grain can never land on top of the type or the product mocks, and
+   there are no z-index games to get wrong.
+
+   The opacity is baked into the SVG. Dark sections take more than light ones
+   — grey noise lightens a dark ground and darkens a light one, and the light
+   surfaces need far less before they look dirty.
+   ========================================================================== */
+@layer components {
+  .grain {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E");
+  }
+
+  .grain-soft {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  }
+}
+
+/* ==========================================================================
+   MARKER HIGHLIGHT — a hand-drawn swipe behind a word
+   --------------------------------------------------------------------------
+   Catchier than swapping the word to teal, and it leaves the word itself at
+   full navy contrast instead of dropping it to teal's 2.9:1 on off-white.
+   `isolation` keeps the -1 layer above the section background.
+   ========================================================================== */
+@layer components {
+  .hilite {
+    position: relative;
+    display: inline-block;
+    isolation: isolate;
+  }
+
+  .hilite::after {
+    content: "";
+    position: absolute;
+    inset: auto -0.1em 0.04em -0.1em;
+    z-index: -1;
+    height: 0.38em;
+    border-radius: 999px;
+    background: rgba(0, 119, 67, 0.34);
+    transform: rotate(-0.8deg);
+  }
+}
+
+/* ==========================================================================
+   BENEFIT CARD — navy block with its hue concentrated in the accents
+   --------------------------------------------------------------------------
+   This started as a solid colour fill, which put it side by side with How It
+   Works using the same six hues in the same order — two sections reading as
+   one block repeated. The fill is now navy for all six, and `--c` drives only
+   the top bar, the icon tile, the tag and the bullets. Light section, dark
+   cards; dark section, bright shapes. They can no longer be confused.
+
+   White on the navy fill is 14.5:1, and every hue clears 4.5:1 on it.
+
+   The shadow is a flat offset rather than a blur — a printed-sticker feel,
+   not a drop shadow.
+   ========================================================================== */
+@layer components {
+  .benefit-card {
+    position: relative;
+    background: #123526;
+    box-shadow: 0 8px 0 -1px rgba(18, 53, 38, 0.22);
+    transition:
+      transform 0.22s cubic-bezier(0.22, 0.9, 0.3, 1),
+      box-shadow 0.22s ease-out;
+  }
+
+  /* Colour bar across the top, clipped by the card's own rounding. */
+  .benefit-card::before {
+    content: "";
+    position: absolute;
+    inset: 0 0 auto 0;
+    height: 6px;
+    background: var(--c);
+  }
+
+  @media (hover: hover) {
+    .benefit-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 16px 0 -3px rgba(18, 53, 38, 0.24);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .benefit-card {
+      transition: none;
+    }
+
+    .benefit-card:hover {
+      transform: none;
+    }
+  }
+}
+
+/* ==========================================================================
+   JOURNEY RIBBON — How It Works (§7.5)
+   --------------------------------------------------------------------------
+   The six steps sit on one arrow band instead of six separate circles, so the
+   section reads as a single journey rather than six features in a row.
+
+   COLOUR. --color-ribbon is deliberately DARKER than the CTA primary:
+   relative luminance 0.112 against the button 0.134. The band is the largest
+   coloured shape on the page, so a brighter green here would outrank the one
+   thing the page exists to get clicked.
+
+   SHAPE. Each segment is clipped to a chevron: a point on its leading edge, a
+   matching bite out of the trailing one. The segments share the six-column
+   grid with the cards below and bleed 15px into each 16px gutter, so a point
+   overlaps the next bite by 14px and leaves a 4px chevron of the dark section
+   showing between them. That sliver is the only divider — there is no border
+   to drift out of step with it.
+   ========================================================================== */
+@layer components {
+  .ribbon-seg {
+    --notch: 18px;
+    background: var(--color-ribbon);
+    clip-path: polygon(
+      0 0,
+      calc(100% - var(--notch)) 0,
+      100% 50%,
+      calc(100% - var(--notch)) 100%,
+      0 100%,
+      var(--notch) 50%
+    );
+  }
+
+  /* The band has to begin somewhere, so step one carries no bite. */
+  .ribbon-seg-first {
+    clip-path: polygon(
+      0 0,
+      calc(100% - var(--notch)) 0,
+      100% 50%,
+      calc(100% - var(--notch)) 100%,
+      0 100%
+    );
+  }
+
+  /* Phone and tablet: the same band turned to run down the page, its point
+     facing the card it belongs to. Six chevrons across is never attempted at
+     375px, where most of this page is read. */
+  .ribbon-bar {
+    --notch: 14px;
+    background: var(--color-ribbon);
+    clip-path: polygon(
+      0 0,
+      100% 0,
+      100% calc(100% - var(--notch)),
+      50% 100%,
+      0 calc(100% - var(--notch))
+    );
+  }
+}
