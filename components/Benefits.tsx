@@ -3,7 +3,7 @@
 import { useCallback, useRef, useState, type CSSProperties } from "react";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
-import { Icon, type IconName } from "@/components/ui/icons";
+import { Icon3d, type Icon3dName } from "@/components/ui/icons3d";
 import { cn } from "@/lib/cn";
 import { benefits, cta } from "@/lib/content";
 import { site } from "@/lib/site";
@@ -70,13 +70,18 @@ function BenefitCard({ card }: { card: Card }) {
       className="benefit-card flex h-full flex-col overflow-hidden rounded-[26px] p-6 pt-7 lg:p-5 lg:pt-6 xl:p-6 xl:pt-7"
       style={{ "--c": card.tint } as CSSProperties}
     >
-      {/* Light tile, deep glyph — the section's colour hit, and the inverse of
-          How It Works, where the tint fills a circle instead */}
+      {/* A raised disc in the card's accent, carrying a solid glyph with its
+          own extrusion. The tile used to be a flat rounded square with a line
+          icon; both are now built to read as objects sitting on the card
+          rather than marks printed on it. See .puck-3d and icons3d.tsx. */}
       <span
-        className="flex h-16 w-16 shrink-0 items-center justify-center rounded-[20px] lg:h-[54px] lg:w-[54px]"
-        style={{ background: card.tint, color: card.deep }}
+        className="puck-3d flex h-16 w-16 shrink-0 items-center justify-center rounded-full lg:h-[56px] lg:w-[56px]"
+        style={{ color: card.deep }}
       >
-        <Icon name={card.icon as IconName} className="h-9 w-9 lg:h-8 lg:w-8" />
+        <Icon3d
+          name={card.icon as Icon3dName}
+          className="h-8 w-8 lg:h-[30px] lg:w-[30px]"
+        />
       </span>
 
       <p

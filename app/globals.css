@@ -680,6 +680,40 @@
 }
 
 /* ==========================================================================
+   3D ICON PUCK — Core Benefits (§7.6)
+   --------------------------------------------------------------------------
+   The reference the client sent is a white disc floating above the page with
+   a glossy coloured object sitting in it. The gloss on those is gradient
+   shading, which the design does not allow, so the depth is built the only
+   other way flat colour can build it: a HARD BOTTOM EDGE plus a soft ambient
+   shadow underneath. The disc gets a visible thickness and then a cast
+   shadow, which is what reads as "raised" — the gradient only ever shaded a
+   surface that was already sitting proud.
+
+   It stays in the card's own accent (--c) rather than going white. Six white
+   discs in a row would outshine the titles beside them, and the tint is the
+   section's colour hit — see the header of Benefits.tsx.
+
+   The edge is mixed from --c so it tracks the three accent families instead
+   of adding six more hex values. A browser without color-mix keeps the
+   ambient shadow and loses only the hard edge.
+   ========================================================================== */
+@layer components {
+  .puck-3d {
+    background: var(--c);
+    box-shadow: 0 9px 14px -6px rgba(0, 0, 0, 0.55);
+  }
+
+  @supports (color: color-mix(in srgb, red 50%, blue)) {
+    .puck-3d {
+      box-shadow:
+        0 5px 0 color-mix(in srgb, var(--c) 64%, #04180f),
+        0 12px 15px -5px rgba(0, 0, 0, 0.55);
+    }
+  }
+}
+
+/* ==========================================================================
    JOURNEY RIBBON — How It Works (§7.5)
    --------------------------------------------------------------------------
    The six steps sit on one arrow band instead of six separate circles, so the
