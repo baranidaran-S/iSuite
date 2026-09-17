@@ -63,7 +63,7 @@ const empty: Fields = {
 const fieldBase =
   "h-12 w-full rounded-btn border border-line-strong bg-white px-4 text-base text-charcoal placeholder:text-slate focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest";
 
-export function LeadForm({ id = "demo-form" }: { id?: string }) {
+export function LeadForm() {
   const [values, setValues] = useState<Fields>(empty);
   const [errors, setErrors] = useState<Partial<Record<keyof Fields, string>>>(
     {},
@@ -105,20 +105,15 @@ export function LeadForm({ id = "demo-form" }: { id?: string }) {
     setErrors((prev) => ({ ...prev, [key]: undefined }));
   }
 
-  // The last section on the page, and the tallest. The ASK arrives much
-  // earlier — see CtaBand, which sits on screen two and scrolls here.
-  //
-  // A second copy was tried directly under the hero and removed: four
-  // fields plus a month calendar plus a time grid is over a phone screen
-  // of commitment to ask of someone who has read one headline.
-  //
-  // The `id` prop is what is left of that experiment. It is kept because it
-  // namespaces every field, error and picker id from one place, which is
-  // worth having whether or not a second copy ever returns.
-  //
-  // It does not need the full 96px the rest of the page's rhythm uses.
+  // The last content section on the page, and the tallest. It does not need
+  // the full 96px the rest of the page's rhythm uses.
   return (
-    <Section bg="white" id={id} padded={false} className="py-12 md:py-20">
+    <Section
+      bg="white"
+      id="demo-form"
+      padded={false}
+      className="py-12 md:py-20"
+    >
       {/* The heading keeps its own narrower measure — a centred sentence
           stretched across 920px is hard to read back. */}
       <div className="mx-auto max-w-[560px]">
@@ -174,12 +169,12 @@ export function LeadForm({ id = "demo-form" }: { id?: string }) {
                       it. See lib/content.ts. */}
                 <div className="space-y-5 md:col-start-1 md:row-start-1">
                   <Field
-                    id={`${id}-fullName`}
+                    id="fullName"
                     label={leadForm.labels.fullName}
                     error={errors.fullName}
                   >
                     <input
-                      id={`${id}-fullName`}
+                      id="fullName"
                       name="fullName"
                       type="text"
                       autoComplete="name"
@@ -188,18 +183,18 @@ export function LeadForm({ id = "demo-form" }: { id?: string }) {
                       onChange={(e) => update("fullName", e.target.value)}
                       aria-invalid={Boolean(errors.fullName)}
                       aria-describedby={
-                        errors.fullName ? `${id}-fullName-error` : undefined
+                        errors.fullName ? "fullName-error" : undefined
                       }
                     />
                   </Field>
 
                   <Field
-                    id={`${id}-whatsapp`}
+                    id="whatsapp"
                     label={leadForm.labels.whatsapp}
                     error={errors.whatsapp}
                   >
                     <input
-                      id={`${id}-whatsapp`}
+                      id="whatsapp"
                       name="whatsapp"
                       type="tel"
                       inputMode="tel"
@@ -209,18 +204,18 @@ export function LeadForm({ id = "demo-form" }: { id?: string }) {
                       onChange={(e) => update("whatsapp", e.target.value)}
                       aria-invalid={Boolean(errors.whatsapp)}
                       aria-describedby={
-                        errors.whatsapp ? `${id}-whatsapp-error` : undefined
+                        errors.whatsapp ? "whatsapp-error" : undefined
                       }
                     />
                   </Field>
 
                   <Field
-                    id={`${id}-businessName`}
+                    id="businessName"
                     label={leadForm.labels.businessName}
                     error={errors.businessName}
                   >
                     <input
-                      id={`${id}-businessName`}
+                      id="businessName"
                       name="businessName"
                       type="text"
                       autoComplete="organization"
@@ -229,9 +224,7 @@ export function LeadForm({ id = "demo-form" }: { id?: string }) {
                       onChange={(e) => update("businessName", e.target.value)}
                       aria-invalid={Boolean(errors.businessName)}
                       aria-describedby={
-                        errors.businessName
-                          ? `${id}-businessName-error`
-                          : undefined
+                        errors.businessName ? "businessName-error" : undefined
                       }
                     />
                   </Field>
@@ -249,7 +242,6 @@ export function LeadForm({ id = "demo-form" }: { id?: string }) {
                 {/* ---- The demo slot: right column, both rows ---- */}
                 <div className="md:col-start-2 md:row-span-2 md:row-start-1">
                   <DateTimePicker
-                    idPrefix={id}
                     date={values.preferredDate}
                     time={values.preferredTime}
                     onDate={(v) => update("preferredDate", v)}

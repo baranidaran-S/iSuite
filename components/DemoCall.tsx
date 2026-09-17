@@ -1,6 +1,5 @@
 import { Section } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
-import { CtaRow } from "@/components/ui/CtaRow";
 import { demoCall } from "@/lib/content";
 
 /* ==========================================================================
@@ -25,9 +24,14 @@ import { demoCall } from "@/lib/content";
    there is. Trust and Business Types run the same move, and it is drawn in
    the same copper against the same emerald so the three read as one voice.
 
-   DARK, on purpose. The page lost a dark anchor when the CTA band moved up
-   and went light. This puts one back where it does the most work — a dark
-   band framing the white form, so the form reads as the thing to act on.
+   IT CARRIES NO BUTTON OF ITS OWN, deliberately. It sits immediately above
+   Final CTA, which asks. Explain, then ask, then the form — one closing
+   sequence rather than two buttons 200px apart.
+
+   Both are dark, and stacked they read as a single closing panel rather than
+   two sections. That is the opposite of the reason the hero's neighbour had
+   to be lightened: the hero is a tall dark block on its own, so a second one
+   under it just looked like more hero. These two are short and sequential.
    ========================================================================== */
 
 const Tick = () => (
@@ -141,8 +145,6 @@ export function DemoCall() {
             {demoCall.footnote}
           </p>
         </Reveal>
-
-        <CtaRow onDark />
       </div>
     </Section>
   );

@@ -19,37 +19,7 @@ export const site = {
   fullFaqUrl: "#", // TODO: main website FAQ URL
   /* ------------------------------------------------------------------------ */
 
-  /* ==========================================================================
-     PLACEHOLDER CLAIMS - INVENTED FIGURES CURRENTLY PUBLISHED ON THE PAGE
-     --------------------------------------------------------------------------
-     Everything above this block is a placeholder CONTACT DETAIL: wrong, but
-     obviously wrong, and harmless if it slipped out.
-
-     This block is different. These are statements of fact presented to a
-     customer that are NOT TRUE. They were approved as stand-ins so the page
-     has no holes in it, on the explicit understanding that real values
-     replace them before any ad spend points at this page. Nothing here is
-     visibly a placeholder to a visitor, which is exactly why it is listed.
-
-     Add to this list any time an invented figure goes onto the page. Empty
-     it before launch.
-     ========================================================================== */
-  PLACEHOLDER_CLAIMS: [
-    {
-      where: "components/JourneyMocks.tsx - the six How It Works cards",
-      claim:
-        "Priya S., her saved budget of Rs 25,000-50,000, and the Rs 42,000 deal value",
-      truth:
-        "Invented sample data. Approved by the client so the product screens stop looking empty. It is written to read as ONE record rather than a result - no totals, no averages, no rates - but it is still not real, and the requirements doc forbids fake dashboard figures, so this override is the client's and should be re-confirmed before launch.",
-    },
-    {
-      where: "lib/content.ts - faq, 'How long does it take to set up?'",
-      claim: "Setup on our side is usually done within a week",
-      truth: "Unknown. Nobody has given a figure from a real onboarding.",
-    },
-  ],
-
-  /** Anchor every Book a Demo CTA scrolls to. The form sits at the foot. */
+  /** Anchor the Book a Demo CTAs scroll to. */
   formAnchor: "#demo-form",
   /** Anchor the Hero's secondary "See How It Works" CTA scrolls to. */
   howItWorksAnchor: "#how-it-works",

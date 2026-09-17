@@ -1,5 +1,4 @@
 import { Section } from "@/components/ui/Section";
-import { CtaRow } from "@/components/ui/CtaRow";
 import { Reveal } from "@/components/ui/Reveal";
 import { Icon, type IconName } from "@/components/ui/icons";
 import {
@@ -162,8 +161,6 @@ export function Problem() {
           </div>
         </div>
       </Reveal>
-
-      <CtaRow />
     </Section>
   );
 }

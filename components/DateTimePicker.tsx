@@ -103,7 +103,6 @@ export function DateTimePicker({
   onTime,
   dateError,
   timeError,
-  idPrefix = "picker",
 }: {
   /** "YYYY-MM-DD", or "" for nothing chosen. */
   date: string;
@@ -113,8 +112,6 @@ export function DateTimePicker({
   onTime: (value: string) => void;
   dateError?: string;
   timeError?: string;
-  /** Namespaces this instance's ids — the page renders two forms. */
-  idPrefix?: string;
 }) {
   /* `null` until mounted — see the header. Everything downstream keys off it. */
   const [now, setNow] = useState<Date | null>(null);
@@ -220,11 +217,8 @@ export function DateTimePicker({
   return (
     <div className="space-y-4">
       {/* ---------------- Date ---------------- */}
-      <div role="group" aria-labelledby={`${idPrefix}-date-label`}>
-        <span
-          id={`${idPrefix}-date-label`}
-          className="t-small font-bold text-forest"
-        >
+      <div role="group" aria-labelledby="picker-date-label">
+        <span id="picker-date-label" className="t-small font-bold text-forest">
           {P.dateLabel}
         </span>
 

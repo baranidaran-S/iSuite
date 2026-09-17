@@ -4,7 +4,6 @@ import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Section } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
-import { CtaRow } from "@/components/ui/CtaRow";
 import { Icon, type IconName } from "@/components/ui/icons";
 import { MetaGlyph } from "@/components/ui/brand";
 import { metaAds, metaAdsShots } from "@/lib/content";
@@ -266,8 +265,6 @@ export function MetaAds() {
             </div>
           </div>
         </Reveal>
-
-        <CtaRow onDark />
       </div>
     </Section>
   );

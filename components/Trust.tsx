@@ -3,7 +3,6 @@
 import { useRef, useState } from "react";
 import { Section } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
-import { CtaRow } from "@/components/ui/CtaRow";
 import { trust } from "@/lib/content";
 
 /* ==========================================================================
@@ -214,8 +213,6 @@ export function Trust() {
           {trust.pricing}
         </p>
       </Reveal>
-
-      <CtaRow />
     </Section>
   );
 }

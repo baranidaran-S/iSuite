@@ -3,7 +3,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Section } from "@/components/ui/Section";
 import { Reveal } from "@/components/ui/Reveal";
-import { CtaRow } from "@/components/ui/CtaRow";
 import { journeyMocks, type JourneyMockName } from "@/components/JourneyMocks";
 import { howItWorks } from "@/lib/content";
 
@@ -294,8 +293,6 @@ export function HowItWorks() {
             />
           </div>
         </Reveal>
-
-        <CtaRow onDark />
       </div>
     </Section>
   );
