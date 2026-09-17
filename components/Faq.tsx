@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Section } from "@/components/ui/Section";
+import { CtaRow } from "@/components/ui/CtaRow";
 import { ChevronDown } from "@/components/ui/icons";
 import { faq } from "@/lib/content";
 
@@ -65,6 +66,8 @@ export function Faq() {
           );
         })}
       </div>
+
+      <CtaRow />
     </Section>
   );
 }
