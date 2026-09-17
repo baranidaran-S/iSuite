@@ -671,10 +671,10 @@ export const faq = {
    * Meta billing the messages, Meta approving the account - but it should be
    * confirmed by someone who has done an onboarding.
    *
-   * WEAKEST ANSWER HERE is the setup time. "Most businesses are live in a
-   * week" would be far stronger than what is written, and it is exactly the
-   * kind of number this page is not allowed to invent. If MnT Future knows
-   * the real figure from real onboardings, it belongs there.
+   * ONE INVENTED FIGURE LIVES IN HERE, by the client's decision: the "within
+   * a week" in the setup answer. It is a placeholder, it is marked as one at
+   * the line itself, and it is registered in lib/site.ts. It is the only
+   * number on this page that is not true, and it must not stay.
    */
   items: [
     {
@@ -695,7 +695,19 @@ export const faq = {
     },
     {
       q: "How long does it take to set up?",
-      a: "Channel connection is handled with you during onboarding. The part that depends on us is quick; the part that does not is Meta, which reviews WhatsApp Business and ad account access on its own timeline. We will give you a realistic schedule for your specific channels during the consultation rather than a number that may not hold.",
+      // ####################################################################
+      // PLACEHOLDER FIGURE - "within a week" IS INVENTED. NOT REAL DATA.
+      // Approved as a stand-in by the client on the understanding that the
+      // real figure replaces it before launch. Registered in lib/site.ts
+      // under PLACEHOLDER_CLAIMS so it cannot be lost.
+      //
+      // It is written to keep the invented part as small as possible: the
+      // week covers OUR side only, and Meta's review is stated separately as
+      // outside anyone's control, which is true and does not need a number.
+      // Whoever has run a real onboarding should replace "within a week"
+      // with what actually happens.
+      // ####################################################################
+      a: "Setup on our side is usually done within a week - connecting your channels, adding your team, setting the slots you want bookable and loading the answers the assistant replies with. The part nobody can put a date on is Meta: WhatsApp Business and ad account access are reviewed on Meta's timeline, not ours, and we will tell you where yours stands during the consultation.",
     },
     {
       q: "Are Meta WhatsApp charges included?",
