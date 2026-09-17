@@ -46,7 +46,7 @@ function Source({ i }: { i: number }) {
       <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-[17px] bg-white p-2 shadow-[0_8px_20px_-6px_rgba(0,0,0,0.55)]">
         <Mark className="h-full w-full" />
       </span>
-      <span className="rounded-full bg-[#FAF9F5] px-3.5 py-2 text-[14px] font-bold text-forest">
+      <span className="rounded-full bg-[#F7F9FD] px-3.5 py-2 text-[14px] font-bold text-forest">
         {channels[i]}
       </span>
     </span>
@@ -57,7 +57,7 @@ function Source({ i }: { i: number }) {
 function Enquiry({ i }: { i: number }) {
   const m = messages[i];
   return (
-    <span className="mock-shadow inline-block max-w-[200px] rounded-[14px] rounded-tl-[4px] bg-[#FAF9F5] px-3 py-2 text-left">
+    <span className="mock-shadow inline-block max-w-[200px] rounded-[14px] rounded-tl-[4px] bg-[#F7F9FD] px-3 py-2 text-left">
       <span className="block text-[12.5px] leading-snug text-charcoal">
         {m.text}
       </span>
@@ -72,7 +72,7 @@ function Enquiry({ i }: { i: number }) {
 function Ghost({ w = 62 }: { w?: number }) {
   return (
     <span
-      className="inline-flex flex-col gap-[5px] rounded-[12px] bg-[#FAF9F5]/55 px-3 py-2.5"
+      className="inline-flex flex-col gap-[5px] rounded-[12px] bg-[#F7F9FD]/55 px-3 py-2.5"
       style={{ width: w }}
     >
       <span className="block h-[3px] w-full rounded-full bg-forest/25" />
@@ -85,7 +85,7 @@ function Ghost({ w = 62 }: { w?: number }) {
 /** One fragment still showing what it was — an unopened message. */
 function Envelope() {
   return (
-    <span className="inline-flex items-center justify-center rounded-[12px] bg-[#FAF9F5]/55 px-3.5 py-3 text-forest/35">
+    <span className="inline-flex items-center justify-center rounded-[12px] bg-[#F7F9FD]/55 px-3.5 py-3 text-forest/35">
       <svg
         viewBox="0 0 24 24"
         fill="none"
@@ -204,7 +204,7 @@ function Threads() {
       className="pointer-events-none absolute inset-0 h-full w-full"
     >
       <g
-        stroke="#CFE6DB"
+        stroke="#D8E3F5"
         fill="none"
         strokeWidth="1.9"
         strokeLinecap="round"
@@ -215,7 +215,7 @@ function Threads() {
           <path key={t.d} d={t.d} strokeOpacity={t.o} />
         ))}
       </g>
-      <g fill="#CFE6DB">
+      <g fill="#D8E3F5">
         {MOTES.map((m) => (
           <circle
             key={`${m.x}-${m.y}`}

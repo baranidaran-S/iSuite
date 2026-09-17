@@ -111,7 +111,7 @@ export const MetaGlyph = ({ className }: P) => (
 
 export const WebsiteMark = ({ className }: P) => (
   <svg viewBox="0 0 24 24" className={className} aria-hidden="true">
-    <circle cx="12" cy="12" r="10" fill="#123526" />
+    <circle cx="12" cy="12" r="10" fill="#0B2545" />
     <g fill="none" stroke="#FFF" strokeWidth="1.4" strokeLinecap="round">
       <circle cx="12" cy="12" r="6.4" />
       <path d="M5.7 12h12.6" />

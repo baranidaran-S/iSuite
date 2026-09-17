@@ -281,12 +281,12 @@ export function ChannelArc() {
         preserveAspectRatio="none"
         aria-hidden="true"
         className="absolute inset-0 h-full w-full overflow-visible"
-        style={{ filter: "drop-shadow(0 0 6px rgba(207, 230, 219, 0.45))" }}
+        style={{ filter: "drop-shadow(0 0 6px rgba(216, 227, 245, 0.45))" }}
       >
         <path
           d="M 28 46 Q 210 6 392 46"
           fill="none"
-          stroke="#CFE6DB"
+          stroke="#D8E3F5"
           strokeWidth="2.5"
           strokeDasharray="7 9"
           strokeLinecap="round"

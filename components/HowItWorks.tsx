@@ -70,10 +70,10 @@ const numberOf = (i: number) => String(i + 1).padStart(2, "0");
 /**
  * The dark disc on the band.
  *
- * The ink fill alone is 2.4:1 against the ribbon green — invisible at arm's
+ * The ink fill alone is 2.15:1 against the ribbon blue — invisible at arm's
  * length, which is exactly how the channel arc's line disappeared earlier. So
- * the RING draws the circle, not the fill: tint at 70% measures 3.25:1 on the
- * band, and the numeral is tint too at 11.4:1 on the ink.
+ * the RING draws the circle, not the fill: tint at 70% measures 4.09:1 on the
+ * band, and the numeral is tint too at 14.1:1 on the ink.
  */
 function Badge({
   n,

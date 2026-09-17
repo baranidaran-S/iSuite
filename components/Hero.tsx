@@ -9,7 +9,7 @@ import { site } from "@/lib/site";
 /* ==========================================================================
    HERO — build spec §7.1 — FIRST DARK ANCHOR
    --------------------------------------------------------------------------
-   Dark #052C1E background, as §7.1 requires, carrying the approved
+   Dark #01152F background, as §7.1 requires, carrying the approved
    reference's design language on top of it:
      - eyebrow pill with a live dot
      - two-tone headline, closing clause in teal
@@ -57,7 +57,7 @@ export function Hero() {
         {/* ---------------- Text column ---------------- */}
         <div>
           <Reveal>
-            <span className="inline-flex items-center gap-2.5 rounded-full border border-emerald-tint/30 bg-emerald/40 px-4 py-2.5 text-sm font-semibold text-white shadow-[0_0_32px_-12px_rgba(0,119,67,0.8)]">
+            <span className="inline-flex items-center gap-2.5 rounded-full border border-emerald-tint/30 bg-emerald/40 px-4 py-2.5 text-sm font-semibold text-white shadow-[0_0_32px_-12px_rgba(2,51,128,0.8)]">
               {/* Was three pulsing "typing" dots. They said the wrong thing:
                   a typing indicator means someone is composing a reply, and
                   this pill is about where the enquiries land. A static inbox

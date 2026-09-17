@@ -28,21 +28,21 @@ import { WhatsAppFab } from "@/components/WhatsAppFab";
    re-add the import and drop <BusinessTypes /> in below <MetaAds />.
 
    Background rhythm - dark anchors bookend the page, with the optional
-   third taken up at Meta Ads. DARK is deep forest #052C1E, LIGHT is warm
-   oat #F4F2EC:
-     Hero            DARK  #052C1E
+   third taken up at Meta Ads. DARK is deep forest #01152F, LIGHT is warm
+   oat #F2F6FC:
+     Hero            DARK  #01152F
      Proof Strip     off-white
      Problem         white
      Solution        off-white
      How It Works    white
      Benefits        off-white
-     Meta Ads        DARK  #052C1E
+     Meta Ads        DARK  #01152F
      Trust           white
      FAQ             off-white
      Demo call       DARK
-     Final CTA       DARK  #052C1E
+     Final CTA       off-white  #01152F
      Lead Form       white     (must stay light for trust)
-     Footer          DARK  #052C1E
+     Footer          DARK  #01152F
    ========================================================================== */
 
 export default function Page() {

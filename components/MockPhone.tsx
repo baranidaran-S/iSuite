@@ -85,9 +85,9 @@ const KEYFRAMES = `
 
 /* The row lights up under the tap */
 @keyframes ph-hit {
-  0%, ${at(CUE.press - 0.1)} { background-color: rgba(0, 119, 67, 0); }
-  ${at(CUE.press)}, ${at(CUE.slide)} { background-color: rgba(0, 119, 67, 0.14); }
-  ${at(CUE.slide + SLIDE)}, 100% { background-color: rgba(0, 119, 67, 0); }
+  0%, ${at(CUE.press - 0.1)} { background-color: rgba(2, 51, 128, 0); }
+  ${at(CUE.press)}, ${at(CUE.slide)} { background-color: rgba(2, 51, 128, 0.14); }
+  ${at(CUE.slide + SLIDE)}, 100% { background-color: rgba(2, 51, 128, 0); }
 }
 
 .ph-anim { animation-duration: ${TOTAL}s; animation-iteration-count: infinite; animation-fill-mode: both; }
@@ -114,12 +114,12 @@ const Pointer = () => (
   <svg
     viewBox="0 0 24 24"
     aria-hidden="true"
-    className="h-6 w-6 drop-shadow-[0_2px_4px_rgba(18,53,38,0.45)]"
+    className="h-6 w-6 drop-shadow-[0_2px_4px_rgba(11,37,69,0.45)]"
   >
     <path
       d="M5.5 3.2 18.2 12l-5.2.7 2.9 5.9-2.4 1.2-2.9-5.9-3.6 3.6z"
       fill="#fff"
-      stroke="#123526"
+      stroke="#0B2545"
       strokeWidth="1.3"
       strokeLinejoin="round"
     />

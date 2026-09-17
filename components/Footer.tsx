@@ -5,8 +5,8 @@ import { site, whatsappLink } from "@/lib/site";
 /* ==========================================================================
    FOOTER — build spec §7.13
    --------------------------------------------------------------------------
-   Background #052C1E, matching the dark anchor sections.
-   Text #F4F2EC / #A5BFB2.
+   Background #01152F, matching the dark anchor sections.
+   Text #F2F6FC / #A8BDD8.
    Company name, contact email, phone, WhatsApp link, privacy/consent link.
    NO additional navigation.
 

@@ -34,8 +34,8 @@ import { site } from "@/lib/site";
      - Light section with dark cards, against a dark section with bright
        shapes.
 
-   Contrast: white on the navy fill is 14.5:1, every hue clears 4.5:1 on it,
-   and dark navy clears 7.3:1 on every icon tile. Nothing is dropped to a
+   Contrast: white on the navy fill is 15.4:1, every hue clears 11.8:1 on it,
+   and each deep clears 5.2:1 on its own icon tile. Nothing is dropped to a
    tint that cannot hold its text.
 
    Desktop / laptop (1024px+): all six in ONE row, alternating vertical
@@ -185,7 +185,7 @@ export function Benefits() {
                   style={
                     i === active
                       ? { height: 10, width: 26, background: card.deep }
-                      : { height: 10, width: 10, background: "#d2cec3" }
+                      : { height: 10, width: 10, background: "#c8ceda" }
                   }
                 />
               </button>

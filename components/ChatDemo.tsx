@@ -157,7 +157,7 @@ function Typing({ animation }: { animation: string }) {
       {[0, 1, 2].map((i) => (
         <span
           key={i}
-          className="cd-dot block h-[7px] w-[7px] rounded-full bg-[#5C6A62]"
+          className="cd-dot block h-[7px] w-[7px] rounded-full bg-[#586577]"
           style={{
             animation: "cd-dot 1.2s ease-in-out infinite",
             animationDelay: `${i * 0.16}s`,
@@ -183,9 +183,9 @@ function Bubble({
   return (
     <div className={them ? "flex" : "flex justify-end"}>
       <div
-        className={`cd-anim max-w-[82%] rounded-[14px] px-3.5 py-2.5 text-[14px] leading-[1.45] text-[#1F2A24] md:text-[15px] ${
+        className={`cd-anim max-w-[82%] rounded-[14px] px-3.5 py-2.5 text-[14px] leading-[1.45] text-[#1B2430] md:text-[15px] ${
           them
-            ? "rounded-tl-[4px] border border-[#E1DFD6] bg-white"
+            ? "rounded-tl-[4px] border border-[#E3E8F0] bg-white"
             : "rounded-tr-[4px] bg-[#D9FDD3]"
         }`}
         style={{ animationName: animation }}
@@ -252,18 +252,18 @@ export function ChatDemo() {
         }`}
       >
         {/* ---------------- Header ---------------- */}
-        <div className="flex items-center gap-3 border-b border-[#E1DFD6] bg-white px-4 py-3">
-          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#E4E6E0] text-[13px] font-extrabold text-[#123526]">
+        <div className="flex items-center gap-3 border-b border-[#E3E8F0] bg-white px-4 py-3">
+          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#E6EAF1] text-[13px] font-extrabold text-[#0B2545]">
             {chatDemo.contact.charAt(0)}
           </span>
 
           <span className="min-w-0 flex-1">
-            <span className="block truncate text-[14px] leading-tight font-bold text-[#1F2A24]">
+            <span className="block truncate text-[14px] leading-tight font-bold text-[#1B2430]">
               {chatDemo.contact}
             </span>
             <span className="mt-0.5 flex items-center gap-1.5">
               <WhatsAppMark className="h-3.5 w-3.5 shrink-0" />
-              <span className="text-[11px] leading-none text-[#5C6A62]">
+              <span className="text-[11px] leading-none text-[#586577]">
                 {chatDemo.channel}
               </span>
             </span>
@@ -287,7 +287,7 @@ export function ChatDemo() {
             the loop, because every bubble occupies its space from the start
             and only its opacity animates. min-h just guarantees the booking
             card has somewhere to sit. */}
-        <div className="relative bg-[#F4F2EC]">
+        <div className="relative bg-[#F2F6FC]">
           <div
             className="cd-anim relative flex min-h-[248px] flex-col gap-2.5 p-3"
             style={{ animationName: "cd-clear" }}
@@ -316,11 +316,11 @@ export function ChatDemo() {
                 message stays on screen. */}
             <div className="relative">
               <div
-                className="cd-anim ml-auto w-[94%] max-w-[320px] rounded-[16px] rounded-tr-[4px] border border-[#E1DFD6] bg-white p-3.5 shadow-[0_12px_28px_-10px_rgba(18,53,38,0.35)]"
+                className="cd-anim ml-auto w-[94%] max-w-[320px] rounded-[16px] rounded-tr-[4px] border border-[#E3E8F0] bg-white p-3.5 shadow-[0_12px_28px_-10px_rgba(11,37,69,0.35)]"
                 style={{ animationName: "cd-card" }}
               >
                 <div className="flex items-center justify-between gap-3">
-                  <span className="text-[13px] font-extrabold text-[#1F2A24]">
+                  <span className="text-[13px] font-extrabold text-[#1B2430]">
                     {chatDemo.slotsTitle}
                   </span>
 
@@ -341,8 +341,8 @@ export function ChatDemo() {
                         key={slot}
                         className={`relative overflow-hidden rounded-full px-3 py-1.5 text-[12px] font-bold ${
                           picked
-                            ? "bg-[#123526] text-white"
-                            : "border border-[#E1DFD6] bg-white text-[#5C6A62]"
+                            ? "bg-[#0B2545] text-white"
+                            : "border border-[#E3E8F0] bg-white text-[#586577]"
                         }`}
                       >
                         {/* Green wash confirms the booking, over the navy fill */}
@@ -377,8 +377,8 @@ export function ChatDemo() {
         </div>
 
         {/* ---------------- Input bar (static chrome) ---------------- */}
-        <div className="flex items-center gap-2 border-t border-[#E1DFD6] bg-white px-3 py-2.5">
-          <span className="flex-1 rounded-full bg-[#F4F2EC] px-3.5 py-2 text-[12px] text-[#5C6A62]">
+        <div className="flex items-center gap-2 border-t border-[#E3E8F0] bg-white px-3 py-2.5">
+          <span className="flex-1 rounded-full bg-[#F2F6FC] px-3.5 py-2 text-[12px] text-[#586577]">
             {chatDemo.inputPlaceholder}
           </span>
           <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#25D366]">

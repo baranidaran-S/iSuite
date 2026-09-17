@@ -112,12 +112,19 @@ export function Trust() {
           that was too much presence for a watermark. The 530px only binds
           past about 2200px, where it would otherwise outgrow the section.
 
-          STRENGTH IS CAPPED BY CONTRAST, NOT BY TASTE. At full strength
-          #CFE6DB puts the slate lead paragraph at 4.27:1 — a FAIL. 70% was
-          the ceiling at 4.67:1, and it read as a second layer of content
-          rather than a background. 40% measures 5.06:1 and sits back where a
-          watermark belongs. It cannot go far above that without the two
-          slate paragraphs failing AA again. */}
+          STRENGTH WAS CAPPED BY CONTRAST. IT NO LONGER IS.
+
+          Under the green palette this was a hard limit: at full strength the
+          old tint put the slate lead paragraph at 4.27:1, a FAIL, and 70%
+          was the ceiling at 4.67:1. 40% was the only value that cleared it
+          comfortably.
+
+          The blue tint is lighter. Full strength now measures 4.58:1 and 70%
+          measures 4.91:1 — both PASS. So the cap is now a judgement, not a
+          requirement: 40% measures 5.29:1 and sits back where a watermark
+          belongs, and at 70% it read as a second layer of content rather
+          than a background. It is kept at 40% because that is what it should
+          look like, not because anything forces it. */}
       <span
         aria-hidden="true"
         className="pointer-events-none absolute inset-x-0 top-1/2 -translate-y-1/2 text-center text-[min(24vw,530px)] leading-none font-extrabold tracking-tighter whitespace-nowrap text-emerald-tint/40 select-none"

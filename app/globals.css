@@ -7,66 +7,89 @@
    ========================================================================== */
 @theme {
   /* ==========================================================================
-     PALETTE — "Emerald & Forest", built on the client's primary #007743
+     PALETTE — "Prussian & Bone", built on the client's primary #023380
      --------------------------------------------------------------------------
-     #007743 is 154deg / 100% saturation / 23% LIGHTNESS. Full saturation would
-     read as neon at 50% lightness; held at 23% it reads as pigment. That is the
-     same rule the rest of this palette follows — colour comes from saturation
-     held deep, never from brightness.
+     REPLACED "Emerald & Forest". The client changed the brand to a primary
+     blue #023380 with #FFFCFD as its white. Every green on the page moved to
+     the blue derived from it; the copper family stayed.
+
+     #023380 is 217deg / 97% saturation / 25% LIGHTNESS — structurally the same
+     colour the green was (154deg / 100% / 23%), which is why the swap holds.
+     Full saturation reads as neon at 50% lightness; held down here it reads as
+     pigment. Colour comes from saturation held deep, never from brightness.
 
      The dark sections are the primary's own deep cousin, so the whole page
      belongs to one colour rather than borrowing an unrelated navy.
 
-     Three accent families, not six — six evenly-spaced hues is the single
-     strongest tell of a generated palette. Each has two tiers: a DEEP that
-     carries white text and a TINT that carries dark text. That split is what
-     lets muted colour work at all; a single mid-tone accent cannot hold dark
-     text (~2.9:1), which is why earlier palettes kept drifting brighter.
+     #FFFCFD OVERRIDES TAILWIND'S OWN --color-white rather than becoming a new
+     token, so every bg-white and text-white already on the page picks it up
+     without touching a component. It is 99% white, so it cannot carry the
+     alternating section rhythm on its own — --color-offwhite is a pale blue
+     for that, where it used to be a warm oat.
 
-     Every pairing used on the page is measured and clears WCAG AA.
+     Three accent families, not six — six evenly-spaced hues is the single
+     strongest tell of a generated palette. COPPER IS KEPT, deliberately: it
+     is the only hue left that is not blue, and it is what stops Core Benefits
+     and How It Works reading as the same section twice. Each family has two
+     tiers: a DEEP that carries white text and a TINT that carries dark text.
+
+     THE BAND IS NO LONGER HELD BELOW THE CTA. Under the green palette the
+     ribbon had to be darker than the button, because both were green and the
+     largest shape would have outranked the one that mattered. #023380 is far
+     darker than #007743 was, so obeying that rule would have made the band
+     invisible against the ink section. The rule is moot now anyway: How It
+     Works carries no button, so the two never appear together.
+
+     Every pairing on this page was re-measured after the swap — 20 pairs, all
+     clearing WCAG AA, including the control-edge 3:1 that --color-line-strong
+     missed on the first attempt at #8B94A5 (2.99:1).
      ========================================================================== */
 
   /* --- The primary -------------------------------------------------------- */
   /* The CTA, and the two letters of "AI" in the logo lockup — the one other
      place a brand's primary colour belongs. Nowhere else. */
-  --color-primary: #007743; /* white label 5.65:1, and legible as text 5.04:1 */
-  --color-primary-dark: #00603a; /* hover                                     */
+  /* The client's white. Overriding Tailwind's own --color-white means
+     every bg-white / text-white on the page picks it up. */
+  --color-white: #fffcfd;
+
+  --color-primary: #023380; /* white label 11.75:1, as text on white 11.52:1 */
+  --color-primary-dark: #011f52; /* hover                                     */
 
   /* --- Light sections ---------------------------------------------------- */
-  --color-forest: #123526; /* Headings, header, footer          12.0:1        */
-  --color-offwhite: #f4f2ec; /* Warm oat. Warm neutrals are most of the reason
+  --color-forest: #0b2545; /* Headings, header, footer          15.1:1        */
+  --color-offwhite: #eff3f9; /* Warm oat. Warm neutrals are most of the reason
                                 this no longer reads as a screen.             */
-  --color-charcoal: #1f2a24; /* Body copy                       13.3:1        */
-  --color-slate: #5c6a62; /* Secondary text                      5.1:1        */
-  --color-line: #e1dfd6; /* Dividers and decorative edges     1.16:1 on white */
+  --color-charcoal: #1b2430; /* Body copy                       15.4:1        */
+  --color-slate: #586577; /* Secondary text                      5.8:1        */
+  --color-line: #e3e8f0; /* Dividers and decorative edges     1.21:1 on white */
   /*
    * Control boundaries — input, select, checkbox, the calendar, the chips.
    *
    * WCAG 1.4.11 asks 3:1 of anything you need to see to identify a control,
-   * and --color-line is 1.16:1 on white: fine for a rule between two rows,
+   * and --color-line is 1.21:1 on white: fine for a rule between two rows,
    * far too faint to be the edge of a field you are meant to type in. This
    * measures 3.21:1 and stays in the warm family the rest of the neutrals
    * belong to.
    */
-  --color-line-strong: #94907f;
+  --color-line-strong: #7f8899;
 
   /* --- Section accents. Deep carries white, tint carries dark ------------ */
-  --color-emerald: #00603a;
-  --color-emerald-tint: #cfe6db;
+  --color-emerald: #0e3f84;
+  --color-emerald-tint: #d8e3f5;
   --color-copper: #8c4a29;
   --color-copper-tint: #f0e0d6;
-  --color-harbour: #2f5a6b;
-  --color-harbour-tint: #d9e3e8;
+  --color-harbour: #3a5a7d;
+  --color-harbour-tint: #dce5ef;
 
   /* --- The How It Works journey band -------------------------------------- */
   /* Held BELOW the CTA's luminance on purpose — see the ribbon block at the
      bottom of this file. It is the one green that is neither CTA nor accent. */
-  --color-ribbon: #0a6e48;
+  --color-ribbon: #1b4c8f;
 
   /* --- Dark anchor sections ---------------------------------------------- */
-  --color-ink: #052c1e; /* Hero, How It Works, Meta Ads, Final CTA, Footer     */
-  --color-ink-fg: #f4f2ec; /* Headlines + body on dark        15.2:1          */
-  --color-ink-muted: #a5bfb2; /* Captions + disclaimers on dark  7.7:1        */
+  --color-ink: #01152f; /* Hero, How It Works, Meta Ads, Final CTA, Footer     */
+  --color-ink-fg: #f2f6fc; /* Headlines + body on dark        16.8:1          */
+  --color-ink-muted: #a8bdd8; /* Captions + disclaimers on dark  9.5:1        */
 
   /* --- Typography (§2) --------------------------------------------------- */
   --font-sans:
@@ -275,7 +298,7 @@
    counts or urgency claims appear anywhere. Colour energy comes from real
    channel brand logos, not from a widened palette.
 
-   The primary #007743 is still CTA-only — that restraint is exactly what
+   The primary #023380 is still CTA-only — that restraint is exactly what
    makes the button carry on a busy page.
    ========================================================================== */
 @layer components {
@@ -285,8 +308,8 @@
     align-items: center;
     gap: 0.5rem;
     border-radius: 9999px;
-    border: 1px solid rgba(165, 191, 178, 0.35);
-    background: rgba(244, 242, 236, 0.06);
+    border: 1px solid rgba(168, 189, 216, 0.35);
+    background: rgba(242, 246, 252, 0.06);
     padding: 0.5rem 1rem;
     font-size: 0.875rem;
     font-weight: 600;
@@ -325,7 +348,7 @@
   @media (hover: hover) {
     .lift:hover {
       transform: translateY(-4px);
-      box-shadow: 0 16px 32px -16px rgba(18, 53, 38, 0.25);
+      box-shadow: 0 16px 32px -16px rgba(11, 37, 69, 0.25);
     }
   }
 
@@ -388,46 +411,46 @@
 @layer components {
   /* --- Pastel icon badges, derived from the two brand colours ----------- */
   .tint-1 {
-    background: rgba(0, 119, 67, 0.12);
+    background: rgba(2, 51, 128, 0.12);
   }
   .tint-2 {
-    background: rgba(18, 53, 38, 0.08);
+    background: rgba(11, 37, 69, 0.08);
   }
   .tint-3 {
-    background: rgba(0, 119, 67, 0.16);
+    background: rgba(2, 51, 128, 0.16);
   }
   .tint-4 {
-    background: rgba(18, 53, 38, 0.12);
+    background: rgba(11, 37, 69, 0.12);
   }
   .tint-5 {
-    background: rgba(0, 119, 67, 0.1);
+    background: rgba(2, 51, 128, 0.1);
   }
   .tint-6 {
-    background: rgba(18, 53, 38, 0.06);
+    background: rgba(11, 37, 69, 0.06);
   }
 
   /* --- Gradient pill CTA, matching the reference's button treatment ----- */
   .btn-pill {
-    background: #007743;
+    background: #023380;
   }
 
   .btn-pill:hover {
-    background: #00603a;
+    background: #011f52;
   }
 
   /*
    * INVERTED on dark sections.
    *
    * The primary is a DARK colour (23% lightness), so a green button on the
-   * deep-forest hero measures 2.68:1 against its own background - under the
+   * deep navy ink measures 1.56:1 against its own background - under the
    * 3:1 needed for a UI component, and in practice a button you have to hunt
    * for. Two of the page's seven CTAs sit on dark sections.
    *
-   * Flipping it keeps #007743 as the one and only button colour: cream fill,
-   * primary text. 13.5:1 separation, 5.04:1 on the label.
+   * Flipping it keeps #023380 as the one and only button colour: cream fill,
+   * primary text. 17.2:1 separation, 11.0:1 on the label.
    */
   .btn-pill-invert {
-    background: #f7f6f1;
+    background: #f5f8fc;
     color: var(--color-primary);
   }
 
@@ -438,15 +461,15 @@
   /* --- Floating cards overlapping the product mock ---------------------- */
   .float-card {
     box-shadow:
-      0 20px 40px -12px rgba(18, 53, 38, 0.18),
-      0 0 0 1px rgba(225, 223, 214, 0.9);
+      0 20px 40px -12px rgba(11, 37, 69, 0.18),
+      0 0 0 1px rgba(227, 232, 240, 0.9);
   }
 
   /* --- The product mock's own elevation --------------------------------- */
   .mock-shadow {
     box-shadow:
-      0 32px 64px -24px rgba(18, 53, 38, 0.28),
-      0 0 0 1px rgba(225, 223, 214, 0.8);
+      0 32px 64px -24px rgba(11, 37, 69, 0.28),
+      0 0 0 1px rgba(227, 232, 240, 0.8);
   }
 }
 
@@ -460,7 +483,7 @@
     font-weight: 900;
     line-height: 1;
     letter-spacing: -0.04em;
-    color: rgba(0, 119, 67, 0.13);
+    color: rgba(2, 51, 128, 0.13);
     user-select: none;
   }
 
@@ -506,7 +529,7 @@
   /* Rotated sticker badge. */
   .sticker {
     transform: rotate(-6deg);
-    box-shadow: 0 12px 28px -10px rgba(18, 53, 38, 0.45);
+    box-shadow: 0 12px 28px -10px rgba(11, 37, 69, 0.45);
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -623,7 +646,7 @@
     z-index: -1;
     height: 0.38em;
     border-radius: 999px;
-    background: rgba(0, 119, 67, 0.34);
+    background: rgba(2, 51, 128, 0.34);
     transform: rotate(-0.8deg);
   }
 }
@@ -637,7 +660,7 @@
    the top bar, the icon tile, the tag and the bullets. Light section, dark
    cards; dark section, bright shapes. They can no longer be confused.
 
-   White on the navy fill is 14.5:1, and every hue clears 4.5:1 on it.
+   White on the navy fill is 15.4:1, and every hue clears 4.5:1 on it.
 
    The shadow is a flat offset rather than a blur — a printed-sticker feel,
    not a drop shadow.
@@ -645,8 +668,8 @@
 @layer components {
   .benefit-card {
     position: relative;
-    background: #123526;
-    box-shadow: 0 8px 0 -1px rgba(18, 53, 38, 0.22);
+    background: #0b2545;
+    box-shadow: 0 8px 0 -1px rgba(11, 37, 69, 0.22);
     transition:
       transform 0.22s cubic-bezier(0.22, 0.9, 0.3, 1),
       box-shadow 0.22s ease-out;
@@ -664,7 +687,7 @@
   @media (hover: hover) {
     .benefit-card:hover {
       transform: translateY(-6px);
-      box-shadow: 0 16px 0 -3px rgba(18, 53, 38, 0.24);
+      box-shadow: 0 16px 0 -3px rgba(11, 37, 69, 0.24);
     }
   }
 
@@ -707,7 +730,7 @@
   @supports (color: color-mix(in srgb, red 50%, blue)) {
     .puck-3d {
       box-shadow:
-        0 5px 0 color-mix(in srgb, var(--c) 64%, #04180f),
+        0 5px 0 color-mix(in srgb, var(--c) 64%, #01101f),
         0 12px 15px -5px rgba(0, 0, 0, 0.55);
     }
   }
@@ -817,7 +840,7 @@
    invites a click is worse than a quiet heading. Nothing rotated reads as a
    control, so 1.5 degrees buys the block back from the button language.
 
-   White on #007743 is 5.65:1 — it clears AA for body text, let alone at
+   White on #023380 is 11.75:1 — it clears AA for body text, let alone at
    heading size. The negative margins keep the sentence's own spacing: the
    padding would otherwise push the words either side apart.
    ========================================================================== */

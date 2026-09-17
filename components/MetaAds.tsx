@@ -11,7 +11,7 @@ import { metaAds, metaAdsShots } from "@/lib/content";
 /* ==========================================================================
    META ADS CONNECTION — build spec §7.7 — THIRD DARK ANCHOR
    --------------------------------------------------------------------------
-   Background #052C1E (the optional third dark anchor, taken up) so this
+   Background #01152F (the optional third dark anchor, taken up) so this
    differentiator stands out mid-page. Copy left, screenshot carousel right,
    following the approved reference layout — its LAYOUT, not its palette. The
    spec fixes this section as dark and the page's rhythm depends on it:

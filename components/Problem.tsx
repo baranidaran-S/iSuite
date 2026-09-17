@@ -28,9 +28,9 @@ import { problem } from "@/lib/content";
 /** One pastel tile per card, taken from the approved mockup. */
 const tiles = [
   { bg: "bg-[#F0E0D6]", fg: "text-[#8C4A29]" },
-  { bg: "bg-[#CFE6DB]", fg: "text-[#00603A]" },
-  { bg: "bg-[#D9E3E8]", fg: "text-[#2F5A6B]" },
-  { bg: "bg-[#D9E3E8]", fg: "text-[#8C4A29]" },
+  { bg: "bg-[#D8E3F5]", fg: "text-[#0E3F84]" },
+  { bg: "bg-[#DCE5EF]", fg: "text-[#3A5A7D]" },
+  { bg: "bg-[#DCE5EF]", fg: "text-[#8C4A29]" },
 ];
 
 /** Splits the heading so its opening clause can carry the teal accent. */
@@ -104,7 +104,7 @@ export function Problem() {
                 {problem.points.map((p, i) => (
                   <li
                     key={p.title}
-                    className="hype-row relative flex h-full items-start gap-4 rounded-[20px] bg-[#FAF9F5] p-5 md:gap-5 md:p-6"
+                    className="hype-row relative flex h-full items-start gap-4 rounded-[20px] bg-[#F7F9FD] p-5 md:gap-5 md:p-6"
                   >
                     {/* Pastel icon tile */}
                     <span

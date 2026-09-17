@@ -14,7 +14,7 @@ import { cn } from "@/lib/cn";
    only element on the page allowed to use the primary as a fill.
 
    On dark sections it INVERTS - cream fill, primary text - because the
-   primary #007743 is itself dark. See .btn-pill-invert in globals.css.
+   primary #023380 is itself dark. See .btn-pill-invert in globals.css.
    ========================================================================== */
 
 type BaseProps = {
@@ -94,7 +94,7 @@ export function Button({
            * INVERTED on dark sections. The primary is a dark colour, so a
            * green fill on the deep-forest hero is 2.68:1 against its own
            * background - under the 3:1 a UI component needs. Flipped it is
-           * 13.5:1, and #007743 is still the only button colour on the page.
+           * 13.5:1, and #023380 is still the only button colour on the page.
            */
           onDark
             ? "btn-pill-invert shadow-lg shadow-black/25"

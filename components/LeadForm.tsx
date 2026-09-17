@@ -13,7 +13,7 @@ import { LEAD_ENDPOINT } from "@/lib/site";
    WHITE background — the spec requires the form to stay on a light background
    for usability and trust, even though the Final CTA above it is dark.
 
-   Card: centred, #E1DFD6 border, 12px radius, 32px padding. 480px in one
+   Card: centred, #E3E8F0 border, 12px radius, 32px padding. 480px in one
    column on a phone; from 768px it opens to 920px and splits — the five
    details on the left, the demo slot on the right, consent and the button
    across the foot.
@@ -291,7 +291,7 @@ export function LeadForm() {
  * ARIA radiogroup to match it.
  *
  * Every chip clears 44px, and the chosen state is a fill rather than a border
- * alone — white on the primary measures 5.65:1, where a 1px ring change would
+ * alone — white on the primary measures 11.75:1, where a 1px ring change would
  * be the only signal and easy to miss on a phone.
  */
 function ChipChoice({

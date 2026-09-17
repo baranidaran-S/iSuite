@@ -29,7 +29,7 @@ import type { ReactNode } from "react";
    coordinates below already allow for.
    ========================================================================== */
 
-const EDGE = "color-mix(in srgb, currentColor 56%, #04180F)";
+const EDGE = "color-mix(in srgb, currentColor 56%, #01101F)";
 
 type P = { className?: string };
 
@@ -53,8 +53,8 @@ function Solid({
     >
       <g
         transform="translate(0 1.15)"
-        fill="#04180F"
-        stroke="#04180F"
+        fill="#01101F"
+        stroke="#01101F"
         style={{ fill: EDGE, stroke: EDGE }}
         strokeWidth={1.1}
         strokeLinejoin="round"

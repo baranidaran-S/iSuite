@@ -196,15 +196,15 @@ export const solution = {
       icon: "sparkReply",
       title: "AI Assistant",
       body: "Replies, qualifies and books for you.",
-      bg: "bg-[#CFE6DB]",
-      fg: "text-[#00603A]",
+      bg: "bg-[#D8E3F5]",
+      fg: "text-[#0E3F84]",
     },
     {
       icon: "calendar",
       title: "Appointments",
       body: "Auto-schedules with your team.",
-      bg: "bg-[#D9E3E8]",
-      fg: "text-[#2F5A6B]",
+      bg: "bg-[#DCE5EF]",
+      fg: "text-[#3A5A7D]",
     },
     {
       icon: "bars",
@@ -233,15 +233,15 @@ export const solution = {
       label: "Books appointments",
       whatsapp: false,
       icon: "calendar",
-      bg: "bg-[#D9E3E8]",
-      fg: "text-[#2F5A6B]",
+      bg: "bg-[#DCE5EF]",
+      fg: "text-[#3A5A7D]",
     },
     {
       label: "Tracks every deal",
       whatsapp: false,
       icon: "bars",
-      bg: "bg-[#CFE6DB]",
-      fg: "text-[#00603A]",
+      bg: "bg-[#D8E3F5]",
+      fg: "text-[#0E3F84]",
     },
   ],
 } as const;
@@ -319,8 +319,8 @@ export const howItWorks = {
       title: "Customer enquiry",
       detail:
         "Enquiries arrive from your ads, WhatsApp, Instagram or your website.",
-      tint: "#CFE6DB",
-      deep: "#00603A",
+      tint: "#D8E3F5",
+      deep: "#0E3F84",
     },
     {
       icon: "sparkReply",
@@ -335,16 +335,16 @@ export const howItWorks = {
       mock: "qualify",
       title: "Lead qualified",
       detail: "It asks your qualifying questions and saves every answer.",
-      tint: "#D9E3E8",
-      deep: "#2F5A6B",
+      tint: "#DCE5EF",
+      deep: "#3A5A7D",
     },
     {
       icon: "calendar",
       mock: "booking",
       title: "Appointment booked",
       detail: "Booked into your calendar, against the times you set.",
-      tint: "#CFE6DB",
-      deep: "#00603A",
+      tint: "#D8E3F5",
+      deep: "#0E3F84",
     },
     {
       icon: "team",
@@ -360,8 +360,8 @@ export const howItWorks = {
       mock: "closed",
       title: "Deal closed",
       detail: "The deal moves to won, with its full history in one place.",
-      tint: "#D9E3E8",
-      deep: "#2F5A6B",
+      tint: "#DCE5EF",
+      deep: "#3A5A7D",
     },
   ],
   // [DRAFT — NEEDS APPROVAL] closing strip under the journey. Names no
@@ -388,8 +388,8 @@ export const benefits = {
    * is a small tile and a tag on a navy card, so the colour arrives in a
    * different shape and the two sections cannot be mistaken for each other.
    *
-   * Measured: every tint clears 10.3:1 on the navy card, and each deep clears
-   * 4.8:1 on its own tint.
+   * Measured: every tint clears 11.8:1 on the navy card, and each deep clears
+   * 5.2:1 on its own tint.
    */
   cards: [
     {
@@ -398,8 +398,8 @@ export const benefits = {
       tag: "Every channel",
       body: "WhatsApp, Instagram, Facebook and website chat, all in one place.",
       points: ["Shared conversations", "Team assignment", "Channel filters"],
-      tint: "#CFE6DB",
-      deep: "#00603A",
+      tint: "#D8E3F5",
+      deep: "#0E3F84",
     },
     {
       icon: "assistant",
@@ -420,8 +420,8 @@ export const benefits = {
       tag: "Every deal tracked",
       body: "Turn enquiries into contacts and deals — track every stage.",
       points: ["Contacts & deals", "Custom stages", "Deal owner"],
-      tint: "#D9E3E8",
-      deep: "#2F5A6B",
+      tint: "#DCE5EF",
+      deep: "#3A5A7D",
     },
     {
       icon: "bell",
@@ -429,8 +429,8 @@ export const benefits = {
       tag: "Nothing forgotten",
       body: "Due and overdue follow-ups tracked automatically.",
       points: ["Due follow-ups", "Overdue visibility", "Owner reminders"],
-      tint: "#CFE6DB",
-      deep: "#00603A",
+      tint: "#D8E3F5",
+      deep: "#0E3F84",
     },
     {
       icon: "megaphone",
@@ -447,8 +447,8 @@ export const benefits = {
       tag: "You stay in charge",
       body: "Roles, permissions and a full AI action history.",
       points: ["Roles & permissions", "Assignments", "AI action history"],
-      tint: "#D9E3E8",
-      deep: "#2F5A6B",
+      tint: "#DCE5EF",
+      deep: "#3A5A7D",
     },
   ],
 } as const;
