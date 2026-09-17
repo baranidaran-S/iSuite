@@ -40,8 +40,23 @@ import { WhatsAppFab } from "@/components/WhatsAppFab";
        no ratings, counts or guarantees can say, and because the required
        pricing sentence lives there.
 
+   PHASE 2: THE LEAD FORM MOVED TO SCREEN TWO, AND REPEATS AT THE FOOT.
+
+   It was the last thing on the page. Traffic arriving from an Instagram ad
+   was being asked to read ten sections before it could see the one control
+   that does anything. Every landing page worth copying puts the signup in
+   the first or second screen.
+
+   It renders TWICE because our form is not an email box - it books a real
+   calendar slot. Someone who read the whole page and is convinced should not
+   have to scroll back up past eight sections to find the picker. The two
+   instances are alternatives, not one form split in half, so independent
+   state is correct. See the header of LeadForm.tsx for how the ids stay
+   unique across the two.
+
    Background rhythm - DARK is deep forest #052C1E, LIGHT is warm oat #F4F2EC:
      Hero            DARK
+     Lead Form       white     (must stay light for trust)
      Problem         white
      Solution        off-white
      How It Works    DARK
@@ -50,7 +65,7 @@ import { WhatsAppFab } from "@/components/WhatsAppFab";
      Trust           white
      FAQ             off-white
      Final CTA       DARK
-     Lead Form       white     (must stay light for trust)
+     Lead Form       white
      Footer          DARK
    ========================================================================== */
 
@@ -62,6 +77,9 @@ export default function Page() {
       <main>
         <Hero />
 
+        {/* PHASE 2: screen two. See the note above. */}
+        <LeadForm />
+
         <Problem />
         <SolutionIntro />
         <HowItWorks />
@@ -70,7 +88,7 @@ export default function Page() {
         <Trust />
         <Faq />
         <FinalCta />
-        <LeadForm />
+        <LeadForm id="demo-form-bottom" />
       </main>
 
       <Footer />

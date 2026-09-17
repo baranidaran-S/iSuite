@@ -9,6 +9,11 @@ import { site } from "@/lib/site";
    --------------------------------------------------------------------------
    Background #052C1E, mirroring the Hero for a bookend effect.
    Same CTA treatment as the Hero: teal on dark, so it pops.
+
+   It now reads as the lead-in to the second copy of the lead form, which
+   sits directly beneath it — dark band, then the white form. Its button
+   points at THAT form, not the one under the hero; scrolling a convinced
+   reader back up past eight sections would be the opposite of the job.
    ========================================================================== */
 
 export function FinalCta() {
@@ -23,7 +28,7 @@ export function FinalCta() {
           {/* CTA #4 of 7 (§10). §6: full-width on mobile where used inline. */}
           <div className="mt-8 flex justify-center">
             <Button
-              href={site.formAnchor}
+              href={site.formAnchorBottom}
               onDark
               fullWidth
               className="sm:w-auto"
