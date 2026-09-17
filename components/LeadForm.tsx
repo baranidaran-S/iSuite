@@ -105,18 +105,18 @@ export function LeadForm({ id = "demo-form" }: { id?: string }) {
     setErrors((prev) => ({ ...prev, [key]: undefined }));
   }
 
-  // RENDERED TWICE. Once right under the hero, so ad traffic meets it on
-  // screen two, and once at the foot for anyone who read the whole page —
-  // the form books a real calendar slot, so sending a convinced reader back
-  // up past eight sections to find the picker is friction worth paying two
-  // renders to avoid. Every id below is derived from `id` so the second
-  // instance does not collide with the first; the two carry independent
-  // state, which is correct — they are alternatives, not one form in two
-  // places. The radios share a `name`, which is safe: a radio group is
-  // scoped to its form owner, so the two <form>s never fight.
+  // The last section on the page, and the tallest. The ASK arrives much
+  // earlier — see CtaBand, which sits on screen two and scrolls here.
   //
-  // It is also the tallest section, and does not need the full 96px the
-  // rest of the page's rhythm uses.
+  // A second copy was tried directly under the hero and removed: four
+  // fields plus a month calendar plus a time grid is over a phone screen
+  // of commitment to ask of someone who has read one headline.
+  //
+  // The `id` prop is what is left of that experiment. It is kept because it
+  // namespaces every field, error and picker id from one place, which is
+  // worth having whether or not a second copy ever returns.
+  //
+  // It does not need the full 96px the rest of the page's rhythm uses.
   return (
     <Section bg="white" id={id} padded={false} className="py-12 md:py-20">
       {/* The heading keeps its own narrower measure — a centred sentence

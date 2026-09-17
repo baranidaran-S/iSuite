@@ -19,15 +19,8 @@ export const site = {
   fullFaqUrl: "#", // TODO: main website FAQ URL
   /* ------------------------------------------------------------------------ */
 
-  /** Anchor the Book a Demo CTAs scroll to — the form under the hero. */
+  /** Anchor every Book a Demo CTA scrolls to. The form sits at the foot. */
   formAnchor: "#demo-form",
-  /**
-   * The second copy of the form, at the foot of the page. Only the Final
-   * CTA points here: it sits directly above it, so sending that one button
-   * back up to the hero form would scroll the reader past the very thing
-   * they just asked for.
-   */
-  formAnchorBottom: "#demo-form-bottom",
   /** Anchor the Hero's secondary "See How It Works" CTA scrolls to. */
   howItWorksAnchor: "#how-it-works",
 } as const;

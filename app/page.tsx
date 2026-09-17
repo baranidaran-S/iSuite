@@ -7,7 +7,7 @@ import { Benefits } from "@/components/Benefits";
 import { MetaAds } from "@/components/MetaAds";
 import { Trust } from "@/components/Trust";
 import { Faq } from "@/components/Faq";
-import { FinalCta } from "@/components/FinalCta";
+import { CtaBand } from "@/components/CtaBand";
 import { LeadForm } from "@/components/LeadForm";
 import { Footer } from "@/components/Footer";
 import { WhatsAppFab } from "@/components/WhatsAppFab";
@@ -40,23 +40,28 @@ import { WhatsAppFab } from "@/components/WhatsAppFab";
        no ratings, counts or guarantees can say, and because the required
        pricing sentence lives there.
 
-   PHASE 2: THE LEAD FORM MOVED TO SCREEN TWO, AND REPEATS AT THE FOOT.
+   PHASE 2: THE ASK MOVED TO SCREEN TWO. THE FORM DID NOT.
 
-   It was the last thing on the page. Traffic arriving from an Instagram ad
-   was being asked to read ten sections before it could see the one control
-   that does anything. Every landing page worth copying puts the signup in
-   the first or second screen.
+   The form used to be the last thing on the page, so traffic from an
+   Instagram ad had to read ten sections before reaching the one control that
+   does anything. Every landing page worth copying puts the ask in the first
+   or second screen.
 
-   It renders TWICE because our form is not an email box - it books a real
-   calendar slot. Someone who read the whole page and is convinced should not
-   have to scroll back up past eight sections to find the picker. The two
-   instances are alternatives, not one form split in half, so independent
-   state is correct. See the header of LeadForm.tsx for how the ids stay
-   unique across the two.
+   The FORM itself was tried there first and pulled back out. It is four
+   fields plus a month calendar plus a time grid — well over a phone screen
+   of commitment to put in front of someone who has read one headline. What
+   moved up instead is the CTA band: a heading and a button that make the
+   same ask in 200px and scroll down to the form when the reader is ready.
 
-   Background rhythm - DARK is deep forest #052C1E, LIGHT is warm oat #F4F2EC:
+   So there is exactly ONE form, still at the foot, and one anchor pointing
+   at it. LeadForm keeps its `id` prop from the two-form experiment; it costs
+   nothing and namespaces the field ids.
+
+   Background rhythm - DARK is deep forest #052C1E, LIGHT is warm oat #F4F2EC.
+   The CTA band is off-white on purpose: stacked under the dark hero, a second
+   dark section reads as one long black block on a phone.
      Hero            DARK
-     Lead Form       white     (must stay light for trust)
+     CTA band        off-white
      Problem         white
      Solution        off-white
      How It Works    DARK
@@ -64,8 +69,7 @@ import { WhatsAppFab } from "@/components/WhatsAppFab";
      Meta Ads        DARK
      Trust           white
      FAQ             off-white
-     Final CTA       DARK
-     Lead Form       white
+     Lead Form       white     (must stay light for trust)
      Footer          DARK
    ========================================================================== */
 
@@ -77,8 +81,8 @@ export default function Page() {
       <main>
         <Hero />
 
-        {/* PHASE 2: screen two. See the note above. */}
-        <LeadForm />
+        {/* Screen two — asks for the demo in 200px, not a whole form. */}
+        <CtaBand />
 
         <Problem />
         <SolutionIntro />
@@ -87,8 +91,7 @@ export default function Page() {
         <MetaAds />
         <Trust />
         <Faq />
-        <FinalCta />
-        <LeadForm id="demo-form-bottom" />
+        <LeadForm />
       </main>
 
       <Footer />
