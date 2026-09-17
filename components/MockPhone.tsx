@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import { LogoMark } from "@/components/ui/Logo";
 import { fillName, filters, messages, threads } from "@/components/mockData";
 
@@ -89,6 +92,13 @@ const KEYFRAMES = `
 
 .ph-anim { animation-duration: ${TOTAL}s; animation-iteration-count: infinite; animation-fill-mode: both; }
 
+/* Held still until the mock is actually on screen. On a phone this sits well
+   below the fold, so an 11-second loop that starts at page load has already
+   glided the pointer over, pressed the conversation and opened the thread by
+   the time anyone scrolls down to it — the visitor arrives to a thread that
+   opened itself and never sees the tap that is the whole point. */
+.ph-paused .ph-anim { animation-play-state: paused; }
+
 /* Motion off: the pointer never appears and the track never moves, so what
    is left is the inbox — a plain, correct product screenshot. */
 @media (prefers-reduced-motion: reduce) {
@@ -119,6 +129,22 @@ const Pointer = () => (
 const thread = threads[0];
 
 export function MockPhone() {
+  const root = useRef<HTMLDivElement>(null);
+  /* Starts paused, so the sequence always begins at frame zero the first
+     time it is seen rather than part-way through. */
+  const [onShow, setOnShow] = useState(false);
+
+  useEffect(() => {
+    const el = root.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => setOnShow(entry.isIntersecting),
+      { threshold: 0.35 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
   return (
     <>
       <style dangerouslySetInnerHTML={{ __html: KEYFRAMES }} />
@@ -131,8 +157,11 @@ export function MockPhone() {
       </p>
 
       <div
+        ref={root}
         aria-hidden="true"
-        className="mock-shadow overflow-hidden rounded-card bg-white xl:hidden"
+        className={`mock-shadow overflow-hidden rounded-card bg-white xl:hidden ${
+          onShow ? "" : "ph-paused"
+        }`}
       >
         {/* App bar — the one piece of chrome both screens share */}
         <div className="flex items-center gap-2 bg-forest px-4 py-3">
