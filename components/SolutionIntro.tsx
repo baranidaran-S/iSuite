@@ -89,25 +89,6 @@ export function SolutionIntro() {
             <p className="mt-6 text-lg leading-relaxed text-slate md:text-xl">
               {solution.lead}
             </p>
-
-            {/* Four capability tiles */}
-            <ul className="mt-10 grid grid-cols-2 gap-6 xl:grid-cols-4 xl:gap-4">
-              {solution.features.map((f) => (
-                <li key={f.title}>
-                  <span
-                    className={`flex h-12 w-12 items-center justify-center rounded-2xl ${f.bg} ${f.fg}`}
-                  >
-                    <Icon name={f.icon as IconName} className="h-6 w-6" />
-                  </span>
-                  <p className="mt-4 text-base font-bold text-forest">
-                    {f.title}
-                  </p>
-                  <p className="mt-2 text-sm leading-relaxed text-slate">
-                    {f.body}
-                  </p>
-                </li>
-              ))}
-            </ul>
           </div>
         </Reveal>
 

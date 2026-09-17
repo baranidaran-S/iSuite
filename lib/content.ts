@@ -40,6 +40,12 @@ export const hero = {
  * lists showrooms, clinics, salons and studios. RAISED AND KEPT — the two
  * lists stay as they are by decision, so do not "fix" one to match the other.
  */
+// NOT RENDERED from Phase 1 of the ads redesign onward. A "Built for"
+// marquee that proved nothing, and whose audience (IT companies, consulting
+// firms, agencies) contradicted `leadForm.businessTypeOptions`. That conflict
+// was raised and kept on purpose for a while; the trim settled it in the
+// form's favour. Kept here, and ProofStrip.tsx kept in components/, in case
+// the list is wanted for the Business Types section when it returns.
 export const proofStrip = {
   label: "Built for",
   items: [
@@ -149,6 +155,14 @@ export const solution = {
    * requirements doc §6 says "Avoid generic AI robot visuals", so that tile
    * uses a speech bubble with a spark instead. Say the word to switch it.
    */
+  // NOT RENDERED from Phase 1 onward. Three of these four repeated a
+  // Benefits card outright - Unified Inbox / One Shared Inbox, AI Assistant /
+  // AI Sales Assistance, Sales Pipeline / Clear Sales Pipeline. Saying the
+  // same four things twice, sixteen lines apart, is what made this stretch of
+  // the page feel like a brochure. Benefits keeps the job; this section keeps
+  // the chat demo, which is the part that SHOWS rather than describes.
+  // Appointments is the one idea not covered there - fold it into a Benefits
+  // card's points rather than restoring the row.
   features: [
     {
       icon: "chatDots",
