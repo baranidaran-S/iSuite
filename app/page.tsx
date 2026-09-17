@@ -5,6 +5,7 @@ import { SolutionIntro } from "@/components/SolutionIntro";
 import { HowItWorks } from "@/components/HowItWorks";
 import { Benefits } from "@/components/Benefits";
 import { MetaAds } from "@/components/MetaAds";
+import { BusinessTypes } from "@/components/BusinessTypes";
 import { Trust } from "@/components/Trust";
 import { Faq } from "@/components/Faq";
 import { CtaBand } from "@/components/CtaBand";
@@ -88,6 +89,7 @@ export default function Page() {
         <SolutionIntro />
         <HowItWorks />
         <Benefits />
+        <BusinessTypes />
         <MetaAds />
         <Trust />
         <Faq />

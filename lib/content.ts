@@ -505,6 +505,24 @@ export const metaAdsShots: Array<{
 export const businessTypes = {
   // [REQ §16] — build spec specifies the 8 items but no section heading
   heading: "Built for Businesses That Sell Through Conversations.",
+  /*
+   * [DRAFT - NEEDS APPROVAL] the two headings and the `notFor` list were
+   * added in Phase 3 of the ads redesign.
+   *
+   * WHY A "NOT FOR" HALF. This page carries no rating, no client count and
+   * no testimonial, by instruction. Turning the wrong reader away is the one
+   * credibility move still available to it: a page that admits who it cannot
+   * help is read differently from one that claims everybody. Every strong
+   * reference page we were sent does this, and it costs nothing to say.
+   *
+   * These three are chosen to be TRUE without shrinking the real market. The
+   * tempting exclusions - "too small", "not enough enquiries" - would cut
+   * straight through the audience this is advertised to, so they are not
+   * here. Each one below describes a business the product genuinely does not
+   * fit, because there is no conversation for it to sit in.
+   */
+  forHeading: "Built for",
+  notForHeading: "Not built for",
   // [SPEC] — 8 icons with labels
   items: [
     { icon: "showroom", label: "Showrooms" },
@@ -515,6 +533,11 @@ export const businessTypes = {
     { icon: "agency", label: "Agencies" },
     { icon: "consultant", label: "Consultants" },
     { icon: "service", label: "Service Businesses" },
+  ],
+  notFor: [
+    "Walk-in-only businesses, where customers never message before they arrive",
+    "Self-service online stores, where nobody asks a question before checkout",
+    "Teams who want every single reply written by a person, with no assistant involved",
   ],
 } as const;
 
@@ -621,26 +644,58 @@ export const trust = {
 
 /* --- §7.10 FAQ ------------------------------------------------------------ */
 export const faq = {
-  // [DRAFT — NEEDS APPROVAL] no heading given for this section
   heading: "Questions Businesses Usually Ask.",
   /*
-   * The 5 questions are [SPEC]. The ANSWERS appear in neither document and are
-   * [DRAFT — NEEDS APPROVAL]. They are written to stay inside the requirements
-   * doc's prohibitions: no guaranteed Meta approval, no claim that iSuite AI
-   * replaces the sales team, Meta/WhatsApp charges stated as separate.
+   * [DRAFT - NEEDS APPROVAL] rebuilt in Phase 3 of the ads redesign.
+   *
+   * The old set opened with "What is iSuite AI?" and "Does it replace my
+   * sales team?". Neither is a question - the first is answered by the eight
+   * sections above it, and the second is answered better by the Trust tabs,
+   * which say it in four words on a button. An FAQ on an ad page is not a
+   * glossary. It is the last place a hesitant reader goes before leaving, so
+   * every entry here is now something that would actually stop someone.
+   *
+   * Ordered by how much it stops them. The WhatsApp ban question goes first
+   * because it is the single biggest fear for any Indian business asked to
+   * automate a number they already run their livelihood on.
+   *
+   * NOTHING BELOW PROMISES ANYTHING. No approval, no ban-proofing, no setup
+   * time and no price. Where the honest answer is "Meta decides" or "it
+   * depends", that is what it says - see the requirements doc, which forbids
+   * guaranteeing Meta outcomes, and lib/content.ts trust.pricing, whose
+   * wording is reused verbatim.
+   *
+   * NEEDS CONFIRMATION before publishing: the first answer states that the
+   * connection is made through Meta's official WhatsApp Business Platform
+   * rather than an unofficial tool. Everything already published implies it -
+   * Meta billing the messages, Meta approving the account - but it should be
+   * confirmed by someone who has done an onboarding.
+   *
+   * WEAKEST ANSWER HERE is the setup time. "Most businesses are live in a
+   * week" would be far stronger than what is written, and it is exactly the
+   * kind of number this page is not allowed to invent. If MnT Future knows
+   * the real figure from real onboardings, it belongs there.
    */
   items: [
     {
-      q: "What is iSuite AI?",
-      a: "iSuite AI is an AI sales system for businesses whose enquiries arrive through WhatsApp, Instagram, Facebook, websites and Meta ads. It brings those conversations into one shared inbox, and its AI sales assistant responds, qualifies enquiries, helps book appointments and follows up — while your team manages contacts, deals and sales progress from one place.",
+      q: "Will my WhatsApp number get banned?",
+      a: "iSuite AI connects through Meta's official WhatsApp Business Platform - the route Meta itself supports for businesses replying at scale - not an unofficial automation tool attached to a personal number. Your account still has to follow Meta's own rules on messaging and templates, and Meta remains the only party that decides the status of any account. We set the connection up with you so it is done the way Meta expects from the start.",
     },
     {
-      q: "Does it replace my sales team?",
-      a: "No. iSuite AI is built to support your existing team, not replace it. The assistant handles first responses, qualifying questions and follow-up reminders so your team can spend its time on the conversations that need a person. Your team keeps ownership of every deal and can take over any conversation at any point.",
+      q: "What if the AI says the wrong thing to a customer?",
+      a: "The assistant works to the answers and rules you give it. It does not invent offers, prices or commitments on your behalf. Every message it sends is logged against that contact, so you can read exactly what was said and when - and anyone on your team can take over a conversation at any point.",
     },
     {
       q: "Can it connect WhatsApp, Instagram and Facebook?",
-      a: "Yes. WhatsApp Business, Instagram DMs, Facebook Messenger and website chat can all be brought into one shared inbox, alongside enquiries from Meta lead ads and click-to-WhatsApp ads. Channel connection, and the approvals each one needs, are handled with you during onboarding.",
+      a: "Yes. WhatsApp Business, Instagram DMs, Facebook and website chat can all be brought into one shared inbox, alongside enquiries from Meta lead ads and click-to-WhatsApp ads. Channel connection, and the approvals each one needs, are handled with you during onboarding.",
+    },
+    {
+      q: "What does it cost?",
+      a: "There is no fixed published price. Pricing is based on business requirements and discussed during consultation - how many channels you connect, the volume of enquiries you handle and the size of your team all change the answer. Meta's own WhatsApp charges are separate and are billed by Meta.",
+    },
+    {
+      q: "How long does it take to set up?",
+      a: "Channel connection is handled with you during onboarding. The part that depends on us is quick; the part that does not is Meta, which reviews WhatsApp Business and ad account access on its own timeline. We will give you a realistic schedule for your specific channels during the consultation rather than a number that may not hold.",
     },
     {
       q: "Are Meta WhatsApp charges included?",
@@ -651,12 +706,6 @@ export const faq = {
       a: "No. WhatsApp Business and Meta ad account approvals are decided by Meta, against Meta's own requirements and timelines. We help you prepare and submit what Meta asks for, but neither approval nor how long it takes is something we can guarantee.",
     },
   ],
-  // [SPEC]
-  /*
-   * NOT RENDERED. The link pointed at `site.fullFaqUrl`, which is still the
-   * "#" placeholder — a dead link under the last question on a page whose
-   * only job is one button. Kept because this repo's removed copy stays put.
-   */
   moreLinkLabel: "More questions? See full FAQ",
 } as const;
 
