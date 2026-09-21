@@ -71,7 +71,7 @@ export function SalesModules() {
                   number twice. */}
               <span
                 aria-hidden="true"
-                className="font-display w-[50px] shrink-0 text-[48px] leading-none font-extrabold tabular-nums text-amber md:w-[62px] md:text-[58px]"
+                className="font-display w-[50px] shrink-0 text-[48px] leading-none tabular-nums text-amber md:w-[62px] md:text-[58px]"
               >
                 {String(i + 1).padStart(2, "0")}
               </span>

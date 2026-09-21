@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { footer, salesDisclaimer } from "@/lib/content";
 import { site } from "@/lib/site";
 
@@ -43,11 +44,38 @@ export function Footer() {
     <footer className="bg-night">
       <div className="shell py-12 md:py-16">
         <div className="mx-auto flex max-w-[760px] flex-col items-center text-center">
-          <p className="text-xl font-extrabold tracking-tight text-white">
-            iSuite<span className="font-medium"> AI</span>
-          </p>
-          <p className="t-small mt-2 text-night-muted">{footer.tagline}</p>
-          <p className="t-small mt-4 text-night-muted">{site.company}</p>
+          {/* THE REAL LOCKUP, replacing a text one that spelled out iSuite AI
+              in Plus Jakarta and put "MnT Future" on a third line. The supplied
+              artwork already carries both — the wordmark and "Product of MnT
+              Future" under it — so those two lines are the image now and the
+              tagline is all that is left in text.
+
+              SIZED BY HEIGHT, NEVER WIDTH. It is a 2.77:1 lockup, so pinning
+              the width makes its height whatever the ratio decides; pinning
+              the height keeps it optically level with the text under it at
+              every screen size. w-auto lets the width follow.
+
+              WHITE ARTWORK ON A DARK FOOTER. That is the only reason it works
+              here with no treatment — on either light section it would be
+              invisible, so this file cannot be reused there without a dark
+              version.
+
+              width/height ARE NOT THE FILE'S PIXELS, AND MUST NOT BE. Passed
+              the real 2086x754, next/image reads that as the display width
+              and builds a srcset up to 3840w — so a logo drawn 122px wide
+              downloaded a 3840px image. These are 2x the real drawn size,
+              332x120, which is the same 2.767 ratio to two decimals so the
+              reserved box is still correct and w-auto still gets the right
+              width. `sizes` then pins what the browser actually asks for. */}
+          <Image
+            src="/logo.png"
+            alt={`${site.product} — product of ${site.company}`}
+            width={332}
+            height={120}
+            sizes="(min-width: 768px) 156px, 122px"
+            className="h-11 w-auto md:h-14"
+          />
+          <p className="t-small mt-4 text-night-muted">{footer.tagline}</p>
 
           {/* THE DISCLAIMER. Every reference page carries one, and for traffic
               arriving from Meta the trademark notice is standard rather than

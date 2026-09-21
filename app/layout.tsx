@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Big_Shoulders, Plus_Jakarta_Sans } from "next/font/google";
+import { Anton, Plus_Jakarta_Sans } from "next/font/google";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -29,31 +29,45 @@ const jakarta = Plus_Jakarta_Sans({
  *
  * WHY NOT BARLOW CONDENSED, WHICH IS WHAT THE REFERENCE USES. It was set that
  * way first and it is the safe answer, not the right one: Barlow is a neutral
- * face, built to get out of the way, which is the opposite of the job. Big
- * Shoulders is narrower still and has squared terminals and flat curves — it
- * looks engineered, and nobody mistakes it for a default.
+ * face, built to get out of the way, which is the opposite of the job.
  *
- * Condensed also pays for itself in space. Its capitals run roughly 0.42em
- * against Plus Jakarta ExtraBold's 0.72em, so about 70% more fits on a line.
- * The hero headline was seven lines at 39px; it is four at 53px. Bigger and
- * shorter at once, which is not a trade you usually get.
+ * ANTON, AND THE REASON IS NOT TASTE. The client's own Meta ad creative sets
+ * its headline in a heavy condensed face, and a visitor who clicks that ad
+ * should land on a page that looks like the ad they just clicked. Matching
+ * the two is worth more here than any argument about letterforms.
  *
- * NO `weight`, DELIBERATELY — that loads the VARIABLE font, so the whole
- * 100-900 range arrives in one file. It is why this face was chosen over
- * Anton and Bebas Neue, which ship a single weight and could therefore never
- * carry the eyebrows, the 01-13 numerals and the headings all at once.
+ * IT REPLACED BIG SHOULDERS, and the comment that used to sit here argued
+ * against exactly this font — that a single-weight face could never carry
+ * the eyebrows, the numerals and the headings at once. That argument was
+ * sound and it is why `weight: "400"` below is not a detail to skim:
  *
- * Google folded "Big Shoulders Display" into "Big Shoulders"; the old name is
- * kept in the CSS fallback chain for anyone whose machine still has it.
+ *   - Anton ships ONE weight. There is no 700 and no 800.
+ *   - next/font REQUIRES `weight` for a static face. Omit it and the build
+ *     fails outright, which is the good outcome.
+ *   - Worse is what happens in CSS. Every display heading used to carry
+ *     `font-extrabold`, and asking a 400-only face for 800 does not fail —
+ *     the browser SYNTHESISES it, smearing the outline outward. On a face
+ *     this heavy that reads as a blurred edge, and it shows up on Windows
+ *     long before anyone notices it on a phone. All seven of those classes
+ *     were removed. Do not add a weight to anything using font-display.
+ *
+ * Condensed still pays for itself in space. Anton's capitals run roughly
+ * 0.48em against Plus Jakarta ExtraBold's 0.72em, so about 50% more fits on
+ * a line — close enough to Big Shoulders' 0.42em that no headline on the
+ * page gained a line in the swap.
  *
  * Their body face is Inter. Ours stays Plus Jakarta Sans: Inter is the most
  * worn-out UI face on the web, and copying it would make this MORE generic.
+ * It is also the face that still carries every bold on the page, because it
+ * has real cuts to carry them with.
  */
-const bigShoulders = Big_Shoulders({
+const anton = Anton({
   subsets: ["latin"],
+  weight: "400",
   display: "swap",
-  variable: "--font-bigshoulders",
+  variable: "--font-anton",
 });
+
 /*
  * The <title> is what shows in the browser tab and in the link preview Meta
  * renders when this URL is shared. It is NOT the hero headline and should not
@@ -98,7 +112,13 @@ export const metadata: Metadata = {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "iSuite AI — one inbox for every enquiry. Free 45-minute demo.",
+        /* The card used to be a designed panel — a headline, the channel
+           marks and a FREE 45-MINUTE DEMO pill — and this described it. It
+           is the logo on white now, at the client's request, so the alt says
+           what is actually in the picture. An alt that describes a previous
+           version of an image is worse than none: a screen reader announces
+           an offer that is not there. */
+        alt: "The iSuite AI logo — product of MnT Future.",
       },
     ],
   },
@@ -120,7 +140,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${jakarta.variable} ${bigShoulders.variable}`}>
+        <html lang="en" className={`${jakarta.variable} ${anton.variable}`}>
       <body>{children}</body>
     </html>
   );

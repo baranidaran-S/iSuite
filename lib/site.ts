@@ -63,12 +63,6 @@ export const site = {
       truth:
         "AI-generated sample screens standing in until real ones are approved. The requirements doc forbids fake dashboard figures, so this override is the client's and must be re-confirmed. Replace the files rather than editing the numbers.",
     },
-    {
-      where: "lib/content.ts — salesFounder",
-      claim: "Nothing yet — it renders [NEEDS NAME] on the live page",
-      truth:
-        "Visible placeholder text. Fine for a reviewer, embarrassing to a visitor. Fill it or remove the block before this is shown outside MnT Future.",
-    },
   ],
 
   /* ==========================================================================

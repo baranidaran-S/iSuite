@@ -208,13 +208,20 @@
 
      ARIAL NARROW COMES SECOND, ahead of the prettier options, because it is
      the only one of them actually installed on a typical Windows or macOS
-     machine. next/font could not generate metric overrides for Big Shoulders
-     (it warns at build), so there is no width-matched synthetic fallback and
-     the closest REAL face is worth more than a better-looking name nobody
-     has. Both faces are preloaded in the production build, so this chain only
-     gets used on a slow connection. */
+     machine.
+
+     THE CHAIN MATTERS LESS THAN IT USED TO. Under Big Shoulders next/font
+     could not generate metric overrides — it said so on every build — so
+     there was no width-matched synthetic fallback and a real condensed face
+     was the only protection against a headline reflowing on arrival. Anton
+     HAS overrides, so "Anton Fallback" is built automatically at the right
+     width and that warning is gone. The named faces below now only matter if
+     the download fails outright rather than merely running late.
+
+     Both faces are preloaded in the production build, so this chain is for a
+     slow connection, not a normal one. */
   --font-display:
-    var(--font-bigshoulders), "Big Shoulders", "Arial Narrow",
+    var(--font-anton), "Anton", "Arial Narrow",
     "Helvetica Neue Condensed", "Oswald", ui-sans-serif, sans-serif;
 
   /* --- Breakpoints -------------------------------------------------------- */

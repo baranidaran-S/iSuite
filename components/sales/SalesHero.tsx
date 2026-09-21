@@ -1,7 +1,8 @@
+import Image from "next/image";
 import { ShotSlot } from "@/components/sales/ShotSlot";
 import { SalesCta } from "@/components/sales/SalesCta";
-import { brandCase } from "@/components/sales/brandCase";
 import { salesCta, salesHero } from "@/lib/content";
+import { site } from "@/lib/site";
 
 /* ==========================================================================
    BLOCKS 1 + 2 — the question, and the offer
@@ -50,9 +51,32 @@ export function SalesHero() {
   return (
     <section className="bg-night px-5 pt-8 pb-10 md:pt-12 md:pb-14">
       <div className="mx-auto max-w-[940px] text-center">
-        <p className="text-[12.5px] font-extrabold tracking-[0.22em] text-amber uppercase md:text-[13px]">
-          {brandCase(salesHero.eyebrow)}
-        </p>
+        {/* THE LOGO REPLACES THE EYEBROW RATHER THAN SITTING ABOVE IT. The
+            eyebrow read "iSuite AI — by MnT Future", which is word for word
+            what the artwork already says; stacked, the hero would open by
+            telling you the same thing twice in two typefaces. The mark says
+            it better, so the text goes.
+
+            mx-auto because the hero is a centred column and an <img> is not
+            a block that centres itself from text-center — without it the
+            logo sits hard left while everything under it is centred, which
+            is exactly the kind of near-miss that reads as broken.
+
+            PRIORITY, because this is the first thing painted above the fold
+            and lazy-loading it would leave a hole at the top of the page on
+            a slow connection. It costs about 6KB.
+
+            Sized a little larger than the footer's copy: this one is the
+            page's first impression, that one is a sign-off. */}
+        <Image
+          src="/logo.png"
+          alt={`${site.product} — product of ${site.company}`}
+          width={354}
+          height={128}
+          sizes="(min-width: 768px) 177px, 133px"
+          priority
+          className="mx-auto h-12 w-auto md:h-16"
+        />
 
         {/* FLUID, NOT STEPPED. A fixed 30px was the same on a 320px phone and
             a 430px one, so the big phones most people carry were handed the
@@ -66,7 +90,7 @@ export function SalesHero() {
             inside 335px. Neither can overflow, which matters more than it
             sounds: one word wider than the screen and the WHOLE PAGE scrolls
             sideways. */}
-        <h1 className="font-display mt-5 text-[clamp(42px,14vw,68px)] leading-[0.92] font-extrabold tracking-[0.01em] text-balance text-white uppercase md:text-[78px] lg:text-[92px]">
+        <h1 className="font-display mt-5 text-[clamp(42px,14vw,68px)] leading-[1.05] tracking-[0.01em] text-balance text-white uppercase md:text-[78px] lg:text-[92px]">
           <Headline />
         </h1>
 

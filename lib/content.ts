@@ -70,11 +70,17 @@ export const salesHero = {
 
   /* The offer, stated in full on the first screen. Client-confirmed. */
   offer: ["Free", "45 minutes", "On Google Meet"],
-  offerNote:
-    "Pick your slot at the bottom of this page. No card, no commitment.",
+  /* IT USED TO SAY "Pick your slot at the bottom of this page", which was
+     true while the page carried its own form with a date and time picker in
+     it. That form is gone and the button opens the booking page instead, so
+     the old line sent people scrolling to the footer looking for something
+     that is not there. Directions on a page have to be re-read every time
+     the thing they point at moves. */
+  offerNote: "Pick a slot on the next screen. No card, no commitment.",
 
-  /* Above the headline, where the reference puts its event name. */
-  eyebrow: "iSuite AI — by MnT Future",
+  /* THE EYEBROW IS GONE. It said "iSuite AI — by MnT Future" and sat above
+     the headline, which is word for word what the logo lockup says; the hero
+     shows the artwork there now rather than saying it twice. */
 
   /* Under the product shot. Names what is on screen so the image is not
      decoration. */
@@ -271,29 +277,63 @@ export const salesChapters = [
 /* --- Sales page block 10 — who runs the demo ------------------------------ */
 export const salesFounder = {
   /*
-   * [NEEDS REAL CONTENT] The reference's block 10 is its strongest: a photo of
+   * [PARTLY SUPPLIED] The reference's block 10 is its strongest: a photo of
    * the host and five lines of what he has done — 40,000 community, 8L reach,
    * 21 years, 30 awards, 300 stage talks. It is the only place on that page a
    * human appears, and it is what makes the rest of it credible.
    *
-   * We have nothing equivalent, and nothing here may be invented. The three
-   * fields below are the SHAPE only. MnT Future has to supply:
-   *   - a photo
-   *   - a name and role
-   *   - two or three lines that are true, and checkable
+   * Nothing here may be invented:
+   *   - a photo   SUPPLIED — public/shots/founder.png
+   *   - a name    SUPPLIED — "Udhay", client-confirmed
+   *   - a role    SUPPLIED — founder, client-confirmed
    *
-   * Until they arrive this block renders the frame and says plainly that the
-   * detail is pending, rather than filling it with something plausible.
+   * `body` — [DRAFT, NEEDS APPROVAL] It was a bracketed placeholder, then
+   * removed, then asked for again: without it the block was a face, a name
+   * and nothing to read. THE VERSION BELOW INVENTS NO BIOGRAPHY. Every claim
+   * in it is either client-confirmed or lifted from the requirements doc:
+   *
+   *   "founder of MnT Future"        client-confirmed
+   *   the list of scattered channels  Requirements.md:142 problem points —
+   *                                   missed WhatsApp enquiries, scattered
+   *                                   conversations, slow first responses,
+   *                                   manual follow-ups
+   *   "sell through conversations"    Requirements.md:374, their own words
+   *   answered / qualified / booked   the documented modules, not outcomes
+   *   / chased / traced to the ad
+   *
+   * WHAT IT DELIBERATELY DOES NOT SAY: how long he has been doing this, what
+   * he built before, how many businesses use it, or that any of it works.
+   * Nobody has supplied those and none may be guessed. It reads as a motive
+   * rather than a CV because a motive is the part we can actually source.
+   *
+   * The one soft edge is "built it for one problem" — the problem is the
+   * doc's, the attribution to him is inference from his being the founder.
+   * If that is wrong, it is the sentence to change.
+   *
+   * Only "Udhay" was given, with no surname. If a surname belongs here, it
+   * goes in `name`.
    */
   heading: "WHO RUNS THE DEMO",
   /* The accent was "RUNS THE DEMO" — three words of four, so the treatment
      landed on almost the whole heading and marked nothing out. Two words. */
   accent: "THE DEMO",
-  name: "[NEEDS NAME]",
-  role: "MnT Future",
-  body: "[NEEDS TWO OR THREE TRUE LINES — who built iSuite AI, and why. No figures unless they are real and checkable.]",
+  name: "Udhay",
+  /* It said just "MnT Future", which is a company name sitting where a job
+     title goes — the block is headed WHO RUNS THE DEMO and then named a
+     company, so it never actually said who Udhay is. */
+  role: "Founder, MnT Future",
+  body: "Udhay is the founder of MnT Future and the person behind iSuite AI. He built it for one problem: businesses that sell through conversations keep losing enquiries between WhatsApp, Instagram, Facebook, their website and their Meta ads — separate inboxes, slow first replies, follow-ups done from memory. iSuite AI is the answer to that. One system where every enquiry is answered, qualified, booked and chased, and traced back to the ad that produced it.",
   /** Client-confirmed: the demo is run by the team, sometimes the founder. */
-  note: "Demos are run by the MnT Future team, sometimes by the founder.",
+  /* `note` IS GONE, AND IT WAS THE ONE CLIENT-CONFIRMED LINE HERE. It read
+     "Demos are run by the MnT Future team, sometimes by the founder." and it
+     existed to stop this block implying something it should not: the heading
+     asks WHO RUNS THE DEMO and the answer is a photograph of one man, so
+     without that line the page now reads as a promise that Udhay personally
+     takes the call. The client removed it knowing that.
+
+     If someone books expecting the founder and gets the team, this is the
+     sentence that was protecting against it. Put it back the moment that
+     becomes a complaint. */
 } as const;
 
 /* --- Sales page block 11 — the whole product ------------------------------ */

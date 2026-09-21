@@ -99,13 +99,13 @@ export function SalesChapter({
           <div className="flex items-center gap-3.5">
             <span
               aria-hidden="true"
-              className="font-display text-[40px] leading-none font-extrabold tabular-nums text-amber md:text-[48px]"
+              className="font-display text-[40px] leading-none tabular-nums text-amber md:text-[48px]"
             >
               {n}
             </span>
             <span
               aria-hidden="true"
-              className="font-display text-[19px] leading-none font-extrabold tabular-nums text-night-muted/70 md:text-[22px]"
+              className="font-display text-[19px] leading-none tabular-nums text-night-muted/70 md:text-[22px]"
             >
               / {of}
             </span>
