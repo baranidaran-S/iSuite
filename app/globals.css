@@ -998,17 +998,30 @@
 /* ==========================================================================
    THE EIGHT CTA ANIMATIONS — one per instance of the button, all looping
    --------------------------------------------------------------------------
-   THEY RUN ON THEIR OWN. No hover, no scroll trigger, no JavaScript. Roughly
-   nine in ten visitors are on a phone: there is no pointer to hover with, and
-   an effect that waits to be provoked is an effect nobody sees. The first cut
-   played once on scroll-in, which had the same flaw in a better disguise —
-   miss the moment, miss the animation.
+   THEY RUN ON THEIR OWN, with no hover to provoke them. Roughly nine in ten
+   visitors are on a phone: there is no pointer to hover with, and an effect
+   that waits to be provoked is an effect nobody sees. The first cut played
+   ONCE, on scroll-in, which had the same flaw in a better disguise — miss
+   the moment, miss the animation.
 
-   MOTION IN THE FIRST QUARTER, REST FOR THE OTHER THREE. Each cycle is four
-   to six seconds and the movement occupies roughly a second of it. That gap
-   is the whole difference between a button that catches the eye and a button
-   that twitches: continuous motion stops being noticed within about ten
-   seconds, and never stops being irritating.
+   They now also REWIND on scroll-in, which is not a return to that: the loop
+   is still the thing, and the observer only resets its clock so a reader who
+   arrives mid-rest is not looking at a button doing nothing. See
+   .cta-restart at the foot of this block.
+
+   MOTION FIRST, THEN REST. The movement takes about a second and the cycle
+   runs 2.1 to 2.7 seconds, so the pause between repeats is 1.1 to 1.6. That
+   gap is the whole difference between a button that catches the eye and a
+   button that twitches: continuous motion stops being noticed within about
+   ten seconds, and never stops being irritating.
+
+   THE REST USED TO BE THREE TIMES LONGER — a 4 to 5.8 second cycle, waiting
+   3 to 5 seconds between repeats, which the client read as the buttons
+   barely moving. Halving it could not be done by shortening the duration
+   alone: the keyframes are percentages, so that speeds the MOVEMENT up too
+   and turns a bounce into a flinch. Every stop was rescaled instead, which
+   is why they now sit at values like 7.5% and 48.6% rather than round
+   numbers — the motion lasts exactly as long as it always did.
 
    THE DURATIONS ARE DELIBERATELY UNEVEN — 4s to 5.8s, no common factor. If
    two of these ever shared a cycle length they would fall into step and the
@@ -1042,20 +1055,20 @@
    not scrolled yet. */
 @keyframes cta-jump {
   0%,
-  26%,
+  48.6%,
   100% {
     transform: translateY(0) scale(1, 1);
   }
-  4% {
+  7.5% {
     transform: translateY(0) scale(1.06, 0.88);
   }
-  10% {
+  18.7% {
     transform: translateY(-22px) scale(0.97, 1.08);
   }
-  16% {
+  29.9% {
     transform: translateY(0) scale(1.04, 0.92);
   }
-  21% {
+  39.3% {
     transform: translateY(-8px) scale(0.99, 1.02);
   }
 }
@@ -1065,13 +1078,13 @@
     opacity: 0;
     transform: skewX(-18deg) translateX(-90px);
   }
-  1% {
+  2.2% {
     opacity: 1;
   }
-  16% {
+  35.3% {
     opacity: 1;
   }
-  18%,
+  39.7%,
   100% {
     opacity: 0;
     transform: skewX(-18deg) translateX(480px);
@@ -1080,17 +1093,17 @@
 
 @keyframes cta-bounce {
   0%,
-  19%,
+  42.7%,
   100% {
     transform: translateY(0) scaleY(1);
   }
-  5% {
+  11.2% {
     transform: translateY(-15px) scaleY(1.03);
   }
-  10.5% {
+  23.6% {
     transform: translateY(0) scaleY(0.94);
   }
-  14.5% {
+  32.6% {
     transform: translateY(-5px) scaleY(1.01);
   }
 }
@@ -1112,7 +1125,7 @@
       0 10px 34px -8px rgba(245, 165, 36, 0.55),
       0 0 0 0 rgba(245, 165, 36, 0.85);
   }
-  26%,
+  44.7%,
   100% {
     box-shadow:
       0 10px 34px -8px rgba(245, 165, 36, 0.55),
@@ -1122,55 +1135,55 @@
 
 @keyframes cta-glow {
   0%,
-  23%,
+  43.1%,
   100% {
     box-shadow: 0 10px 34px -8px rgba(245, 165, 36, 0.55);
   }
-  11% {
+  20.6% {
     box-shadow: 0 16px 50px -6px rgba(245, 165, 36, 1);
   }
 }
 
 @keyframes cta-nudge {
   0%,
-  8%,
-  16%,
+  21.4%,
+  42.7%,
   100% {
     transform: translateX(0);
   }
-  4%,
-  12% {
+  10.7%,
+  32.1% {
     transform: translateX(9px);
   }
 }
 
 @keyframes cta-tilt {
   0%,
-  20%,
+  38.6%,
   100% {
     transform: perspective(620px) rotateX(0deg);
   }
-  8% {
+  15.4% {
     transform: perspective(620px) rotateX(-15deg);
   }
 }
 
 @keyframes cta-wobble {
   0%,
-  15%,
+  40.1%,
   100% {
     transform: rotate(0deg);
   }
-  3% {
+  8% {
     transform: rotate(-2deg);
   }
-  6% {
+  16% {
     transform: rotate(1.6deg);
   }
-  9% {
+  24.1% {
     transform: rotate(-1deg);
   }
-  12% {
+  32.1% {
     transform: rotate(0.6deg);
   }
 }
@@ -1195,30 +1208,60 @@
     opacity: 0;
     pointer-events: none;
     transform: skewX(-18deg) translateX(-90px);
-    animation: cta-swipe 5.3s ease-out infinite;
+    animation: cta-swipe 2.404s ease-out infinite;
   }
 
   [data-cta="ripple"] {
-    animation: cta-ripple 4.2s ease-out infinite;
+    animation: cta-ripple 2.442s ease-out infinite;
   }
 
   [data-cta="jump"] {
-    animation: cta-jump 4s cubic-bezier(0.3, 0.7, 0.4, 1) infinite;
+    animation: cta-jump 2.14s cubic-bezier(0.3, 0.7, 0.4, 1) infinite;
   }
   [data-cta="bounce"] {
-    animation: cta-bounce 4.9s cubic-bezier(0.3, 0.8, 0.4, 1) infinite;
+    animation: cta-bounce 2.181s cubic-bezier(0.3, 0.8, 0.4, 1) infinite;
   }
   [data-cta="glow"] {
-    animation: cta-glow 5.1s ease-in-out infinite;
+    animation: cta-glow 2.723s ease-in-out infinite;
   }
   [data-cta="nudge"] {
-    animation: cta-nudge 5.6s ease-in-out infinite;
+    animation: cta-nudge 2.096s ease-in-out infinite;
   }
   [data-cta="tilt"] {
-    animation: cta-tilt 4.4s ease-in-out infinite;
+    animation: cta-tilt 2.28s ease-in-out infinite;
   }
   [data-cta="wobble"] {
-    animation: cta-wobble 5.8s ease-in-out infinite;
+    animation: cta-wobble 2.17s ease-in-out infinite;
+  }
+
+  /* SCROLLED INTO VIEW = PLAY FROM THE TOP. Driven from SalesCta.tsx.
+
+     A looping animation is wherever its own clock has got to by the time you
+     arrive. Shortening the rest helps, but a reader scrolling down still
+     lands mid-rest as often as not and sees a button doing nothing. So the
+     observer restarts it the moment the button is properly on screen, and
+     parks it again once it leaves — which also means seven off-screen
+     buttons are not animating while you read the eighth.
+
+     .cta-restart is held for a single reflow: killing the animation and
+     restoring it is what rewinds the clock to 0. Both rules name ::before
+     and ::after because `swipe` animates a pseudo-element, and a
+     pseudo-element's animation does not restart just because its parent's
+     did.
+
+     NO JAVASCRIPT, NO PROBLEM. Neither hook is ever set without it, so the
+     buttons fall back to looping continuously — exactly what they did
+     before — rather than falling back to standing still. */
+  [data-cta].cta-restart,
+  [data-cta].cta-restart::before,
+  [data-cta].cta-restart::after {
+    animation: none !important;
+  }
+
+  [data-cta][data-inview="false"],
+  [data-cta][data-inview="false"]::before,
+  [data-cta][data-inview="false"]::after {
+    animation-play-state: paused;
   }
 
   @media (prefers-reduced-motion: reduce) {

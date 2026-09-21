@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useRef } from "react";
 import { salesCta } from "@/lib/content";
 import { site } from "@/lib/site";
 
@@ -35,13 +38,19 @@ import { site } from "@/lib/site";
    this played once on scroll-in, which was the same mistake wearing a
    different hat: miss the moment, miss the animation.
 
-   So they run. Each keyframe set puts its motion in the first quarter of the
-   cycle and rests for the other three, which is what keeps a looping button
-   from turning into a twitch. Durations are deliberately uneven so no two
-   ever fall into step.
+   So they run. Each keyframe set puts its motion in roughly the first two
+   fifths of the cycle and rests for the remainder, which is what keeps a
+   looping button from turning into a twitch. Durations are deliberately
+   uneven so no two ever fall into step.
 
-   No JavaScript anywhere in this: it is one CSS class, which is also why the
-   button still animates if a script fails. The keyframes are in globals.css.
+   AND THEY ALSO REPLAY ON SCROLL-IN, which reads like a reversal of the
+   paragraph above and is not. The mistake the first cut made was playing
+   ONCE, on a trigger: miss the moment and there was nothing left to see.
+   These loop on their own AND rewind when they reach you, so arriving at a
+   button mid-rest no longer means arriving at a button doing nothing.
+
+   The looping half is pure CSS, so a failed script costs the replay and
+   nothing else. The keyframes are in globals.css.
 
    THE HOVER LIFT STAYS, for the one visitor in ten holding a mouse. It is not
    what the animation is for.
@@ -66,15 +75,64 @@ import { site } from "@/lib/site";
    AN EMPTY bookingUrl IS LOUD, NOT SILENT. It falls back to "#" so the page
    cannot navigate to itself, and warns once per build. Eight dead buttons on
    a page behind paid traffic is the worst outcome available here, so it is
-   worth the noise in the build log.
+   worth the noise in the build log. The warning is fenced to the server so a
+   visitor never sees it in their own console.
+
+   THE ONE PIECE OF JAVASCRIPT ON THIS PAGE, and it exists for one reason: a
+   looping animation is wherever its own clock has got to by the time you
+   scroll to it. Eight buttons all started at page load, so by the time a
+   reader reaches the sixth it is mid-rest as often as not and appears to do
+   nothing. An IntersectionObserver rewinds each one to 0 as it comes into
+   view, and pauses it on the way out.
+
+   The rewind is a class held for exactly one reflow — see .cta-restart in
+   globals.css. There is no React state here and nothing re-renders: this
+   touches two attributes on one element and never runs again for that
+   button until it next enters the viewport.
    ========================================================================== */
 
-if (!site.bookingUrl) {
+if (typeof window === "undefined" && !site.bookingUrl) {
   console.warn(
     "\n[iSuite AI] site.bookingUrl is EMPTY — all 8 'BOOK MY FREE DEMO' " +
       "buttons lead nowhere.\n             Set it in lib/site.ts before this " +
       "page takes any ad spend.\n",
   );
+}
+
+/** Rewind this button's loop whenever it scrolls into view; pause it when it
+ *  leaves. Returns the ref to hang on the <a>. */
+function useReplayInView() {
+  const ref = useRef<HTMLAnchorElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || typeof IntersectionObserver === "undefined") return;
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) {
+          el.dataset.inview = "false";
+          return;
+        }
+        el.dataset.inview = "true";
+        /* Kill the animation, force the style to be recomputed, then give it
+           back. That round trip is what resets the clock to 0 — assigning
+           the same animation again without it changes nothing. */
+        el.classList.add("cta-restart");
+        void el.offsetWidth;
+        el.classList.remove("cta-restart");
+      },
+      /* 0.6 rather than any sliver of the button: on a phone it is a 64px
+         bar, and firing when 2px of it has appeared spends the animation
+         below the fold where nobody is looking yet. */
+      { threshold: 0.6 },
+    );
+
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  return ref;
 }
 
 /** The eight, in the order they appear down the page. */
@@ -91,8 +149,11 @@ export function SalesCta({
   anim?: CtaAnim;
   className?: string;
 }) {
+  const ref = useReplayInView();
+
   return (
     <a
+      ref={ref}
       href={site.bookingUrl || "#"}
       data-cta={anim}
       className={`group inline-flex min-h-[64px] items-center justify-center gap-3 rounded-full bg-amber px-7 text-center text-[19px] leading-none font-extrabold tracking-[0.03em] text-night uppercase shadow-[0_10px_34px_-8px_rgba(245,165,36,0.55)] transition-[background-color,transform,box-shadow] duration-200 hover:-translate-y-0.5 hover:bg-amber-dark hover:shadow-[0_16px_40px_-10px_rgba(245,165,36,0.65)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber active:translate-y-0 motion-reduce:transition-none motion-reduce:hover:translate-y-0 md:min-h-[74px] md:px-10 md:text-[22px] ${
