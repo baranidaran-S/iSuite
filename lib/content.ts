@@ -642,5 +642,5 @@ export const demoCall = {
 export const footer = {
   // [DRAFT — NEEDS APPROVAL]
   tagline: "An AI sales system for businesses that sell through conversations.",
-  privacyLabel: "Privacy & Consent",
+  /* privacyLabel went with the link it labelled — see Footer.tsx. */
 } as const;

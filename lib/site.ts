@@ -17,10 +17,13 @@ export const site = {
      link. None of them is referenced anywhere any more, and a placeholder
      nobody reads is how a placeholder reaches production.
 
+     privacyUrl has now gone the same way. It was "#" from the first commit
+     and the footer's "Privacy & Consent" link was the only thing reading it,
+     so the page shipped a visible link to nowhere. Both are gone.
+
      Bringing any of them back means adding the value here AND the element
      that shows it, which is the point — nothing on this page is wired to a
-     contact detail today. */
-  privacyUrl: "#", // TODO: published privacy policy URL
+     contact detail or a policy today. */
 
   /* The deployed address. NOT cosmetic, and not optional: og:image has to be
      an ABSOLUTE url, because WhatsApp and Facebook fetch it from their own
@@ -38,9 +41,8 @@ export const site = {
   /* ==========================================================================
      PLACEHOLDER CLAIMS — THINGS ON THE PAGE THAT ARE NOT TRUE
      --------------------------------------------------------------------------
-     privacyUrl and bookingUrl above are placeholders too, but they are
-     OBVIOUSLY unfinished: a "#" link goes nowhere the moment anyone clicks
-     it, and an empty bookingUrl shouts in the build log.
+     bookingUrl below is a placeholder too, but it is OBVIOUSLY unfinished:
+     an empty value shouts in the build log every time the page compiles.
 
      This block is different. These read as true to a visitor and are not.
      They were approved as stand-ins so the page has no holes while it is

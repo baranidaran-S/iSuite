@@ -32,12 +32,18 @@ import { site } from "@/lib/site";
    keeps both paragraphs to a readable ragged block rather than one wide
    band of fine print.
 
-   Privacy & Consent keeps min-h-11 so it still clears 44px under a thumb —
-   it is the only thing in the footer anyone taps now.
-   ========================================================================== */
+   NOTHING IN THE FOOTER IS TAPPABLE. A "Privacy & Consent" link sat under
+   the copyright and was the last one; it pointed at site.privacyUrl, which
+   was never anything but "#", so the only tap target left on the page below
+   the last button led nowhere. Removed at the client's request along with
+   the placeholder url and the label.
 
-const linkClass =
-  "t-small inline-flex min-h-11 items-center text-night-muted underline-offset-4 hover:text-white hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber";
+   A PRIVACY POLICY IS STILL OWED. Meta's own rules expect a reachable
+   privacy policy from an advertiser collecting enquiries, and the booking
+   tool this page hands off to collects a name and a number. Nothing on THIS
+   page collects anything any more, so it is not broken today — but when a
+   policy exists it belongs back here, in this same centred column.
+   ========================================================================== */
 
 export function Footer() {
   return (
@@ -92,15 +98,10 @@ export function Footer() {
             </p>
           </div>
 
-          <div className="mt-7 flex w-full flex-col items-center gap-1 border-t border-white/10 pt-6">
-            <p className="t-small text-night-muted">
-              © {new Date().getFullYear()} {site.company}. All rights reserved.
-            </p>
-
-            <a href={site.privacyUrl} className={linkClass}>
-              {footer.privacyLabel}
-            </a>
-          </div>
+          {/* One line under a rule now, so no flex column to stack it in. */}
+          <p className="t-small mt-7 w-full border-t border-white/10 pt-6 text-night-muted">
+            © {new Date().getFullYear()} {site.company}. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>
