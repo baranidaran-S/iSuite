@@ -11,6 +11,8 @@ import { faq } from "@/lib/content";
    Off-white background. Closed by default, click/tap to expand, only ONE open
    at a time. 5 questions, with a link out to the full website FAQ below.
 
+   The list sits in a bordered white card — see the note on the container.
+
    §2: the smooth accordion expand is one of the two sanctioned
    micro-interactions. Animated with grid-template-rows so it collapses cleanly
    under prefers-reduced-motion, and so answers of any length work.
@@ -26,7 +28,23 @@ export function Faq() {
     <Section bg="offwhite">
       <h2 className="t-h2 measure text-forest">{faq.heading}</h2>
 
-      <div className="mt-12 divide-y divide-line border-y border-line">
+      {/* A bordered card rather than the two hairlines it used to be.
+
+          It was `border-y border-line` — a rule above the first question and
+          another below the last, with nothing holding the sides. On the old
+          warm oat that read as a deliberate open list. On the new pale blue
+          it reads as unfinished, because the section tint and the list are
+          now close enough in value that the list has no edge of its own.
+
+          The treatment is copied from the lead form's card, not invented:
+          rounded-card, border-line-strong, white fill. Two panels on one page
+          that are both "a bordered box of controls" should not be drawn two
+          different ways.
+
+          The side padding is what the hairline version never needed. It also
+          insets the dividers, which is what stops them running into the new
+          border at each end. */}
+      <div className="mt-12 divide-y divide-line rounded-card border border-line-strong bg-white px-5 md:px-7">
         {faq.items.map((item, i) => {
           const isOpen = openIndex === i;
           return (

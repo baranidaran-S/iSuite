@@ -45,6 +45,64 @@
      missed on the first attempt at #8B94A5 (2.99:1).
      ========================================================================== */
 
+  /* ==========================================================================
+     SALES PAGE PALETTE — near-black + one hot accent
+     --------------------------------------------------------------------------
+     The page is being rebuilt as a long-form direct-response sales page, to
+     the structure of the reference the client's senior supplied. That format
+     runs on a near-black ground and ONE hot accent used hard — on every
+     button and on the key phrase inside every headline. The brand navy cannot
+     do that job: #023380 on a dark ground measures 1.56:1 against it, so a
+     navy button on a dark page is invisible. Amber is 9.37:1 on the same
+     ground, and it is the colour both reference pages use for exactly this.
+
+     The navy palette above is NOT deleted. It still dresses the lead form,
+     which stays light because a form asking for a phone number should look
+     like a form, not like an advert.
+
+     Measured: 12 pairs, all clearing WCAG AA. The amber carries dark text at
+     9.37:1, white on the ground is 18.76:1, and the card sits 1.12:1 off the
+     ground — enough to read as a raised block without becoming a second
+     surface competing with the accent.
+     ========================================================================== */
+  --color-night: #0a0f1c; /* the ground - most of the page          */
+  --color-night-card: #141b2d; /* raised blocks on it               */
+
+  /* THE FEATURE LIST'S CARD, AND NOTHING ELSE'S. --color-night-card sits
+     1.12:1 off the ground: close enough that a card reads as a faint outline
+     rather than an object. That is right nearly everywhere here, because the
+     amber has to be the only thing on the page that shouts.
+
+     Block 11 is the exception. It is the only place that has to look like a
+     LOT of product, and thirteen barely-there rectangles do the opposite. At
+     1.59:1 the cards are surfaces rather than inferred edges. White on it is
+     11.8:1, the body copy 9.5:1, the numerals 5.9:1.
+
+     It was briefly the shared token, which lifted every card on the page. The
+     client's call, and the right one: brightening everything spends the
+     contrast where it buys nothing and flattens the one block that needed it
+     back into the crowd. */
+  --color-night-raised: #26355c; /* block 11 only           1.59:1 on ground */
+  /* SECONDARY TEXT, AND IT IS NOT GREY. This was #9AA7BF at 7.9:1 — legible,
+     correct, and read as dull on the page, which on a sales page is the only
+     verdict that counts. Body copy here is 15-18px against 26-60px uppercase
+     extrabold headings, so SIZE and WEIGHT carry the hierarchy and the colour
+     does not have to. Freed of that job it goes bright: 15.09:1, one step off
+     the white rather than half way to the background. */
+  --color-night-muted: #dce5f5; /* secondary text on the ground 15.1:1 */
+  --color-amber: #f5a524; /* THE accent. Buttons + key phrases. 9.4:1 */
+  --color-amber-dark: #d98a0b; /* hover                             */
+  --color-good: #3dd68c; /* the WITH column            9.1:1 on card */
+  --color-bad: #f2555a; /* the WITHOUT column          5.1:1 on card */
+
+  /* The same decision on the two LIGHT sections, in the other direction.
+     --color-slate (#586577, 5.3:1) is the old site's secondary grey and it
+     stays where it belongs — on form placeholders, which have to sit BELOW
+     the typed value. For the founder's copy and the form's subhead it washed
+     out the same way, so those take this instead: a deep ink with blue still
+     in it, 11.5:1, dark enough to read as deliberate rather than faded. */
+  --color-day-muted: #27324a; /* secondary text on the light sections 11.5:1 */
+
   /* --- The primary -------------------------------------------------------- */
   /* The CTA, and the two letters of "AI" in the logo lockup — the one other
      place a brand's primary colour belongs. Nowhere else. */
@@ -95,6 +153,13 @@
   --font-sans:
     var(--font-jakarta), ui-sans-serif, system-ui, -apple-system, "Segoe UI",
     sans-serif;
+
+  /* THE HEADLINE FACE. Every fallback here is condensed too — a headline set
+     at 49px because the face is narrow, falling back to a normal-width
+     system font, would run off the screen before it swapped. */
+  --font-display:
+    var(--font-barlow), "Barlow Condensed", "Oswald", "Arial Narrow",
+    ui-sans-serif, sans-serif;
 
   /* --- Breakpoints -------------------------------------------------------- */
   /*
@@ -854,5 +919,237 @@
     background: var(--color-primary);
     color: #fff;
     transform: rotate(-1.5deg);
+  }
+}
+
+/* ==========================================================================
+   THE EIGHT CTA ANIMATIONS — one per instance of the button, all looping
+   --------------------------------------------------------------------------
+   THEY RUN ON THEIR OWN. No hover, no scroll trigger, no JavaScript. Roughly
+   nine in ten visitors are on a phone: there is no pointer to hover with, and
+   an effect that waits to be provoked is an effect nobody sees. The first cut
+   played once on scroll-in, which had the same flaw in a better disguise —
+   miss the moment, miss the animation.
+
+   MOTION IN THE FIRST QUARTER, REST FOR THE OTHER THREE. Each cycle is four
+   to six seconds and the movement occupies roughly a second of it. That gap
+   is the whole difference between a button that catches the eye and a button
+   that twitches: continuous motion stops being noticed within about ten
+   seconds, and never stops being irritating.
+
+   THE DURATIONS ARE DELIBERATELY UNEVEN — 4s to 5.8s, no common factor. If
+   two of these ever shared a cycle length they would fall into step and the
+   page would start to pulse as one thing. The hero's is the shortest: it is
+   the one button a reader sits in front of rather than scrolls past.
+
+   EIGHT ANIMATIONS, STILL ONE BUTTON. Same words, same amber, same size, same
+   resting state. Only the way each catches the eye differs, so the page never
+   looks like it is making eight different asks.
+
+   NO GRADIENTS. The shine in `swipe` is a solid translucent white bar, not a
+   gradient sweep — the senior's rule still holds.
+
+   WHAT THIS COSTS: an infinite animation owns `transform`, so the 2px hover
+   lift no longer applies on the five transform-based variants. Hover still
+   darkens the amber and deepens the shadow. A 2px lift on a pointer device is
+   not worth trading the thing every phone visitor actually sees.
+
+   ALL OFF under prefers-reduced-motion, at the foot of this block.
+   ========================================================================== */
+
+/* THE HERO'S. A scale-up "breath" sat here and was too polite for the one
+   button above the fold, so this is a real jump: crouch, launch, land with a
+   squash, and a small second hop on the way to rest. The X and Y scales move
+   against each other — squash wide on the crouch and the landing, stretch
+   tall at the top — which is the whole difference between a thing that jumps
+   and a thing that slides up and down.
+
+   Its cycle is the shortest on the page at 4s. Every other button gets looked
+   at once on the way past; this one is sitting in front of a reader who has
+   not scrolled yet. */
+@keyframes cta-jump {
+  0%,
+  26%,
+  100% {
+    transform: translateY(0) scale(1, 1);
+  }
+  4% {
+    transform: translateY(0) scale(1.06, 0.88);
+  }
+  10% {
+    transform: translateY(-22px) scale(0.97, 1.08);
+  }
+  16% {
+    transform: translateY(0) scale(1.04, 0.92);
+  }
+  21% {
+    transform: translateY(-8px) scale(0.99, 1.02);
+  }
+}
+
+@keyframes cta-swipe {
+  0% {
+    opacity: 0;
+    transform: skewX(-18deg) translateX(-90px);
+  }
+  1% {
+    opacity: 1;
+  }
+  16% {
+    opacity: 1;
+  }
+  18%,
+  100% {
+    opacity: 0;
+    transform: skewX(-18deg) translateX(480px);
+  }
+}
+
+@keyframes cta-bounce {
+  0%,
+  19%,
+  100% {
+    transform: translateY(0) scaleY(1);
+  }
+  5% {
+    transform: translateY(-15px) scaleY(1.03);
+  }
+  10.5% {
+    transform: translateY(0) scaleY(0.94);
+  }
+  14.5% {
+    transform: translateY(-5px) scaleY(1.01);
+  }
+}
+
+@keyframes cta-ripple {
+  0% {
+    opacity: 0.9;
+    transform: scale(1);
+  }
+  26%,
+  100% {
+    opacity: 0;
+    transform: scale(1.32);
+  }
+}
+
+@keyframes cta-glow {
+  0%,
+  23%,
+  100% {
+    box-shadow: 0 10px 34px -8px rgba(245, 165, 36, 0.55);
+  }
+  11% {
+    box-shadow: 0 16px 50px -6px rgba(245, 165, 36, 1);
+  }
+}
+
+@keyframes cta-nudge {
+  0%,
+  8%,
+  16%,
+  100% {
+    transform: translateX(0);
+  }
+  4%,
+  12% {
+    transform: translateX(9px);
+  }
+}
+
+@keyframes cta-tilt {
+  0%,
+  20%,
+  100% {
+    transform: perspective(620px) rotateX(0deg);
+  }
+  8% {
+    transform: perspective(620px) rotateX(-15deg);
+  }
+}
+
+@keyframes cta-wobble {
+  0%,
+  15%,
+  100% {
+    transform: rotate(0deg);
+  }
+  3% {
+    transform: rotate(-2deg);
+  }
+  6% {
+    transform: rotate(1.6deg);
+  }
+  9% {
+    transform: rotate(-1deg);
+  }
+  12% {
+    transform: rotate(0.6deg);
+  }
+}
+
+@layer components {
+  /* `swipe` clips its bar to the pill; `ripple` draws a ring OUTSIDE the
+     pill, so the two cannot share an overflow value. Each sets its own. */
+  [data-cta="swipe"] {
+    position: relative;
+    overflow: hidden;
+  }
+
+  [data-cta="swipe"]::after {
+    content: "";
+    position: absolute;
+    top: -25%;
+    bottom: -25%;
+    left: 0;
+    width: 46px;
+    background: rgba(255, 255, 255, 0.4);
+    opacity: 0;
+    pointer-events: none;
+    transform: skewX(-18deg) translateX(-90px);
+    animation: cta-swipe 5.3s ease-out infinite;
+  }
+
+  [data-cta="ripple"] {
+    position: relative;
+  }
+
+  [data-cta="ripple"]::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    border: 2px solid var(--color-amber);
+    opacity: 0;
+    pointer-events: none;
+    animation: cta-ripple 4.2s ease-out infinite;
+  }
+
+  [data-cta="jump"] {
+    animation: cta-jump 4s cubic-bezier(0.3, 0.7, 0.4, 1) infinite;
+  }
+  [data-cta="bounce"] {
+    animation: cta-bounce 4.9s cubic-bezier(0.3, 0.8, 0.4, 1) infinite;
+  }
+  [data-cta="glow"] {
+    animation: cta-glow 5.1s ease-in-out infinite;
+  }
+  [data-cta="nudge"] {
+    animation: cta-nudge 5.6s ease-in-out infinite;
+  }
+  [data-cta="tilt"] {
+    animation: cta-tilt 4.4s ease-in-out infinite;
+  }
+  [data-cta="wobble"] {
+    animation: cta-wobble 5.8s ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-cta],
+    [data-cta]::before,
+    [data-cta]::after {
+      animation: none !important;
+    }
   }
 }

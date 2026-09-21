@@ -1,5 +1,6 @@
 import { WhatsAppGlyph } from "@/components/ui/icons";
 import { footer } from "@/lib/content";
+import { salesDisclaimer } from "@/lib/content";
 import { site, whatsappLink } from "@/lib/site";
 
 /* ==========================================================================
@@ -25,21 +26,21 @@ import { site, whatsappLink } from "@/lib/site";
    ========================================================================== */
 
 const linkClass =
-  "t-small inline-flex min-h-11 items-center gap-2 text-ink-muted underline-offset-4 hover:text-ink-fg hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink-fg md:min-h-0";
+  "t-small inline-flex min-h-11 items-center gap-2 text-night-muted underline-offset-4 hover:text-white hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber md:min-h-0";
 
 export function Footer() {
   return (
-    <footer className="grain bg-ink">
+    <footer className="bg-night">
       <div className="shell py-12 md:py-16">
         <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between md:gap-12">
           <div>
-            <p className="text-xl font-extrabold tracking-tight text-ink-fg">
+            <p className="text-xl font-extrabold tracking-tight text-white">
               iSuite<span className="font-medium"> AI</span>
             </p>
-            <p className="t-small measure mt-2 text-ink-muted">
+            <p className="t-small measure mt-2 text-night-muted">
               {footer.tagline}
             </p>
-            <p className="t-small mt-4 text-ink-muted">{site.company}</p>
+            <p className="t-small mt-4 text-night-muted">{site.company}</p>
           </div>
 
           {/* The 3px lifts the first contact's 22.5px line box into the
@@ -67,8 +68,23 @@ export function Footer() {
           </nav>
         </div>
 
-        <div className="mt-10 flex flex-col gap-1 border-t border-ink-muted/30 pt-6 md:flex-row md:items-center md:justify-between md:gap-6">
-          <p className="t-small text-ink-muted">
+        {/* THE DISCLAIMER. Every reference page carries one, and for traffic
+            arriving from Meta the trademark notice is standard rather than
+            optional. Set small and quiet on purpose — it has to be present
+            and readable, not prominent.
+
+            NEEDS LEGAL REVIEW before this page takes any ad spend. */}
+        <div className="mt-10 flex flex-col gap-4 border-t border-white/10 pt-7">
+          <p className="text-[11.5px] leading-relaxed text-night-muted md:text-[12px]">
+            {salesDisclaimer.meta}
+          </p>
+          <p className="text-[11.5px] leading-relaxed text-night-muted md:text-[12px]">
+            {salesDisclaimer.results}
+          </p>
+        </div>
+
+        <div className="mt-7 flex flex-col gap-1 border-t border-white/10 pt-6 md:flex-row md:items-center md:justify-between md:gap-6">
+          <p className="t-small text-night-muted">
             © {new Date().getFullYear()} {site.company}. All rights reserved.
           </p>
 

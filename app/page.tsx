@@ -1,73 +1,175 @@
-import { Header } from "@/components/Header";
-import { Hero } from "@/components/Hero";
-import { ProofStrip } from "@/components/ProofStrip";
-import { Problem } from "@/components/Problem";
-import { SolutionIntro } from "@/components/SolutionIntro";
-import { HowItWorks } from "@/components/HowItWorks";
-import { Benefits } from "@/components/Benefits";
-import { MetaAds } from "@/components/MetaAds";
-import { Trust } from "@/components/Trust";
-import { Faq } from "@/components/Faq";
-import { DemoCall } from "@/components/DemoCall";
-import { FinalCta } from "@/components/FinalCta";
+import { SalesHero } from "@/components/sales/SalesHero";
+import { SalesShowcase } from "@/components/sales/SalesShowcase";
+import { SalesChapter } from "@/components/sales/SalesChapter";
+import { SalesCtaRow } from "@/components/sales/SalesCta";
+import { ShotSlot } from "@/components/sales/ShotSlot";
+import { SalesOffer } from "@/components/sales/SalesOffer";
+import { SalesFounder } from "@/components/sales/SalesFounder";
+import { SalesModules } from "@/components/sales/SalesModules";
+import { SalesAudience } from "@/components/sales/SalesAudience";
+import { SalesFaq } from "@/components/sales/SalesFaq";
+import { salesChapters } from "@/lib/content";
 import { LeadForm } from "@/components/LeadForm";
 import { Footer } from "@/components/Footer";
-import { WhatsAppFab } from "@/components/WhatsAppFab";
 
 /* ==========================================================================
-   iSuite AI - Meta Ads landing page
+   iSuite AI — Meta ads SALES page
    --------------------------------------------------------------------------
-   Section order follows build spec 7.1 - 7.13, with ONE section dropped:
-   7.8 Suitable Business Types. It listed showrooms, clinics, salons and
-   studios while the proof strip at the top of the page names IT companies,
-   consulting firms and agencies - the same job, done twice, with the two
-   copies disagreeing about who the product is for. The strip is the one that
-   matches the current audience, so it kept the job.
+   BEING REBUILT. The client's senior rejected the previous page as reading
+   like a normal landing page, and supplied a long-form direct-response sales
+   page as the reference. This is that rebuild, block by block, to the
+   reference's own structure with our content in place of its event content.
 
-   The component and its copy are both still in the repo. To bring it back:
-   re-add the import and drop <BusinessTypes /> in below <MetaAds />.
+   NO HEADER. The reference has no navigation and no menu at all — an ad page
+   has one exit and it is the button. The old Header component is still in the
+   repo, unused.
 
-   Background rhythm - dark anchors bookend the page, with the optional
-   third taken up at Meta Ads. DARK is deep forest #01152F, LIGHT is warm
-   oat #F2F6FC:
-     Hero            DARK  #01152F
-     Proof Strip     off-white
-     Problem         white
-     Solution        off-white
-     How It Works    white
-     Benefits        off-white
-     Meta Ads        DARK  #01152F
-     Trust           white
-     FAQ             off-white
-     Demo call       DARK
-     Final CTA       off-white  #01152F
-     Lead Form       white     (must stay light for trust)
-     Footer          DARK  #01152F
+   EIGHT IDENTICAL BUTTONS, one roughly every screen and a half. The
+   reference carries eight and never changes a word of them; that
+   repetition is the format. See SalesCta — every instance takes its
+   label from one place so rewording is impossible.
+
+   Structure, 15 blocks:
+
+      1  question + product shot        [BUILT]
+      2  the offer + CTA                [BUILT - one unit with 1]
+      3  the four screens                [BUILT]
+      4  ONE INBOX                       [BUILT]
+      5  IT REPLIES                     [BUILT]
+      6  IT BOOKS                       [BUILT]
+      7  NOTHING SLIPS                  [BUILT]
+      8  ADS TO DEALS + CTA             [BUILT]
+      9  WHAT HAPPENS ON THE CALL + CTA  [BUILT]
+     10  who runs the demo               [BUILT - needs photo]
+     11  all 13 modules                  [BUILT]
+     12  WHO IT IS FOR / NOT FOR + CTA   [BUILT]
+     13  the objection FAQ              [BUILT]
+     14  the form, dark band            [BUILT]
+     15  footer + Meta disclaimer       [BUILT]
+
+
+   TWO LIGHT SECTIONS, AND ONLY TWO: the founder and the form. A four-block
+   light band was tried across blocks 10-13 and rejected on sight — it broke
+   the page into two halves that looked like two different sites, and the
+   near-black is most of why this reads as a sales page at all.
+
+   The two that stayed are the two that are not about the product. A face
+   belongs on a light ground, and a form is the one thing here you act ON
+   rather than read. Everything else is dark, as it was.
+
+   Amber is 1.80:1 on a light ground, so neither of them uses amber as text —
+   see the notes in SalesFounder and LeadForm.
    ========================================================================== */
 
 export default function Page() {
   return (
     <>
-      <Header />
-
       <main>
-        <Hero />
+        <SalesHero />
+        <SalesShowcase />
+        <SalesCtaRow anim="swipe" className="bg-night pb-10 md:pb-14" />
 
-        <ProofStrip />
-        <Problem />
-        <SolutionIntro />
-        <HowItWorks />
-        <Benefits />
-        <MetaAds />
-        <Trust />
-        <Faq />
-        <DemoCall />
-        <FinalCta />
-        <LeadForm />
+        {/* ---- Blocks 4-8: the five chapters ----
+            EVERY CHAPTER SHOWS A DIFFERENT SCREEN. The hero and chapter 4
+            were both the inbox, which the client flagged: the inbox is not
+            the product, it is one part of it. The hero now carries the
+            dashboard, and the five chapters run inbox, conversation,
+            calendar, follow-ups, ads - five separate screens, no repeats.
+
+            `flip` swaps which side the screen sits on, so five in a row do
+            not march down one column.
+
+            All five files are in public/shots/ and wired below. `ratio`
+            must match the file's own width/height or ShotSlot's objectFit
+            will crop it: 16/9 for the wide screens, 16/10 for the inbox,
+            4/5 for the portrait conversation. */}
+        <SalesChapter
+          chapter={salesChapters[0]}
+          mock={
+            <ShotSlot
+              name="The shared inbox, with all four channels in one list"
+              file="inbox.png"
+              src="/shots/inbox.png"
+              ratio="16 / 10"
+            />
+          }
+        />
+
+        <SalesChapter
+          chapter={salesChapters[1]}
+          flip
+          mock={
+            <ShotSlot
+              name="A WhatsApp conversation where the assistant replies in Tamil"
+              file="assistant-reply.png"
+              src="/shots/assistant-reply.png"
+              ratio="4 / 5"
+            />
+          }
+        />
+
+        <SalesCtaRow anim="bounce" className="bg-night pb-9 md:pb-12" />
+
+        <SalesChapter
+          chapter={salesChapters[2]}
+          mock={
+            <ShotSlot
+              name="The appointment calendar, with slots and reminders"
+              file="appointments.png"
+              src="/shots/appointments.png"
+              ratio="16 / 9"
+            />
+          }
+        />
+
+        <SalesChapter
+          chapter={salesChapters[3]}
+          flip
+          mock={
+            <ShotSlot
+              name="The follow-ups list - due and overdue, with owner names"
+              file="followups.png"
+              src="/shots/followups.png"
+              ratio="16 / 9"
+            />
+          }
+        />
+
+        <SalesChapter
+          chapter={salesChapters[4]}
+          mock={
+            <ShotSlot
+              name="Meta Ads - spend, leads and won deals in one view"
+              file="meta-ads.png"
+              src="/shots/meta-ads.png"
+              ratio="16 / 9"
+            />
+          }
+        />
+
+        <SalesCtaRow anim="ripple" className="bg-night pb-10 md:pb-14" />
+
+        <SalesOffer />
+
+        {/* LIGHT. The only break in the near-black before the form. */}
+        <SalesFounder />
+
+        <SalesModules />
+        <SalesCtaRow anim="nudge" className="bg-night pb-10 md:pb-14" />
+        <SalesAudience />
+
+        <SalesFaq />
+
+        {/* This row is the last dark thing before the form goes light, so
+            unlike the others it closes with its own bottom padding rather
+            than running into the next section. */}
+        <SalesCtaRow anim="wobble" className="bg-night pb-12 md:pb-16" />
+
+        {/* LIGHT, with the sales page's wording and heading. See LeadForm. */}
+        <LeadForm sales />
       </main>
 
       <Footer />
-      <WhatsAppFab />
     </>
   );
 }

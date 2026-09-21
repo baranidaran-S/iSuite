@@ -4,7 +4,7 @@ import { useState, type FormEvent } from "react";
 import { Button } from "@/components/ui/Button";
 import { Section } from "@/components/ui/Section";
 import { DateTimePicker } from "@/components/DateTimePicker";
-import { cta, leadForm } from "@/lib/content";
+import { cta, leadForm, salesCta } from "@/lib/content";
 import { LEAD_ENDPOINT } from "@/lib/site";
 
 /* ==========================================================================
@@ -63,7 +63,18 @@ const empty: Fields = {
 const fieldBase =
   "h-12 w-full rounded-btn border border-line-strong bg-white px-4 text-base text-charcoal placeholder:text-slate focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest";
 
-export function LeadForm() {
+export function LeadForm({
+  sales = false,
+}: {
+  /**
+   * Sales-page dressing: the pale band, the uppercase heading and the sales
+   * page's own button wording. The prop was `dark` and put this on the
+   * near-black — the band is light again, which is what the spec asked for
+   * in the first place, so the name now describes the wording rather than a
+   * colour it no longer sets.
+   */
+  sales?: boolean;
+}) {
   const [values, setValues] = useState<Fields>(empty);
   const [errors, setErrors] = useState<Partial<Record<keyof Fields, string>>>(
     {},
@@ -112,13 +123,41 @@ export function LeadForm() {
       bg="white"
       id="demo-form"
       padded={false}
-      className="py-12 md:py-20"
+      className={sales ? "bg-offwhite! py-12 md:py-16" : "py-12 md:py-20"}
     >
       {/* The heading keeps its own narrower measure — a centred sentence
-          stretched across 920px is hard to read back. */}
+          stretched across 920px is hard to read back.
+
+          PALE BAND, WHITE CARD. This was briefly on the near-black to match
+          the sections above it, and it is light again on the client's call.
+          It is also what the build spec asked for: the form is the one thing
+          on the page you act ON rather than read, and a light ground is
+          where people expect to type.
+
+          Coming after eight near-black screens, the switch also marks the
+          form out as the end of the page rather than one more block of it.
+
+          The submit stays navy. Amber on white measures 1.9:1 and would fail
+          outright; navy is 11.5:1. The eight amber buttons above are LINKS
+          that scroll down here — this is the submit, a different control,
+          carrying the same words so nobody has to work out they match. */}
       <div className="mx-auto max-w-[560px]">
-        <h2 className="t-h2 text-center text-forest">{leadForm.heading}</h2>
-        <p className="t-small mt-4 text-center text-slate">
+        <h2
+          className={
+            sales
+              ? "font-display text-center text-[clamp(34px,11vw,52px)] leading-[0.98] font-bold tracking-[0.005em] text-balance text-night uppercase md:text-[56px]"
+              : "t-h2 text-center text-forest"
+          }
+        >
+          {leadForm.heading}
+        </h2>
+        <p
+          className={
+            sales
+              ? "mt-4 text-center text-[15px] leading-relaxed text-day-muted md:text-[16px]"
+              : "t-small mt-4 text-center text-slate"
+          }
+        >
           {leadForm.subhead}
         </p>
       </div>
@@ -258,8 +297,14 @@ export function LeadForm() {
                         an 1100px button reads as a banner, not something to
                         press. */}
                   <div className="mx-auto max-w-[420px]">
+                    {/* SAME WORDS AS THE EIGHT ABOVE. Those are links that
+                        scroll down here; this is the submit. Different
+                        control, and a different colour because amber on
+                        white measures 1.9:1 — but the reader must not have to
+                        work out that "Book a Demo" and "Book my free demo"
+                        are the same thing. */}
                     <Button type="submit" fullWidth>
-                      {cta.primary}
+                      {sales ? salesCta.label : cta.primary}
                     </Button>
                   </div>
 
@@ -267,7 +312,7 @@ export function LeadForm() {
                         button is the agreement, and the wording sits directly
                         under it rather than buried. NEEDS LEGAL REVIEW — see
                         leadForm.consentNote in lib/content.ts. */}
-                  <p className="t-small mx-auto mt-4 max-w-[480px] text-center text-slate">
+                  <p className="t-small mx-auto mt-4 max-w-[480px] text-center text-day-muted">
                     {leadForm.consentNote}
                   </p>
                 </div>

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Plus_Jakarta_Sans } from "next/font/google";
+import { Barlow_Condensed, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 
 /**
@@ -13,6 +13,32 @@ const jakarta = Plus_Jakarta_Sans({
   weight: ["400", "500", "600", "700", "800"],
   display: "swap",
   variable: "--font-jakarta",
+});
+
+/**
+ * THE HEADLINE FACE — and the reason the page reads as a poster rather than
+ * a product site.
+ *
+ * The reference page the client's senior supplied names exactly two faces, by
+ * role, not by section: --headlinefont: 'Barlow Condensed' and --contentfont:
+ * 'Inter'. Its headlines are CONDENSED; that single difference in letter
+ * shape is what separates it from every SaaS page, and it is what the client
+ * had read as "a different font in every section".
+ *
+ * It also pays for itself in space. Condensed capitals run roughly 0.45em
+ * against Plus Jakarta ExtraBold's 0.72em, so about 60% more fits on a line.
+ * The hero headline went from seven lines at 39px to four lines at 49px —
+ * bigger AND shorter, which is not a trade you usually get to make.
+ *
+ * Their body face is Inter. Ours stays Plus Jakarta Sans: Inter is the most
+ * worn-out UI face on the web and copying it would make this MORE generic,
+ * not less. Two faces, one condensed and one not, is the whole system.
+ */
+const barlow = Barlow_Condensed({
+  subsets: ["latin"],
+  weight: ["600", "700"],
+  display: "swap",
+  variable: "--font-barlow",
 });
 
 /*
@@ -53,7 +79,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={jakarta.variable}>
+    <html lang="en" className={`${jakarta.variable} ${barlow.variable}`}>
       <body>{children}</body>
     </html>
   );
