@@ -212,11 +212,28 @@
        `clip`, not `hidden`: `hidden` would turn <html> into a scroll
        container and break the sticky header. `clip` does not, and leaves the
        vertical axis visible. Safari below 16 ignores it and simply behaves
-       as it does today. */
+       as it does today.
+
+       THIS LINE ALONE IS NOT ENOUGH, which cost a real bug. Overflow set on
+       the root is PROPAGATED TO THE VIEWPORT rather than applied to <html>'s
+       own box, and `clip` cannot create a scroll container - so the
+       propagated value does not stop the viewport scrolling the way it would
+       on any other element. The rule compiled correctly and the page still
+       scrolled sideways on an Android phone. The net is on <body> below. */
     overflow-x: clip;
   }
 
   body {
+    /* WHERE THE GUARD ACTUALLY BITES. Because <html> above sets a non-visible
+       overflow, <body>'s own overflow is NOT propagated to the viewport - it
+       applies to <body>'s box and clips its descendants, which is the
+       behaviour wanted in the first place.
+
+       It is a net, not a fix. Anything overflowing here is still a bug, and
+       is still worth finding: this caught a button whose expanding ring
+       scaled 34px past each edge of a 375px screen. The ring is drawn with a
+       box-shadow now, which contributes nothing to layout at any width. */
+    overflow-x: clip;
     background-color: var(--color-offwhite);
     color: var(--color-charcoal);
     font-family: var(--font-sans);
@@ -1030,15 +1047,28 @@
   }
 }
 
+/* THE RING IS A BOX-SHADOW, NOT A SCALED ELEMENT, AND THAT IS THE WHOLE
+   POINT. It was a ::before at inset:0 scaled to 1.32, with no overflow clip
+   because the ring has to show OUTSIDE the button. On a 375px phone the
+   button spans x=20..355, so the ring reached -34..409 - thirty-four pixels
+   past each edge of the screen. That made the entire page scrollable
+   sideways, which is how the client found it.
+
+   A box-shadow spread draws outside the border box and contributes NOTHING to
+   layout or to the scrollable area, so it cannot do this at any width. The
+   first shadow in each frame is the button's own amber glow, repeated because
+   an animation on box-shadow replaces the property outright. */
 @keyframes cta-ripple {
   0% {
-    opacity: 0.9;
-    transform: scale(1);
+    box-shadow:
+      0 10px 34px -8px rgba(245, 165, 36, 0.55),
+      0 0 0 0 rgba(245, 165, 36, 0.85);
   }
   26%,
   100% {
-    opacity: 0;
-    transform: scale(1.32);
+    box-shadow:
+      0 10px 34px -8px rgba(245, 165, 36, 0.55),
+      0 0 0 24px rgba(245, 165, 36, 0);
   }
 }
 
@@ -1098,8 +1128,9 @@
 }
 
 @layer components {
-  /* `swipe` clips its bar to the pill; `ripple` draws a ring OUTSIDE the
-     pill, so the two cannot share an overflow value. Each sets its own. */
+  /* `swipe` is the only one that needs a clip: its bar travels the length of
+     the button and must not escape the pill. `ripple` draws outside the pill
+     on purpose and does it with a box-shadow, which costs no layout. */
   [data-cta="swipe"] {
     position: relative;
     overflow: hidden;
@@ -1120,17 +1151,6 @@
   }
 
   [data-cta="ripple"] {
-    position: relative;
-  }
-
-  [data-cta="ripple"]::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-    border: 2px solid var(--color-amber);
-    opacity: 0;
-    pointer-events: none;
     animation: cta-ripple 4.2s ease-out infinite;
   }
 
