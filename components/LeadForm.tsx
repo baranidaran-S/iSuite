@@ -145,7 +145,7 @@ export function LeadForm({
         <h2
           className={
             sales
-              ? "font-display text-center text-[clamp(34px,11vw,52px)] leading-[0.98] font-bold tracking-[0.005em] text-balance text-night uppercase md:text-[56px]"
+              ? "font-display text-center text-[clamp(37px,12vw,58px)] leading-[0.94] font-extrabold tracking-[0.01em] text-balance text-night uppercase md:text-[62px]"
               : "t-h2 text-center text-forest"
           }
         >

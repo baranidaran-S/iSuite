@@ -75,8 +75,8 @@ export function SalesHeading({
 
   return (
     <Tag
-      className={`font-display text-[clamp(34px,11vw,52px)] font-bold tracking-[0.005em] text-balance uppercase md:text-[58px] lg:text-[66px] ${
-        light ? "leading-[1.14] text-night" : "leading-[0.98] text-white"
+      className={`font-display text-[clamp(37px,12vw,58px)] font-extrabold tracking-[0.01em] text-balance uppercase md:text-[64px] lg:text-[74px] ${
+        light ? "leading-[1.1] text-night" : "leading-[0.94] text-white"
       } ${className}`}
     >
       {inner}

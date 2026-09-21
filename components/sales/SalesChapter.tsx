@@ -21,70 +21,109 @@ import type { salesChapters } from "@/lib/content";
 
    `flip` alternates which side the screen sits on from chapter to chapter, so
    five in a row do not march down the page in one column. On a phone there is
-   no flip — copy always comes first, because the label and title are what
+   no flip - copy always comes first, because the label and title are what
    tell you whether the screen below is worth looking at.
-   ========================================================================== */
 
-const Tick = () => (
-  <svg
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth={3}
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    aria-hidden="true"
-    className="h-3.5 w-3.5"
-  >
-    <path d="m5 12.5 4.6 4.5L19 7.5" />
-  </svg>
-);
+   WHICH WAS THE WHOLE PROBLEM. `flip` is an lg: utility, so it does nothing
+   below 1024px, and roughly nine in ten visitors here are on a phone. The one
+   device that mattered got the one version with no variation at all: five
+   structurally identical blocks, and twenty identical ticked rows between
+   them. The client read it as repetitive and as the old landing page, and it
+   was both.
+
+   THREE THINGS FIX IT, AND NONE OF THEM IS `flip`:
+
+   01 / 05. The chapters are a sequence - an enquiry arrives, is answered, is
+   booked, is chased, and is traced back to the ad - so the number is true
+   rather than decorative, and "/ 05" says how far through you are. It gives
+   the run forward motion, and unlike flip it works at every width.
+
+   THE CUSTOMER'S MESSAGE OPENS EACH ONE. This product is about messages; a
+   page about messages should start with one rather than with a feature name.
+   It is an incoming bubble carrying no name, no business and no outcome - see
+   the note on `quote` in content.ts, which is where that line is drawn.
+
+   THE TICKS ARE GONE. A ticked vertical list is the single most generic
+   element a landing page can carry, and there were four per chapter. The same
+   four facts now sit in a two-column strip with a hairline above them, which
+   reads as specification rather than as a checklist and costs half the
+   height.
+   ========================================================================== */
 
 export function SalesChapter({
   chapter,
   mock,
+  index,
+  total,
   flip = false,
 }: {
   chapter: (typeof salesChapters)[number];
   /** The product screen for this chapter. */
   mock: ReactNode;
+  /** 1-based position, printed as 01 / 05. */
+  index: number;
+  total: number;
   flip?: boolean;
 }) {
+  const n = String(index).padStart(2, "0");
+  const of = String(total).padStart(2, "0");
+
   return (
     <section className="bg-night px-5 py-9 md:py-12">
       <div className="mx-auto grid max-w-[1100px] items-center gap-7 lg:grid-cols-2 lg:gap-12">
         {/* Copy. Always first in the DOM, so it is always first on a phone. */}
         <div className={flip ? "lg:order-2" : ""}>
-          <span className="inline-flex items-center gap-3">
-            <span aria-hidden="true" className="h-px w-8 bg-amber" />
+          {/* 01 / 05 - where you are in the run. */}
+          <div className="flex items-center gap-3.5">
+            <span
+              aria-hidden="true"
+              className="font-display text-[40px] leading-none font-extrabold tabular-nums text-amber md:text-[48px]"
+            >
+              {n}
+            </span>
+            <span
+              aria-hidden="true"
+              className="font-display text-[19px] leading-none font-extrabold tabular-nums text-night-muted/70 md:text-[22px]"
+            >
+              / {of}
+            </span>
+            <span aria-hidden="true" className="h-px flex-1 bg-white/15" />
             <span className="text-[13px] font-extrabold tracking-[0.2em] text-amber uppercase md:text-[14px]">
               {chapter.label}
             </span>
-          </span>
+          </div>
+
+          {/* The message that starts it. Not a testimonial - see content.ts. */}
+          <div className="mt-6 max-w-[420px]">
+            <p className="text-[11.5px] font-extrabold tracking-[0.16em] text-night-muted uppercase md:text-[12px]">
+              {chapter.channel}
+            </p>
+            <p className="mt-2 rounded-[18px] rounded-bl-[5px] border border-white/12 bg-night-card px-4 py-3 text-[16px] leading-snug font-semibold text-white md:text-[17.5px]">
+              {chapter.quote}
+            </p>
+          </div>
 
           <SalesHeading
             as="h3"
             text={chapter.title}
             accent={chapter.accent}
-            className="mt-4 text-left"
+            className="mt-6 text-left"
           />
 
           <p className="mt-4 text-[16.5px] leading-relaxed text-night-muted md:text-[17.5px]">
             {chapter.body}
           </p>
 
-          <ul className="mt-6 flex flex-col gap-2.5">
+          <ul className="mt-6 grid gap-x-6 gap-y-3 border-t border-white/12 pt-5 sm:grid-cols-2">
             {chapter.points.map((point) => (
-              <li key={point} className="flex items-start gap-3">
-                <span
-                  aria-hidden="true"
-                  className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-amber/15 text-amber"
-                >
-                  <Tick />
+              <li
+                key={point}
+                className="text-[14px] leading-snug font-semibold text-white md:text-[15px]"
+              >
+                <span aria-hidden="true" className="mr-2 text-amber">
+                  &#8213;
                 </span>
-                <span className="text-[14.5px] leading-snug font-semibold text-white md:text-[15.5px]">
-                  {point}
-                </span>
+                {point}
               </li>
             ))}
           </ul>

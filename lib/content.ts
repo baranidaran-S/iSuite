@@ -136,7 +136,41 @@ export const salesChapters = [
    * spine of the page and the only part of it that is not a button.
    *
    * Ours are the five things the product actually does, in the order a lead
-   * moves through them. Every capability named below is documented in
+   * moves through them. That order is why each one now carries a number: 01
+   * to 05 is a claim about SEQUENCE, and the sequence is real — an enquiry
+   * arrives, is answered, is booked, is chased, and is traced back to the ad
+   * that produced it. (Contrast salesModules, where numbering would be pure
+   * decoration and is used only to make thirteen feel like thirteen.)
+   *
+   * `quote` IS NOT A TESTIMONIAL AND MUST NEVER BECOME ONE. It is an example
+   * of the kind of message that arrives on each channel, carried in an
+   * incoming chat bubble because this product is about messages and a page
+   * about messages should open with one. It has NO name, NO business and NO
+   * outcome attached, which is what keeps it an illustration rather than
+   * evidence. Attribute one of these to a real or invented customer and it
+   * becomes exactly the invented proof the requirements doc forbids.
+   *
+   * The Tamil line is the same message shown in assistant-reply.png, so the
+   * page and the screenshot agree.
+   *
+   * BODY AND POINTS MUST NOT SAY THE SAME THING. Twelve of the twenty points
+   * once repeated the paragraph directly above them — ADS TO DEALS opened
+   * "Build campaigns, ad sets and lead forms from inside iSuite" and its first
+   * point read "Build campaigns and lead forms from inside iSuite". The
+   * client read the chapters as too much information, and they were, but the
+   * volume was never the problem: it was the same information twice.
+   *
+   * So the two now have separate jobs, and adding a feature name back into a
+   * body is what breaks it. THE BODY MAKES THE ARGUMENT — why this matters to
+   * someone losing enquiries — in one or two lines and names no feature. THE
+   * POINTS CARRY THE FACTS, and are the only place a capability is listed.
+   * Bodies went from 33-42 words to 14-21.
+   *
+   * Nothing in the new bodies is a statistic or a result. "A deal nobody
+   * chased looks exactly like a deal nobody wanted" is an observation anyone
+   * can check against their own week; "most deals are lost to no follow-up"
+   * would be a figure we do not have, and is exactly the sentence not to
+   * write here. Every capability named below is documented in
    * iSuite-AI-Main-Website-Requirements.md §6–§15. No figure, no result, no
    * promise appears in any of them.
    *
@@ -144,10 +178,12 @@ export const salesChapters = [
    */
   {
     id: "inbox",
+    channel: "Instagram",
+    quote: "Hi, do you have this in stock?",
     label: "ONE INBOX",
     title: "Every channel. One screen.",
     accent: "One screen.",
-    body: "WhatsApp Business on your own number, Instagram DMs, Facebook and your website chat all arrive in the same list. Assign a conversation to a person, filter by channel or by what is still unanswered, and leave internal notes your customer never sees.",
+    body: "Four apps means four places to lose someone. One list means there is nowhere left for a message to hide.",
     points: [
       "WhatsApp Business on your own number",
       "Instagram, Facebook and website chat",
@@ -157,10 +193,12 @@ export const salesChapters = [
   },
   {
     id: "replies",
+    channel: "WhatsApp",
+    quote: "நாளை appointment கிடைக்குமா?",
     label: "IT REPLIES",
     title: "In their language. At 11pm.",
     accent: "At 11pm.",
-    body: "The assistant reads what the customer actually wrote and answers in the same language. It uses only the services, prices and rules you gave it, asks your qualifying questions, and saves the answers against the contact so nobody has to ask twice.",
+    body: "Nobody waits until morning. The reply goes out while they are still holding the phone.",
     points: [
       "Tamil, Tanglish, English, Hindi and more",
       "Answers only from information you approved",
@@ -170,10 +208,12 @@ export const salesChapters = [
   },
   {
     id: "books",
+    channel: "WhatsApp",
+    quote: "Can I come tomorrow evening?",
     label: "IT BOOKS",
     title: "Checks the real calendar first.",
     accent: "the real calendar",
-    body: "It offers only the slots your team has actually made available — per person or per service, inside your working hours, with your buffers and your notice period. Confirmation goes out, then a reminder a day before and another an hour before.",
+    body: "The difference between a booking and a double-booking is whether anybody checked first.",
     points: [
       "Calendar per person or per service",
       "Working hours, buffers and minimum notice",
@@ -183,10 +223,12 @@ export const salesChapters = [
   },
   {
     id: "followups",
+    channel: "Instagram",
+    quote: "Let me check and call you back.",
     label: "NOTHING SLIPS",
     title: "Who owes whom a reply.",
     accent: "Who owes whom",
-    body: "Every promised follow-up gets a due date and a name against it. The overdue list is a list, not a feeling — and the follow-ups the assistant promised on your behalf, it writes.",
+    body: "A deal nobody chased looks exactly like a deal nobody wanted. Only one of those is true.",
     points: [
       "Due and overdue lists, with owner names",
       "Reminders go to the person who owns it",
@@ -196,10 +238,12 @@ export const salesChapters = [
   },
   {
     id: "ads",
+    channel: "Facebook",
+    quote: "Saw your ad — what is the price?",
     label: "ADS TO DEALS",
     title: "Which ad brought the money.",
     accent: "brought the money",
-    body: "Build campaigns, ad sets and lead forms from inside iSuite. Spend, impressions, clicks and leads come back in — and so do won deals and deal value, against the exact campaign and ad that produced them.",
+    body: "Meta can tell you what a lead cost. It cannot tell you which of them paid you back.",
     points: [
       "Build campaigns and lead forms from inside iSuite",
       "Spend and clicks sitting next to won deals",

@@ -69,7 +69,7 @@ export function SalesAudience() {
         {/* The light panel. It is the only one on this stretch of the page,
             which is the whole reason the eye goes to it. */}
         <div className="mt-6 rounded-[20px] bg-white px-5 py-7 md:mt-8 md:px-8 md:py-9">
-          <h3 className="font-display text-center text-[30px] leading-[1.04] font-bold text-night md:text-[38px]">
+          <h3 className="font-display text-center text-[33px] leading-[1] font-extrabold text-night md:text-[42px]">
             {salesAudience.notHeading}
           </h3>
 

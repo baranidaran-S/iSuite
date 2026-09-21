@@ -49,7 +49,7 @@ export function SalesFounder() {
             className="text-left"
           />
 
-          <p className="font-display mt-5 text-[29px] leading-[1.04] font-bold text-night md:text-[34px]">
+          <p className="font-display mt-5 text-[32px] leading-[1] font-extrabold text-night md:text-[38px]">
             {salesFounder.name}
           </p>
           {/* The role was amber TEXT on the dark band. On this one that is

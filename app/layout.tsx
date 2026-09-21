@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Barlow_Condensed, Plus_Jakarta_Sans } from "next/font/google";
+import { Big_Shoulders, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 
 /**
@@ -19,28 +19,40 @@ const jakarta = Plus_Jakarta_Sans({
  * THE HEADLINE FACE — and the reason the page reads as a poster rather than
  * a product site.
  *
- * The reference page the client's senior supplied names exactly two faces, by
- * role, not by section: --headlinefont: 'Barlow Condensed' and --contentfont:
- * 'Inter'. Its headlines are CONDENSED; that single difference in letter
- * shape is what separates it from every SaaS page, and it is what the client
- * had read as "a different font in every section".
+ * The reference the client's senior supplied names exactly two faces, by role
+ * and not by section: --headlinefont: 'Barlow Condensed', --contentfont:
+ * 'Inter'. Its headlines are CONDENSED, and that one difference in letter
+ * shape is what separates it from every SaaS page — it is what the client had
+ * read as "a different font in every section". So: two faces, one condensed,
+ * one not. That is the whole system.
  *
- * It also pays for itself in space. Condensed capitals run roughly 0.45em
- * against Plus Jakarta ExtraBold's 0.72em, so about 60% more fits on a line.
- * The hero headline went from seven lines at 39px to four lines at 49px —
- * bigger AND shorter, which is not a trade you usually get to make.
+ * WHY NOT BARLOW CONDENSED, WHICH IS WHAT THE REFERENCE USES. It was set that
+ * way first and it is the safe answer, not the right one: Barlow is a neutral
+ * face, built to get out of the way, which is the opposite of the job. Big
+ * Shoulders is narrower still and has squared terminals and flat curves — it
+ * looks engineered, and nobody mistakes it for a default.
+ *
+ * Condensed also pays for itself in space. Its capitals run roughly 0.42em
+ * against Plus Jakarta ExtraBold's 0.72em, so about 70% more fits on a line.
+ * The hero headline was seven lines at 39px; it is four at 53px. Bigger and
+ * shorter at once, which is not a trade you usually get.
+ *
+ * NO `weight`, DELIBERATELY — that loads the VARIABLE font, so the whole
+ * 100-900 range arrives in one file. It is why this face was chosen over
+ * Anton and Bebas Neue, which ship a single weight and could therefore never
+ * carry the eyebrows, the 01-13 numerals and the headings all at once.
+ *
+ * Google folded "Big Shoulders Display" into "Big Shoulders"; the old name is
+ * kept in the CSS fallback chain for anyone whose machine still has it.
  *
  * Their body face is Inter. Ours stays Plus Jakarta Sans: Inter is the most
- * worn-out UI face on the web and copying it would make this MORE generic,
- * not less. Two faces, one condensed and one not, is the whole system.
+ * worn-out UI face on the web, and copying it would make this MORE generic.
  */
-const barlow = Barlow_Condensed({
+const bigShoulders = Big_Shoulders({
   subsets: ["latin"],
-  weight: ["600", "700"],
   display: "swap",
-  variable: "--font-barlow",
+  variable: "--font-bigshoulders",
 });
-
 /*
  * The <title> is what shows in the browser tab and in the link preview Meta
  * renders when this URL is shared. It is NOT the hero headline and should not
@@ -79,7 +91,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${jakarta.variable} ${barlow.variable}`}>
+    <html lang="en" className={`${jakarta.variable} ${bigShoulders.variable}`}>
       <body>{children}</body>
     </html>
   );

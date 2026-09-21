@@ -85,6 +85,8 @@ export default function Page() {
             4/5 for the portrait conversation. */}
         <SalesChapter
           chapter={salesChapters[0]}
+          index={1}
+          total={5}
           mock={
             <ShotSlot
               name="The shared inbox, with all four channels in one list"
@@ -97,6 +99,8 @@ export default function Page() {
 
         <SalesChapter
           chapter={salesChapters[1]}
+          index={2}
+          total={5}
           flip
           mock={
             <ShotSlot
@@ -112,6 +116,8 @@ export default function Page() {
 
         <SalesChapter
           chapter={salesChapters[2]}
+          index={3}
+          total={5}
           mock={
             <ShotSlot
               name="The appointment calendar, with slots and reminders"
@@ -124,6 +130,8 @@ export default function Page() {
 
         <SalesChapter
           chapter={salesChapters[3]}
+          index={4}
+          total={5}
           flip
           mock={
             <ShotSlot
@@ -137,6 +145,8 @@ export default function Page() {
 
         <SalesChapter
           chapter={salesChapters[4]}
+          index={5}
+          total={5}
           mock={
             <ShotSlot
               name="Meta Ads - spend, leads and won deals in one view"

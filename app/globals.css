@@ -155,11 +155,19 @@
     sans-serif;
 
   /* THE HEADLINE FACE. Every fallback here is condensed too — a headline set
-     at 49px because the face is narrow, falling back to a normal-width
-     system font, would run off the screen before it swapped. */
+     at 53px because the face is narrow, dropping to a normal-width system
+     font, would run off the screen before it ever swapped.
+
+     ARIAL NARROW COMES SECOND, ahead of the prettier options, because it is
+     the only one of them actually installed on a typical Windows or macOS
+     machine. next/font could not generate metric overrides for Big Shoulders
+     (it warns at build), so there is no width-matched synthetic fallback and
+     the closest REAL face is worth more than a better-looking name nobody
+     has. Both faces are preloaded in the production build, so this chain only
+     gets used on a slow connection. */
   --font-display:
-    var(--font-barlow), "Barlow Condensed", "Oswald", "Arial Narrow",
-    ui-sans-serif, sans-serif;
+    var(--font-bigshoulders), "Big Shoulders", "Arial Narrow",
+    "Helvetica Neue Condensed", "Oswald", ui-sans-serif, sans-serif;
 
   /* --- Breakpoints -------------------------------------------------------- */
   /*

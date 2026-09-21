@@ -64,7 +64,7 @@ export function SalesHero() {
             inside 335px. Neither can overflow, which matters more than it
             sounds: one word wider than the screen and the WHOLE PAGE scrolls
             sideways. */}
-        <h1 className="font-display mt-5 text-[clamp(38px,13vw,62px)] leading-[0.96] font-bold tracking-[0.005em] text-balance text-white uppercase md:text-[70px] lg:text-[82px]">
+        <h1 className="font-display mt-5 text-[clamp(42px,14vw,68px)] leading-[0.92] font-extrabold tracking-[0.01em] text-balance text-white uppercase md:text-[78px] lg:text-[92px]">
           <Headline />
         </h1>
 
