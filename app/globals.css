@@ -151,7 +151,6 @@
   --color-night-muted: #dce5f5; /* secondary text on the ground 15.1:1 */
   --color-amber: #f5a524; /* THE accent. Buttons + key phrases. 8.9:1 */
   --color-amber-dark: #d98a0b; /* hover                             */
-  --color-good: #3dd68c; /* the WITH column            9.1:1 on card */
   --color-bad: #f2555a; /* the WITHOUT column          5.1:1 on card */
 
   /* The same decision on the two LIGHT sections, in the other direction.
@@ -170,7 +169,6 @@
   --color-white: #fffcfd;
 
   --color-primary: #023380; /* white label 11.75:1, as text on white 11.52:1 */
-  --color-primary-dark: #011f52; /* hover                                     */
 
   /* --- Light sections ---------------------------------------------------- */
   --color-forest: #0b2545; /* Headings, header, footer          15.1:1        */
@@ -190,14 +188,6 @@
    */
   --color-line-strong: #7f8899;
 
-  /* --- Section accents. Deep carries white, tint carries dark ------------ */
-  --color-emerald: #0e3f84;
-  --color-emerald-tint: #d8e3f5;
-  --color-copper: #8c4a29;
-  --color-copper-tint: #f0e0d6;
-  --color-harbour: #3a5a7d;
-  --color-harbour-tint: #dce5ef;
-
   /* --- The How It Works journey band -------------------------------------- */
   /* Held BELOW the CTA's luminance on purpose — see the ribbon block at the
      bottom of this file. It is the one green that is neither CTA nor accent. */
@@ -206,7 +196,6 @@
   /* --- Dark anchor sections ---------------------------------------------- */
   --color-ink: #01152f; /* Hero, How It Works, Meta Ads, Final CTA, Footer     */
   --color-ink-fg: #f2f6fc; /* Headlines + body on dark        16.8:1          */
-  --color-ink-muted: #a8bdd8; /* Captions + disclaimers on dark  9.5:1        */
 
   /* --- Typography (§2) --------------------------------------------------- */
   --font-sans:

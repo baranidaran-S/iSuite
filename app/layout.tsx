@@ -86,19 +86,19 @@ export const metadata: Metadata = {
   metadataBase: new URL(site.siteUrl),
   title: "iSuite AI — One Inbox for WhatsApp, Instagram and Facebook Enquiries",
   description:
-    "iSuite AI brings WhatsApp, Instagram, Facebook, website and Meta ad enquiries into one system — with an AI sales assistant that responds, qualifies, books appointments and follows up. Book a free 30-minute demo.",
+    "iSuite AI brings WhatsApp, Instagram, Facebook, website and Meta ad enquiries into one system — with an AI sales assistant that responds, qualifies, books appointments and follows up. Book a free 45-minute demo.",
   openGraph: {
     title:
       "iSuite AI — One Inbox for WhatsApp, Instagram and Facebook Enquiries",
     description:
-      "One system for every enquiry, follow-up and deal. Book a free 30-minute demo with MnT Future, on Google Meet.",
+      "One system for every enquiry, follow-up and deal. Book a free 45-minute demo with MnT Future, on Google Meet.",
     type: "website",
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "iSuite AI — one inbox for every enquiry. Free 30-minute demo.",
+        alt: "iSuite AI — one inbox for every enquiry. Free 45-minute demo.",
       },
     ],
   },

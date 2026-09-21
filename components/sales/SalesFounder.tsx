@@ -1,5 +1,6 @@
 import { SalesHeading } from "@/components/sales/SalesHeading";
 import { ShotSlot } from "@/components/sales/ShotSlot";
+import { brandCase } from "@/components/sales/brandCase";
 import { salesFounder } from "@/lib/content";
 
 /* ==========================================================================
@@ -56,7 +57,7 @@ export function SalesFounder() {
               1.83:1, so it becomes an amber chip with the ground on it —
               5.48:1, and the same colour still marking the same thing. */}
           <span className="mt-2 inline-block rounded-[5px] bg-amber px-2 py-1 text-[13px] font-extrabold tracking-[0.18em] text-night uppercase md:text-[14px]">
-            {salesFounder.role}
+            {brandCase(salesFounder.role)}
           </span>
 
           <p className="mt-5 text-[15.5px] leading-relaxed text-day-muted md:text-[17px]">

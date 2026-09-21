@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { brandCase } from "@/components/sales/brandCase";
 
 /* ==========================================================================
    THE HEADLINE TREATMENT — every block on the page uses it
@@ -62,14 +63,16 @@ export function SalesHeading({
     ? "box-decoration-clone rounded-[5px] bg-amber px-2 text-night"
     : "text-amber";
 
+  /* brandCase runs on each slice separately, so an accent that happens to
+     contain a brand name still gets both treatments. */
   const inner: ReactNode =
     i === -1 || !accent ? (
-      text
+      brandCase(text)
     ) : (
       <>
-        {text.slice(0, i)}
-        <span className={accentClass}>{accent}</span>
-        {text.slice(i + accent.length)}
+        {brandCase(text.slice(0, i))}
+        <span className={accentClass}>{brandCase(accent)}</span>
+        {brandCase(text.slice(i + accent.length))}
       </>
     );
 

@@ -1,96 +1,78 @@
-import { WhatsAppGlyph } from "@/components/ui/icons";
-import { footer } from "@/lib/content";
-import { salesDisclaimer } from "@/lib/content";
-import { site, whatsappLink } from "@/lib/site";
+import { footer, salesDisclaimer } from "@/lib/content";
+import { site } from "@/lib/site";
 
 /* ==========================================================================
    FOOTER — build spec §7.13
    --------------------------------------------------------------------------
    Background #01152F, matching the dark anchor sections.
    Text #F2F6FC / #A8BDD8.
-   Company name, contact email, phone, WhatsApp link, privacy/consent link.
-   NO additional navigation.
 
-   ALIGNMENT. Every link carries min-h-11 so it clears 44px under a thumb.
-   Stacked, that is a 44px row plus the gap for EACH contact — on a desktop
-   the four of them ran to roughly 200px beside a 90px brand block, which is
-   what made this look ragged. The target is dropped from md up, where a
-   pointer does not need it, so each contact is just its own line of text.
+   NO CONTACT DETAILS, AND NO NAVIGATION. It carried an email, a phone number
+   and a WhatsApp link in a right-hand column, set against the brand block on
+   the left. All three were placeholders — `hello@mntfuture.com` and
+   `+91 00000 00000` — and a visitor reading a phone number of ten zeroes
+   learns only that nobody checked the page. The client removed them.
 
-   Privacy & Consent sits in the bottom bar opposite the copyright rather
-   than on the contact stack. It is not a way to reach anyone, and moving it
-   leaves three lines on each side of the top row, which is what makes the
-   two columns read as a pair.
+   They cost nothing to lose. This page has ONE action, repeated eight times,
+   and it is the button; a second way to make contact in the footer is a
+   second ask, and on a page behind paid traffic that is a leak, not a
+   courtesy. If real details are ever wanted here, they belong above the
+   disclaimer in the same centred column, not in a column of their own.
 
-   Every contact detail here is a placeholder — see lib/site.ts.
+   CENTRED, IN ONE COLUMN. With the contacts gone there is no second column
+   for a two-column layout to balance against, and a lone brand block pinned
+   left with an empty right half reads as something that failed to load. One
+   centred stack at a fixed measure is the honest shape of what is left, and
+   it is the same at every width, so there is no separate phone layout to
+   drift.
+
+   The measure is capped at 760px. The disclaimer is the longest text here
+   and centred lines get hard to track once they run much past that; the cap
+   keeps both paragraphs to a readable ragged block rather than one wide
+   band of fine print.
+
+   Privacy & Consent keeps min-h-11 so it still clears 44px under a thumb —
+   it is the only thing in the footer anyone taps now.
    ========================================================================== */
 
 const linkClass =
-  "t-small inline-flex min-h-11 items-center gap-2 text-night-muted underline-offset-4 hover:text-white hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber md:min-h-0";
+  "t-small inline-flex min-h-11 items-center text-night-muted underline-offset-4 hover:text-white hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber";
 
 export function Footer() {
   return (
     <footer className="bg-night">
       <div className="shell py-12 md:py-16">
-        <div className="flex flex-col gap-8 md:flex-row md:items-start md:justify-between md:gap-12">
-          <div>
-            <p className="text-xl font-extrabold tracking-tight text-white">
-              iSuite<span className="font-medium"> AI</span>
+        <div className="mx-auto flex max-w-[760px] flex-col items-center text-center">
+          <p className="text-xl font-extrabold tracking-tight text-white">
+            iSuite<span className="font-medium"> AI</span>
+          </p>
+          <p className="t-small mt-2 text-night-muted">{footer.tagline}</p>
+          <p className="t-small mt-4 text-night-muted">{site.company}</p>
+
+          {/* THE DISCLAIMER. Every reference page carries one, and for traffic
+              arriving from Meta the trademark notice is standard rather than
+              optional. Set small and quiet on purpose — it has to be present
+              and readable, not prominent.
+
+              NEEDS LEGAL REVIEW before this page takes any ad spend. */}
+          <div className="mt-9 flex w-full flex-col gap-4 border-t border-white/10 pt-7 md:mt-10">
+            <p className="text-[11.5px] leading-relaxed text-night-muted md:text-[12px]">
+              {salesDisclaimer.meta}
             </p>
-            <p className="t-small measure mt-2 text-night-muted">
-              {footer.tagline}
+            <p className="text-[11.5px] leading-relaxed text-night-muted md:text-[12px]">
+              {salesDisclaimer.results}
             </p>
-            <p className="t-small mt-4 text-night-muted">{site.company}</p>
           </div>
 
-          {/* The 3px lifts the first contact's 22.5px line box into the
-              middle of the brand name's 28px one, so the two columns start
-              on the same line rather than a few pixels apart. */}
-          <nav
-            aria-label="Contact"
-            className="flex flex-col gap-2 md:items-end md:gap-1.5 md:pt-[3px]"
-          >
-            <a href={`mailto:${site.contactEmail}`} className={linkClass}>
-              {site.contactEmail}
+          <div className="mt-7 flex w-full flex-col items-center gap-1 border-t border-white/10 pt-6">
+            <p className="t-small text-night-muted">
+              © {new Date().getFullYear()} {site.company}. All rights reserved.
+            </p>
+
+            <a href={site.privacyUrl} className={linkClass}>
+              {footer.privacyLabel}
             </a>
-            <a href={site.phoneHref} className={linkClass}>
-              {site.phone}
-            </a>
-            <a
-              href={whatsappLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={linkClass}
-            >
-              <WhatsAppGlyph className="h-4 w-4" />
-              {footer.whatsappLabel}
-            </a>
-          </nav>
-        </div>
-
-        {/* THE DISCLAIMER. Every reference page carries one, and for traffic
-            arriving from Meta the trademark notice is standard rather than
-            optional. Set small and quiet on purpose — it has to be present
-            and readable, not prominent.
-
-            NEEDS LEGAL REVIEW before this page takes any ad spend. */}
-        <div className="mt-10 flex flex-col gap-4 border-t border-white/10 pt-7">
-          <p className="text-[11.5px] leading-relaxed text-night-muted md:text-[12px]">
-            {salesDisclaimer.meta}
-          </p>
-          <p className="text-[11.5px] leading-relaxed text-night-muted md:text-[12px]">
-            {salesDisclaimer.results}
-          </p>
-        </div>
-
-        <div className="mt-7 flex flex-col gap-1 border-t border-white/10 pt-6 md:flex-row md:items-center md:justify-between md:gap-6">
-          <p className="t-small text-night-muted">
-            © {new Date().getFullYear()} {site.company}. All rights reserved.
-          </p>
-
-          <a href={site.privacyUrl} className={linkClass}>
-            {footer.privacyLabel}
-          </a>
+          </div>
         </div>
       </div>
     </footer>

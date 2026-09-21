@@ -9,7 +9,6 @@ import { SalesModules } from "@/components/sales/SalesModules";
 import { SalesAudience } from "@/components/sales/SalesAudience";
 import { SalesFaq } from "@/components/sales/SalesFaq";
 import { salesChapters } from "@/lib/content";
-import { LeadForm } from "@/components/LeadForm";
 import { Footer } from "@/components/Footer";
 
 /* ==========================================================================
@@ -170,13 +169,11 @@ export default function Page() {
 
         <SalesFaq />
 
-        {/* This row is the last dark thing before the form goes light, so
-            unlike the others it closes with its own bottom padding rather
-            than running into the next section. */}
+        {/* THE LAST ASK ON THE PAGE. It used to hand over to the lead form
+            below it; the form is gone and every button now opens the booking
+            page directly, so this row is the end of the page's argument and
+            closes with its own bottom padding. */}
         <SalesCtaRow anim="wobble" className="bg-night pb-12 md:pb-16" />
-
-        {/* LIGHT, with the sales page's wording and heading. See LeadForm. */}
-        <LeadForm sales />
       </main>
 
       <Footer />

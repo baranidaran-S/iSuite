@@ -10,7 +10,7 @@ import { demoCall, salesCta } from "@/lib/content";
    thing it keeps coming back to.
 
    Ours is the demo, stated the same way. Every fact is the client's own
-   answer: free, thirty minutes, Google Meet, run by the team.
+   answer: free, forty-five minutes, Google Meet, run by the team.
 
    THE LAST LINE IS THE ONE THAT EARNS THE OTHERS. The demo is a walkthrough,
    not a setup session — nobody's account is touched on the call. Saying so

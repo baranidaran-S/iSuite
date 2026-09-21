@@ -46,13 +46,36 @@ import { site } from "@/lib/site";
    THE HOVER LIFT STAYS, for the one visitor in ten holding a mouse. It is not
    what the animation is for.
 
-   EVERY INSTANCE SITS ON THE NEAR-BLACK. The two light sections on the page
-   — the founder and the form — carry no SalesCta: the founder introduces the
-   person and the form has its own submit. So this component has one skin and
+   EVERY INSTANCE SITS ON THE NEAR-BLACK. The founder block is the one light
+   section on the page and it carries no SalesCta, because it introduces a
+   person rather than asking for anything. So this component has one skin and
    needs no light variant. If a light section ever does need the button, amber
    is 1.83:1 on #EFF3F9 and the edge would have to be drawn in the ground to
    satisfy WCAG 1.4.11; it is not a straight recolour.
+
+   IT LEAVES THE SITE NOW. This used to scroll to #demo-form, a form further
+   down the page. That form is gone and the button opens the client's booking
+   page instead — see site.bookingUrl, which is the only place that address
+   is written.
+
+   SAME TAB, NOT A NEW ONE. Roughly nine in ten visitors arrive from a Meta
+   ad, which means they are inside the Facebook or Instagram in-app browser,
+   where target="_blank" is unreliable — it can open a tab the user cannot
+   find or silently do nothing. A plain same-tab navigation always works.
+
+   AN EMPTY bookingUrl IS LOUD, NOT SILENT. It falls back to "#" so the page
+   cannot navigate to itself, and warns once per build. Eight dead buttons on
+   a page behind paid traffic is the worst outcome available here, so it is
+   worth the noise in the build log.
    ========================================================================== */
+
+if (!site.bookingUrl) {
+  console.warn(
+    "\n[iSuite AI] site.bookingUrl is EMPTY — all 8 'BOOK MY FREE DEMO' " +
+      "buttons lead nowhere.\n             Set it in lib/site.ts before this " +
+      "page takes any ad spend.\n",
+  );
+}
 
 /** The eight, in the order they appear down the page. */
 export type CtaAnim =
@@ -70,7 +93,7 @@ export function SalesCta({
 }) {
   return (
     <a
-      href={site.formAnchor}
+      href={site.bookingUrl || "#"}
       data-cta={anim}
       className={`group inline-flex min-h-[64px] items-center justify-center gap-3 rounded-full bg-amber px-7 text-center text-[19px] leading-none font-extrabold tracking-[0.03em] text-night uppercase shadow-[0_10px_34px_-8px_rgba(245,165,36,0.55)] transition-[background-color,transform,box-shadow] duration-200 hover:-translate-y-0.5 hover:bg-amber-dark hover:shadow-[0_16px_40px_-10px_rgba(245,165,36,0.65)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-amber active:translate-y-0 motion-reduce:transition-none motion-reduce:hover:translate-y-0 md:min-h-[74px] md:px-10 md:text-[22px] ${
         full ? "w-full max-w-[440px]" : ""

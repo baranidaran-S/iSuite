@@ -1,5 +1,6 @@
 import { ShotSlot } from "@/components/sales/ShotSlot";
 import { SalesCta } from "@/components/sales/SalesCta";
+import { brandCase } from "@/components/sales/brandCase";
 import { salesCta, salesHero } from "@/lib/content";
 
 /* ==========================================================================
@@ -19,7 +20,7 @@ import { salesCta, salesHero } from "@/lib/content";
    and "Hurry! Limited Seats Only". We have no ticket, no deadline and no seat
    count, so those lines are absent rather than invented. The three offer
    chips do that work instead, and every one of them is the client's own
-   answer: free, thirty minutes, Google Meet. They sit BELOW the button - see
+   answer: free, forty-five minutes, Google Meet. They sit BELOW the button - see
    the note there.
 
    THE HERO SHOT IS THE DASHBOARD, NOT THE INBOX. It was the inbox, and so was
@@ -50,7 +51,7 @@ export function SalesHero() {
     <section className="bg-night px-5 pt-8 pb-10 md:pt-12 md:pb-14">
       <div className="mx-auto max-w-[940px] text-center">
         <p className="text-[12.5px] font-extrabold tracking-[0.22em] text-amber uppercase md:text-[13px]">
-          {salesHero.eyebrow}
+          {brandCase(salesHero.eyebrow)}
         </p>
 
         {/* FLUID, NOT STEPPED. A fixed 30px was the same on a 320px phone and

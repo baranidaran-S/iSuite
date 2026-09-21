@@ -10,13 +10,17 @@ export const site = {
   company: "MnT Future",
   product: "iSuite AI",
 
-  /* ---- TODO BEFORE LAUNCH: replace every value in this block -------------- */
-  contactEmail: "hello@mntfuture.com", // TODO: real contact email
-  phone: "+91 00000 00000", // TODO: real phone number
-  phoneHref: "tel:+910000000000", // TODO: keep in sync with `phone`
-  whatsappNumber: "910000000000", // TODO: real WhatsApp number, digits only, with country code
+  /* ---- TODO BEFORE LAUNCH ------------------------------------------------
+     The email, phone number and WhatsApp number that used to sit here went
+     with the footer's contact column: the page has one action now, and it is
+     the button. `fullFaqUrl` went with the old FAQ's "see all questions"
+     link. None of them is referenced anywhere any more, and a placeholder
+     nobody reads is how a placeholder reaches production.
+
+     Bringing any of them back means adding the value here AND the element
+     that shows it, which is the point — nothing on this page is wired to a
+     contact detail today. */
   privacyUrl: "#", // TODO: published privacy policy URL
-  fullFaqUrl: "#", // TODO: main website FAQ URL
 
   /* The deployed address. NOT cosmetic, and not optional: og:image has to be
      an ABSOLUTE url, because WhatsApp and Facebook fetch it from their own
@@ -34,9 +38,9 @@ export const site = {
   /* ==========================================================================
      PLACEHOLDER CLAIMS — THINGS ON THE PAGE THAT ARE NOT TRUE
      --------------------------------------------------------------------------
-     The contact details above are placeholders too, but they are OBVIOUSLY
-     wrong: a visitor who saw +91 00000 00000 would read it as broken, not as
-     a lie.
+     privacyUrl and bookingUrl above are placeholders too, but they are
+     OBVIOUSLY unfinished: a "#" link goes nowhere the moment anyone clicks
+     it, and an empty bookingUrl shouts in the build log.
 
      This block is different. These read as true to a visitor and are not.
      They were approved as stand-ins so the page has no holes while it is
@@ -67,22 +71,25 @@ export const site = {
     },
   ],
 
-  /** Anchor the Book a Demo CTAs scroll to. */
-  formAnchor: "#demo-form",
-  /** Anchor the Hero's secondary "See How It Works" CTA scrolls to. */
-  howItWorksAnchor: "#how-it-works",
+  /* ==========================================================================
+     THE BOOKING LINK — PASTE IT HERE, AND NOWHERE ELSE
+     --------------------------------------------------------------------------
+     Every "BOOK MY FREE DEMO" button on the page reads this one value. There
+     are EIGHT of them, and they all come from components/sales/SalesCta.tsx,
+     so there is exactly one string to change and no way for two buttons to
+     disagree.
+
+     This replaced the lead form. The page used to carry its own name / number
+     / business-type form that scrolled into view at #demo-form and posted
+     nowhere; the client's booking tool now does that job, so the form, its
+     date picker and its copy were removed rather than left running alongside.
+
+     WHILE THIS IS EMPTY THE BUTTONS GO NOWHERE. They render as normal but
+     their href falls back to "#", and the build prints a warning every time.
+     That is deliberate: a silent dead button on a page taking ad spend is the
+     single most expensive bug this page could have.
+
+     Paste the full address including https://, for example a Calendly,
+     Google Calendar appointment or Zoho Bookings page. */
+  bookingUrl: "", // TODO BEFORE LAUNCH: the demo booking page
 } as const;
-
-/**
- * TODO BEFORE LAUNCH — the lead form is intentionally NOT connected yet.
- *
- * While this is an empty string the form validates, shows its success state and
- * logs a warning, but sends the lead nowhere. Set it to your destination
- * (webhook, CRM endpoint, or a Next.js route handler) to switch delivery on.
- */
-export const LEAD_ENDPOINT = "";
-
-/** Pre-filled WhatsApp deep link used by the footer + mobile floating button. */
-export const whatsappLink = `https://wa.me/${site.whatsappNumber}?text=${encodeURIComponent(
-  "Hi, I would like to know more about iSuite AI.",
-)}`;
