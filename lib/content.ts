@@ -170,7 +170,28 @@ export const salesChapters = [
    * chased looks exactly like a deal nobody wanted" is an observation anyone
    * can check against their own week; "most deals are lost to no follow-up"
    * would be a figure we do not have, and is exactly the sentence not to
-   * write here. Every capability named below is documented in
+   * write here.
+   *
+   * THE LABELS ARE A VERB CHAIN, AND THAT IS THE POINT. They were five
+   * unrelated nouns - ONE INBOX, IT REPLIES, IT BOOKS, NOTHING SLIPS, ADS TO
+   * DEALS - and the two at the end broke the only thing holding them
+   * together. They now read as one sentence you can say out loud: one inbox,
+   * it replies, it books, it chases, it pays off.
+   *
+   * The chain also solves "it". A reader landing on chapter 2 does not yet
+   * know what IT is, and no label can define it in two words. Four labels
+   * repeating the same subject does what one label cannot.
+   *
+   * NO JARGON, MEASURED AGAINST ONE READER: someone who runs a showroom or a
+   * clinic and has never heard of a Conversions API. Where a point named a
+   * mechanism it now names the reason to want it - "send won deals back to
+   * Meta, so it learns who your real buyers are" - which is a description of
+   * what the mechanism does, never a promise about what it will earn.
+   *
+   * A TITLE MUST ANSWER ITS OWN MESSAGE. Chapter 4 opens on "Let me check and
+   * call you back" and used to answer with "Who owes whom a reply", which the
+   * reader has to stop and decode. "They never call back. You do." lands
+   * without being worked out. Same test for the others. Every capability named below is documented in
    * iSuite-AI-Main-Website-Requirements.md §6–§15. No figure, no result, no
    * promise appears in any of them.
    *
@@ -187,7 +208,7 @@ export const salesChapters = [
     points: [
       "WhatsApp Business on your own number",
       "Instagram, Facebook and website chat",
-      "Conversation assignment and internal notes",
+      "Hand a chat to a staff member, add notes the customer never sees",
       "See how long someone has been waiting",
     ],
   },
@@ -211,12 +232,12 @@ export const salesChapters = [
     channel: "WhatsApp",
     quote: "Can I come tomorrow evening?",
     label: "IT BOOKS",
-    title: "Checks the real calendar first.",
-    accent: "the real calendar",
+    title: "It books them in. Without double-booking you.",
+    accent: "Without double-booking you.",
     body: "The difference between a booking and a double-booking is whether anybody checked first.",
     points: [
       "Calendar per person or per service",
-      "Working hours, buffers and minimum notice",
+      "Your hours, the gap you need between appointments, how much warning you need",
       "24-hour and 1-hour reminders",
       "Customer reschedules or cancels themselves",
     ],
@@ -225,22 +246,22 @@ export const salesChapters = [
     id: "followups",
     channel: "Instagram",
     quote: "Let me check and call you back.",
-    label: "NOTHING SLIPS",
-    title: "Who owes whom a reply.",
-    accent: "Who owes whom",
+    label: "IT CHASES",
+    title: "They never call back. You do.",
+    accent: "You do.",
     body: "A deal nobody chased looks exactly like a deal nobody wanted. Only one of those is true.",
     points: [
       "Due and overdue lists, with owner names",
       "Reminders go to the person who owns it",
       "The assistant writes the follow-ups it promised",
-      "On-time follow-up rate, per person",
+      "Who is actually following up — and who is not",
     ],
   },
   {
     id: "ads",
     channel: "Facebook",
     quote: "Saw your ad — what is the price?",
-    label: "ADS TO DEALS",
+    label: "IT PAYS OFF",
     title: "Which ad brought the money.",
     accent: "brought the money",
     body: "Meta can tell you what a lead cost. It cannot tell you which of them paid you back.",
@@ -248,7 +269,7 @@ export const salesChapters = [
       "Build campaigns and lead forms from inside iSuite",
       "Spend and clicks sitting next to won deals",
       "Which campaign and which ad produced each contact",
-      "Won deals sent back to Meta via Conversions API",
+      "Send won deals back to Meta, so it learns who your real buyers are",
     ],
   },
 ] as const;
