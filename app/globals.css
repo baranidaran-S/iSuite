@@ -52,8 +52,8 @@
      the structure of the reference the client's senior supplied. That format
      runs on one dark ground and ONE hot accent used hard — on every
      button and on the key phrase inside every headline. The brand navy cannot
-     do that job: #023380 on this ground measures 1.05:1 against it, so a
-     navy button on this ground is invisible. Amber is 5.48:1 on the same
+     do that job: #023380 on this ground measures 1.55:1 against it, so a
+     navy button on this ground is invisible. Amber is 8.90:1 on the same
      ground, and it is the colour both reference pages use for exactly this.
 
      The navy palette above is NOT deleted. It still dresses the lead form,
@@ -61,7 +61,7 @@
      like a form, not like an advert.
 
      Measured: 12 pairs, all clearing WCAG AA. The amber carries dark text at
-     5.48:1, white on the ground is 10.97:1, and the card sits 1.12:1 off the
+     8.90:1, white on the ground is 17.81:1, and the card sits 1.12:1 off the
      ground — enough to read as a raised block without becoming a second
      surface competing with the accent.
      ========================================================================== */
@@ -81,20 +81,11 @@
          #0A0F1C   amber 9.37:1
          #001D55   amber 7.87:1
          #01327E   amber 5.85:1   <- getting close to the 4.5 floor
-         #011533   amber 8.90:1
-         #01397C   amber 5.48:1   <- here, roughly one step of headroom
+         #011533   amber 8.90:1   <- here
 
      Nothing else on the page is this sensitive to the ground, because
-     nothing else has to carry a colour on top of it AND under it.
-
-     THIS ONE ARRIVED AS A FIVE-STOP GRADIENT. Its stops span 0.002 in
-     luminance, about a hundredth of a visible step, so it renders as a flat
-     fill - set as a solid colour rather than shipping five dead stops plus
-     the machinery needed to sweep the cards alongside them. An earlier
-     request, #0F37FF to #5CC7FF, was a real gradient and could not be used
-     at any stop: it ended at amber 1.08:1, the button invisible against its
-     own background. */
-  --color-night: #01397c; /* the ground - most of the page   5.48:1 vs amber */
+     nothing else has to carry a colour on top of it AND under it. */
+  --color-night: #011533; /* the ground - most of the page   8.90:1 vs amber */
   /* RAISED BLOCKS, RE-DERIVED FROM THE GROUND EVERY TIME IT MOVES. This is
      not decoration: the original #141B2D sat 1.12:1 ABOVE a near-black, and
      against a blue ground it is DARKER - every card flips from a raised
@@ -104,7 +95,32 @@
 
      Saturation tracks the ground too. At 98% saturated ground, a muted card
      reads as a grey patch rather than a lift, so this sits at 80%. */
-  --color-night-card: #0e427f; /* raised blocks on it       1.12:1 on ground */
+  /* THE FAR END OF THE GROUND GRADIENT. The client asked for
+     linear-gradient(90deg, #0F37FF, #5CC7FF). That exact pair cannot be used:
+     measured across one section it gives white 6.84 -> 1.86:1, body copy
+     5.50 -> 1.50:1 and the amber 3.42 -> 1.08:1, so by the right-hand edge
+     the button is invisible against its own background. Every stop fails.
+
+     This keeps the journey - deep blue travelling to a lighter, cyan-leaning
+     blue, left to right - and caps it where the accent still reads. The
+     ceiling is arithmetic, not taste: amber needs 4.5:1, which puts the
+     lightest possible ground at luminance 0.064. #06406B sits at 0.038 and
+     holds amber at 5.27:1, leaving room for the button to stay obvious.
+
+     NOTE: the senior's brief said no gradients. This overrides that at the
+     client's explicit request. Third-party channel logos were already the
+     only exemption; this is the second. */
+  --color-night-far: #06406b; /* gradient far end          amber 5.27:1 */
+
+  --color-night-card: #082044; /* raised blocks on it       1.12:1 on ground */
+  /* A SOLID CARD ON A GRADIENT GROUND INVERTS HALFWAY ACROSS. #082044 sits
+     above the ground at the near edge and below it past the midpoint, so a
+     card would read as raised on the left and as a hole on the right. Each
+     card surface gets its own sweep, solved for the SAME ratio against the
+     ground's far end, so the lift is constant at every horizontal position
+     rather than only at x=0. */
+  --color-night-card-far: #0d4873; /* card at the far end       1.12:1 there */
+  --color-night-raised-far: #115e98; /* block 11 at the far end 1.58:1 there */
 
   /* THE FEATURE LIST'S CARD, AND NOTHING ELSE'S. --color-night-card sits
      1.12:1 off the ground: close enough that a card reads as a faint outline
@@ -114,25 +130,26 @@
      Block 11 is the exception. It is the only place that has to look like a
      LOT of product, and thirteen barely-there rectangles do the opposite. At
      1.59:1 the cards are surfaces rather than inferred edges. White on it is
-     6.9:1, the body copy 5.6:1, the numerals 3.5:1.
+     11.3:1, the body copy 9.1:1, the numerals 5.6:1.
 
      It was briefly the shared token, which lifted every card on the page. The
      client's call, and the right one: brightening everything spends the
      contrast where it buys nothing and flattens the one block that needed it
      back into the crowd. */
-  /* Amber on this measures 3.46:1. It passes ONLY because block 11's
-     numerals are 44-48px, where large text needs 3:1 rather than 4.5:1.
-     Small amber text must never go on this surface - it is the first thing
-     on the page to fail whenever the ground lightens. */
-  --color-night-raised: #1357aa; /* block 11 only           1.58:1 on ground */
+  /* Amber on this measures 5.62:1. On the previous, lighter ground the same
+     1.59:1 lift put it at 3.68:1 - passing only because the numerals are
+     44-48px and large text needs 3:1, not 4.5:1. Worth remembering if the
+     ground lightens again: this surface is the first place small amber text
+     would fail. */
+  --color-night-raised: #0d3777; /* block 11 only           1.58:1 on ground */
   /* SECONDARY TEXT, AND IT IS NOT GREY. This was #9AA7BF at 7.9:1 — legible,
      correct, and read as dull on the page, which on a sales page is the only
      verdict that counts. Body copy here is 15-18px against 26-60px uppercase
      extrabold headings, so SIZE and WEIGHT carry the hierarchy and the colour
-     does not have to. Freed of that job it goes bright: 8.82:1, one step off
+     does not have to. Freed of that job it goes bright: 15.09:1, one step off
      the white rather than half way to the background. */
   --color-night-muted: #dce5f5; /* secondary text on the ground 15.1:1 */
-  --color-amber: #f5a524; /* THE accent. Buttons + key phrases. 5.5:1 */
+  --color-amber: #f5a524; /* THE accent. Buttons + key phrases. 8.9:1 */
   --color-amber-dark: #d98a0b; /* hover                             */
   --color-good: #3dd68c; /* the WITH column            9.1:1 on card */
   --color-bad: #f2555a; /* the WITHOUT column          5.1:1 on card */
@@ -1221,5 +1238,56 @@
     [data-cta]::after {
       animation: none !important;
     }
+  }
+}
+
+/* ==========================================================================
+   THE GROUND GRADIENT
+   --------------------------------------------------------------------------
+   Applied as a background-IMAGE over .bg-night rather than by changing the
+   token, because --color-night is not only the ground: it is also the text
+   colour on the amber button and the heading colour on the two light
+   sections. A colour token cannot hold a gradient and still do those jobs.
+
+   .bg-night keeps setting background-color, so the solid navy remains
+   underneath as the fallback, and anything that cannot paint the image gets
+   a correct page rather than a transparent one.
+
+   Every dark block runs the same 90deg sweep across its own width, so they
+   line up down the page instead of drifting.
+
+   THE CARDS SWEEP TOO, and they have to. A solid card on a gradient ground
+   is raised at the near edge and recessed past the midpoint - the same
+   inversion that breaks a card whenever the ground moves, except happening
+   inside a single section. Each card's far end is solved for the same ratio
+   against the ground's far end, so the lift holds at every x.
+
+   Amber on the block 11 card reaches 3.34:1 at the far end, which is why its
+   numerals are 44-48px: large text needs 3:1. Small amber text must not go
+   on that surface.
+   ========================================================================== */
+@layer components {
+  .bg-night {
+    background-image: linear-gradient(
+      90deg,
+      var(--color-night) 0%,
+      var(--color-night-far) 100%
+    );
+  }
+
+  .bg-night-card {
+    background-image: linear-gradient(
+      90deg,
+      var(--color-night-card) 0%,
+      var(--color-night-card-far) 100%
+    );
+  }
+
+  .bg-night-raised {
+    background-image: linear-gradient(
+      90deg,
+      var(--color-night-raised) 0%,
+      var(--color-night-raised-far) 100%
+    );
   }
 }
