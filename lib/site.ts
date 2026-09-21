@@ -17,6 +17,18 @@ export const site = {
   whatsappNumber: "910000000000", // TODO: real WhatsApp number, digits only, with country code
   privacyUrl: "#", // TODO: published privacy policy URL
   fullFaqUrl: "#", // TODO: main website FAQ URL
+
+  /* The deployed address. NOT cosmetic, and not optional: og:image has to be
+     an ABSOLUTE url, because WhatsApp and Facebook fetch it from their own
+     servers, which have no idea what "/og-image.jpg" means. Next builds that
+     absolute url from metadataBase in app/layout.tsx, and with no value set
+     it falls back to localhost:3000 - which every crawler fails to fetch, so
+     the share card renders blank exactly as it did before the image existed.
+
+     No trailing slash: new URL() adds one, and two produce "//og-image.jpg".
+
+     REPLACE THIS if the page moves to a custom domain. */
+  siteUrl: "https://isuite-meta.vercel.app",
   /* ------------------------------------------------------------------------ */
 
   /* ==========================================================================

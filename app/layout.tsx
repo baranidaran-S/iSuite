@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Big_Shoulders, Plus_Jakarta_Sans } from "next/font/google";
+import { site } from "@/lib/site";
 import "./globals.css";
 
 /**
@@ -64,11 +65,25 @@ const bigShoulders = Big_Shoulders({
  * said "Messenger" long after the channel was renamed to Facebook across the
  * rest of the page. Both fixed.
  *
- * STILL MISSING: an og:image. Meta renders a blank card without one, which
- * is the first thing a person sees when this link is shared — and this page
- * exists to be shared by Meta. It needs a real 1200x630 image in public/.
+ * THE OG IMAGE. This is what WhatsApp, Facebook, Instagram and Slack draw
+ * when somebody pastes the link, and what Meta uses when an ad points here.
+ * Without it they render a blank grey rectangle, which was the first thing
+ * anybody saw of a page whose whole purpose is to be shared.
+ *
+ * 1200x630 because that is the ratio every one of them crops to. JPEG rather
+ * than PNG: the artwork carries enough background noise that PNG came out at
+ * 684KB, and WhatsApp's crawler skips previews much above 300KB - a blank
+ * card again, for a different reason. At quality 92 it is 89KB with no
+ * visible artefact on the text edges.
+ *
+ * metadataBase IS NOT OPTIONAL HERE. og:image must be ABSOLUTE, because the
+ * crawler fetching it runs on Meta's servers and "/og-image.jpg" means
+ * nothing to them. Next builds that absolute url from metadataBase; with
+ * none set it falls back to localhost:3000 and every crawler fails. It is
+ * site.siteUrl, which is a placeholder until the real domain is known.
  */
 export const metadata: Metadata = {
+  metadataBase: new URL(site.siteUrl),
   title: "iSuite AI — One Inbox for WhatsApp, Instagram and Facebook Enquiries",
   description:
     "iSuite AI brings WhatsApp, Instagram, Facebook, website and Meta ad enquiries into one system — with an AI sales assistant that responds, qualifies, books appointments and follows up. Book a free 30-minute demo.",
@@ -78,6 +93,20 @@ export const metadata: Metadata = {
     description:
       "One system for every enquiry, follow-up and deal. Book a free 30-minute demo with MnT Future, on Google Meet.",
     type: "website",
+    images: [
+      {
+        url: "/og-image.jpg",
+        width: 1200,
+        height: 630,
+        alt: "iSuite AI — one inbox for every enquiry. Free 30-minute demo.",
+      },
+    ],
+  },
+  /* X ignores og:image sizing and needs telling to use the wide card.
+     Without this it draws a small square thumbnail and centre-crops the
+     artwork, which cuts the headline in half. */
+  twitter: {
+    card: "summary_large_image",
   },
 };
 

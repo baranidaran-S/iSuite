@@ -19,7 +19,8 @@ import { salesCta, salesHero } from "@/lib/content";
    and "Hurry! Limited Seats Only". We have no ticket, no deadline and no seat
    count, so those lines are absent rather than invented. The three offer
    chips do that work instead, and every one of them is the client's own
-   answer: free, thirty minutes, Google Meet.
+   answer: free, thirty minutes, Google Meet. They sit BELOW the button - see
+   the note there.
 
    THE HERO SHOT IS THE DASHBOARD, NOT THE INBOX. It was the inbox, and so was
    chapter 4 — the client flagged it: the inbox is one part of the product,
@@ -72,8 +73,22 @@ export function SalesHero() {
           {salesHero.sub}
         </p>
 
-        {/* The offer, stated before the button rather than after it. */}
-        <ul className="mt-6 flex flex-wrap items-center justify-center gap-2.5">
+        {/* THE BUTTON COMES BEFORE THE OFFER CHIPS, not after. The chips sat
+            above it and pushed the one control on the page a further 60px
+            down a first screen that is already carrying a five-line headline
+            and a three-line subhead. On a phone that is the difference
+            between the ask being visible on landing and needing a scroll.
+
+            The chips still do their job underneath: the ask first, then what
+            it costs and how long it takes. Somebody who has already decided
+            can press without reading them, and somebody who has not gets the
+            answer immediately below. Nothing is hidden - it is 60px lower and
+            the button is 60px higher. */}
+        <div className="mt-7 flex flex-col items-center">
+          <SalesCta anim="jump" />
+        </div>
+
+        <ul className="mt-5 flex flex-wrap items-center justify-center gap-2.5">
           {salesHero.offer.map((item) => (
             <li
               key={item}
@@ -83,10 +98,6 @@ export function SalesHero() {
             </li>
           ))}
         </ul>
-
-        <div className="mt-6 flex flex-col items-center">
-          <SalesCta anim="jump" />
-        </div>
 
         <p className="mx-auto mt-4 max-w-[440px] text-[14.5px] leading-relaxed text-night-muted md:text-[15px]">
           {salesHero.offerNote}
