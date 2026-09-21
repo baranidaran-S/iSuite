@@ -46,14 +46,14 @@
      ========================================================================== */
 
   /* ==========================================================================
-     SALES PAGE PALETTE — near-black + one hot accent
+     SALES PAGE PALETTE — deep blue ground + one hot accent
      --------------------------------------------------------------------------
      The page is being rebuilt as a long-form direct-response sales page, to
      the structure of the reference the client's senior supplied. That format
-     runs on a near-black ground and ONE hot accent used hard — on every
+     runs on one dark ground and ONE hot accent used hard — on every
      button and on the key phrase inside every headline. The brand navy cannot
-     do that job: #023380 on a dark ground measures 1.56:1 against it, so a
-     navy button on a dark page is invisible. Amber is 9.37:1 on the same
+     do that job: #023380 on this ground measures 1.05:1 against it, so a
+     navy button on this ground is invisible. Amber is 5.48:1 on the same
      ground, and it is the colour both reference pages use for exactly this.
 
      The navy palette above is NOT deleted. It still dresses the lead form,
@@ -61,12 +61,50 @@
      like a form, not like an advert.
 
      Measured: 12 pairs, all clearing WCAG AA. The amber carries dark text at
-     9.37:1, white on the ground is 18.76:1, and the card sits 1.12:1 off the
+     5.48:1, white on the ground is 10.97:1, and the card sits 1.12:1 off the
      ground — enough to read as a raised block without becoming a second
      surface competing with the accent.
      ========================================================================== */
-  --color-night: #0a0f1c; /* the ground - most of the page          */
-  --color-night-card: #141b2d; /* raised blocks on it               */
+  /* THE GROUND. Settled here after three moves - #0A0F1C near-black, then
+     #001D55, then #01327E - and this is a deep navy in the client's blue
+     family rather than a near-black or a mid blue.
+
+     IT IS ALSO THE TEXT COLOUR ON THE AMBER BUTTON, which is why it cannot
+     be picked by eye: the label is this value on #F5A524 and measures 8.90:1
+     both ways. White headings 17.81:1, body copy 14.33:1, the amber accent
+     8.90:1.
+
+     THE AMBER IS THE THING TO WATCH when this moves again. Every lift of the
+     ground costs it, and the button is the one element on this page that may
+     never be hard to see:
+
+         #0A0F1C   amber 9.37:1
+         #001D55   amber 7.87:1
+         #01327E   amber 5.85:1   <- getting close to the 4.5 floor
+         #011533   amber 8.90:1
+         #01397C   amber 5.48:1   <- here, roughly one step of headroom
+
+     Nothing else on the page is this sensitive to the ground, because
+     nothing else has to carry a colour on top of it AND under it.
+
+     THIS ONE ARRIVED AS A FIVE-STOP GRADIENT. Its stops span 0.002 in
+     luminance, about a hundredth of a visible step, so it renders as a flat
+     fill - set as a solid colour rather than shipping five dead stops plus
+     the machinery needed to sweep the cards alongside them. An earlier
+     request, #0F37FF to #5CC7FF, was a real gradient and could not be used
+     at any stop: it ended at amber 1.08:1, the button invisible against its
+     own background. */
+  --color-night: #01397c; /* the ground - most of the page   5.48:1 vs amber */
+  /* RAISED BLOCKS, RE-DERIVED FROM THE GROUND EVERY TIME IT MOVES. This is
+     not decoration: the original #141B2D sat 1.12:1 ABOVE a near-black, and
+     against a blue ground it is DARKER - every card flips from a raised
+     block to a recessed hole, at a ratio too small to see either way. The
+     value is always solved for 1.12:1 on the LIT side of whatever the ground
+     currently is.
+
+     Saturation tracks the ground too. At 98% saturated ground, a muted card
+     reads as a grey patch rather than a lift, so this sits at 80%. */
+  --color-night-card: #0e427f; /* raised blocks on it       1.12:1 on ground */
 
   /* THE FEATURE LIST'S CARD, AND NOTHING ELSE'S. --color-night-card sits
      1.12:1 off the ground: close enough that a card reads as a faint outline
@@ -76,21 +114,25 @@
      Block 11 is the exception. It is the only place that has to look like a
      LOT of product, and thirteen barely-there rectangles do the opposite. At
      1.59:1 the cards are surfaces rather than inferred edges. White on it is
-     11.8:1, the body copy 9.5:1, the numerals 5.9:1.
+     6.9:1, the body copy 5.6:1, the numerals 3.5:1.
 
      It was briefly the shared token, which lifted every card on the page. The
      client's call, and the right one: brightening everything spends the
      contrast where it buys nothing and flattens the one block that needed it
      back into the crowd. */
-  --color-night-raised: #26355c; /* block 11 only           1.59:1 on ground */
+  /* Amber on this measures 3.46:1. It passes ONLY because block 11's
+     numerals are 44-48px, where large text needs 3:1 rather than 4.5:1.
+     Small amber text must never go on this surface - it is the first thing
+     on the page to fail whenever the ground lightens. */
+  --color-night-raised: #1357aa; /* block 11 only           1.58:1 on ground */
   /* SECONDARY TEXT, AND IT IS NOT GREY. This was #9AA7BF at 7.9:1 — legible,
      correct, and read as dull on the page, which on a sales page is the only
      verdict that counts. Body copy here is 15-18px against 26-60px uppercase
      extrabold headings, so SIZE and WEIGHT carry the hierarchy and the colour
-     does not have to. Freed of that job it goes bright: 15.09:1, one step off
+     does not have to. Freed of that job it goes bright: 8.82:1, one step off
      the white rather than half way to the background. */
   --color-night-muted: #dce5f5; /* secondary text on the ground 15.1:1 */
-  --color-amber: #f5a524; /* THE accent. Buttons + key phrases. 9.4:1 */
+  --color-amber: #f5a524; /* THE accent. Buttons + key phrases. 5.5:1 */
   --color-amber-dark: #d98a0b; /* hover                             */
   --color-good: #3dd68c; /* the WITH column            9.1:1 on card */
   --color-bad: #f2555a; /* the WITHOUT column          5.1:1 on card */

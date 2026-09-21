@@ -51,13 +51,13 @@ import { Footer } from "@/components/Footer";
    TWO LIGHT SECTIONS, AND ONLY TWO: the founder and the form. A four-block
    light band was tried across blocks 10-13 and rejected on sight — it broke
    the page into two halves that looked like two different sites, and the
-   near-black is most of why this reads as a sales page at all.
+   dark ground is most of why this reads as a sales page at all.
 
    The two that stayed are the two that are not about the product. A face
    belongs on a light ground, and a form is the one thing here you act ON
    rather than read. Everything else is dark, as it was.
 
-   Amber is 1.80:1 on a light ground, so neither of them uses amber as text —
+   Amber is 1.83:1 on a light ground, so neither of them uses amber as text —
    see the notes in SalesFounder and LeadForm.
    ========================================================================== */
 
@@ -161,7 +161,7 @@ export default function Page() {
 
         <SalesOffer />
 
-        {/* LIGHT. The only break in the near-black before the form. */}
+        {/* LIGHT. The only break in the dark before the form. */}
         <SalesFounder />
 
         <SalesModules />

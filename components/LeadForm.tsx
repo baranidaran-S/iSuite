@@ -69,7 +69,7 @@ export function LeadForm({
   /**
    * Sales-page dressing: the pale band, the uppercase heading and the sales
    * page's own button wording. The prop was `dark` and put this on the
-   * near-black — the band is light again, which is what the spec asked for
+   * dark ground — the band is light again, which is what the spec asked for
    * in the first place, so the name now describes the wording rather than a
    * colour it no longer sets.
    */
@@ -128,13 +128,13 @@ export function LeadForm({
       {/* The heading keeps its own narrower measure — a centred sentence
           stretched across 920px is hard to read back.
 
-          PALE BAND, WHITE CARD. This was briefly on the near-black to match
+          PALE BAND, WHITE CARD. This was briefly on the dark ground to match
           the sections above it, and it is light again on the client's call.
           It is also what the build spec asked for: the form is the one thing
           on the page you act ON rather than read, and a light ground is
           where people expect to type.
 
-          Coming after eight near-black screens, the switch also marks the
+          Coming after eight dark screens, the switch also marks the
           form out as the end of the page rather than one more block of it.
 
           The submit stays navy. Amber on white measures 1.9:1 and would fail

@@ -19,7 +19,7 @@ import { demoCall, salesCta } from "@/lib/content";
    being straight about the limit is all there is.
 
    It is drawn in a LIGHTER PANEL than the rest of the page. The whole page is
-   near-black; the one block that states the offer should not be the same
+   dark ground; the one block that states the offer should not be the same
    surface as the blocks that argue for it.
    ========================================================================== */
 

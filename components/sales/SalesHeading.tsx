@@ -17,10 +17,10 @@ import type { ReactNode } from "react";
    just stops. Worth knowing when a heading suddenly looks flat.
 
    ON A LIGHT SECTION the accent cannot stay amber text: #F5A524 on #EFF3F9
-   measures 1.80:1, which is not a colour, it is a smudge. The amber has to
+   measures 1.83:1, which is not a colour, it is a smudge. The amber has to
    become a SHAPE, and which shape is not a free choice.
 
-   So it becomes an amber BLOCK carrying near-black text, which is 9.37:1 and
+   So it becomes an amber BLOCK carrying the ground colour, which is 5.48:1
    reads as a marker-pen highlight — the same colour doing the same job.
 
    TWO THINGS KEEP THE BLOCK ALIGNED, and both were wrong the first time.

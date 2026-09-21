@@ -18,13 +18,15 @@ import { site } from "@/lib/site";
    WHAT MAKES IT LOOK LIKE A SALES BUTTON RATHER THAN A UI BUTTON:
      - it is a BAR on a phone, not a pill floating mid-screen
      - 58px tall, above the 44px minimum, because it is the point of the page
-     - an amber glow under it, so it sits above the near-black rather than on
+     - an amber glow under it, so it sits above the ground rather than on
        it. A shadow, not a gradient — the no-gradient rule still stands.
      - the arrow slides on hover, and stops entirely under reduced motion
      - the offer repeats underneath every single time
 
-   Amber is 9.37:1 on the ground and carries near-black text at the same
-   ratio. The brand navy measures 1.56:1 here and would be invisible.
+   Amber is 5.48:1 on the ground and carries the ground colour as text at
+   the same ratio. Both were 9.37:1 when the ground was a near-black; the
+   ground is the client's blue now and the pair moved together, which is the
+   point of deriving one from the other rather than picking each by eye.
 
    EIGHT ANIMATIONS, ONE BUTTON. Each instance names a different `anim` and
    LOOPS it, on its own, with nothing to trigger it. Roughly nine in ten
@@ -48,7 +50,7 @@ import { site } from "@/lib/site";
    — the founder and the form — carry no SalesCta: the founder introduces the
    person and the form has its own submit. So this component has one skin and
    needs no light variant. If a light section ever does need the button, amber
-   is 1.80:1 on #EFF3F9 and the edge would have to be drawn in near-black to
+   is 1.83:1 on #EFF3F9 and the edge would have to be drawn in the ground to
    satisfy WCAG 1.4.11; it is not a straight recolour.
    ========================================================================== */
 

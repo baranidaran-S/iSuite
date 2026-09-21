@@ -21,13 +21,13 @@ import { salesFounder } from "@/lib/content";
    ONE OF THE TWO LIGHT SECTIONS ON THE PAGE, the other being the form. A
    wider light band was tried from here down to the FAQ and rejected — it
    split the page into two halves that read as two different sites. Narrowed
-   to this block alone it does the one thing it was for: fifteen near-black
+   to this block alone it does the one thing it was for: fifteen dark
    screens in a row is an endless scroll on a phone, and this is the single
    place a break also means something. A face belongs on a light ground.
 
-   Amber is 1.80:1 here, so nothing on this section uses amber as TEXT — the
-   heading accent and the role line are amber FILLS carrying near-black,
-   which is 9.37:1. Same colour, same job.
+   Amber is 1.83:1 here, so nothing on this section uses amber as TEXT — the
+   heading accent and the role line are amber FILLS carrying the ground,
+   which is 5.48:1. Same colour, same job.
    ========================================================================== */
 
 export function SalesFounder() {
@@ -53,8 +53,8 @@ export function SalesFounder() {
             {salesFounder.name}
           </p>
           {/* The role was amber TEXT on the dark band. On this one that is
-              1.80:1, so it becomes an amber chip with near-black on it —
-              9.37:1, and the same colour still marking the same thing. */}
+              1.83:1, so it becomes an amber chip with the ground on it —
+              5.48:1, and the same colour still marking the same thing. */}
           <span className="mt-2 inline-block rounded-[5px] bg-amber px-2 py-1 text-[13px] font-extrabold tracking-[0.18em] text-night uppercase md:text-[14px]">
             {salesFounder.role}
           </span>
