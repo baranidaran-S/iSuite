@@ -970,17 +970,55 @@ export const metaAdsShots: Array<{
 export const businessTypes = {
   // [REQ §16] — build spec specifies the 8 items but no section heading
   heading: "Built for Businesses That Sell Through Conversations.",
-  // [SPEC] — 8 icons with labels
+  /* [SPEC] — 8 icons with labels.
+   *
+   * `message` IS WHAT MAKES THE READER RECOGNISE THEMSELVES. A trade name on
+   * its own is a taxonomy: a salon owner reads "Salons" and agrees it is a
+   * category they belong to, which persuades nobody. They got "How much for
+   * bridal makeup?" this morning, and reading it back is a different
+   * experience entirely.
+   *
+   * It is the same device the five chapters open with, for the same reason,
+   * and it has the same rule: NO NAME, NO BUSINESS, NO OUTCOME. These are
+   * examples of the first message each trade receives, not quotes from
+   * anybody. Attribute one and it becomes invented proof.
+   *
+   * Photographs were considered here and rejected on arithmetic: eight cards
+   * in a grid gives each image roughly 40px, and at 40px a clinic, a salon
+   * and a studio are the same grey rectangle. Photographs would have needed
+   * the card to grow and the grid to halve. An icon reads at 40px; that is
+   * the whole argument.
+   */
   items: [
-    { icon: "showroom", label: "Showrooms" },
-    { icon: "clinic", label: "Clinics" },
-    { icon: "salon", label: "Salons" },
-    { icon: "studio", label: "Studios" },
-    { icon: "school", label: "Schools" },
-    { icon: "agency", label: "Agencies" },
-    { icon: "consultant", label: "Consultants" },
-    { icon: "service", label: "Service Businesses" },
+    {
+      icon: "showroom",
+      label: "Showrooms",
+      message: "Is the showroom open today?",
+    },
+    { icon: "clinic", label: "Clinics", message: "Any appointment tomorrow?" },
+    { icon: "salon", label: "Salons", message: "How much for bridal makeup?" },
+    {
+      icon: "studio",
+      label: "Studios",
+      message: "Can you share your packages?",
+    },
+    { icon: "school", label: "Schools", message: "What are the fees?" },
+    { icon: "agency", label: "Agencies", message: "Can we get on a call?" },
+    {
+      icon: "consultant",
+      label: "Consultants",
+      message: "What do you charge?",
+    },
+    {
+      icon: "service",
+      label: "Service Businesses",
+      message: "Do you come to Anna Nagar?",
+    },
   ],
+  /* For everyone who does not see their own trade on the list. Without it,
+   * eight named categories quietly tell a ninth reader this is not for them. */
+  catchAll:
+    "Not on this list? If your customers message you before they buy, it works the same way.",
 } as const;
 
 /* --- §7.9 Trust / Transparency -------------------------------------------- */

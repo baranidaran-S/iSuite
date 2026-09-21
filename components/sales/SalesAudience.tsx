@@ -50,21 +50,41 @@ export function SalesAudience() {
           </p>
         </div>
 
-        <ul className="mt-8 grid grid-cols-2 gap-2.5 md:mt-10 md:grid-cols-3 md:gap-3">
+        {/* ONE COLUMN ON A PHONE, THEN TWO, THEN FOUR. It was two then three,
+            which orphaned the eighth card into a row of its own at every
+            desktop width. 8 divides exactly by 1, 2 and 4.
+
+            The message needs a full line to itself, and half of a 375px
+            screen does not give it one - 130px of text column after the icon
+            and the padding, which would break a six-word sentence over three
+            lines. A phone gets one column so each card can hold a sentence. */}
+        <ul className="mt-8 grid gap-2.5 sm:grid-cols-2 md:mt-10 md:gap-3 lg:grid-cols-4">
           {businessTypes.items.map((item) => (
             <li
               key={item.label}
-              className="flex items-center gap-3 rounded-[14px] border border-white/10 bg-night-card px-4 py-3.5 md:px-5 md:py-4"
+              className="rounded-[14px] border border-white/10 bg-night-card px-4 py-3.5 md:px-5 md:py-4"
             >
-              <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[10px] bg-amber/12 text-amber">
-                <Icon name={item.icon as IconName} className="h-5 w-5" />
-              </span>
-              <span className="text-[15px] leading-snug font-extrabold text-white md:text-[16px]">
-                {item.label}
-              </span>
+              <div className="flex items-center gap-3">
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[10px] bg-amber/12 text-amber">
+                  <Icon name={item.icon as IconName} className="h-5 w-5" />
+                </span>
+                <span className="text-[15px] leading-snug font-extrabold text-white md:text-[16px]">
+                  {item.label}
+                </span>
+              </div>
+
+              {/* The first message this trade actually receives. Not a quote
+                  from anyone - see the note in content.ts. */}
+              <p className="mt-2.5 text-[14px] leading-snug text-night-muted md:text-[14.5px]">
+                {item.message}
+              </p>
             </li>
           ))}
         </ul>
+
+        <p className="mt-5 text-center text-[14px] leading-relaxed font-semibold text-night-muted md:mt-6 md:text-[15px]">
+          {businessTypes.catchAll}
+        </p>
 
         {/* The light panel. It is the only one on this stretch of the page,
             which is the whole reason the eye goes to it. */}

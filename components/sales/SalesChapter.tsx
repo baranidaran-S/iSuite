@@ -43,12 +43,34 @@ import type { salesChapters } from "@/lib/content";
    It is an incoming bubble carrying no name, no business and no outcome - see
    the note on `quote` in content.ts, which is where that line is drawn.
 
-   THE TICKS ARE GONE. A ticked vertical list is the single most generic
-   element a landing page can carry, and there were four per chapter. The same
-   four facts now sit in a two-column strip with a hairline above them, which
-   reads as specification rather than as a checklist and costs half the
-   height.
+   THE TICK LIST IS TWO COLUMNS NOW. A ticked vertical list running the full
+   width is the single most generic element a landing page can carry, and
+   there were four per chapter. The same four facts sit in a two-column strip
+   under a hairline, which costs half the height and stops the run of five
+   reading as five checklists.
+
+   The tick itself came back at the client's call, and bigger: a 19px glyph
+   with no circle behind it. The circle was what made the old one read as a
+   checklist - a filled disc per row is a lot of furniture for a line of text
+   - and the bare glyph says the same thing without it. Each row is a flex
+   with the tick fixed, so a point wrapping to three lines keeps its text in
+   one column instead of running back under the tick.
    ========================================================================== */
+
+const Tick = ({ className }: { className?: string }) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={3.4}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+    className={className}
+  >
+    <path d="m4.5 12.5 5 5L19.5 6.5" />
+  </svg>
+);
 
 export function SalesChapter({
   chapter,
@@ -118,12 +140,10 @@ export function SalesChapter({
             {chapter.points.map((point) => (
               <li
                 key={point}
-                className="text-[14px] leading-snug font-semibold text-white md:text-[15px]"
+                className="flex items-start gap-2.5 text-[14px] leading-snug font-semibold text-white md:gap-3 md:text-[15px]"
               >
-                <span aria-hidden="true" className="mr-2 text-amber">
-                  &#8213;
-                </span>
-                {point}
+                <Tick className="mt-px h-[19px] w-[19px] shrink-0 text-amber md:h-[21px] md:w-[21px]" />
+                <span>{point}</span>
               </li>
             ))}
           </ul>
