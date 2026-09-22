@@ -104,9 +104,10 @@ export default function Page() {
                                    so the conversation belongs here.
               03  bookings.png     the real bookings list, not the calendar.
 
-            TWO FILES ARE NOW ORPHANED and referenced by nothing:
-            assistant-reply.png and appointments.png, both AI-generated
-            mocks. Delete them once the real set is signed off. */}
+            THE TWO AI-GENERATED MOCKS THEY REPLACED ARE GONE from
+            public/shots/ - appointments.png and assistant-reply.png, 2MB
+            between them, referenced by nothing after the swap. Git still
+            has them if a real screenshot ever falls through. */}
         <SalesChapter
           chapter={salesChapters[0]}
           index={1}
