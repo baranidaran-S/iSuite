@@ -174,7 +174,7 @@ export default function Page() {
           total={5}
           mock={
             <ShotSlot
-              name="Meta Ads - spend, leads and won deals in one view"
+              name="Ad return - what each ad cost, and the revenue it brought back"
               file="meta-ads.png"
               src={metaAdsShot}
               sizes={SHOT_SIZES.chapter}

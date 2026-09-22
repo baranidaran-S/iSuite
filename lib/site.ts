@@ -51,19 +51,23 @@ export const site = {
 
      EMPTY THIS LIST BEFORE LAUNCH. Add to it any time an invented figure
      goes onto the page.
+
+     THE SCREENSHOTS CAME OFF THIS LIST. All seven were AI-generated mocks
+     carrying invented pipeline values, ad spend and response times, which
+     the requirements doc forbids outright and which sat here as the client's
+     own override. Every one is now a real screen from their own CRM, with
+     staff names and customer numbers redacted, so the figures on the page
+     are the client's actual figures and there is nothing left to disclose.
+
+     WHICH IS A HIGHER BAR, NOT A LOWER ONE. Real numbers cannot be quietly
+     adjusted to look better. If a screenshot is ever swapped for something
+     retouched, it belongs back on this list the same day.
      ========================================================================== */
   PLACEHOLDER_CLAIMS: [
     {
       where: "lib/content.ts — salesFaq, 'How long does it take to set up?'",
       claim: "Setup on our side is usually done within a week",
       truth: "Unknown. Nobody has given a figure from a real onboarding.",
-    },
-    {
-      where: "public/shots/*.png — the six product screenshots",
-      claim:
-        "Every figure inside them: pipeline value, deal values, ad spend, lead and won-deal counts, response times",
-      truth:
-        "AI-generated sample screens standing in until real ones are approved. The requirements doc forbids fake dashboard figures, so this override is the client's and must be re-confirmed. Replace the files rather than editing the numbers.",
     },
   ],
 
@@ -85,7 +89,15 @@ export const site = {
      That is deliberate: a silent dead button on a page taking ad spend is the
      single most expensive bug this page could have.
 
-     Paste the full address including https://, for example a Calendly,
-     Google Calendar appointment or Zoho Bookings page. */
-  bookingUrl: "", // TODO BEFORE LAUNCH: the demo booking page
+     IT IS THEIR OWN CRM. Not Calendly or Zoho — the booking page is served
+     by iSuite AI itself at crm.mntfuture.com, which matters more than it
+     looks: a visitor who clicks "BOOK MY FREE DEMO" lands on the product
+     being sold, and the booking they make is the same booking the chapter 3
+     screenshot shows. The demo starts before the call does.
+
+     THE PATH IS AN OPAQUE ID and there is nothing to read in it. Changing a
+     character does not fail loudly — it serves someone else's booking page
+     or a 404, and the only symptom is bookings quietly not arriving. Check
+     it against the CRM rather than retyping it. */
+  bookingUrl: "https://crm.mntfuture.com/b/abb8c76365cd45a4a5c495f33013adea",
 } as const;
