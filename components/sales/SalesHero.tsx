@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { ShotSlot } from "@/components/sales/ShotSlot";
+import { SHOT_SIZES, ShotSlot } from "@/components/sales/ShotSlot";
+import dashboardShot from "@/public/shots/dashboard.png";
 import { SalesCta } from "@/components/sales/SalesCta";
 import { salesCta, salesHero } from "@/lib/content";
 import { site } from "@/lib/site";
@@ -136,8 +137,8 @@ export function SalesHero() {
           <ShotSlot
             name="The dashboard - open deals, pipeline value, today's bookings, first-response time"
             file="dashboard.png"
-            src="/shots/dashboard.png"
-            ratio="16 / 9"
+            src={dashboardShot}
+            sizes={SHOT_SIZES.hero}
             priority
           />
         </div>

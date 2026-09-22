@@ -2,7 +2,14 @@ import { SalesHero } from "@/components/sales/SalesHero";
 import { SalesShowcase } from "@/components/sales/SalesShowcase";
 import { SalesChapter } from "@/components/sales/SalesChapter";
 import { SalesCtaRow } from "@/components/sales/SalesCta";
-import { ShotSlot } from "@/components/sales/ShotSlot";
+import { SHOT_SIZES, ShotSlot } from "@/components/sales/ShotSlot";
+/* Static imports, not string paths: Next reads each file's real size at
+   build time and emits it under a content-hashed url. See ShotSlot. */
+import bookingsShot from "@/public/shots/bookings.png";
+import followupsShot from "@/public/shots/followups.png";
+import fullInboxShot from "@/public/shots/full-inbox.png";
+import inboxShot from "@/public/shots/inbox.png";
+import metaAdsShot from "@/public/shots/meta-ads.png";
 import { SalesOffer } from "@/components/sales/SalesOffer";
 import { SalesFounder } from "@/components/sales/SalesFounder";
 import { SalesModules } from "@/components/sales/SalesModules";
@@ -78,20 +85,38 @@ export default function Page() {
             `flip` swaps which side the screen sits on, so five in a row do
             not march down one column.
 
-            All five files are in public/shots/ and wired below. `ratio`
-            must match the file's own width/height or ShotSlot's objectFit
-            will crop it: 16/9 for the wide screens, 16/10 for the inbox,
-            4/5 for the portrait conversation. */}
+            All five files are in public/shots/ and wired below. THERE IS
+            NO RATIO TO SET any more — each shot renders at its own shape,
+            measured from the file at build time. Three rounds of replacement
+            screenshots each came back a different shape and each time the
+            hand-written ratio still described the file before it, so cover
+            quietly sliced up to 39% off the sides. See ShotSlot.
+
+            THREE SLOTS NOW HOLD A DIFFERENT FILE FROM THE ONE THEY WERE
+            BUILT WITH, because the real screenshots arrived and they are not
+            shaped like the mocks were:
+
+              01  full-inbox.png   the whole inbox - channel list, thread and
+                                   contact panel. Matches "Every channel. One
+                                   screen." far better than a single thread.
+              02  inbox.png        the Tamil thread that used to sit in 01.
+                                   Chapter 2 is "In their language. At 11pm.",
+                                   so the conversation belongs here.
+              03  bookings.png     the real bookings list, not the calendar.
+
+            TWO FILES ARE NOW ORPHANED and referenced by nothing:
+            assistant-reply.png and appointments.png, both AI-generated
+            mocks. Delete them once the real set is signed off. */}
         <SalesChapter
           chapter={salesChapters[0]}
           index={1}
           total={5}
           mock={
             <ShotSlot
-              name="The shared inbox, with all four channels in one list"
-              file="inbox.png"
-              src="/shots/inbox.png"
-              ratio="16 / 10"
+              name="The shared inbox - every channel's conversations in one list"
+              file="full-inbox.png"
+              src={fullInboxShot}
+              sizes={SHOT_SIZES.chapter}
             />
           }
         />
@@ -104,9 +129,9 @@ export default function Page() {
           mock={
             <ShotSlot
               name="A WhatsApp conversation where the assistant replies in Tamil"
-              file="assistant-reply.png"
-              src="/shots/assistant-reply.png"
-              ratio="4 / 5"
+              file="inbox.png"
+              src={inboxShot}
+              sizes={SHOT_SIZES.chapter}
             />
           }
         />
@@ -119,10 +144,10 @@ export default function Page() {
           total={5}
           mock={
             <ShotSlot
-              name="The appointment calendar, with slots and reminders"
-              file="appointments.png"
-              src="/shots/appointments.png"
-              ratio="16 / 9"
+              name="The bookings list - who booked, with whom, and whether they showed"
+              file="bookings.png"
+              src={bookingsShot}
+              sizes={SHOT_SIZES.chapter}
             />
           }
         />
@@ -136,8 +161,8 @@ export default function Page() {
             <ShotSlot
               name="The follow-ups list - due and overdue, with owner names"
               file="followups.png"
-              src="/shots/followups.png"
-              ratio="16 / 9"
+              src={followupsShot}
+              sizes={SHOT_SIZES.chapter}
             />
           }
         />
@@ -150,8 +175,8 @@ export default function Page() {
             <ShotSlot
               name="Meta Ads - spend, leads and won deals in one view"
               file="meta-ads.png"
-              src="/shots/meta-ads.png"
-              ratio="16 / 9"
+              src={metaAdsShot}
+              sizes={SHOT_SIZES.chapter}
             />
           }
         />

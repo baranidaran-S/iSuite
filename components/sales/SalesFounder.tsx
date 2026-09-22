@@ -1,5 +1,6 @@
 import { SalesHeading } from "@/components/sales/SalesHeading";
-import { ShotSlot } from "@/components/sales/ShotSlot";
+import { SHOT_SIZES, ShotSlot } from "@/components/sales/ShotSlot";
+import founderShot from "@/public/shots/founder.png";
 import { brandCase } from "@/components/sales/brandCase";
 import { salesFounder } from "@/lib/content";
 import { site } from "@/lib/site";
@@ -63,8 +64,13 @@ export function SalesFounder() {
              does not belong on a page. The client has since confirmed it. */
           name={`${salesFounder.name}, founder of ${site.company}`}
           file="founder.png"
-          src="/shots/founder.png"
-          ratio="4 / 5"
+          src={founderShot}
+          /* THE ONLY DELIBERATE CROP ON THE PAGE. Every screenshot renders
+             at its own shape; this one does not, because the block was built
+             around a portrait box and the photo is very nearly square. See
+             the note below on what the 4/5 crop actually takes. */
+          cropTo="4 / 5"
+          sizes={SHOT_SIZES.founder}
           light
         />
 
