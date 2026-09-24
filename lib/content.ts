@@ -65,25 +65,38 @@ export const salesHero = {
   /* Two-tone: `accent` is the phrase that goes amber. It must appear in
      `headline` exactly, or the split silently does nothing.
 
-     IT NAMES THE WHOLE JOURNEY, WHICH THE OLD ONE DID NOT. "Are your
-     enquiries sitting unread in four different apps?" described the mess at
-     the top of the funnel and stopped there — it sold an inbox. The product
-     does not stop at the inbox: it carries the same customer through to a
-     quotation, an invoice and a payment, and that is the part a business
-     owner is actually buying. Two nouns do the work: first message, paid
-     invoice. Everything between them is the product.
+     HEADLINE AND SUB ARE SWAPPED, at the client's instruction: the long
+     descriptive sentence is the headline now and the short promise is the
+     sub. What stood here — "FROM FIRST MESSAGE TO PAID INVOICE." over a
+     150-character subhead — is these same two strings the other way round.
 
-     It is also shorter. 2 lines at 375px against the old 3, measured in
-     Anton — 55px of a first screen back, on a page whose job is the button.
+     THE SWAP COST 167px OF THE FIRST SCREEN, AND THE TYPE SCALE PAID IT.
+     Measured in Anton against the 335px column a 375px phone gives:
 
-     THE ACCENT WRAPS, and that is fine here. "PAID INVOICE" breaks across
-     the two lines, and on a dark section the accent is plain amber TEXT, so
-     both halves simply colour. It is only the LIGHT sections that cannot do
-     this — there the accent is a filled block that would come out as two
-     rectangles of different widths. See SalesHeading. */
-  headline: "FROM FIRST MESSAGE TO PAID INVOICE.",
-  accent: "PAID INVOICE.", // full stop inside the accent, or it is left white and reads as a stray dot
-  sub: "iSuite AI is the AI Sales System that answers, qualifies, books, follows up and helps your team close — all the way to quotation, invoice and payment.",
+         old headline    35 chars     2 lines at 52.5px    110px
+         new headline   150 chars    12 lines at 52.5px    662px  <- unusable
+         new headline   150 chars     7 lines at 36px      277px  <- shipped
+
+     Twelve lines is the entire phone screen with the button under the fold
+     on every handset, so the h1 drops from clamp(42,14vw,68) to
+     clamp(30,9.6vw,44). The arithmetic is in SalesHero, next to the class.
+
+     IF THIS SENTENCE IS EVER SHORTENED, PUT THE SCALE BACK UP. The type is
+     small because the string is long, not because the hero wanted it small.
+
+     THE ACCENT IS STILL THE PAYOFF — it was "PAID INVOICE." closing the old
+     headline, and it is the three nouns closing this one. It wraps across
+     lines, which is fine on a dark section: the accent is plain amber TEXT
+     here, so every fragment simply colours. Only the LIGHT sections cannot
+     do that, where it is a filled block. See SalesHeading.
+
+     "iSuite" SURVIVES THE UPPERCASE because Headline() now runs brandCase
+     over each slice. It did not before — the old headline carried no brand
+     name and this one opens with it. Without it the page says "ISUITE AI". */
+  headline:
+    "iSuite AI is the AI Sales System that answers, qualifies, books, follows up and helps your team close — all the way to quotation, invoice and payment.",
+  accent: "quotation, invoice and payment.", // full stop inside the accent, or it is left white and reads as a stray dot
+  sub: "From first message to paid invoice.",
 
   /* WHO IT IS FOR, SAID OUT LOUD, one line under the promise. A page that
      names its buyer loses the wrong reader deliberately, which on paid
@@ -244,11 +257,13 @@ export const salesDifferentiator = {
    * its length if they see the whole of it at once.
    *
    * MESSAGE and PAYMENT are the two the eye should land on — they are the
-   * headline's own two ends, "from first message to paid invoice". The
-   * component marks the first and last stage for that reason.
+   * two ends of the hero's own promise, "from first message to paid
+   * invoice". The component marks the first and last stage for that reason.
    *
-   * THE PAYOFF IS THE HEADLINE AGAIN, deliberately, and this is its second of
-   * three appearances (hero, here, final CTA). A direct-response page is
+   * THE PAYOFF IS THE HERO'S SUBHEAD AGAIN, deliberately, and this is its
+   * second of three appearances (hero, here, final CTA). It was the hero's
+   * HEADLINE until the client swapped the two, which changes where it sits
+   * up there but not what it does down here. A direct-response page is
    * allowed one sentence it repeats until it sticks; this page has one.
    */
   heading: "IT DOESN'T STOP AT THE REPLY.",

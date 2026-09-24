@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { brandCase } from "@/components/sales/brandCase";
 import { ChannelMark, type ChannelName } from "@/components/sales/ChannelMark";
 import { SHOT_SIZES, ShotSlot } from "@/components/sales/ShotSlot";
 import dashboardShot from "@/public/shots/dashboard.png";
@@ -36,15 +37,20 @@ import { site } from "@/lib/site";
    tracked in site.PLACEHOLDER_CLAIMS until the client confirms them.
    ========================================================================== */
 
+/* brandCase runs on each slice separately, so the brand keeps its own casing
+   under the h1's uppercase and an accent containing one still gets both
+   treatments. It was not here until the headline began with "iSuite AI" —
+   the previous one had no brand name in it, and without this the page opens
+   by calling the product ISUITE AI. */
 function Headline() {
   const { headline, accent } = salesHero;
   const i = headline.indexOf(accent);
-  if (i === -1) return <>{headline}</>;
+  if (i === -1) return <>{brandCase(headline)}</>;
   return (
     <>
-      {headline.slice(0, i)}
-      <span className="text-amber">{accent}</span>
-      {headline.slice(i + accent.length)}
+      {brandCase(headline.slice(0, i))}
+      <span className="text-amber">{brandCase(accent)}</span>
+      {brandCase(headline.slice(i + accent.length))}
     </>
   );
 }
@@ -80,19 +86,36 @@ export function SalesHero() {
           className="mx-auto h-12 w-auto md:h-16"
         />
 
-        {/* FLUID, NOT STEPPED. A fixed 30px was the same on a 320px phone and
-            a 430px one, so the big phones most people carry were handed the
-            headline built for the smallest. 10.5vw scales it to the glass and
-            the clamp stops it at both ends.
+        {/* FLUID, NOT STEPPED. A fixed size is the same on a 320px phone and
+            a 430px one, so the big phones most people carry get the headline
+            built for the smallest. 9.6vw scales it to the glass and the clamp
+            stops it at both ends.
 
-            THE CEILING IS MEASURED, not guessed. The longest unbreakable word
-            here is ENQUIRIES at 9 capitals; in Plus Jakarta Sans ExtraBold
-            that is about 9 x 0.72em. At the 320px floor the clamp gives 32px
-            -> 207px inside a 280px column, and at 375px it gives 39px -> 255px
-            inside 335px. Neither can overflow, which matters more than it
-            sounds: one word wider than the screen and the WHOLE PAGE scrolls
-            sideways. */}
-        <h1 className="font-display mt-5 text-[clamp(42px,14vw,68px)] leading-[1.05] tracking-[0.01em] text-balance text-white uppercase md:text-[78px] lg:text-[92px]">
+            THIS SCALE IS SET BY THE STRING, and the string is 150 characters
+            since the headline and the subhead were swapped. Measured in Anton
+            out of the built woff2, not estimated:
+
+                        col     size    lines   height
+                320px   280    30.7px     7      237px
+                375px   335     36px      7      277px
+                430px   390    41.3px     7      318px
+                768px   728     42px      4      185px
+               1024px+  940     56px      4      246px
+
+            At the old clamp(42,14vw,68) the same sentence ran TWELVE lines
+            and 662px at 375px — a whole phone screen of headline, with the
+            button below the fold on every handset. Shorten the sentence and
+            this should go back up; it is small because the copy is long.
+
+            NO WORD CAN OVERFLOW, which matters more than it sounds: one word
+            wider than the screen and the WHOLE PAGE scrolls sideways. The
+            longest here is "quotation," at 150px in a 335px column.
+
+            text-pretty, NOT text-balance. Balance is for headings of two to
+            four lines and Chromium ignores it past six, so on a phone it did
+            nothing at all; pretty keeps the last line off a single orphan
+            word, which is the failure this shape actually has. */}
+        <h1 className="font-display mt-5 text-[clamp(30px,9.6vw,44px)] leading-[1.1] tracking-[0.01em] text-pretty text-white uppercase md:text-[42px] lg:text-[56px]">
           <Headline />
         </h1>
 
