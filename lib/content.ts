@@ -71,7 +71,11 @@ export const salesHero = {
      150-character subhead — is these same two strings the other way round.
 
      THE SWAP COST 167px OF THE FIRST SCREEN, AND THE TYPE SCALE PAID IT.
-     Measured in Anton against the 335px column a 375px phone gives:
+     Measured against the 335px column a 375px phone gives. THE FIGURES ARE
+     ANTON'S, which was the headline face at the time; the face is Satoshi
+     now and SalesHero carries the re-measured table. The ratio is what
+     survives — a 150-character headline costs six extra lines on a phone
+     whatever it is set in:
 
          old headline    35 chars     2 lines at 52.5px    110px
          new headline   150 chars    12 lines at 52.5px    662px  <- unusable

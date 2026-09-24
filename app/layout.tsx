@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
-import { Anton, Plus_Jakarta_Sans } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
+import localFont from "next/font/local";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -20,52 +21,49 @@ const jakarta = Plus_Jakarta_Sans({
  * THE HEADLINE FACE — and the reason the page reads as a poster rather than
  * a product site.
  *
- * The reference the client's senior supplied names exactly two faces, by role
- * and not by section: --headlinefont: 'Barlow Condensed', --contentfont:
- * 'Inter'. Its headlines are CONDENSED, and that one difference in letter
- * shape is what separates it from every SaaS page — it is what the client had
- * read as "a different font in every section". So: two faces, one condensed,
- * one not. That is the whole system.
+ * SATOSHI, at the client's senior's request, replacing Anton. It is not on
+ * Google Fonts — it is Fontshare (Indian Type Foundry), free for commercial
+ * use — so it is SELF-HOSTED from app/fonts rather than pulled from a third
+ * party at runtime. Fontshare's CDN would have worked with one link tag and
+ * cost a render-blocking request to a domain we do not control; next/font
+ * fingerprints, preloads and same-origins the file instead.
  *
- * WHY NOT BARLOW CONDENSED, WHICH IS WHAT THE REFERENCE USES. It was set that
- * way first and it is the safe answer, not the right one: Barlow is a neutral
- * face, built to get out of the way, which is the opposite of the job.
+ * ONE FILE, THE BLACK CUT. Satoshi ships 300-900; only the 900 is here,
+ * because only one display weight is ever used and an unused face is bytes
+ * on every first paint.
  *
- * ANTON, AND THE REASON IS NOT TASTE. The client's own Meta ad creative sets
- * its headline in a heavy condensed face, and a visitor who clicks that ad
- * should land on a page that looks like the ad they just clicked. Matching
- * the two is worth more here than any argument about letterforms.
+ * `weight: "400"` IS DELIBERATE AND IT IS NOT A MISTAKE. The file is
+ * Satoshi Black. Declaring it as 400 means the default `font-weight: normal`
+ * matches it EXACTLY, so the browser can never synthesise a bolder cut by
+ * smearing the outline — the failure the Anton note warned about, and the
+ * reason no font-display element on this page carries a weight class. Do not
+ * "fix" this to 900 without also setting font-weight on every consumer.
  *
- * IT REPLACED BIG SHOULDERS, and the comment that used to sit here argued
- * against exactly this font — that a single-weight face could never carry
- * the eyebrows, the numerals and the headings at once. That argument was
- * sound and it is why `weight: "400"` below is not a detail to skim:
+ * WHAT THE SWAP COST, because it is not free. Anton is ultra-condensed and
+ * Satoshi is a wide geometric grotesque:
  *
- *   - Anton ships ONE weight. There is no 700 and no 800.
- *   - next/font REQUIRES `weight` for a static face. Omit it and the build
- *     fails outright, which is the good outcome.
- *   - Worse is what happens in CSS. Every display heading used to carry
- *     `font-extrabold`, and asking a 400-only face for 800 does not fail —
- *     the browser SYNTHESISES it, smearing the outline outward. On a face
- *     this heavy that reads as a blurred edge, and it shows up on Windows
- *     long before anyone notices it on a phone. All seven of those classes
- *     were removed. Do not add a weight to anything using font-display.
+ *     hero headline, 150 chars   Anton 100%   Satoshi 900 119.7%
+ *     cap height                 0.8594em     0.7400em
+ *     descender                 -0.1270em    -0.2560em   (twice as deep)
+ *     content area               1.5054em     1.2500em
  *
- * Condensed still pays for itself in space. Anton's capitals run roughly
- * 0.48em against Plus Jakarta ExtraBold's 0.72em, so about 50% more fits on
- * a line — close enough to Big Shoulders' 0.42em that no headline on the
- * page gained a line in the swap.
+ * Wider AND optically smaller at the same px, so every display size on the
+ * page was re-derived rather than carried over. The binding constraint is
+ * the light accent: it is an inline-block with whitespace-nowrap, and "already
+ * waiting." in the final CTA ran 347px inside a 335px column at the old size
+ * — which is not a clipped heading, it is the whole page scrolling sideways.
+ * The h2 clamp is sized so that string fits at every width down to 320px.
  *
  * Their body face is Inter. Ours stays Plus Jakarta Sans: Inter is the most
  * worn-out UI face on the web, and copying it would make this MORE generic.
  * It is also the face that still carries every bold on the page, because it
  * has real cuts to carry them with.
  */
-const anton = Anton({
-  subsets: ["latin"],
+const satoshi = localFont({
+  src: "./fonts/Satoshi-Black.woff2",
   weight: "400",
   display: "swap",
-  variable: "--font-anton",
+  variable: "--font-satoshi",
 });
 
 /*
@@ -140,7 +138,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-        <html lang="en" className={`${jakarta.variable} ${anton.variable}`}>
+        <html lang="en" className={`${jakarta.variable} ${satoshi.variable}`}>
       <body>{children}</body>
     </html>
   );

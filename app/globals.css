@@ -202,27 +202,30 @@
     var(--font-jakarta), ui-sans-serif, system-ui, -apple-system, "Segoe UI",
     sans-serif;
 
-  /* THE HEADLINE FACE. Every fallback here is condensed too — a headline set
-     at 53px because the face is narrow, dropping to a normal-width system
-     font, would run off the screen before it ever swapped.
+  /* THE HEADLINE FACE. THE FALLBACKS ARE NO LONGER CONDENSED, and that is a
+     consequence of the face change rather than an oversight. The chain read
+     Arial Narrow / Helvetica Neue Condensed / Oswald because Anton was
+     ultra-condensed and a headline sized for a narrow face, dropping to a
+     normal-width system font, would run off the screen before it swapped.
+     Satoshi is a wide geometric grotesque, so a condensed fallback would now
+     be the mismatch. Plus Jakarta is already loaded for the body and is the
+     closest thing on the page to Satoshi's proportions, so it goes first.
 
-     ARIAL NARROW COMES SECOND, ahead of the prettier options, because it is
-     the only one of them actually installed on a typical Windows or macOS
-     machine.
-
-     THE CHAIN MATTERS LESS THAN IT USED TO. Under Big Shoulders next/font
-     could not generate metric overrides — it said so on every build — so
-     there was no width-matched synthetic fallback and a real condensed face
-     was the only protection against a headline reflowing on arrival. Anton
-     HAS overrides, so "Anton Fallback" is built automatically at the right
-     width and that warning is gone. The named faces below now only matter if
-     the download fails outright rather than merely running late.
+     THE CHAIN MATTERS LESS THAN THE OVERRIDES. next/font builds a
+     metric-matched "satoshi Fallback" from local Arial automatically —
+     ascent 92.36%, descent 21.95%, size-adjust 109.35% — and ships it inside
+     var(--font-satoshi) itself, so the width is already matched before this
+     list is consulted. Under Big Shoulders no overrides could be generated
+     and a real condensed face was the only protection against a headline
+     reflowing on arrival; that has not been the situation for two faces now.
+     The names below only matter if the download fails outright rather than
+     merely running late.
 
      Both faces are preloaded in the production build, so this chain is for a
      slow connection, not a normal one. */
   --font-display:
-    var(--font-anton), "Anton", "Arial Narrow",
-    "Helvetica Neue Condensed", "Oswald", ui-sans-serif, sans-serif;
+    var(--font-satoshi), "Satoshi", "Plus Jakarta Sans", "Segoe UI",
+    ui-sans-serif, system-ui, sans-serif;
 
   /* --- Breakpoints -------------------------------------------------------- */
   /*

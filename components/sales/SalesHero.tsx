@@ -91,31 +91,36 @@ export function SalesHero() {
             built for the smallest. 9.6vw scales it to the glass and the clamp
             stops it at both ends.
 
-            THIS SCALE IS SET BY THE STRING, and the string is 150 characters
-            since the headline and the subhead were swapped. Measured in Anton
-            out of the built woff2, not estimated:
+            THIS SCALE IS SET BY THE STRING AND BY THE FACE. The string is 150
+            characters since the headline and the subhead were swapped, and
+            the face is Satoshi Black, which is about 20% wider than the Anton
+            this was last measured in. Re-measured out of app/fonts, not
+            estimated:
 
                         col     size    lines   height
-                320px   280    30.7px     7      237px
-                375px   335     36px      7      277px
-                430px   390    41.3px     7      318px
-                768px   728     42px      4      185px
-               1024px+  940     56px      4      246px
+                320px   280    25.6px     7      206px
+                375px   335     30.0px     7      241px
+                430px   390    34.4px     7      277px
+                768px   728     38.0px     4      175px
+               1024px+  940     48.0px     4      221px
 
-            At the old clamp(42,14vw,68) the same sentence ran TWELVE lines
-            and 662px at 375px — a whole phone screen of headline, with the
-            button below the fold on every handset. Shorten the sentence and
-            this should go back up; it is small because the copy is long.
+            Anton carried this at clamp(30,9.6vw,44)/42/56 for the same seven
+            lines. Satoshi needs clamp(25,8vw,38)/38/48 to land in the same
+            place, which is the whole cost of the wider face. Earlier still,
+            at clamp(42,14vw,68), the sentence ran TWELVE lines and 662px at
+            375px — a whole phone screen of headline with the button below the
+            fold. Shorten the sentence and this should go back up; it is small
+            because the copy is long.
 
             NO WORD CAN OVERFLOW, which matters more than it sounds: one word
             wider than the screen and the WHOLE PAGE scrolls sideways. The
-            longest here is "quotation," at 150px in a 335px column.
+            longest here is "quotation," at 148px in a 335px column.
 
             text-pretty, NOT text-balance. Balance is for headings of two to
             four lines and Chromium ignores it past six, so on a phone it did
             nothing at all; pretty keeps the last line off a single orphan
             word, which is the failure this shape actually has. */}
-        <h1 className="font-display mt-5 text-[clamp(30px,9.6vw,44px)] leading-[1.15] tracking-[0.01em] text-pretty text-white md:text-[42px] lg:text-[56px]">
+        <h1 className="font-display mt-5 text-[clamp(25px,8vw,38px)] leading-[1.1] tracking-[0.01em] text-pretty text-white md:text-[38px] lg:text-[48px]">
           <Headline />
         </h1>
 
