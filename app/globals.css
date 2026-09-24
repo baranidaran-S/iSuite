@@ -252,6 +252,39 @@
 /* ==========================================================================
    BASE
    ========================================================================== */
+/* ==========================================================================
+   THE SPECTRUM — decorative ONLY, and only in SalesSells
+   --------------------------------------------------------------------------
+   Five bars down the ten capability pills, one hue per row. They carry no
+   information: remove them and nothing is lost but rhythm, which is exactly
+   what they are for. Ten identical pills in two columns read as a wall, and
+   a wall is the wrong shape for "look how much it does".
+
+   THEY ARE NOT IN @theme, AND THAT IS NOT AN OVERSIGHT. Tailwind v4 emits a
+   theme variable only when it can SEE it referenced in the source. These are
+   referenced as var(--color-bar-${n}) with n computed at runtime, which the
+   scanner cannot match — so four of the five were silently dropped from the
+   stylesheet and four rows of bars rendered with no colour at all. Nothing
+   errored: an undefined custom property just resolves to nothing.
+
+   A plain :root rule is never tree-shaken. Anything referenced only through
+   a computed var() name belongs here rather than in @theme.
+
+   NEVER SET TEXT IN THESE. Every one fails on the night ground at body size,
+   and the page has one accent colour for a reason — amber is the thing that
+   shouts. These are 3px marks.
+
+   The last two are not new: the ramp lands on the page's own amber and its
+   own bad-red, so it resolves into colours already here.
+   ========================================================================== */
+:root {
+  --color-bar-1: #3b82f6; /* blue    */
+  --color-bar-2: #14b8a6; /* teal    */
+  --color-bar-3: #22c55e; /* green   */
+  --color-bar-4: #f5a524; /* = amber */
+  --color-bar-5: #f2555a; /* = bad   */
+}
+
 @layer base {
   html {
     -webkit-text-size-adjust: 100%;

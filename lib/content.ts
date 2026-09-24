@@ -63,31 +63,338 @@ export const salesCta = {
 
 export const salesHero = {
   /* Two-tone: `accent` is the phrase that goes amber. It must appear in
-     `headline` exactly, or the split silently does nothing. */
-  headline: "ARE YOUR ENQUIRIES SITTING UNREAD IN FOUR DIFFERENT APPS?",
-  accent: "SITTING UNREAD",
-  sub: "WhatsApp, Instagram, Facebook, your website and Meta ads land in one inbox — with an AI sales assistant that answers in Tamil, Tanglish, English or Hindi, qualifies the lead and books the appointment. Day or night.",
+     `headline` exactly, or the split silently does nothing.
+
+     IT NAMES THE WHOLE JOURNEY, WHICH THE OLD ONE DID NOT. "Are your
+     enquiries sitting unread in four different apps?" described the mess at
+     the top of the funnel and stopped there — it sold an inbox. The product
+     does not stop at the inbox: it carries the same customer through to a
+     quotation, an invoice and a payment, and that is the part a business
+     owner is actually buying. Two nouns do the work: first message, paid
+     invoice. Everything between them is the product.
+
+     It is also shorter. 2 lines at 375px against the old 3, measured in
+     Anton — 55px of a first screen back, on a page whose job is the button.
+
+     THE ACCENT WRAPS, and that is fine here. "PAID INVOICE" breaks across
+     the two lines, and on a dark section the accent is plain amber TEXT, so
+     both halves simply colour. It is only the LIGHT sections that cannot do
+     this — there the accent is a filled block that would come out as two
+     rectangles of different widths. See SalesHeading. */
+  headline: "FROM FIRST MESSAGE TO PAID INVOICE.",
+  accent: "PAID INVOICE.", // full stop inside the accent, or it is left white and reads as a stray dot
+  sub: "iSuite AI is the AI Sales System that answers, qualifies, books, follows up and helps your team close — all the way to quotation, invoice and payment.",
+
+  /* WHO IT IS FOR, SAID OUT LOUD, one line under the promise. A page that
+     names its buyer loses the wrong reader deliberately, which on paid
+     traffic is a saving rather than a loss: somebody who does not sell
+     through WhatsApp should leave before the demo, not during it. */
+  qualifier: "For businesses that sell through WhatsApp.",
 
   /* The offer, stated in full on the first screen. Client-confirmed. */
   offer: ["Free", "45 minutes", "On Google Meet"],
-  /* IT USED TO SAY "Pick your slot at the bottom of this page", which was
-     true while the page carried its own form with a date and time picker in
-     it. That form is gone and the button opens the booking page instead, so
-     the old line sent people scrolling to the footer looking for something
-     that is not there. Directions on a page have to be re-read every time
-     the thing they point at moves. */
-  offerNote: "Pick a slot on the next screen. No card, no commitment.",
 
-  /* THE EYEBROW IS GONE. It said "iSuite AI — by MnT Future" and sat above
-     the headline, which is word for word what the logo lockup says; the hero
-     shows the artwork there now rather than saying it twice. */
+  /* THE CHANNELS, under the ask. The headline no longer names them — it
+     goes from first message to paid invoice and says nothing about where
+     the message arrived — so this line carries what the old headline's
+     "four different apps" used to. Five now, not four: the website and Meta
+     ads were always in the product and were never in that count.
+
+     IT REPLACED offerNote, which read "Pick a slot on the next screen. No
+     card, no commitment." That was reassurance at the point of clicking and
+     it is a real loss; it is out because the client's layout puts the
+     channels here instead. Worth putting back if the button ever underperforms. */
+  channels: ["WhatsApp", "Instagram", "Facebook", "Website", "Meta Ads"],
 
   /* Under the product shot. Names what is on screen so the image is not
      decoration. */
   shotCaption: "One inbox. Every channel.",
 } as const;
 
-/* --- Sales page block 3 — what you will see ------------------------------- */
+/* --- Sales page block 2 — the pain --------------------------------------- */
+export const salesPain = {
+  /*
+   * [FROM THE REVISED COPY DOC, §02] A block the page did not have. It ran
+   * hero -> showcase -> chapters, which is promise straight into product: the
+   * reader was shown the answer before agreeing there was a question.
+   *
+   * THE FOUR LINES ARE IN TIME ORDER AND THAT IS THE POINT. 11pm, then the
+   * quotation, then the silence, then the handover — one enquiry decaying
+   * across four moments, not four separate complaints. The numbering in the
+   * component counts that sequence; it is the one list on this page where
+   * numbering carries information rather than decorating it.
+   *
+   * NOBODY IS BLAMED. Every line is passive or third-person — "nobody
+   * replies", "someone says" — because the reader IS the person who did not
+   * reply, and a page that opens by accusing them gets closed. The last line
+   * makes that explicit: the lead was lost by the gap, not by the team.
+   *
+   * IT ALSO SETS UP THE NEW HEADLINE. "Between the message and the sale" is
+   * the same span as "from first message to paid invoice", stated as a
+   * problem rather than a promise. The page now poses its question and
+   * answers it in the same words.
+   */
+  heading: "THE LEAD CAME IN. WHAT HAPPENED AFTER THAT?",
+  /* SHORT ON PURPOSE. On the light ground this is painted as a filled block,
+     and "WHAT HAPPENED AFTER THAT?" is 468px of solid amber at lg:74px — a
+     wall rather than a mark, and wider than the balanced line it gets given.
+     Three words highlight the question without becoming the section. */
+  accent: "AFTER THAT?",
+  /* SPLIT INTO TWO LINES WHERE THE DOC SPLITS INTO TWO SENTENCES. The first
+     two items are each a thing that happened followed by the thing that did
+     not: a message arrives / nobody replies, a quotation is asked for /
+     someone promises a call. Setting the second sentence quieter makes the
+     failure land after the event rather than beside it.
+
+     Items 03 and 04 are single sentences in the doc and stay single. Forcing
+     a `sub` onto them would have meant inventing half a line each. */
+  items: [
+    { lead: "A customer messages at 11 PM.", sub: "Nobody replies." },
+    {
+      lead: "A customer asks for a quotation.",
+      sub: "Someone says, “I’ll call you back.”",
+    },
+    { lead: "Nobody follows up." },
+    {
+      lead: "A salesperson takes over and the customer has to explain everything again.",
+    },
+  ],
+  /* The turn. Set apart from the four above because it is the sentence the
+     whole block exists to deliver — and it is the one line here that is on
+     the reader's side. */
+  payoff: "The lead wasn't lost at the ad.",
+  payoffAccent: "It was lost between the message and the sale.",
+} as const;
+
+/* --- Sales page block 3 — the journey ------------------------------------ */
+export const salesJourney = {
+  /*
+   * [FROM THE REVISED COPY DOC, §03] This REPLACED salesShowcase, which was
+   * "FOUR SCREENS YOUR TEAM WILL LIVE IN" over four named screens. Four
+   * screens was a tour of the software. Eight steps is the journey one
+   * enquiry takes, which is what the page now sells — and the four screens
+   * were also saying the same thing as PRODUCT SCREENS further down, in a
+   * shorter list.
+   *
+   * THREE OF THE EIGHT HAVE NO CHAPTER BELOW THEM. Hand over, Propose and
+   * Close & get paid are the new half of the product; the five chapters stop
+   * at attribution. Until chapters exist for them this block is the only
+   * place they appear, which is worth knowing before anyone trims it.
+   *
+   * "GST QUOTATIONS" IS THE MOST SPECIFIC CLAIM ON THE PAGE. It is from the
+   * client's own copy doc and it is a good detail — an Indian business owner
+   * reads "GST" and knows the quotation will be the one their accountant
+   * accepts. It is also checkable, so it needs to be true of the actual
+   * quotation screen. [CONFIRM]
+   *
+   * SEE ALSO the warning on salesModules: Quotations and Invoices are listed
+   * under "Do Not Claim" in Main-Website-Requirements §18 and §23. That doc
+   * is stale — the client's own CRM shows the feature — but steps 05 and 07
+   * are two more places a reviewer will stop.
+   */
+  heading: "iSuite AI DOES THE SALES WORK BETWEEN THE ENQUIRY AND THE INVOICE.",
+  accent: "BETWEEN THE ENQUIRY AND THE INVOICE.",
+  lead: "One enquiry. One continuous sales journey.",
+  steps: [
+    { name: "Respond", body: "Answer immediately, in the customer's language." },
+    { name: "Qualify", body: "Ask the right questions and record the answers." },
+    { name: "Book", body: "Check real availability and book the appointment." },
+    { name: "Hand over", body: "Give the right salesperson the full context." },
+    { name: "Propose", body: "Send products, packages and GST quotations." },
+    { name: "Follow up", body: "Keep the open deal moving without nagging." },
+    { name: "Close & get paid", body: "Quotation, invoice, payment." },
+    {
+      name: "Learn",
+      body: "Show which ads and conversations turned into customers.",
+    },
+  ],
+} as const;
+
+/* --- Sales page block 4 — the differentiator ----------------------------- */
+export const salesDifferentiator = {
+  /*
+   * [FROM THE REVISED COPY DOC, §04] The only competitive claim on the page,
+   * and the only place it says what everyone ELSE does. It earns that: every
+   * "AI replies to your WhatsApp" tool on the market stops at the reply, so a
+   * reader arriving from a Meta ad has almost certainly seen three of them
+   * this week and is sorting this into the same pile.
+   *
+   * IT NAMES NO COMPETITOR. "Most systems" is as far as it goes, which keeps
+   * it defensible — naming one invites a comparison the page cannot support
+   * and a complaint it does not need.
+   *
+   * THE EIGHT STAGES ARE THE EIGHT STEPS ABOVE, SAID IN ONE BREATH. Block 3
+   * walks them at a card each; this compresses the same journey into a line
+   * you can read in two seconds. That repetition is the argument, not an
+   * oversight: the claim is that the journey is LONG, and a reader only feels
+   * its length if they see the whole of it at once.
+   *
+   * MESSAGE and PAYMENT are the two the eye should land on — they are the
+   * headline's own two ends, "from first message to paid invoice". The
+   * component marks the first and last stage for that reason.
+   *
+   * THE PAYOFF IS THE HEADLINE AGAIN, deliberately, and this is its second of
+   * three appearances (hero, here, final CTA). A direct-response page is
+   * allowed one sentence it repeats until it sticks; this page has one.
+   */
+  heading: "IT DOESN'T STOP AT THE REPLY.",
+  accent: "AT THE REPLY.",
+  lead: "Most systems help you get the conversation started.",
+  leadStrong: "iSuite AI keeps the deal moving.",
+  flow: [
+    "Message",
+    "Qualify",
+    "Book",
+    "Hand over",
+    "Quote",
+    "Follow up",
+    "Invoice",
+    "Payment",
+  ],
+  payoff: "From first message to paid invoice.",
+} as const;
+
+/* --- Sales page block 5 — what the assistant actually does --------------- */
+export const salesSells = {
+  /*
+   * [FROM THE REVISED COPY DOC, §05] The claim is in the heading and the
+   * evidence is ten verbs. Every competitor tool answers a message; almost
+   * none of them create a deal, send a quotation or hand the conversation to
+   * a named person. Listing the verbs IS the argument, which is why the
+   * component sets the verb apart from the rest of each line — a reader
+   * scanning the left edge gets Answer, Ask, Save, Create, Book, Send, Send,
+   * Create, Follow up, Hand, and that column alone makes the point.
+   *
+   * SEVEN OF THE TEN ARE ALREADY ON THE PAGE, in chapters 01 to 04, and this
+   * was very nearly cut for that reason. It survives because the chapters
+   * spread them over five screens with a screenshot between each, and the one
+   * thing a reader cannot do there is see how MANY there are. Ten in one
+   * block is a different claim from ten across five blocks.
+   *
+   * THREE ARE NEW AND HAVE NO CHAPTER — create and move deals, send product
+   * cards and packages, send quotations. Until chapters 06 and 07 exist this
+   * is the only place on the page they appear.
+   *
+   * THE LAST LINE IS THE WHOLE SAFETY ARGUMENT IN NINE WORDS, and it is the
+   * reason the ten above do not read as a machine let loose on your
+   * customers. It is §11's argument arriving early; keep them apart when §11
+   * is built, or the page makes the same promise twice in one scroll.
+   */
+  heading: "IT SELLS, NOT JUST REPLIES.",
+  accent: "NOT JUST REPLIES.",
+  /* Split at the verb deliberately — see the note above. `verb` is what the
+     assistant DOES, `rest` is what it does it to. */
+  items: [
+    { verb: "Answer", rest: "enquiries." },
+    { verb: "Ask", rest: "qualifying questions." },
+    { verb: "Save", rest: "customer details." },
+    { verb: "Create and move", rest: "deals." },
+    { verb: "Book", rest: "appointments." },
+    { verb: "Send", rest: "product cards and service packages." },
+    { verb: "Send", rest: "quotations." },
+    { verb: "Create", rest: "follow-up tasks." },
+    { verb: "Follow up", rest: "on open conversations." },
+    { verb: "Hand", rest: "conversations to your team." },
+  ],
+  /* Split so the opening two words can carry the amber. The sentence is the
+     safety argument and the emphasis belongs on the qualifier, not the noun:
+     it is ALL WITHIN your rules, rather than "the prices you set". */
+  limitAccent: "All within",
+  limit: "the prices, products and rules you set.",
+} as const;
+
+/* --- The handover card, shown in place of chapter 04's screenshot -------- */
+export const handoverCard = {
+  /*
+   * [FROM THE REVISED COPY DOC, §06] The five lines a salesperson opens when
+   * a conversation reaches them. It is the most distinctive thing in the
+   * client's document and there is nothing like it on a competitor's page:
+   * everyone claims a handover, this shows what is actually handed over.
+   *
+   * THE EXAMPLE IS INTERIORS and it matches the customer message on the
+   * chapter beside it. One customer, one step, read left to right.
+   *
+   * NOT A REAL CUSTOMER. Same rule as every other example here: no name, no
+   * business, no outcome. "2BHK interiors, December move-in" is a plausible
+   * enquiry, not a record of one.
+   */
+  title: "What the salesperson opens",
+  rows: [
+    { k: "Wants", v: "2BHK interiors · December move-in" },
+    { k: "Done", v: "Budget collected · Consultation booked" },
+    { k: "Pending", v: "Kitchen requirement" },
+    { k: "Told them", v: "Consultation is free" },
+    { k: "Next", v: "Confirm the visit." },
+  ],
+  footer: "Nobody asks the customer the same questions twice.",
+} as const;
+
+/* --- The quote-to-cash card, chapter 01's visual ------------------------- */
+/* --- The routing card, chapter 02's visual ------------------------------- */
+export const routingCard = {
+  /*
+   * [§07] The five things the conversation is routed on, from the copy doc's
+   * own line: "Stage · Reason · Language · Deal value · Availability".
+   *
+   * They are the CARD rather than the chapter's points because the points
+   * are carrying the escalation ladder, and the ladder has to stay together
+   * — 15, 30, 45, 60 only means something read in order. Split across two
+   * places, one of them would have read as a set of five unrelated criteria.
+   *
+   * Nothing to screenshot: routing rules are configuration, and no screen in
+   * the product displays them as a list.
+   */
+  title: "It routes on",
+  criteria: [
+    { k: "Stage", v: "where the deal has got to" },
+    { k: "Reason", v: "why it needs a person" },
+    { k: "Language", v: "what the customer is writing in" },
+    { k: "Deal value", v: "what it is worth" },
+    { k: "Availability", v: "who is actually free" },
+  ],
+  footer: "The right person, not the next person.",
+} as const;
+
+export const quoteToCashCard = {
+  /*
+   * DRAWN, NOT CAPTURED, for the same reason as the handover card: there is
+   * no quotation screenshot yet, and a drawn panel beats a dashed "screenshot
+   * needed" box on a live page. Replace it with a real capture of
+   * Commerce > Quotes & invoices when one exists — the chapter takes any
+   * ReactNode as its mock.
+   *
+   * NO FIGURES. A quotation with an amount on it would be an invented number
+   * on a page that has just got rid of its last one.
+   */
+  title: "How the deal closes",
+  steps: [
+    { k: "Quotation", v: "prepared and sent from the conversation" },
+    { k: "Invoice", v: "raised when the customer accepts" },
+    { k: "Payment", v: "recorded against the deal" },
+  ],
+  footer: "The sales journey doesn't end at “interested”.",
+} as const;
+
+/* --- The rules card, chapter 03's visual --------------------------------- */
+export const rulesCard = {
+  /*
+   * The six lines verbatim from the copy doc §11. They are the card rather
+   * than the chapter's points because a list of things something WILL NOT DO
+   * is a different kind of statement from a feature, and putting them beside
+   * ticks in the points grid would have read as six features.
+   */
+  title: "What it will not do",
+  rules: [
+    "Invent a price",
+    "Invent a product",
+    "Give an unapproved discount",
+    "Say something is booked without checking",
+    "Keep talking after your team takes over",
+    "Overwrite recorded customer details",
+  ],
+  footer: "You decide what it knows, says and can do.",
+} as const;
+
 export const salesShowcase = {
   /*
    * [DRAFT — NEEDS APPROVAL] The reference's block 3 is a heading over four
@@ -197,84 +504,176 @@ export const salesChapters = [
    *
    * Chapters 2–5 are written but not yet rendered — see SalesChapter.
    */
+
+/* THE ARRAY IS IN THE COPY DOC'S ORDER, AND THAT IS load-BEARING. app/page.tsx
+   renders salesChapters[0] through [5] as chapters 01 to 06, in sequence, so
+   the index IS the chapter number and there is nothing to keep in sync.
+
+   It was not always. The chapters were once wired by hand — [5] rendered as
+   chapter 06 above [4] rendered as chapter 05 — and the page counted
+   01 02 03 04 06 05 with two screenshots on the wrong chapters. Nothing
+   errored, because nothing could: every index was valid.
+
+   Reorder here, never in page.tsx. */
+
+/* ONE CHAPTER PER SECTION OF THE COPY DOC, IN THE DOC'S OWN ORDER. §06, §07,
+   §08, §09, §10, §11, §12 — seven, and app/page.tsx renders salesChapters[0]
+   through [6] in sequence, so the array index IS the chapter number.
+
+   §06 AND §07 WERE ONE CHAPTER UNTIL NOW and that was wrong. Merging them put
+   §07's heading in a body paragraph and its routing criteria in prose, so
+   every line survived and no line was visible. They are two sections in the
+   doc because they are two arguments: §06 is WHAT the salesperson receives,
+   §07 is WHEN it goes and TO WHOM.
+
+   §09, §10 AND §12 CARRIED THE PRE-DOC COPY until now. Their headings matched
+   closely enough to look done — "They never call back. You do." against
+   "Every enquiry answered" — and twelve lines of the doc were missing behind
+   them. Checked line by line against the pdf now, not by heading.
+
+   Reorder here, never in page.tsx. */
   {
-    id: "inbox",
-    channel: "Instagram",
-    quote: "Hi, do you have this in stock?",
-    label: "ONE INBOX",
-    title: "Every channel. One screen.",
-    accent: "One screen.",
-    body: "Four apps means four places to lose someone. One list means there is nowhere left for a message to hide.",
+    /* [§06 — USP 2] The handover card is the visual; see handoverCard. The
+       points are the control argument rather than a repeat of the card's
+       five rows, which the card already says better. */
+    id: "control",
+    channel: "WhatsApp",
+    quote: "Can someone call me about the 2BHK?",
+    /* "IT HANDS OVER", not "YOUR TEAM STAYS IN CONTROL". Every other label
+       on the run is IT <verb> — two or three words — and this one was 26
+       characters, more than double the next longest. On a phone it wrapped
+       to two lines, which squeezed the "/ 07" beside the numeral until the
+       slash and the 07 sat on separate lines.
+
+       The doc's phrase survives where it belongs: it is this chapter's
+       title, one line down, at a size that can carry it. */
+    label: "IT HANDS OVER",
+    title: "AI handles the routine. Your team handles what matters.",
+    accent: "what matters.",
+    body: "Nobody asks the customer the same questions twice. Whoever picks the conversation up already has what they wanted, what has been done, what is still open and what they were told.",
     points: [
-      "WhatsApp Business on your own number",
-      "Instagram, Facebook and website chat",
-      "Hand a chat to a staff member, add notes the customer never sees",
-      "See how long someone has been waiting",
+      "Take over any conversation at any point",
+      "The assistant stops the moment you do",
+      "Notes on the contact the customer never sees",
+      "Every AI action logged against that contact",
     ],
   },
   {
+    /* [§07 — HANDOVER & ESCALATION] The four points are the doc's ladder,
+       verbatim in substance: 15, 30, 45, 60. They are the only points on the
+       page that are a SEQUENCE — each fires because the last got no answer. */
+    id: "escalate",
+    channel: "Instagram",
+    quote: "Is anyone there?",
+    label: "IT ESCALATES",
+    title: "When a person needs to step in, the AI knows.",
+    accent: "the AI knows.",
+    body: "The conversation moves to the right person based on the stage it is at, the reason it stopped, the language it is written in, the value of the deal and who is actually free.",
+    points: [
+      "15 min — a reminder to whoever owns it",
+      "30 min — it moves to the next person",
+      "45 min — it moves to a manager",
+      "60 min — one honest holding message to the customer",
+    ],
+  },
+  {
+    /* [§08 — QUOTE TO CASH] The half of the journey no competitor has, and
+       the half that makes the headline true. "GST quotations" is the client's
+       own wording and is checkable. [CONFIRM] */
+    id: "quotetocash",
+    channel: "WhatsApp",
+    quote: "What's the final price?",
+    label: "IT GETS PAID",
+    title: "From conversation to payment.",
+    accent: "to payment.",
+    body: "A customer asks for the price. The deal progresses. A quotation is prepared. The customer accepts. An invoice is raised. Payment is recorded. The sales journey doesn't end at “interested”.",
+    points: [
+      "Send product cards and service packages",
+      "Send GST quotations from the conversation",
+      "Raise the invoice when the customer accepts",
+      "Record the payment against the deal",
+    ],
+  },
+  {
+    /* [§09 — FOLLOW-UP] REWRITTEN. It carried "They never call back. You do."
+       over four points about lists and owners — the pre-doc copy. The doc's
+       argument is the opposite and better: the interesting thing is not that
+       it chases, it is that it STOPS. Five conditions, and four of them are
+       reasons to shut up. */
+    id: "followups",
+    channel: "WhatsApp",
+    quote: "Let me check and call you back.",
+    label: "IT CHASES",
+    title: "Every enquiry answered. Every open deal followed up.",
+    accent: "Every open deal followed up.",
+    body: "The AI follows up around what is still open — not with a vague “just checking in”. And it knows when to stop.",
+    points: [
+      "Stops when the customer replies",
+      "Stops when a booking happens",
+      "Stops when the customer opts out",
+      "Stops when a salesperson takes over",
+      "Creates a task when human action is needed",
+    ],
+  },
+  {
+    /* [§10 — LANGUAGE] REWRITTEN. It carried "In their language. At 11pm."
+       The doc adds what the old copy never said: it is not only languages,
+       it is text, voice notes and photos. A customer who sends a voice note
+       in Tanglish is the normal case, not the edge one. */
     id: "replies",
     channel: "WhatsApp",
     quote: "நாளை appointment கிடைக்குமா?",
     label: "IT REPLIES",
-    title: "In their language. At 11pm.",
-    accent: "At 11pm.",
-    body: "Nobody waits until morning. The reply goes out while they are still holding the phone.",
+    title: "Your customer speaks their language. So does iSuite AI.",
+    accent: "So does iSuite AI.",
+    body: "Nobody waits until morning, and nobody switches to English to be understood. The reply goes out while they are still holding the phone, in whatever they wrote in.",
     points: [
       "Tamil, Tanglish, English, Hindi and more",
+      "Text, voice notes and photos",
       "Answers only from information you approved",
       "Asks your qualifying questions, saves the answers",
-      "Hands over complaints, payments and anything you flag",
     ],
   },
   {
-    id: "books",
-    channel: "WhatsApp",
-    quote: "Can I come tomorrow evening?",
-    label: "IT BOOKS",
-    title: "It books them in. Without double-booking you.",
-    accent: "Without double-booking you.",
-    body: "The difference between a booking and a double-booking is whether anybody checked first.",
-    points: [
-      "Calendar per person or per service",
-      "Your hours, the gap you need between appointments, how much warning you need",
-      "24-hour and 1-hour reminders",
-      "Customer reschedules or cancels themselves",
-    ],
-  },
-  {
-    id: "followups",
+    /* [§11 — SAFETY & CONTROL] The six "will not" lines are in rulesCard,
+       verbatim. The points here are the same rules stated as things it DOES,
+       because a reader needs both: the card reassures, the points are what
+       they can picture working. */
+    id: "rules",
     channel: "Instagram",
-    quote: "Let me check and call you back.",
-    label: "IT CHASES",
-    title: "They never call back. You do.",
-    accent: "You do.",
-    body: "A deal nobody chased looks exactly like a deal nobody wanted. Only one of those is true.",
+    quote: "Can you give 20% off?",
+    label: "IT STAYS IN BOUNDS",
+    title: "The AI works inside your rules.",
+    accent: "inside your rules.",
+    body: "You decide what it knows, says and can do. Everything it sends comes from the products, packages and prices you loaded, and anything outside them goes to a person.",
     points: [
-      "Due and overdue lists, with owner names",
-      "Reminders go to the person who owns it",
-      "The assistant writes the follow-ups it promised",
-      "Who is actually following up — and who is not",
+      "Answers only from the prices you loaded",
+      "Discount requests go to a manager",
+      "Checks the calendar before saying a slot is free",
+      "Stops the moment your team takes over",
     ],
   },
   {
+    /* [§12 — META ADS] REWRITTEN. The old copy had the attribution argument
+       but not the doc's chain or its last line. "Send qualified and won
+       outcomes back to Meta" is the part that matters most and was missing:
+       it is not reporting, it is feeding the algorithm real buyers. */
     id: "ads",
-    channel: "Facebook",
-    quote: "Saw your ad — what is the price?",
+    channel: "Meta Ads",
+    quote: "Which ad actually made money?",
     label: "IT PAYS OFF",
-    title: "Which ad brought the money.",
-    accent: "brought the money",
-    body: "Meta can tell you what a lead cost. It cannot tell you which of them paid you back.",
+    title: "Which ad brought the money?",
+    accent: "brought the money?",
+    body: "Ad, enquiry, conversation, deal, won, revenue — one line all the way through. See your ad spend beside the revenue generated by the customers it brought, not beside the clicks.",
     points: [
       "Build campaigns and lead forms from inside iSuite",
-      "Spend and clicks sitting next to won deals",
       "Which campaign and which ad produced each contact",
-      "Send won deals back to Meta, so it learns who your real buyers are",
+      "Spend sitting next to the revenue it produced",
+      "Send qualified and won outcomes back to Meta",
     ],
   },
 ] as const;
 
-/* --- Sales page block 10 — who runs the demo ------------------------------ */
 export const salesFounder = {
   /*
    * [PARTLY SUPPLIED] The reference's block 10 is its strongest: a photo of
@@ -340,20 +739,48 @@ export const salesFounder = {
 export const salesModules = {
   /*
    * [DRAFT — NEEDS APPROVAL] The client's note: "inbox alone is not the entire
-   * feature". Correct — the five chapters above cover five of thirteen
-   * modules. This block names all thirteen so the page shows the product's
-   * real size without becoming thirteen chapters.
+   * feature". Correct — the five chapters above cover five of these, and a
+   * reader who has only seen those five would think the product is a shared
+   * inbox with a bot on it.
    *
-   * Every line is from iSuite-AI-Main-Website-Requirements.md §6–§18. The
-   * figures that appear (8 sources, 10 triggers, 14 actions) are COUNTS OF
-   * DOCUMENTED FEATURES, not results — they can be verified against the doc.
+   * TEN NOW, NOT THIRTEEN, AND IT IS A DIFFERENT LIST. Five went — Lead
+   * Capture, Contacts & Custom Fields, Broadcasts & Templates, Team &
+   * Permissions, Chat Commerce — and two arrived: Quotations, and Invoices &
+   * Payments. The five that went are plumbing every CRM has; the two that
+   * arrived are the ones the hero now promises, "all the way to quotation,
+   * invoice and payment". The list and the headline finally describe the same
+   * product.
+   *
+   * THE COUNT LEFT THE LEAD. It read "Thirteen modules. The five above are
+   * the ones you will use on day one." A number in a heading has to be
+   * maintained every time the list changes, and it was already wrong twice
+   * during this edit. The numerals 01-10 down the left still count what is on
+   * the page, which is the honest version of the same argument.
+   *
+   * ⚠ QUOTATIONS AND INVOICES CONTRADICT THE REQUIREMENTS DOC. It lists both
+   * under "Do Not Claim" (Main-Website-Requirements §18) and again under
+   * things the product guide does not list (§23). That doc is STALE: the
+   * client's own CRM screenshot in public/shots/meta-ads.png shows "Quotes &
+   * invoices" in the Commerce menu, so the feature exists and the prohibition
+   * predates it. Applied on that evidence. The doc needs updating, or a
+   * reviewer will read this as a claim the client was told not to make.
+   *
+   * The counts that remain — ten triggers, fourteen actions — are COUNTS OF
+   * DOCUMENTED FEATURES, checkable against the doc. They are not results.
    */
-  heading: "EVERYTHING INSIDE iSuite AI",
-  accent: "EVERYTHING",
-  lead: "Thirteen modules. The five above are the ones you will use on day one.",
+  /* THE LEAD BECAME THE HEADING. It was "PRODUCT SCREENS" over "Everything
+     your sales team needs. In one system." — a category label over the only
+     sentence that said anything. "Product screens" describes the block to
+     whoever is building the page; it tells a reader nothing they want.
+
+     NO LEAD UNDER IT NOW, deliberately. The ten numbered cards are the
+     explanation, and a line of prose between the promise and its evidence
+     only delays them. */
+  heading: "EVERYTHING YOUR SALES TEAM NEEDS. IN ONE SYSTEM.",
+  accent: "IN ONE SYSTEM.",
   items: [
     {
-      name: "One Inbox",
+      name: "Shared Inbox",
       body: "WhatsApp, Instagram, Facebook and website chat in one list.",
     },
     {
@@ -361,70 +788,64 @@ export const salesModules = {
       body: "Replies, qualifies, books and follows up in your customer's language.",
     },
     {
-      name: "Lead Capture",
-      body: "Eight sources — ads, forms, booking pages, Instagram comments.",
-    },
-    {
-      name: "Contacts & Custom Fields",
-      body: "One record per customer, across every channel.",
-    },
-    {
       name: "Sales Pipeline",
       body: "Your own boards and stages, with won and lost reasons.",
+    },
+    {
+      name: "Bookings",
+      body: "Calendars per person or per service, with reminders.",
+    },
+    {
+      // [DRAFTED — NEEDS APPROVAL] and see the warning above about §18/§23.
+      name: "Quotations",
+      body: "Send a quotation from the conversation and keep it on the deal.",
     },
     {
       name: "Follow-ups",
       body: "Due, overdue and owned. Nothing left to memory.",
     },
     {
-      name: "Appointments",
-      body: "Calendars per person or per service, with reminders.",
+      /* [DRAFTED — NEEDS APPROVAL] The payment half is sourced: the
+         requirements doc lists "payment request inside chat" and "payment
+         confirmation recording" as capabilities. The invoice half is the part
+         §18 says not to claim. */
+      name: "Invoices & Payments",
+      body: "Raise the invoice, request payment in chat, record it when it lands.",
     },
     {
       name: "Meta Ads",
       body: "Build campaigns and lead forms without leaving iSuite.",
     },
     {
-      name: "Broadcasts & Templates",
-      body: "Approved templates, segments, opt-outs skipped automatically.",
-    },
-    {
-      name: "No-Code Automations",
+      name: "Automations",
       body: "Ten triggers, fourteen actions, every run logged.",
     },
     {
-      name: "Reports & Dashboard",
+      name: "Reports",
       body: "Response times, pipeline value, AI-handled versus human-handled.",
-    },
-    {
-      name: "Team & Permissions",
-      body: "Roles, audit trail and a full AI action history.",
-    },
-    {
-      name: "Chat Commerce",
-      body: "Catalogue, cart and payment request inside the chat.",
     },
   ],
 } as const;
 
-/* --- Sales page block 12 — who it is for, and who it is not --------------- */
 export const salesAudience = {
   /*
-   * [DRAFT — NEEDS APPROVAL] The reference gives this two blocks: four cards
-   * of "WHO IS THIS CHALLENGE FOR?" and then a white card headed "Who this is
-   * NOT for". The second is the one that does the work — a page that admits
-   * who it cannot help reads differently from one that claims everybody.
+   * The reference gives this two blocks: four cards of "WHO IS THIS CHALLENGE
+   * FOR?" and then a white card headed "Who this is NOT for". The second is
+   * the one that does the work — a page that admits who it cannot help reads
+   * differently from one that claims everybody.
    *
    * This page carries no rating, no client count and no testimonial, so
    * turning the wrong reader away is the only credibility move available.
    *
    * The three exclusions are chosen to be TRUE without shrinking the real
    * market. "Too small" and "not enough enquiries" would cut straight through
-   * the audience the ads target, so they are not here.
+   * the audience the ads target, so they are not here. THE PANEL IS UNCHANGED
+   * — the client asked for the trades above it to change and for this to stay
+   * exactly as it is.
    */
-  heading: "WHO THIS IS BUILT FOR",
-  accent: "BUILT FOR",
-  lead: "Businesses whose customers message before they buy.",
+  heading: "WHO IT'S FOR",
+  accent: "IT'S FOR",
+  lead: "Built for businesses where customers message before they buy.",
   notHeading: "Who this is NOT for",
   notFor: [
     "Walk-in-only businesses, where customers never message before they arrive",
@@ -433,62 +854,81 @@ export const salesAudience = {
   ],
 } as const;
 
-/* --- Sales page block 13 — the objections --------------------------------- */
 export const salesFaq = {
   /*
-   * [DRAFT — NEEDS APPROVAL] The page FAQ opened with "What is iSuite AI?" and
-   * "Does it replace my sales team?". Neither is a question a reader stops on
-   * — the twelve blocks above answer the first, and the second is answered
-   * better by the "NOT for" panel.
-   *
    * On a sales page the FAQ is the last place a hesitant reader goes before
    * leaving. So every entry is something that would actually stop someone,
    * ordered by how much.
    *
    * NOTHING BELOW PROMISES ANYTHING. Where the honest answer is "Meta
-   * decides" or "it depends", that is what it says.
+   * decides", that is what it says — three of the eight answers begin with
+   * a flat "No", which is the point rather than a weakness.
    *
-   * ONE PLACEHOLDER FIGURE: "within a week" in the setup answer. It is
-   * invented, it was approved as a stand-in, and it is registered in
-   * site.PLACEHOLDER_CLAIMS.
+   * THE ANSWERS GOT SHORTER, roughly by half. The previous set argued its
+   * case in four or five sentences each; these state the position and stop.
+   * On a phone that is the difference between an answer being read and an
+   * answer being scrolled past, and an FAQ nobody reads protects nobody.
+   *
+   * TWO QUESTIONS WENT, AND ONE OF THEM MATTERS:
+   *
+   *   "What if the AI says the wrong thing?" is covered better by the new
+   *   "Will the AI make up prices or discounts?", which asks the version of
+   *   it people actually worry about.
+   *
+   *   "What does it cost?" IS GONE AND NOTHING REPLACED IT. That answer
+   *   carried "Pricing is based on business requirements and discussed
+   *   during consultation" — wording both approved documents require on the
+   *   page (Build Spec line 188, Requirements line 412) and which now
+   *   appears nowhere. Dropped at the client's instruction, recorded here
+   *   because it is a documented requirement rather than a preference.
+   *
+   * THE OLD PLACEHOLDER IS GONE WITH IT. "Setup on our side is usually done
+   * within a week" was invented and registered in site.PLACEHOLDER_CLAIMS;
+   * the question that held it no longer exists. One unverified figure
+   * arrives in its place — see the note on the approval answer below.
    */
   heading: "QUESTIONS PEOPLE ASK BEFORE BOOKING",
   accent: "BEFORE BOOKING",
   items: [
     {
       q: "Will my WhatsApp number get banned?",
-      a: "iSuite AI connects through Meta's official WhatsApp Business Platform — the route Meta itself supports for businesses replying at scale — not an unofficial automation tool attached to a personal number. Your account still has to follow Meta's own rules, and Meta remains the only party that decides the status of any account. We set the connection up with you so it is done the way Meta expects from the start.",
+      a: "iSuite AI connects through Meta's official WhatsApp Business Platform. Your account must follow Meta's rules, and Meta decides account status.",
     },
     {
-      q: "What if the AI says the wrong thing to a customer?",
-      a: "The assistant works to the answers and rules you give it. It does not invent offers, prices or commitments on your behalf. Every message it sends is logged against that contact, and anyone on your team can take over a conversation at any point.",
+      q: "Will the AI make up prices or discounts?",
+      a: "No. It works from the products, packages, prices and rules you provide. Discount or exception requests can go to a manager for approval.",
     },
     {
-      q: "Does it replace my sales team?",
-      a: "No. It handles the first reply and the follow-ups nobody gets round to. Your people take over the conversations that matter, and every deal stays owned by a person.",
+      q: "Does iSuite AI replace my sales team?",
+      a: "No. The AI handles routine conversations, qualification and follow-ups. Your team takes over when human involvement is needed.",
     },
     {
-      q: "What does it cost?",
-      a: "There is no fixed published price. Pricing is based on business requirements and discussed during consultation — how many channels you connect, the volume of enquiries and the size of your team all change the answer. Meta's own WhatsApp charges are separate and are billed by Meta.",
+      q: "What languages can it handle?",
+      a: "Tamil, Tanglish, English, Hindi and more, depending on the customer's language and your setup.",
     },
     {
-      q: "How long does it take to set up?",
-      // PLACEHOLDER FIGURE — "within a week" is invented. Registered in
-      // lib/site.ts. Replace with the real figure from a real onboarding.
-      a: "Setup on our side is usually done within a week — connecting your channels, adding your team, setting the slots you want bookable and loading the answers the assistant replies with. The part nobody can put a date on is Meta: WhatsApp Business and ad account access are reviewed on Meta's timeline, not ours.",
+      q: "Are Meta charges included?",
+      a: "No. Meta charges separately at Meta's rates. WhatsApp messaging charges are separate from MnT Future charges.",
     },
     {
-      q: "Are Meta's WhatsApp charges included?",
-      a: "No. Meta's own WhatsApp messaging charges are billed by Meta and are separate from MnT Future's charges. We walk you through how Meta's pricing applies to your expected volume during the consultation.",
+      q: "How long does WhatsApp approval take?",
+      // UNVERIFIED FIGURE — "1-2 weeks". Registered in site.PLACEHOLDER_CLAIMS.
+      // Lower risk than the "within a week" claim it replaces, because it
+      // describes META's review rather than MnT Future's own work and is
+      // hedged twice. Still nobody's measured number. Confirm or cut it.
+      a: "Typically 1–2 weeks, subject to Meta's review.",
+    },
+    {
+      q: "Do you message people without consent?",
+      a: "No. iSuite AI is designed to message people who have opted in, and opt-outs are respected.",
     },
     {
       q: "Is Meta approval guaranteed?",
-      a: "No. WhatsApp Business and Meta ad account approvals are decided by Meta, against Meta's own requirements and timelines. We help you prepare and submit what Meta asks for, but neither approval nor how long it takes is something we can guarantee.",
+      a: "No. WhatsApp Business and Meta advertising approvals are decided by Meta.",
     },
   ],
 } as const;
 
-/* --- Sales page block 15 — the disclaimer --------------------------------- */
 export const salesDisclaimer = {
   /*
    * [NEEDS LEGAL REVIEW — `meta` only]
@@ -517,7 +957,7 @@ export const salesDisclaimer = {
    */
   meta: "This site is not a part of the Facebook or Instagram websites, or Meta Platforms, Inc. It is not endorsed by Meta in any way. FACEBOOK, INSTAGRAM and WHATSAPP are trademarks of Meta Platforms, Inc.",
   results:
-    "Meta advertising charges and Meta approval requirements are separate from MnT Future charges and timelines.",
+    "Meta advertising charges and WhatsApp messaging charges are separate from MnT Future charges. WhatsApp Business approval and Meta advertising approvals are subject to Meta's requirements and review.",
 } as const;
 
 /* --- §7.8 Suitable Business Types ----------------------------------------- */
@@ -533,112 +973,158 @@ export const businessTypes = {
   heading: "Built for Businesses That Sell Through Conversations.",
   /* [SPEC] — 8 icons with labels.
    *
+   * THE EIGHT TRADES CHANGED. They were Showrooms, Clinics, Salons, Studios,
+   * Schools, Agencies, Consultants, Service Businesses — a list of shop
+   * types. The client replaced it with a list of SECTORS: Real Estate,
+   * Interiors, Education & Coaching, Clinics, Travel, D2C, Distributors,
+   * B2B Services. Higher ticket, longer sales conversations, and the deal
+   * sizes in the Ad return screenshot make more sense beside them.
+   *
    * `message` IS WHAT MAKES THE READER RECOGNISE THEMSELVES. A trade name on
-   * its own is a taxonomy: a salon owner reads "Salons" and agrees it is a
-   * category they belong to, which persuades nobody. They got "How much for
-   * bridal makeup?" this morning, and reading it back is a different
+   * its own is a taxonomy: a clinic owner reads "Clinics" and agrees it is a
+   * category they belong to, which persuades nobody. They got "Any
+   * appointment tomorrow?" this morning, and reading it back is a different
    * experience entirely.
    *
-   * It is the same device the five chapters open with, for the same reason,
-   * and it has the same rule: NO NAME, NO BUSINESS, NO OUTCOME. These are
-   * examples of the first message each trade receives, not quotes from
-   * anybody. Attribute one and it becomes invented proof.
+   * THE EIGHT MESSAGES ARE DRAFTED, NOT SUPPLIED. The client sent the trade
+   * names only. Each line below is the first message that trade plausibly
+   * receives, written to match the originals — NO NAME, NO BUSINESS, NO
+   * OUTCOME. They are examples, not quotes from anybody; attribute one and it
+   * becomes invented proof. [NEEDS APPROVAL]
+   *
+   * TWO ICONS ARE NEW. travel and d2c did not exist — the old list needed no
+   * plane and no box. Drawn in icons.tsx in the same hand as the rest.
    *
    * Photographs were considered here and rejected on arithmetic: eight cards
-   * in a grid gives each image roughly 40px, and at 40px a clinic, a salon
-   * and a studio are the same grey rectangle. Photographs would have needed
-   * the card to grow and the grid to halve. An icon reads at 40px; that is
+   * in a grid gives each image roughly 40px, and at 40px a clinic, a showroom
+   * and a studio are the same grey rectangle. An icon reads at 40px; that is
    * the whole argument.
    */
   items: [
     {
       icon: "showroom",
-      label: "Showrooms",
-      message: "Is the showroom open today?",
+      label: "Real Estate",
+      message: "Is this flat still available?",
     },
-    { icon: "clinic", label: "Clinics", message: "Any appointment tomorrow?" },
-    { icon: "salon", label: "Salons", message: "How much for bridal makeup?" },
     {
       icon: "studio",
-      label: "Studios",
+      label: "Interiors",
       message: "Can you share your packages?",
     },
-    { icon: "school", label: "Schools", message: "What are the fees?" },
-    { icon: "agency", label: "Agencies", message: "Can we get on a call?" },
     {
-      icon: "consultant",
-      label: "Consultants",
-      message: "What do you charge?",
+      icon: "school",
+      label: "Education & Coaching",
+      message: "What are the fees?",
+    },
+    { icon: "clinic", label: "Clinics", message: "Any appointment tomorrow?" },
+    { icon: "travel", label: "Travel", message: "Any packages for December?" },
+    { icon: "d2c", label: "D2C", message: "Do you deliver to my pincode?" },
+    {
+      icon: "pipeline",
+      label: "Distributors",
+      message: "What is the bulk rate?",
     },
     {
       icon: "service",
-      label: "Service Businesses",
-      message: "Do you come to Anna Nagar?",
+      label: "B2B Services",
+      message: "Can we get on a call?",
     },
   ],
-  /* For everyone who does not see their own trade on the list. Without it,
-   * eight named categories quietly tell a ninth reader this is not for them. */
+
+  /* The line under the grid. It used to work as a catch-all for anyone whose
+     trade was not in the eight; it now states the actual qualifying test, so
+     a reader in a sector nobody listed still knows whether this is for them.
+     Same sentence as the hero's qualifier, deliberately — the page opens and
+     closes its argument on the same condition. */
   catchAll:
-    "Not on this list? If your customers message you before they buy, it works the same way.",
+    "If your customers message you before they buy, iSuite AI fits the way you sell.",
 } as const;
 
-/* --- The demo call, stated plainly ---------------------------------------- */
 export const demoCall = {
   /*
-   * [DRAFT - NEEDS APPROVAL] new in Phase 5. Every fact below came from the
-   * client directly: 45 minutes, free, Google Meet, a general walkthrough
-   * rather than a session on the visitor's own accounts, run by the team and
-   * sometimes the founder.
+   * [FROM THE REVISED COPY DOC, §15] It was "What Happens on the Call." over
+   * four points with a paragraph each. This is eight, one line apiece, and
+   * every one starts with "How" — the demo is not a pitch, it is a
+   * walkthrough of the reader's own journey, and eight lines all beginning
+   * the same way say that faster than four paragraphs explaining it.
    *
-   * WHY THIS SECTION EXISTS. "Book a Demo" asks a business owner for their
-   * WhatsApp number and a slot in their week, and tells them nothing about
-   * what they are agreeing to. Every reference page we were sent states the
-   * shape of its offer next to the ask - three hours, live on Zoom, this is
-   * what you leave with. This is ours.
+   * THE EIGHT ARE THE PAGE'S OWN ARGUMENT, IN ORDER. Enquiries enter, the AI
+   * responds, qualification, booking, handover, quotations and invoices,
+   * follow-ups, Meta Ads to revenue — the same spine as the journey block and
+   * the chapters. A reader who has scrolled this far recognises every line,
+   * which is the point: the demo shows them the thing they have just read.
    *
-   * THE LAST POINT IS THE IMPORTANT ONE. The demo is a walkthrough, not a
-   * setup session; nobody's account gets connected on the call. Saying so
-   * costs a little enthusiasm and buys the thing this page cannot buy any
-   * other way - it has no rating, no client count and no testimonial, so
-   * being straight about the limits is the whole of its credibility. Trust
-   * and Business Types both run the same move.
+   * THE LIMIT PANEL SURVIVED. "It is a walkthrough, not a setup session" is
+   * not in the copy doc, and it is not contradicted by it either. It is kept
+   * because it is the only credibility move this page has: no rating, no
+   * client count and no testimonial by instruction, so being straight about
+   * what the call is NOT is all there is. Remove it and the block becomes
+   * eight promises with nothing holding them down.
    *
-   * Nothing here is a figure, a result or a promise.
+   * "NO CARD, NO COMMITMENT" IS BACK. It was in the hero as offerNote and
+   * went when the channels took that slot. The copy doc puts it here instead,
+   * at the moment of clicking, which is arguably where it always belonged.
    */
-  heading: "What Happens on the Call.",
-  headingAccent: "on the Call",
-  lead: "Forty-five minutes on Google Meet. Here is exactly what it is - and what it is not.",
+  heading: "SEE iSuite AI WITH YOUR OWN SALES JOURNEY.",
+  /* SHORT, BECAUSE THIS SECTION IS LIGHT NOW. On a light ground the accent
+     is not amber text — amber on offwhite is 1.83:1, which is a smudge — so
+     SalesHeading paints it as a filled BLOCK instead. A filled block is an
+     inline-block and cannot break across two lines, so the accent has to fit
+     on one at every width. "YOUR OWN SALES JOURNEY." measured 237px inside a
+     240px column on a 320px phone: three pixels from overflowing the screen,
+     which is not a margin, it is luck. */
+  headingAccent: "SALES JOURNEY.",
+  lead: "45-minute live walkthrough.",
 
   points: [
-    {
-      title: "A live walkthrough of iSuite AI",
-      body: "The shared inbox, the assistant replying, the sales pipeline and the Meta Ads view - shown working, not described.",
-    },
-    {
-      title: "Your channels, named",
-      body: "You tell us where your enquiries actually arrive. We show you how each one lands in the inbox.",
-    },
-    {
-      title: "What setting it up would involve",
-      body: "Which channels you would connect, what Meta has to approve, and which parts run on Meta's timeline rather than ours.",
-    },
-    {
-      title: "Meta's charges, explained",
-      body: "Meta bills WhatsApp messaging separately from MnT Future. We walk you through how that applies to the volume you expect.",
-    },
+    "How your enquiries enter.",
+    "How the AI responds.",
+    "How qualification works.",
+    "How appointments are booked.",
+    "How your team receives handovers.",
+    "How quotations and invoices work.",
+    "How follow-ups happen.",
+    "How Meta Ads connect to revenue.",
   ],
 
-  /** The honest limit. Rendered apart from the four above, in copper. */
+  /** The honest limit. Rendered apart from the eight above. Not in the copy
+      doc, kept deliberately — see the note above. */
   limit: {
     title: "It is a walkthrough, not a setup session",
     body: "We do not connect your accounts on the call, and nothing changes in your business until you decide it should.",
   },
 
-  footnote:
-    "Free. Forty-five minutes. On Google Meet. Run by the MnT Future team, sometimes by the founder.",
+  footnote: "Free · 45 minutes · Google Meet · No card · No commitment",
 } as const;
 
-/* --- §7.13 Footer -------------------------------------------------------- */
+/* --- Sales page block 17 — the last ask ---------------------------------- */
+export const salesFinal = {
+  /*
+   * [FROM THE REVISED COPY DOC, §17] The page used to end on a bare CTA row —
+   * a button and its sub-line, the eighth of eight, with nothing said around
+   * it. A reader who has scrolled the whole page and not pressed one of the
+   * previous seven is not going to press an identical eighth; the last ask
+   * has to say something the other seven did not.
+   *
+   * THIS ONE DOES, AND IT IS A TENSE CHANGE. Every other line on the page is
+   * about what happened — the lead that came in, the message nobody answered.
+   * This is the only sentence in the future: the next enquiry has not
+   * arrived yet, and what happens to it is still open. That is the whole
+   * device, and it is why this block earns its place over another CTA row.
+   *
+   * THIRD AND LAST APPEARANCE of "From first message to paid invoice." Hero,
+   * differentiator, here. A direct-response page is allowed one sentence it
+   * repeats until it sticks.
+   */
+  heading: "YOUR NEXT ENQUIRY IS ALREADY WAITING.",
+  accent: "ALREADY WAITING.",
+  sub: "Make sure it doesn't wait for your team.",
+  /* The lockup line. The logo is not repeated here — the footer carries it
+     immediately below, and twice in one screen reads as a mistake. */
+  brand: "iSuite AI",
+  payoff: "From first message to paid invoice.",
+} as const;
+
 export const footer = {
   // [DRAFT — NEEDS APPROVAL]
   tagline: "An AI sales system for businesses that sell through conversations.",

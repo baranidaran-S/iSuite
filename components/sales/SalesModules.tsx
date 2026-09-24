@@ -35,9 +35,6 @@ export function SalesModules() {
             text={salesModules.heading}
             accent={salesModules.accent}
           />
-          <p className="mt-4 text-[15px] leading-relaxed text-night-muted md:text-[17px]">
-            {salesModules.lead}
-          </p>
         </div>
 
         <ul className="mt-8 grid gap-2.5 sm:grid-cols-2 md:mt-10 md:grid-cols-3 md:gap-3">

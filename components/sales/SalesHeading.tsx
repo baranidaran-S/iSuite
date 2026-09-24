@@ -117,12 +117,26 @@ export function SalesHeading({
      The heading's leading-[1.25] below is the same calculation — 1.12em of
      box plus a gap you can see between lines.
 
-     The cost is that an inline-block cannot split across two lines, so a
-     LIGHT accent has to be short enough to fit one. "THE DEMO" is eight
-     characters and the only light heading on the page. A longer one needs
-     the inline version back, and its collision solved another way. */
+     whitespace-nowrap IS NOT COSMETIC, AND IT IS THERE BECAUSE THIS BROKE.
+     The cost of an inline-block is that it cannot split across two lines —
+     but without nowrap it does something far worse than refuse: it wraps
+     INSIDE itself, and leading-[0.8] then paints its own two lines on top
+     of each other inside one enormous amber slab.
+
+     text-balance is what triggers it. The pain heading runs 778px at
+     lg:74px inside a 760px column, so the balancer aims for two even lines
+     of about 389px — and hands the accent, which needs 468px, a 389px box.
+     Nothing overflows and nothing errors; the heading becomes unreadable.
+
+     With nowrap the accent takes its natural width and moves to its own
+     line instead, which is what was always intended.
+
+     THE CONTENT RULE STILL STANDS: a light accent must be short enough to
+     fit one line, because nowrap turns an overlong one into horizontal page
+     scroll rather than a mess. Measure it against that section's own
+     container at lg:74px before using it. */
   const accentClass = light
-    ? "inline-block rounded-[5px] bg-amber px-2 pt-[0.17em] pb-[0.15em] leading-[0.8] text-night"
+    ? "inline-block rounded-[5px] bg-amber px-2 pt-[0.17em] pb-[0.15em] leading-[0.8] whitespace-nowrap text-night"
     : "text-amber";
 
   /* brandCase runs on each slice separately, so an accent that happens to

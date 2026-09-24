@@ -1,19 +1,29 @@
 import { SalesHero } from "@/components/sales/SalesHero";
-import { SalesShowcase } from "@/components/sales/SalesShowcase";
+import { SalesPain } from "@/components/sales/SalesPain";
+import { SalesDifferentiator } from "@/components/sales/SalesDifferentiator";
+import { SalesSells } from "@/components/sales/SalesSells";
+import { SalesJourney } from "@/components/sales/SalesJourney";
 import { SalesChapter } from "@/components/sales/SalesChapter";
 import { SalesCtaRow } from "@/components/sales/SalesCta";
+import { HandoverCard } from "@/components/sales/HandoverCard";
+import { RoutingCard } from "@/components/sales/RoutingCard";
+import { RulesCard } from "@/components/sales/RulesCard";
 import { SHOT_SIZES, ShotSlot } from "@/components/sales/ShotSlot";
 /* Static imports, not string paths: Next reads each file's real size at
-   build time and emits it under a content-hashed url. See ShotSlot. */
-import bookingsShot from "@/public/shots/bookings.png";
+   build time and emits it under a content-hashed url. See ShotSlot.
+
+   TWO SCREENSHOTS LEFT THIS FILE with the chapters that showed them.
+   full-inbox.png and bookings.png are still in public/shots/ and still
+   redacted; nothing renders them. They are the obvious source if either
+   replaced chapter is ever reinstated. */
 import followupsShot from "@/public/shots/followups.png";
-import fullInboxShot from "@/public/shots/full-inbox.png";
 import inboxShot from "@/public/shots/inbox.png";
 import metaAdsShot from "@/public/shots/meta-ads.png";
+import quotationShot from "@/public/shots/quotation.png";
 import { SalesOffer } from "@/components/sales/SalesOffer";
-import { SalesFounder } from "@/components/sales/SalesFounder";
 import { SalesModules } from "@/components/sales/SalesModules";
 import { SalesAudience } from "@/components/sales/SalesAudience";
+import { SalesFinal } from "@/components/sales/SalesFinal";
 import { SalesFaq } from "@/components/sales/SalesFaq";
 import { salesChapters } from "@/lib/content";
 import { Footer } from "@/components/Footer";
@@ -53,18 +63,24 @@ import { Footer } from "@/components/Footer";
      14  the form, dark band            [BUILT]
      15  footer + Meta disclaimer       [BUILT]
 
-
    TWO LIGHT SECTIONS, AND ONLY TWO: the founder and the form. A four-block
    light band was tried across blocks 10-13 and rejected on sight — it broke
    the page into two halves that looked like two different sites, and the
    dark ground is most of why this reads as a sales page at all.
 
-   The two that stayed are the two that are not about the product. A face
-   belongs on a light ground, and a form is the one thing here you act ON
-   rather than read. Everything else is dark, as it was.
+   THE RULE IS NOW: THE PAGE ARGUES IN THE DARK AND ASKS IN THE LIGHT. Every
+   block that wants something from the reader sits on offwhite — the pain
+   that makes them want it, the demo, the final CTA. Every block explaining
+   something sits on night. A reader never notices that and always follows it.
 
-   Amber is 1.83:1 on a light ground, so neither of them uses amber as text —
-   see the notes in SalesFounder and LeadForm.
+   THE FOUNDER WAS THE FOURTH LIGHT SECTION and it is gone — cut because the
+   revised copy doc has no founder section. It was also the only thing
+   breaking a very long dark run: with it removed, twelve consecutive blocks
+   between the pain and the demo are all on night.
+
+   Amber is 1.83:1 on a light ground, so no light section may use amber as
+   TEXT — every one of them paints it as a fill with night on top, at 8.90:1.
+   See the note in SalesHeading.
    ========================================================================== */
 
 export default function Page() {
@@ -72,8 +88,31 @@ export default function Page() {
     <>
       <main>
         <SalesHero />
-        <SalesShowcase />
-        <SalesCtaRow anim="swipe" className="bg-night pb-10 md:pb-14" />
+        {/* Block 2 — the problem the rest of the page answers. It sits
+            between the promise and the product deliberately: a reader shown
+            features before agreeing there is a problem reads them as things
+            to learn. */}
+        <SalesPain />
+
+        {/* Block 3 — the eight steps one enquiry moves through. It
+            replaced the four-screen showcase: a tour of the software before
+            the reader had a reason to care what the screens were. */}
+        <SalesJourney />
+
+        {/* Block 4 — the one competitive claim. It compresses the eight
+            steps above into a single readable line, because the argument is
+            that the journey is LONG and a reader only feels that if they see
+            the whole of it at once. */}
+        <SalesDifferentiator />
+
+        {/* Block 5 — the ten verbs. Seven of them appear again inside the
+            chapters below, which is the point: the chapters spread them over
+            five screens with a screenshot between each, and the one thing a
+            reader cannot do there is see how MANY there are. */}
+        {/* Block 5 — the ten verbs. Its CTA row moved INSIDE the section,
+            so a claim that strong is followed by the ask in the same breath
+            rather than after a gap. Same button, not a ninth. */}
+        <SalesSells />
 
         {/* ---- Blocks 4-8: the five chapters ----
             EVERY CHAPTER SHOWS A DIFFERENT SCREEN. The hero and chapter 4
@@ -108,30 +147,46 @@ export default function Page() {
             public/shots/ - appointments.png and assistant-reply.png, 2MB
             between them, referenced by nothing after the swap. Git still
             has them if a real screenshot ever falls through. */}
+        {/* THE SEVEN CHAPTERS, ONE PER SECTION OF THE COPY DOC, in the doc's
+            own order: §06 control, §07 escalation, §08 quote to cash, §09
+            follow-up, §10 language, §11 safety, §12 Meta Ads.
+
+            RENDERED STRAIGHT OFF salesChapters[0..6], so the array index IS
+            the chapter number. This block was hand-wired until it drifted —
+            [5] rendered as chapter 06 above [4] rendered as 05, and two
+            screenshots sat on each other's chapters. Every index was valid,
+            so nothing errored. Reorder in content.ts, never here.
+
+            `flip` alternates which side the visual sits on. */}
         <SalesChapter
           chapter={salesChapters[0]}
           index={1}
-          total={5}
-          mock={
-            <ShotSlot
-              name="The shared inbox - every channel's conversations in one list"
-              file="full-inbox.png"
-              src={fullInboxShot}
-              sizes={SHOT_SIZES.chapter}
-            />
-          }
+          total={7}
+          mock={<HandoverCard />}
         />
 
         <SalesChapter
           chapter={salesChapters[1]}
           index={2}
-          total={5}
+          total={7}
           flip
+          mock={<RoutingCard />}
+        />
+
+        {/* 03 — quote to cash. A REAL SCREEN, not the drawn card it had. This
+            is the chapter carrying the page's biggest new claim, and quotes
+            and invoices are the two things the requirements doc lists under
+            "Do Not Claim" — so it was also the claim with the least evidence
+            behind it. The Quotes & invoices screen is that evidence. */}
+        <SalesChapter
+          chapter={salesChapters[2]}
+          index={3}
+          total={7}
           mock={
             <ShotSlot
-              name="A WhatsApp conversation where the assistant replies in Tamil"
-              file="inbox.png"
-              src={inboxShot}
+              name="Quotes and invoices - what has been quoted, billed and accepted"
+              file="quotation.png"
+              src={quotationShot}
               sizes={SHOT_SIZES.chapter}
             />
           }
@@ -140,23 +195,9 @@ export default function Page() {
         <SalesCtaRow anim="bounce" className="bg-night pb-9 md:pb-12" />
 
         <SalesChapter
-          chapter={salesChapters[2]}
-          index={3}
-          total={5}
-          mock={
-            <ShotSlot
-              name="The bookings list - who booked, with whom, and whether they showed"
-              file="bookings.png"
-              src={bookingsShot}
-              sizes={SHOT_SIZES.chapter}
-            />
-          }
-        />
-
-        <SalesChapter
           chapter={salesChapters[3]}
           index={4}
-          total={5}
+          total={7}
           flip
           mock={
             <ShotSlot
@@ -171,7 +212,29 @@ export default function Page() {
         <SalesChapter
           chapter={salesChapters[4]}
           index={5}
-          total={5}
+          total={7}
+          mock={
+            <ShotSlot
+              name="A WhatsApp conversation where the assistant replies in Tamil"
+              file="inbox.png"
+              src={inboxShot}
+              sizes={SHOT_SIZES.chapter}
+            />
+          }
+        />
+
+        <SalesChapter
+          chapter={salesChapters[5]}
+          index={6}
+          total={7}
+          flip
+          mock={<RulesCard />}
+        />
+
+        <SalesChapter
+          chapter={salesChapters[6]}
+          index={7}
+          total={7}
           mock={
             <ShotSlot
               name="Ad return - what each ad cost, and the revenue it brought back"
@@ -184,22 +247,27 @@ export default function Page() {
 
         <SalesCtaRow anim="ripple" className="bg-night pb-10 md:pb-14" />
 
-        <SalesOffer />
-
-        {/* LIGHT. The only break in the dark before the form. */}
-        <SalesFounder />
-
         <SalesModules />
         <SalesCtaRow anim="nudge" className="bg-night pb-10 md:pb-14" />
         <SalesAudience />
 
+        {/* THE OFFER, STATED IN FULL — and it sits here rather than
+            straight after the chapters, where it used to. The FAQ below
+            exists to kill objections, and an objection is something a
+            reader only has once they have been ASKED. Above the product
+            screens, the ask came first and the answers came four blocks
+            later, by which time the reader had put the question down.
+            Ask, then answer, then close. */}
+        <SalesOffer />
+
         <SalesFaq />
 
-        {/* THE LAST ASK ON THE PAGE. It used to hand over to the lead form
-            below it; the form is gone and every button now opens the booking
-            page directly, so this row is the end of the page's argument and
-            closes with its own bottom padding. */}
-        <SalesCtaRow anim="wobble" className="bg-night pb-12 md:pb-16" />
+        {/* THE LAST ASK ON THE PAGE. It was a bare CtaRow — the eighth
+            identical button, with nothing said around it. A reader who has
+            scrolled this far past seven of them will not press the eighth
+            for being lower down, so the last ask now carries its own
+            argument. See SalesFinal. */}
+        <SalesFinal />
       </main>
 
       <Footer />

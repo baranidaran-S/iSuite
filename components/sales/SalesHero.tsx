@@ -99,6 +99,16 @@ export function SalesHero() {
           {salesHero.sub}
         </p>
 
+        {/* WHO IT IS FOR. Set in white rather than the muted grey the subhead
+            uses, because it is a qualifying line and not a footnote — a
+            reader scanning for "is this me?" has to be able to find it. It
+            sits between the promise and the ask deliberately: the last thing
+            read before the button is the sentence that says the button is
+            for you. */}
+        <p className="mt-4 text-[15px] font-extrabold text-white md:text-[16.5px]">
+          {salesHero.qualifier}
+        </p>
+
         {/* THE BUTTON COMES BEFORE THE OFFER CHIPS, not after. The chips sat
             above it and pushed the one control on the page a further 60px
             down a first screen that is already carrying a five-line headline
@@ -125,8 +135,16 @@ export function SalesHero() {
           ))}
         </ul>
 
+        {/* THE CHANNELS. A plain separated line, not chips — the amber chips
+            directly above are the OFFER, and giving these the same treatment
+            would read as eight things of equal weight rather than three you
+            get and five you already use.
+
+            The separator is a real middot with non-breaking spaces either
+            side, so a wrap never leaves a dot stranded at the start of a
+            line. The list wraps to two lines on a phone and that is fine. */}
         <p className="mx-auto mt-4 max-w-[440px] text-[14.5px] leading-relaxed text-night-muted md:text-[15px]">
-          {salesHero.offerNote}
+          {salesHero.channels.join(" · ")}
         </p>
       </div>
 

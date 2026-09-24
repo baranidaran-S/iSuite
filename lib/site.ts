@@ -65,9 +65,10 @@ export const site = {
      ========================================================================== */
   PLACEHOLDER_CLAIMS: [
     {
-      where: "lib/content.ts — salesFaq, 'How long does it take to set up?'",
-      claim: "Setup on our side is usually done within a week",
-      truth: "Unknown. Nobody has given a figure from a real onboarding.",
+      where: "lib/content.ts — salesFaq, 'How long does WhatsApp approval take?'",
+      claim: "Typically 1–2 weeks, subject to Meta's review",
+      truth:
+        "Nobody has measured it. It REPLACED a worse one — 'setup on our side is usually done within a week', which was a claim about MnT Future's own speed — and it is hedged twice, so the exposure is smaller. It is still a number on a page that nobody has checked against a real approval. Confirm it from an actual submission or cut the figure and say 'Meta decides the timeline'.",
     },
   ],
 

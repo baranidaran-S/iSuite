@@ -95,17 +95,22 @@ export function SalesChapter({
       <div className="mx-auto grid max-w-[1100px] items-center gap-7 lg:grid-cols-2 lg:gap-12">
         {/* Copy. Always first in the DOM, so it is always first on a phone. */}
         <div className={flip ? "lg:order-2" : ""}>
-          {/* 01 / 05 - where you are in the run. */}
+          {/* 01 / 07 - where you are in the run.
+
+              shrink-0 AND whitespace-nowrap ON THE COUNT, because it broke.
+              "/ 07" contains a space, so in a flex row squeezed by a long
+              label it wrapped and put the slash on one line and the 07 on
+              the next. The label is allowed to wrap; the count never is. */}
           <div className="flex items-center gap-3.5">
             <span
               aria-hidden="true"
-              className="font-display text-[40px] leading-none tabular-nums text-amber md:text-[48px]"
+              className="font-display shrink-0 text-[40px] leading-none tabular-nums text-amber md:text-[48px]"
             >
               {n}
             </span>
             <span
               aria-hidden="true"
-              className="font-display text-[19px] leading-none tabular-nums text-night-muted/70 md:text-[22px]"
+              className="font-display shrink-0 whitespace-nowrap text-[19px] leading-none tabular-nums text-night-muted/70 md:text-[22px]"
             >
               / {of}
             </span>

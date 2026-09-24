@@ -212,6 +212,25 @@ const studio = (p: P) => (
   </Line>
 );
 
+/* Travel — a paper plane rather than an aircraft: an aircraft at 20px is a
+   grey smudge, a plane made of three straight strokes still reads. */
+const travel = (p: P) => (
+  <Line {...p}>
+    <path d="M20.6 4.1 3.6 10.4c-.6.2-.6 1 0 1.2l6.6 2.3 2.3 6.6c.2.6 1 .6 1.2 0z" />
+    <path d="M20.6 4.1 10.2 13.9" />
+  </Line>
+);
+
+/* D2C — a shipped box seen from the front, with the tape seam down it. The
+   seam is what stops it reading as a plain square at small sizes. */
+const d2c = (p: P) => (
+  <Line {...p}>
+    <path d="M3.9 7.6 12 3.9l8.1 3.7v8.8L12 20.1 3.9 16.4z" />
+    <path d="M3.9 7.6 12 11.3l8.1-3.7" />
+    <path d="M12 11.3v8.8" />
+  </Line>
+);
+
 const school = (p: P) => (
   <Line {...p}>
     <path d="m12 4.2 8.9 4.4-8.9 4.4-8.9-4.4z" />
@@ -315,6 +334,8 @@ export const icons = {
   megaphone,
   team,
   showroom,
+  travel,
+  d2c,
   clinic,
   salon,
   studio,
