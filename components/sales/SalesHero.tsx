@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ChannelMark, type ChannelName } from "@/components/sales/ChannelMark";
 import { SHOT_SIZES, ShotSlot } from "@/components/sales/ShotSlot";
 import dashboardShot from "@/public/shots/dashboard.png";
 import { SalesCta } from "@/components/sales/SalesCta";
@@ -135,17 +136,32 @@ export function SalesHero() {
           ))}
         </ul>
 
-        {/* THE CHANNELS. A plain separated line, not chips — the amber chips
-            directly above are the OFFER, and giving these the same treatment
-            would read as eight things of equal weight rather than three you
-            get and five you already use.
+        {/* THE CHANNELS, each with its own mark. They were middot-separated
+            text, which named the channels without ever showing them — and a
+            green bubble is recognised before the word beside it is read.
 
-            The separator is a real middot with non-breaking spaces either
-            side, so a wrap never leaves a dot stranded at the start of a
-            line. The list wraps to two lines on a phone and that is fine. */}
-        <p className="mx-auto mt-4 max-w-[440px] text-[14.5px] leading-relaxed text-night-muted md:text-[15px]">
-          {salesHero.channels.join(" · ")}
-        </p>
+            QUIETER CHIPS THAN THE OFFER ABOVE, deliberately. Those are amber
+            and are what you GET; these are white-on-nothing and are what you
+            already USE. Same shape, a full step down in weight, so the row
+            reads as context rather than as five more benefits.
+
+            The logos keep their brand colours while the labels stay white —
+            the mark does the recognising, the label does the reading, and
+            five coloured words would have been a ransom note. */}
+        <ul className="mx-auto mt-5 flex max-w-[520px] flex-wrap items-center justify-center gap-2">
+          {salesHero.channels.map((channel) => (
+            <li
+              key={channel.label}
+              className="flex items-center gap-2 rounded-full border border-white/12 bg-white/[0.05] px-3 py-1.5 text-[13px] font-semibold text-white md:px-3.5 md:text-[14px]"
+            >
+              <ChannelMark
+                name={channel.name as ChannelName}
+                className="h-[15px] w-[15px] shrink-0 text-night-muted md:h-4 md:w-4"
+              />
+              {channel.label}
+            </li>
+          ))}
+        </ul>
       </div>
 
       {/* The product, straight after the ask. The reference puts its banner

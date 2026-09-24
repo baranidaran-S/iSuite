@@ -101,10 +101,24 @@ export const salesHero = {
      ads were always in the product and were never in that count.
 
      IT REPLACED offerNote, which read "Pick a slot on the next screen. No
-     card, no commitment." That was reassurance at the point of clicking and
-     it is a real loss; it is out because the client's layout puts the
-     channels here instead. Worth putting back if the button ever underperforms. */
-  channels: ["WhatsApp", "Instagram", "Facebook", "Website", "Meta Ads"],
+     card, no commitment." That line lives on the demo block now, right at
+     the moment of clicking, which is arguably where it belonged.
+
+     THEY CARRY THEIR OWN LOGOS. As plain text they were a list to be parsed;
+     the green bubble is recognised before the word beside it is read, and
+     this row exists to be recognised rather than read. The marks are
+     third-party trademarks identifying channels the product connects to —
+     read the note in ChannelMark before touching any of them. */
+  /* Each carries its own mark now — `name` is the key into ChannelMark, not
+     a filename. The glyphs are inline SVG, so there is no request to make
+     and nothing to go missing. */
+  channels: [
+    { name: "whatsapp", label: "WhatsApp" },
+    { name: "instagram", label: "Instagram" },
+    { name: "facebook", label: "Facebook" },
+    { name: "website", label: "Website" },
+    { name: "meta", label: "Meta Ads" },
+  ],
 
   /* Under the product shot. Names what is on screen so the image is not
      decoration. */
