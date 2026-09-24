@@ -74,22 +74,56 @@ export function ChannelMark({
   }
 
   if (name === "meta") {
-    /* Meta's mark is two interlocking loops. Stroked rather than filled: the
-       filled original relies on variable stroke weight that disappears at
-       18px and comes out as a blob. */
+    /* Meta's mark is ONE ribbon crossing itself — a lemniscate — and this is
+       the second attempt at it. The first was two separate open paths that
+       both began at the same point and went opposite ways, so the left loop
+       never closed: at 15px it rendered as a squiggle with a gap in it, which
+       is what the client saw.
+
+       CONSTRUCTED, NOT TRACED. Meta's real artwork uses a variable-width
+       ribbon that vanishes at this size, and tracing it badly is the failure
+       above. So this is drawn from geometry instead — one closed path, two
+       mirrored loops, pinched at the centre:
+
+           centre        12, 12
+           left  loop    x 2.1 .. 12    right loop  x 12 .. 21.9
+           top / bottom  y 6.83 / 17.17   symmetric about y = 12
+
+       EVERY RIGHT-HAND NUMBER IS 24 MINUS ITS LEFT-HAND TWIN, which is what
+       makes the two loops identical; change one and you must change its pair
+       or the mark goes lopsided.
+
+       THE CROSSING IS WHAT MAKES IT READ, and it works because the tangents
+       line up. The path leaves the centre towards 10.02 8.37 and arrives
+       back from 13.98 15.63 — both (-1.98, -3.63) — so the two strands pass
+       through one point at two different angles and the join is smooth
+       rather than a kink. Nudge a control point near the centre and it
+       becomes a blob.
+
+       WIDER THAN IT IS TALL, on purpose: 19.8 x 10.3 units inside a 24 box,
+       which is Meta's own 1.9:1. The other marks here fill their box and
+       Meta's does not — it is a wide mark, and stretching it to match their
+       height would make it the biggest thing in the row.
+
+       STROKE 2.9, NOT THE 2.1 EVERY OTHER STROKED THING HERE USES. This mark
+       sits between WhatsApp, Instagram and Facebook, which are SOLID FILLED
+       shapes, and an outline next to three filled discs reads as fainter
+       even at the same nominal size. 2.9 is where its ink matches theirs;
+       much past 3 and the loops close into two blobs at 15px. The globe
+       beside it stays at 1.9 because it is a full-height mark and does not
+       need the compensation. */
     return (
       <svg
         viewBox="0 0 24 24"
         fill="none"
         stroke={fill}
-        strokeWidth={2.1}
+        strokeWidth={2.9}
         strokeLinecap="round"
         strokeLinejoin="round"
         aria-hidden="true"
         className={className}
       >
-        <path d="M2.4 14.6c0-3.9 1.9-8 4.6-8 1.8 0 3.1 1.6 5 4.7 1.9 3.1 3 4.7 4.5 4.7 1.8 0 2.7-1.9 2.7-4.4 0-2.9-1.2-5-3-5-1.7 0-3.1 1.5-4.9 4.3" />
-        <path d="M2.4 14.6c0 1.9.9 3.1 2.4 3.1 1.5 0 2.6-1.1 4.4-3.9" />
+        <path d="M12 12C10.02 8.37 7.27 6.83 5.07 7.27C2.98 7.71 2.1 9.69 2.1 12C2.1 14.31 2.98 16.29 5.07 16.73C7.27 17.17 10.02 15.63 12 12C13.98 8.37 16.73 6.83 18.93 7.27C21.02 7.71 21.9 9.69 21.9 12C21.9 14.31 21.02 16.29 18.93 16.73C16.73 17.17 13.98 15.63 12 12Z" />
       </svg>
     );
   }
