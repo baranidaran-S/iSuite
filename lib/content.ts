@@ -945,43 +945,33 @@ export const salesFaq = {
 
 export const salesDisclaimer = {
   /*
-   * [NEEDS LEGAL REVIEW — `meta` only]
+   * ONE PARAGRAPH NOW, and it is the copy doc's §17 wording verbatim.
    *
-   * `meta` IS NOT FROM THE REQUIREMENTS DOCS. No document asks for it. It is
-   * here because the page names WhatsApp, Instagram, Facebook and Meta
-   * throughout and runs on Meta ad traffic, and Meta's advertising policies
-   * prohibit implying their endorsement. It is the common form of that
-   * notice, and it is a judgement call, not a client instruction - whoever
-   * signs off legal copy should confirm it before this page takes ad spend.
+   * WHAT WENT: "This site is not a part of the Facebook or Instagram
+   * websites, or Meta Platforms, Inc. It is not endorsed by Meta in any way.
+   * FACEBOOK, INSTAGRAM and WHATSAPP are trademarks of Meta Platforms, Inc."
+   * Removed at the client's instruction. It is NOT required by either
+   * approved document — the Requirements doc (line 362) asks for the charges
+   * and approval line and nothing else — so this breaks no spec.
    *
-   * `results` IS FROM THE DOCS, VERBATIM. iSuite-AI-Landing-Page-
-   * Requirements.md line 364, under a heading called "### Disclaimer", and
-   * repeated in the build spec at line 178 with a size and a colour. It was
-   * previously three sentences - two of mine about results not being
-   * guaranteed, plus a reworded version of this one. The client asked for
-   * only what the doc actually says, so the two invented sentences are gone
-   * and this is the doc's own wording, unaltered.
+   * IT IS STILL THE MORE COMMON PRACTICE on a page running Meta ads, and the
+   * trademark sentence got MORE relevant the day the hero started showing
+   * the WhatsApp, Instagram, Facebook and Meta marks. Attribution costs one
+   * line and is the ordinary courtesy for displaying someone's trademark.
+   * Recorded here so bringing it back is a paste rather than a rediscovery.
    *
-   * REMOVING THEM IS SAFE ONLY WHILE THE PAGE PROMISES NOTHING. Requirements
-   * line 366 says "Do not promise guaranteed leads, ROAS, sales or Meta
-   * approval", and line 403 forbids publishing "Guaranteed 5X results". That
-   * rule has not gone away - it was simply being obeyed twice, once by the
-   * copy and once by a disclaimer. If a results claim ever enters the page,
-   * the disclaimer is no longer the thing that makes it acceptable.
+   * WHAT STAYED is the sentence that actually protects the client: Meta
+   * bills separately and Meta decides approvals. That is the promise this
+   * page must never be read as making, and it is also the answer to two of
+   * the eight FAQ questions.
+   *
+   * NEEDS LEGAL REVIEW before this page takes any ad spend. Still nobody has
+   * looked at it.
    */
-  meta: "This site is not a part of the Facebook or Instagram websites, or Meta Platforms, Inc. It is not endorsed by Meta in any way. FACEBOOK, INSTAGRAM and WHATSAPP are trademarks of Meta Platforms, Inc.",
   results:
     "Meta advertising charges and WhatsApp messaging charges are separate from MnT Future charges. WhatsApp Business approval and Meta advertising approvals are subject to Meta's requirements and review.",
 } as const;
 
-/* --- §7.8 Suitable Business Types ----------------------------------------- */
-/*
- * NOT RENDERED — §7.8 was removed from the page. It answered the same
- * question as the proof strip ("is this for a business like mine?") and the
- * two disagreed: this said showrooms and salons, the strip says IT companies
- * and consulting firms. Kept verbatim because it is spec copy and this repo
- * has no version control.
- */
 export const businessTypes = {
   // [REQ §16] — build spec specifies the 8 items but no section heading
   heading: "Built for Businesses That Sell Through Conversations.",

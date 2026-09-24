@@ -89,14 +89,14 @@ export function Footer() {
               and readable, not prominent.
 
               NEEDS LEGAL REVIEW before this page takes any ad spend. */}
-          <div className="mt-9 flex w-full flex-col gap-4 border-t border-white/10 pt-7 md:mt-10">
-            <p className="text-[11.5px] leading-relaxed text-night-muted md:text-[12px]">
-              {salesDisclaimer.meta}
-            </p>
-            <p className="text-[11.5px] leading-relaxed text-night-muted md:text-[12px]">
-              {salesDisclaimer.results}
-            </p>
-          </div>
+          {/* ONE PARAGRAPH, so no flex column to space two of them in. The
+              Meta affiliation and trademark notice that sat above this was
+              removed at the client's instruction — see the note in
+              content.ts, which records what it said and why it may be worth
+              having back now the hero displays Meta's marks. */}
+          <p className="mt-9 w-full border-t border-white/10 pt-7 text-[11.5px] leading-relaxed text-night-muted md:mt-10 md:text-[12px]">
+            {salesDisclaimer.results}
+          </p>
 
           {/* One line under a rule now, so no flex column to stack it in. */}
           <p className="t-small mt-7 w-full border-t border-white/10 pt-6 text-night-muted">
