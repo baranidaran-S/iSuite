@@ -93,7 +93,7 @@ export function SalesDifferentiator() {
           })}
         </ol>
 
-        <p className="font-display mt-8 text-[24px] leading-[1.1] text-white uppercase md:mt-10 md:text-[30px]">
+        <p className="font-display mt-8 text-[24px] leading-[1.15] text-white md:mt-10 md:text-[30px]">
           {salesDifferentiator.payoff}
         </p>
       </div>

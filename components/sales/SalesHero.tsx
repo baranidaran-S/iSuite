@@ -115,7 +115,7 @@ export function SalesHero() {
             four lines and Chromium ignores it past six, so on a phone it did
             nothing at all; pretty keeps the last line off a single orphan
             word, which is the failure this shape actually has. */}
-        <h1 className="font-display mt-5 text-[clamp(30px,9.6vw,44px)] leading-[1.1] tracking-[0.01em] text-pretty text-white uppercase md:text-[42px] lg:text-[56px]">
+        <h1 className="font-display mt-5 text-[clamp(30px,9.6vw,44px)] leading-[1.15] tracking-[0.01em] text-pretty text-white md:text-[42px] lg:text-[56px]">
           <Headline />
         </h1>
 

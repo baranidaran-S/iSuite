@@ -62,7 +62,7 @@ export function SalesFinal() {
           <p className="text-[13px] font-extrabold tracking-[0.2em] text-day-muted uppercase md:text-[14px]">
             {brandCase(salesFinal.brand)}
           </p>
-          <p className="font-display mt-2 text-[24px] leading-[1.1] text-night uppercase md:text-[30px]">
+          <p className="font-display mt-2 text-[24px] leading-[1.15] text-night md:text-[30px]">
             {salesFinal.payoff}
           </p>
         </div>

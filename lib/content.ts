@@ -161,12 +161,12 @@ export const salesPain = {
    * problem rather than a promise. The page now poses its question and
    * answers it in the same words.
    */
-  heading: "THE LEAD CAME IN. WHAT HAPPENED AFTER THAT?",
+  heading: "The lead came in. What happened after that?",
   /* SHORT ON PURPOSE. On the light ground this is painted as a filled block,
      and "WHAT HAPPENED AFTER THAT?" is 468px of solid amber at lg:74px — a
      wall rather than a mark, and wider than the balanced line it gets given.
      Three words highlight the question without becoming the section. */
-  accent: "AFTER THAT?",
+  accent: "after that?",
   /* SPLIT INTO TWO LINES WHERE THE DOC SPLITS INTO TWO SENTENCES. The first
      two items are each a thing that happened followed by the thing that did
      not: a message arrives / nobody replies, a quotation is asked for /
@@ -197,7 +197,7 @@ export const salesPain = {
 export const salesJourney = {
   /*
    * [FROM THE REVISED COPY DOC, §03] This REPLACED salesShowcase, which was
-   * "FOUR SCREENS YOUR TEAM WILL LIVE IN" over four named screens. Four
+   * "Four screens your team will live in" over four named screens. Four
    * screens was a tour of the software. Eight steps is the journey one
    * enquiry takes, which is what the page now sells — and the four screens
    * were also saying the same thing as PRODUCT SCREENS further down, in a
@@ -219,8 +219,8 @@ export const salesJourney = {
    * is stale — the client's own CRM shows the feature — but steps 05 and 07
    * are two more places a reviewer will stop.
    */
-  heading: "iSuite AI DOES THE SALES WORK BETWEEN THE ENQUIRY AND THE INVOICE.",
-  accent: "BETWEEN THE ENQUIRY AND THE INVOICE.",
+  heading: "iSuite AI does the sales work between the enquiry and the invoice.",
+  accent: "between the enquiry and the invoice.",
   lead: "One enquiry. One continuous sales journey.",
   steps: [
     { name: "Respond", body: "Answer immediately, in the customer's language." },
@@ -266,8 +266,8 @@ export const salesDifferentiator = {
    * up there but not what it does down here. A direct-response page is
    * allowed one sentence it repeats until it sticks; this page has one.
    */
-  heading: "IT DOESN'T STOP AT THE REPLY.",
-  accent: "AT THE REPLY.",
+  heading: "It doesn't stop at the reply.",
+  accent: "at the reply.",
   lead: "Most systems help you get the conversation started.",
   leadStrong: "iSuite AI keeps the deal moving.",
   flow: [
@@ -309,8 +309,8 @@ export const salesSells = {
    * customers. It is §11's argument arriving early; keep them apart when §11
    * is built, or the page makes the same promise twice in one scroll.
    */
-  heading: "IT SELLS, NOT JUST REPLIES.",
-  accent: "NOT JUST REPLIES.",
+  heading: "It sells, not just replies.",
+  accent: "not just replies.",
   /* Split at the verb deliberately — see the note above. `verb` is what the
      assistant DOES, `rest` is what it does it to. */
   items: [
@@ -436,8 +436,8 @@ export const salesShowcase = {
    * four named screens read as finished and gain an image later without the
    * layout moving.
    */
-  heading: "FOUR SCREENS YOUR TEAM WILL LIVE IN",
-  accent: "FOUR SCREENS",
+  heading: "Four screens your team will live in",
+  accent: "Four screens",
   lead: "This is the whole product. Nothing else to learn.",
   items: [
     {
@@ -741,10 +741,10 @@ export const salesFounder = {
    * Only "Udhay" was given, with no surname. If a surname belongs here, it
    * goes in `name`.
    */
-  heading: "WHO RUNS THE DEMO",
+  heading: "Who runs the demo",
   /* The accent was "RUNS THE DEMO" — three words of four, so the treatment
      landed on almost the whole heading and marked nothing out. Two words. */
-  accent: "THE DEMO",
+  accent: "the demo",
   name: "Udhay",
   /* It said just "MnT Future", which is a company name sitting where a job
      title goes — the block is headed WHO RUNS THE DEMO and then named a
@@ -805,8 +805,8 @@ export const salesModules = {
      NO LEAD UNDER IT NOW, deliberately. The ten numbered cards are the
      explanation, and a line of prose between the promise and its evidence
      only delays them. */
-  heading: "EVERYTHING YOUR SALES TEAM NEEDS. IN ONE SYSTEM.",
-  accent: "IN ONE SYSTEM.",
+  heading: "Everything your sales team needs. In one system.",
+  accent: "In one system.",
   items: [
     {
       name: "Shared Inbox",
@@ -872,8 +872,8 @@ export const salesAudience = {
    * — the client asked for the trades above it to change and for this to stay
    * exactly as it is.
    */
-  heading: "WHO IT'S FOR",
-  accent: "IT'S FOR",
+  heading: "Who it's for",
+  accent: "it's for",
   lead: "Built for businesses where customers message before they buy.",
   notHeading: "Who this is NOT for",
   notFor: [
@@ -916,8 +916,8 @@ export const salesFaq = {
    * the question that held it no longer exists. One unverified figure
    * arrives in its place — see the note on the approval answer below.
    */
-  heading: "QUESTIONS PEOPLE ASK BEFORE BOOKING",
-  accent: "BEFORE BOOKING",
+  heading: "Questions people ask before booking",
+  accent: "before booking",
   items: [
     {
       q: "Will my WhatsApp number get banned?",
@@ -989,7 +989,7 @@ export const salesDisclaimer = {
 
 export const businessTypes = {
   // [REQ §16] — build spec specifies the 8 items but no section heading
-  heading: "Built for Businesses That Sell Through Conversations.",
+  heading: "Built for businesses that sell through conversations.",
   /* [SPEC] — 8 icons with labels.
    *
    * THE EIGHT TRADES CHANGED. They were Showrooms, Clinics, Salons, Studios,
@@ -1084,7 +1084,7 @@ export const demoCall = {
    * went when the channels took that slot. The copy doc puts it here instead,
    * at the moment of clicking, which is arguably where it always belonged.
    */
-  heading: "SEE iSuite AI WITH YOUR OWN SALES JOURNEY.",
+  heading: "See iSuite AI with your own sales journey.",
   /* SHORT, BECAUSE THIS SECTION IS LIGHT NOW. On a light ground the accent
      is not amber text — amber on offwhite is 1.83:1, which is a smudge — so
      SalesHeading paints it as a filled BLOCK instead. A filled block is an
@@ -1135,8 +1135,8 @@ export const salesFinal = {
    * differentiator, here. A direct-response page is allowed one sentence it
    * repeats until it sticks.
    */
-  heading: "YOUR NEXT ENQUIRY IS ALREADY WAITING.",
-  accent: "ALREADY WAITING.",
+  heading: "Your next enquiry is already waiting.",
+  accent: "already waiting.",
   sub: "Make sure it doesn't wait for your team.",
   /* The lockup line. The logo is not repeated here — the footer carries it
      immediately below, and twice in one screen reads as a mistake. */

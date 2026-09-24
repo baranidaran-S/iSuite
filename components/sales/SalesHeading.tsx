@@ -4,10 +4,23 @@ import { brandCase } from "@/components/sales/brandCase";
 /* ==========================================================================
    THE HEADLINE TREATMENT — every block on the page uses it
    --------------------------------------------------------------------------
-   Heavy capitals, centred, with the key phrase in amber. It is the loudest
-   single signal that a page is selling rather than explaining, and the
-   reference uses it without exception — "WHO IS THIS CHALLENGE FOR?", "WHAT
-   YOU'LL WALK AWAY WITH", "HERE'S WHAT'S COVERED".
+   Heavy display type, centred, with the key phrase in amber.
+
+   SENTENCE CASE, NOT CAPITALS, at the client's instruction. It ran in full
+   capitals until then — the reference page shouts every heading and that was
+   the loudest single signal this page is selling rather than explaining. The
+   weight, the scale and the amber still carry that; the shouting does not.
+
+   THE CHANGE IS NOT JUST A CLASS. text-transform was doing real typographic
+   work: capitals in Anton stop dead at the baseline and reach 0.8594em, so
+   both the line spacing and the amber highlight box below were sized to ink
+   that had no descenders. Sentence case puts `j` up at 0.9229em and `g` down
+   at -0.1270em, and every number in this file moved with it. The arithmetic
+   is kept in place below so the next person does not have to re-derive it.
+
+   THE STRINGS THEMSELVES ARE SENTENCE CASE TOO, in content.ts. Lowercasing
+   in CSS alone would leave the page shouting at any reader whose screen
+   reader takes the DOM text rather than the rendered glyphs.
 
    It lives here rather than being written out per block so the scale and the
    split can never drift apart between blocks.
@@ -38,11 +51,16 @@ import { brandCase } from "@/components/sales/brandCase";
    on one line touches the block on the next and the two merge into a single
    amber slab.
 
-   THE DARK 1.05 IS ALSO MEASURED, not inherited. It was 0.94, which in Anton
-   leaves 0.94 - 0.8594 = 0.08em between one line's capitals and the next —
-   about 5px at the size these headings run, which the client read as the two
-   lines touching. 1.05 opens that to 0.19em, roughly 11px. Uppercase Anton
-   has no descenders to fall into the gap, so the whole of it is visible.
+   THE DARK 1.15 IS MEASURED, not inherited, AND IT MOVED WITH THE CASE. It
+   was 0.94 once, which left 0.94 - 0.8594 = 0.08em between one line's
+   capitals and the next — about 5px at the size these run, which the client
+   read as the two lines touching. 1.05 opened that to 0.19em.
+
+   Both of those were sized against CAPITALS, which have no descenders. In
+   sentence case the ink runs 1.0498em tall — `j` to +0.9229, `g` to -0.1270
+   — so 1.05 leaves 0.0002em between lines. That is not a tight gap, it is a
+   touch, and "journey" in the demo heading puts a real `j` on the page.
+   1.15 restores 0.10em of daylight.
 
    Neither fix helps if the accent spans a line break — a highlight has to
    stop where the line stops, so it comes out as two rectangles of unequal
@@ -105,17 +123,30 @@ export function SalesHeading({
      its highlight — measured at -0.036em above the caps against +0.296em
      below, which is what the client circled.
 
-     Solved rather than nudged. With leading-[0.8] the content box sits
-     0.8236em above the baseline and 0.0236em ABOVE it at the bottom, so:
+     THE PADDING IS DELIBERATELY UNEVEN, AND IT MOVED WHEN THE HEADINGS LEFT
+     CAPITALS. Under caps the ink stopped at the baseline, so the bottom only
+     had to look right. Sentence case drops `g`, `y` and `p` to -0.1270em and
+     the old floor sat at -0.1264 — the final CTA's accent is "already
+     waiting." and that `y` was being sliced, by six ten-thousandths of an em.
+     Nothing errors; it just looks like a bad crop.
 
-         above the caps   0.8236 + 0.17 - 0.8594 = 0.134 em
-         below the base  -0.0236 + 0.15         = 0.126 em
+         leading-[0.8]   0.80em  the box's own line box
+         pt-[0.15em]    +0.15em
+         pb-[0.19em]    +0.19em
+                        ───────
+                         1.14em  painted, against 1.51em for a plain inline
 
-     Even, and the box stays the 1.12em it already was. THESE ARE DERIVED
-     FROM ANTON. Change the display face and every one is wrong together:
-     re-read the font's sTypo pair and sCapHeight and redo the arithmetic.
-     The heading's leading-[1.25] below is the same calculation — 1.12em of
-     box plus a gap you can see between lines.
+     which puts the box at -0.1664 .. +0.9736 about the baseline:
+
+         above the capitals   0.9736 - 0.8594  = 0.114 em
+         above a tall j       0.9736 - 0.9229  = 0.051 em
+         below a g           -0.1270 - -0.1664 = 0.039 em
+
+     THESE ARE DERIVED FROM ANTON. Change the display face and every one is
+     wrong together: re-read the font's sTypo pair, sCapHeight and the real
+     glyph bounds for j and g, then redo the arithmetic. The heading's
+     leading-[1.25] below is the same calculation — 1.14em of box plus a gap
+     you can see between lines.
 
      whitespace-nowrap IS NOT COSMETIC, AND IT IS THERE BECAUSE THIS BROKE.
      The cost of an inline-block is that it cannot split across two lines —
@@ -136,7 +167,7 @@ export function SalesHeading({
      scroll rather than a mess. Measure it against that section's own
      container at lg:74px before using it. */
   const accentClass = light
-    ? "inline-block rounded-[5px] bg-amber px-2 pt-[0.17em] pb-[0.15em] leading-[0.8] whitespace-nowrap text-night"
+    ? "inline-block rounded-[5px] bg-amber px-2 pt-[0.15em] pb-[0.19em] leading-[0.8] whitespace-nowrap text-night"
     : "text-amber";
 
   /* brandCase runs on each slice separately, so an accent that happens to
@@ -154,8 +185,8 @@ export function SalesHeading({
 
   return (
     <Tag
-      className={`font-display text-[clamp(37px,12vw,58px)] tracking-[0.01em] text-balance uppercase md:text-[64px] lg:text-[74px] ${
-        light ? "leading-[1.25] text-night" : "leading-[1.05] text-white"
+      className={`font-display text-[clamp(37px,12vw,58px)] tracking-[0.01em] text-balance md:text-[64px] lg:text-[74px] ${
+        light ? "leading-[1.25] text-night" : "leading-[1.15] text-white"
       } ${className}`}
     >
       {inner}
