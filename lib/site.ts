@@ -36,6 +36,22 @@ export const site = {
 
      REPLACE THIS if the page moves to a custom domain. */
   siteUrl: "https://isuite-meta.vercel.app",
+
+  /* THE COMPANY SITE, and the ONLY link on this page that is not the booking
+     button. It sits on "MnT Future" in the footer copyright at the client's
+     request — a real address, unlike the "#" privacy link that used to be
+     down there, which is why this one is allowed and that one was removed.
+
+     IT OPENS IN A NEW TAB, and that is the whole reason it is acceptable
+     here. This page is behind paid traffic and has exactly one action; an
+     exit in the footer is a leak. target="_blank" makes it an addition
+     rather than a departure — the visitor still has the landing page, and
+     the button, sitting in the tab behind them. If this is ever changed to
+     open in place, it stops being a courtesy and starts costing bookings.
+
+     rel="noopener noreferrer" is not decoration: without noopener the opened
+     page gets a handle on this one through window.opener. */
+  companyUrl: "https://mntfuture.com/",
   /* ------------------------------------------------------------------------ */
 
   /* ==========================================================================

@@ -32,11 +32,16 @@ import { site } from "@/lib/site";
    keeps both paragraphs to a readable ragged block rather than one wide
    band of fine print.
 
-   NOTHING IN THE FOOTER IS TAPPABLE. A "Privacy & Consent" link sat under
-   the copyright and was the last one; it pointed at site.privacyUrl, which
-   was never anything but "#", so the only tap target left on the page below
-   the last button led nowhere. Removed at the client's request along with
-   the placeholder url and the label.
+   ONE THING IN THE FOOTER IS TAPPABLE: the company name in the copyright,
+   which goes to mntfuture.com at the client's request. Everything else here
+   is inert on purpose.
+
+   IT IS NOT THE LINK THAT WAS REMOVED. A "Privacy & Consent" link sat under
+   the copyright and pointed at site.privacyUrl, which was never anything but
+   "#" — the only tap target below the last button on the page led nowhere.
+   That went, with its placeholder url and its label. This one goes to a real
+   address and opens in a new tab, so the landing page and its button are
+   still there behind it. See the note in site.ts.
 
    A PRIVACY POLICY IS STILL OWED. Meta's own rules expect a reachable
    privacy policy from an advertiser collecting enquiries, and the booking
@@ -98,9 +103,38 @@ export function Footer() {
             {salesDisclaimer.results}
           </p>
 
-          {/* One line under a rule now, so no flex column to stack it in. */}
+          {/* One line under a rule now, so no flex column to stack it in.
+
+              THE COMPANY NAME IS A LINK, and it is the only one on the page
+              that is not the booking button. Three things it needs that a
+              bare <a> would not have given it:
+
+              UNDERLINE BY DEFAULT, not on hover. It is the single tappable
+              thing in a footer where nothing else is, set in the same muted
+              grey as the text around it; with the underline held back until
+              hover, nobody on a phone — where there is no hover — would ever
+              know it was there. The offset keeps it off the descenders.
+
+              A FOCUS RING. Every other interactive element on this page has
+              one, and an outline-amber on night is 8.90:1.
+
+              AN ACCESSIBLE NAME THAT STILL CONTAINS THE VISIBLE ONE. The
+              label spells out that it opens a new tab, because an
+              unannounced one is disorienting on a screen reader — but it is
+              "MnT Future (opens in a new tab)" and not a replacement, so
+              voice control still acts on the words actually on screen. */}
           <p className="t-small mt-7 w-full border-t border-white/10 pt-6 text-night-muted">
-            © {new Date().getFullYear()} {site.company}. All rights reserved.
+            © {new Date().getFullYear()}{" "}
+            <a
+              href={site.companyUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`${site.company} (opens in a new tab)`}
+              className="rounded-[3px] underline decoration-night-muted/45 underline-offset-[3px] transition-colors hover:text-white hover:decoration-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber"
+            >
+              {site.company}
+            </a>
+            . All rights reserved.
           </p>
         </div>
       </div>
